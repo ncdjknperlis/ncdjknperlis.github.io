@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brain Wiring Test</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
+            color: #333;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+        }
+        .container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            max-width: 600px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        p.subtitle {
+            text-align: center;
+            color: #7f8c8d;
+            margin-bottom: 30px;
+        }
+        .question {
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eceff1;
+        }
+        .question p {
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+        .options label {
+            display: block;
+            background-color: #f8f9fa;
+            padding: 10px 15px;
+            margin: 5px 0;
+            border: 1px solid #dcdde1;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .options label:hover {
+            background-color: #e1bee7;
+            border-color: #ba68c8;
+        }
+        .options input {
+            margin-right: 10px;
+        }
+        button {
+            display: block;
+            width: 100%;
+            background-color: #8e44ad;
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        button:hover {
+            background-color: #732d91;
+        }
+        #result {
+            margin-top: 30px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #e8f5e9;
+            border: 1px solid #c8e6c9;
+            display: none;
+        }
+        #result h2 {
+            margin-top: 0;
+            color: #2e7d32;
+        }
+        .badge {
+            display: inline-block;
+            padding: 5px 10px;
+            background-color: #8e44ad;
+            color: white;
+            border-radius: 4px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Brain Wiring Test</h1>
+    <p class="subtitle">Ketahui kecenderungan corak pemikiran anda secara rawak.</p>
+    
+    <form id="quizForm">
+        <div class="question">
+            <p>1. Apabila membaca peta atau pelan jalan, anda biasanya:</p>
+            <div class="options">
+                <label><input type="radio" name="q1" value="10" required> Menghadapi kesukaran dan kerap meminta bantuan orang lain.</label>
+                <label><input type="radio" name="q1" value="5"> Memusingkan peta mengikut arah pemanduan anda.</label>
+                <label><input type="radio" name="q1" value="0"> Tiada masalah, boleh membaca peta dengan mudah tanpa memusingkannya.</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>2. Anda sedang memasak resipi yang rumit, tiba-tiba radio berbunyi dan rakan mula bercakap dengan anda. Anda akan:</p>
+            <div class="options">
+                <label><input type="radio" name="q2" value="10"> Terus memasak sambil berbual dan mendengar radio tanpa masalah.</label>
+                <label><input type="radio" name="q2" value="5"> Boleh melayan mereka, tetapi masakan anda mungkin sedikit terjejas.</label>
+                <label><input type="radio" name="q2" value="0"> Meminta rakan diam atau perlahankan radio kerana anda hilang fokus.</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>3. Apabila seseorang menceritakan masalah mereka kepada anda, anda cenderung untuk:</p>
+            <div class="options">
+                <label><input type="radio" name="q3" value="10"> Menunjukkan simpati, mendengar dengan mendalam, dan memahami emosi mereka.</label>
+                <label><input type="radio" name="q3" value="5"> Menawarkan beberapa penyelesaian sambil bersimpati.</label>
+                <label><input type="radio" name="q3" value="0"> Terus memikirkan penyelesaian logik dan cara taktikal untuk menyelesaikan masalah itu.</label>
+            </div>
+        </div>
+
+        <div class="question">
+            <p>4. Di dalam sebuah bangunan atau kawasan yang baru, bagaimana anda menentukan arah jalan pulang?</p>
+            <div class="options">
+                <label><input type="radio" name="q4" value="10"> Menggunakan 'gerak hati' (*intuition*) atau berdasarkan mercu tanda yang menarik perhatian.</label>
+                <label><input type="radio" name="q4" value="5"> Mengingat beberapa kedai atau laluan asas secara umum.</label>
+                <label><input type="radio" name="q4" value="0"> Mengingat arah kompas (Utara/Selatan) dan jarak laluan secara sistematik.</label>
+            </div>
+        </div>
+
+        <button type="button" onclick="calculateResult()">Hantar & Lihat Keputusan</button>
+    </form>
+
+    <div id="result">
+        <h2>Keputusan Ujian Anda</h2>
