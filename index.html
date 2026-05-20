@@ -3,185 +3,237 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unit Kawalan Penyakit Tidak Berjangkit (NCD) - Jom Sihat</title>
+    <title>Unit Kawalan Penyakit Tidak Berjangkit (NCD)</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+Pro:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
     <style>
-        body { font-family: 'Source Sans Pro', sans-serif; }
-        h1, h2, h3, h4 { font-family: 'Playfair Display', serif; }
-        
-        /* Tekstur latar belakang kertas halus yang sangat nipis */
-        .humane-bg {
-            background-color: #fdfaf5;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3E%3Cpath fill='%23e5e1da' fill-opacity='0.4' d='M1 3h1v1H1V3zm2-2h1v1H3V1z'%3E%3C/path%3E%3C/svg%3E");
-        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-display { font-family: 'Montserrat', sans-serif; }
     </style>
 </head>
-<body class="humane-bg text-gray-900 overflow-x-hidden">
+<body class="bg-[#f8fafc] text-[#0f172a] antialiased">
 
-    <header class="bg-white/90 backdrop-blur-sm shadow-sm sticky top-0 z-50">
-        <div class="container mx-auto px-6 py-4 flex justify-between items-center border-b-2 border-[#e5e1da]">
+    <div class="bg-[#0f172a] text-xs text-slate-400 py-2 px-6 border-b border-slate-800 tracking-wider font-medium">
+        <div class="container mx-auto flex justify-between items-center">
+            <span>PORTAL RASMI UNIT KAWALAN PENYAKIT TIDAK BERJANGKIT</span>
+            <span>KEMAS KINI: 2026</span>
+        </div>
+    </div>
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-3">
-                <span class="text-4xl text-emerald-700">🌱</span>
-                <div class="flex flex-col">
-                    <span class="font-bold text-2xl text-emerald-900 tracking-tight">Kesejahteraan Komuniti</span>
-                    <span class="text-xs text-gray-600">Unit NCD - Di Sini Untuk Anda</span>
+                <div class="bg-[#1e3a8a] text-white p-2 rounded-lg">
+                    <i data-lucide="activity" class="w-6 h-6"></i>
+                </div>
+                <div class="leading-tight">
+                    <span class="block font-display font-bold text-lg text-[#1e3a8a] tracking-tight">UNIT NCD</span>
+                    <span class="block text-[10px] uppercase tracking-widest text-slate-500 font-semibold">Sektor Kesihatan Awam</span>
                 </div>
             </div>
-            <nav class="hidden md:flex space-x-6">
-                <a href="#mengenai" class="text-gray-700 hover:text-emerald-700 font-semibold">Siapa Kami</a>
-                <a href="#penyakit" class="text-gray-700 hover:text-emerald-700 font-semibold">Kesihatan Anda</a>
-                <a href="#program" class="text-gray-700 hover:text-emerald-700 font-semibold">Sertai Kami</a>
-                <a href="#hubungi" class="bg-emerald-100 text-emerald-900 px-5 py-2.5 rounded-full font-bold hover:bg-emerald-200 transition">Hubungi</a>
+            <nav class="hidden md:flex items-center space-x-8 text-sm font-semibold tracking-wide">
+                <a href="#profil" class="text-slate-600 hover:text-[#1e3a8a] transition">Profil Unit</a>
+                <a href="#teras" class="text-slate-600 hover:text-[#1e3a8a] transition">Teras Strategik</a>
+                <a href="#intervensi" class="text-slate-600 hover:text-[#1e3a8a] transition">Program Intervensi</a>
+                <a href="#hubungi" class="bg-[#1e3a8a] text-white px-5 py-2 rounded font-medium hover:bg-[#172554] transition text-xs uppercase tracking-wider">Hubungi Kami</a>
             </nav>
         </div>
     </header>
 
-    <section class="py-24 px-6 relative">
-        <div class="absolute -top-10 -left-10 text-emerald-100 text-9xl opacity-50 transform -rotate-12">🍃</div>
-        <div class="absolute -bottom-10 -right-10 text-emerald-100 text-9xl opacity-50 transform rotate-12">🧡</div>
-        
-        <div class="container mx-auto text-center relative z-10 max-w-3xl">
-            <h1 class="text-5xl md:text-6xl font-bold text-emerald-900 mb-6 leading-tight">Kehidupan Yang Lebih Sihat Mulai Di Sini</h1>
-            <p class="text-xl text-gray-700 mb-10 leading-relaxed font-normal">Mari kita bersama-sama menjaga kesihatan diri dan insan tersayang. Unit NCD sedia membantu anda memahami langkah mudah ke arah kesejahteraan berpanjangan.</p>
-            <a href="#mengenai" class="inline-block bg-[#e07a5f] hover:bg-[#c6664b] text-white font-bold px-10 py-4 rounded-full shadow-lg transition-transform hover:scale-105">Mari Mulakan</a>
-        </div>
-    </section>
-
-    <section id="mengenai" class="py-20 px-6 bg-white rounded-[50px] shadow-inner">
-        <div class="container mx-auto max-w-5xl">
-            <div class="grid md:grid-cols-5 gap-12 items-center">
-                <div class="md:col-span-3">
-                    <h2 class="text-4xl font-bold text-emerald-900 mb-6">Misi Kami Adalah Anda.</h2>
-                    <div class="prose prose-lg text-gray-700 leading-relaxed space-y-4">
-                        <p>Kami di Unit Kawalan Penyakit Tidak Berjangkit (NCD) bukan sekadar menyebarkan statistik. Kami adalah rakan anda dalam perjalanan menuju kesihatan yang lebih baik.</p>
-                        <p>Kami fokus membantu komuniti mencegah penyakit kronik seperti penyakit jantung dan diabetes menerusi perubahan gaya hidup yang sederhana tetapi berkesan.</p>
-                    </div>
+    <section class="relative bg-white py-24 border-b border-slate-200 overflow-hidden">
+        <div class="container mx-auto px-6 grid md:grid-cols-12 gap-12 items-center">
+            <div class="md:col-span-7 z-10">
+                <span class="inline-block bg-slate-100 text-slate-800 text-[11px] font-bold tracking-widest uppercase px-3 py-1 rounded-sm mb-6 border border-slate-200">
+                    Pelan Strategik Kebangsaan
+                </span>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-[#0f172a] tracking-tight leading-none mb-6">
+                    Menangani Faktor Risiko NCD Secara <span class="text-[#0d9488]">Komprehensif.</span>
+                </h1>
+                <p class="text-slate-600 text-base md:text-lg max-w-xl leading-relaxed mb-8 font-normal">
+                    Melaksanakan advokasi berpaksikan data, saringan klinikal berkala, dan intervensi berfokus untuk mengurangkan morbiditi serta mortaliti penyakit tidak berjangkit dalam populasi negara.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#teras" class="bg-[#0f172a] hover:bg-[#1e293b] text-white font-medium text-sm tracking-wide px-6 py-3 rounded transition flex items-center gap-2">
+                        Data Kesihatan <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
                 </div>
-                <div class="md:col-span-2 bg-[#fdfaf5] p-8 rounded-[40px] border-4 border-[#e5e1da] relative">
-                    <span class="absolute -top-5 -right-5 text-6xl transform rotate-12">🤝</span>
-                    <h3 class="text-2xl font-semibold text-[#8d6e63] mb-3">Falsafah Kami</h3>
-                    <p class="text-sm text-gray-600">Setiap perubahan kecil adalah kejayaan. Kami sedia mendengar dan memberi sokongan tanpa batasan.</p>
+            </div>
+            <div class="md:col-span-5 relative hidden md:block">
+                <div class="absolute inset-0 bg-gradient-to-tr from-slate-100 to-transparent rounded-2xl transform rotate-3"></div>
+                <div class="bg-[#1e3a8a]/5 border-2 border-dashed border-[#1e3a8a]/20 p-8 rounded-2xl relative z-10">
+                    <div class="space-y-4">
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-center gap-4">
+                            <div class="bg-red-50 text-red-600 p-2 rounded-lg"><i data-lucide="heart" class="w-5 h-5"></i></div>
+                            <div><p class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Kardiovaskular</p><p class="text-sm font-bold text-slate-800">Pemantauan Tekanan Darah</p></div>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-center gap-4">
+                            <div class="bg-teal-50 text-teal-600 p-2 rounded-lg"><i data-lucide="droplet" class="w-5 h-5"></i></div>
+                            <div><p class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Metabolik</p><p class="text-sm font-bold text-slate-800">Saringan Glukosa Komuniti</p></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="penyakit" class="py-20 px-6">
-        <div class="container mx-auto">
-            <div class="text-center mb-16 max-w-2xl mx-auto">
-                <h2 class="text-4xl font-bold text-emerald-900 mb-4">Mari Fahami Kesihatan Kita</h2>
-                <p class="text-gray-700">Mencegah penyakit kronik bermula dengan pengetahuan asas yang betul.</p>
+    <section id="profil" class="py-20 bg-[#f8fafc]">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-12 gap-8 items-start">
+                <div class="md:col-span-4 sticky top-24">
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-[#0d9488] mb-3">Mengenai Pejabat Kami</h2>
+                    <h3 class="text-3xl font-bold tracking-tight text-[#0f172a] leading-tight">Objektif & Mandat Struktur</h3>
+                    <div class="w-12 h-1 bg-[#1e3a8a] mt-4"></div>
+                </div>
+                <div class="md:col-span-8 bg-white border border-slate-200 p-8 md:p-12 rounded-lg shadow-sm grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-display font-bold text-slate-900 mb-3 text-base uppercase tracking-wider">Visi Utama</h4>
+                        <p class="text-sm text-slate-600 leading-relaxed">Menjadi peneraju dalam pembentukan dasar, strategi inovatif, dan pemantauan epidemiologi bagi mewujudkan masyarakat yang responsif terhadap kesihatan kendiri.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-display font-bold text-slate-900 mb-3 text-base uppercase tracking-wider">Misi Sektor</h4>
+                        <p class="text-sm text-slate-600 leading-relaxed">Memperkukuh sistem sokongan kesihatan awam melalui integrasi teknologi saringan, latihan kepakaran, dan pemerkasaan fasiliti kesihatan primer.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="teras" class="py-20 bg-white border-t border-b border-slate-200">
+        <div class="container mx-auto px-6">
+            <div class="max-w-2xl mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-[#0d9488] mb-3">Skop Pengawasan</h2>
+                <h3 class="text-3xl font-bold tracking-tight text-[#0f172a]">4 Kluster Penyakit Utama (NCD)</h3>
             </div>
             
-            <div class="grid sm:grid-cols-2 gap-10 max-w-5xl mx-auto">
-                <div class="bg-white p-8 rounded-[30px] shadow-sm border border-[#e5e1da] hover:border-emerald-200 transition">
-                    <div class="flex items-center gap-4 mb-5">
-                        <span class="text-5xl">❤️</span>
-                        <h3 class="font-bold text-2xl text-emerald-950">Jantung & Saluran Darah</h3>
-                    </div>
-                    <p class="text-gray-700 leading-relaxed">Menjaga jantung anda dengan pemakanan sihat, bergerak aktif, dan mengawal stres.</p>
+            <div class="grid md:grid-cols-4 gap-0 border-l border-t border-slate-200">
+                <div class="p-8 border-r border-b border-slate-200 hover:bg-slate-50 transition group">
+                    <span class="text-xs font-mono font-bold text-slate-400 block mb-6">01 / KLUSTER KARDIO</span>
+                    <h4 class="font-bold text-lg text-slate-900 mb-3 group-hover:text-[#1e3a8a] transition">Penyakit Kardiovaskular</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">Pengawasan ke atas morbiditi berkaitan serangan jantung, hipertensi kronik, dan kejadian strok dalam populasi bersasar.</p>
                 </div>
-                <div class="bg-white p-8 rounded-[30px] shadow-sm border border-[#e5e1da] hover:border-emerald-200 transition">
-                    <div class="flex items-center gap-4 mb-5">
-                        <span class="text-5xl">🍬</span>
-                        <h3 class="font-bold text-2xl text-emerald-950">Kawalan Diabetes</h3>
-                    </div>
-                    <p class="text-gray-700 leading-relaxed">Fahami bagaimana tahap gula yang stabil boleh dicapai menerusi diet seimbang.</p>
+                <div class="p-8 border-r border-b border-slate-200 hover:bg-slate-50 transition group">
+                    <span class="text-xs font-mono font-bold text-slate-400 block mb-6">02 / KLUSTER ENDOKRIN</span>
+                    <h4 class="font-bold text-lg text-slate-900 mb-3 group-hover:text-[#1e3a8a] transition">Diabetes Melitus</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">Fokus kepada pendaftaran kes baharu, pengurusan rintangan insulin, dan pencegahan komplikasi jangka panjang.</p>
                 </div>
-                <div class="bg-white p-8 rounded-[30px] shadow-sm border border-[#e5e1da] hover:border-emerald-200 transition">
-                    <div class="flex items-center gap-4 mb-5">
-                        <span class="text-5xl">🎗️</span>
-                        <h3 class="font-bold text-2xl text-emerald-950">Pencegahan Kanser</h3>
-                    </div>
-                    <p class="text-gray-700 leading-relaxed">Mengenali faktor risiko utama seperti tembakau dan pentingnya saringan awal.</p>
+                <div class="p-8 border-r border-b border-slate-200 hover:bg-slate-50 transition group">
+                    <span class="text-xs font-mono font-bold text-slate-400 block mb-6">03 / KLUSTER ONKOLOGI</span>
+                    <h4 class="font-bold text-lg text-slate-900 mb-3 group-hover:text-[#1e3a8a] transition">Onkologi (Kanser)</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">Sokongan terhadap program saringan awal kanser serviks, payudara, dan kolorektal demi intervensi awal.</p>
                 </div>
-                <div class="bg-white p-8 rounded-[30px] shadow-sm border border-[#e5e1da] hover:border-emerald-200 transition">
-                    <div class="flex items-center gap-4 mb-5">
-                        <span class="text-5xl">🌬️</span>
-                        <h3 class="font-bold text-2xl text-emerald-950">Kesihatan Pernafasan</h3>
-                    </div>
-                    <p class="text-gray-700 leading-relaxed">Mengamalkan persekitaran bebas asap dan penjagaan kebersihan udara.</p>
+                <div class="p-8 border-r border-b border-slate-200 hover:bg-slate-50 transition group">
+                    <span class="text-xs font-mono font-bold text-slate-400 block mb-6">04 / KLUSTER RESPIRATORI</span>
+                    <h4 class="font-bold text-lg text-slate-900 mb-3 group-hover:text-[#1e3a8a] transition">Respiratori Kronik</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">Pemantauan penyakit saluran pernafasan obstruktif kronik (COPD) dan asma tegar melalui klinik pakar primer.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="program" class="py-20 px-6 bg-emerald-50 rounded-[50px] shadow-inner">
-        <div class="container mx-auto max-w-6xl">
-            <div class="text-center mb-16">
-                <h2 class="text-4xl font-bold text-emerald-900 mb-3">Sertai Komuniti Kami</h2>
-                <p class="text-gray-700">Jadilah sebahagian daripada perubahan positif ini.</p>
+    <section id="intervensi" class="py-20 bg-[#f8fafc]">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-end mb-12">
+                <div>
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-[#0d9488] mb-3">Pelaksanaan Lapangan</h2>
+                    <h3 class="text-3xl font-bold tracking-tight text-[#0f172a]">Inisiatif Kebangsaan Aktif</h3>
+                </div>
             </div>
             
             <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-white rounded-[30px] overflow-hidden shadow-sm relative">
-                    <div class="absolute -top-3 -right-3 text-7xl opacity-10">🍏</div>
-                    <div class="p-8">
-                        <span class="text-xs font-semibold text-[#8d6e63] bg-[#fdfaf5] px-3 py-1.5 rounded-full">Projek Khas</span>
-                        <h3 class="font-bold text-xl mt-4 mb-3 text-emerald-950">Suku-Suku Separuh</h3>
-                        <p class="text-gray-700 text-sm leading-relaxed">Belajar panduan pemakanan mudah setiap hari untuk tenaga yang berpanjangan tanpa berlebihan.</p>
+                <div class="bg-white border border-slate-200 p-8 rounded shadow-sm">
+                    <div class="w-10 h-10 bg-[#1e3a8a]/10 text-[#1e3a8a] flex items-center justify-center rounded mb-6">
+                        <i data-lucide="users" class="w-5 h-5"></i>
                     </div>
+                    <h4 class="font-bold text-lg text-slate-900 mb-2">Program KOSPEN</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-4">Komuniti Sihat Pembina Negara. Struktur mobilisasi sukarelawan untuk saringan kesihatan di lokaliti perumahan dan komuniti luar bandar.</p>
                 </div>
-                <div class="bg-white rounded-[30px] overflow-hidden shadow-sm relative">
-                    <div class="absolute -top-3 -right-3 text-7xl opacity-10">🧘</div>
-                    <div class="p-8">
-                        <span class="text-xs font-semibold text-[#8d6e63] bg-[#fdfaf5] px-3 py-1.5 rounded-full">Senaman</span>
-                        <h3 class="font-bold text-xl mt-4 mb-3 text-emerald-950">Jom Gerak Sikit</h3>
-                        <p class="text-gray-700 text-sm leading-relaxed">Program aktiviti fizikal ringan yang menyeronokkan dan boleh diamalkan oleh sesiapa sahaja.</p>
+                <div class="bg-white border border-slate-200 p-8 rounded shadow-sm">
+                    <div class="w-10 h-10 bg-[#0d9488]/10 text-[#0d9488] flex items-center justify-center rounded mb-6">
+                        <i data-lucide="shield-check" class="w-5 h-5"></i>
                     </div>
+                    <h4 class="font-bold text-lg text-slate-900 mb-2">Saringan Tempat Kerja (KOSPEN Plus)</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-4">Intervensi khusus di sektor awam dan swasta bagi mengawal faktor risiko obesiti serta tabiat pemakanan tidak sihat dalam kalangan pekerja.</p>
                 </div>
-                <div class="bg-white rounded-[30px] overflow-hidden shadow-sm relative">
-                    <div class="absolute -top-3 -right-3 text-7xl opacity-10">🚭</div>
-                    <div class="p-8">
-                        <span class="text-xs font-semibold text-[#8d6e63] bg-[#fdfaf5] px-3 py-1.5 rounded-full">Sokongan</span>
-                        <h3 class="font-bold text-xl mt-4 mb-3 text-emerald-950">Kempen Bebas Rokok</h3>
+                <div class="bg-white border border-slate-200 p-8 rounded shadow-sm">
+                    <div class="w-10 h-10 bg-red-100 text-red-600 flex items-center justify-center rounded mb-6">
+                        <i data-lucide="ban" class="w-5 h-5"></i>
                     </div>
+                    <h4 class="font-bold text-lg text-slate-900 mb-2">MQuit (Klinik Berhenti Merokok)</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-4">Akreditasi perkhidmatan berhenti merokok menerusi kerjasama farmasi swasta dan fasiliti kesihatan kerajaan untuk terapi penggantian nikotin.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="hubungi" class="py-20 px-6">
-        <div class="container mx-auto max-w-5xl bg-white p-12 rounded-[40px] shadow-xl border-4 border-[#e5e1da] relative overflow-hidden">
-            <div class="absolute -bottom-10 -left-10 text-9xl text-emerald-50">📩</div>
-            
-            <div class="grid md:grid-cols-2 gap-12 relative z-10">
-                <div>
-                    <h2 class="text-4xl font-bold text-emerald-900 mb-6 leading-tight">Kami Sedia <br> Mendengar Anda.</h2>
-                    <p class="text-gray-700 mb-8 leading-relaxed">Jangan ragu-ragu untuk menghubungi kami jika ada pertanyaan atau sekadar ingin berkongsi cerita kesihatan anda. Pintu kami sentiasa terbuka.</p>
-                    <div class="space-y-4 text-sm text-gray-700 font-medium">
-                        <p><span class="text-2xl mr-2">📍</span> Pejabat Kesihatan Daerah / Negeri</p>
-                        <p><span class="text-2xl mr-2">📞</span> +603-XXXXXXXX</p>
-                        <p><span class="text-2xl mr-2">✉️</span> ncd_unit@moh.gov.my</p>
+    <section id="hubungi" class="py-20 bg-white border-t border-slate-200">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="grid md:grid-cols-12 gap-12">
+                <div class="md:col-span-5">
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-[#0d9488] mb-3">Saluran Komunikasi</h2>
+                    <h3 class="text-3xl font-bold tracking-tight text-[#0f172a] mb-6">Pertanyaan & Urusan Rasmi</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-8">
+                        Sila gunakan saluran di bawah atau borang rasmi bagi sebarang urusan surat-menyurat, permohonan data epidemiologi NCD, atau kolaborasi program.
+                    </p>
+                    <div class="space-y-4 text-xs font-medium text-slate-700">
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-[#1e3a8a] shrink-0 mt-0.5"></i>
+                            <span>Pejabat Kesihatan Awam, Unit Kawalan Penyakit (NCD), Blok Pentadbiran.</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="phone" class="w-4 h-4 text-[#1e3a8a]"></i>
+                            <span>+603-XXXX XXXX</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="mail" class="w-4 h-4 text-[#1e3a8a]"></i>
+                            <span>ncd_unit@moh.gov.my</span>
+                        </div>
                     </div>
                 </div>
-                <div class="bg-[#fdfaf5] p-8 rounded-[30px] border border-[#e5e1da]">
-                    <h3 class="font-bold text-xl mb-5 text-[#8d6e63]">Mesej Mesra Anda</h3>
-                    <form action="#" method="POST" class="space-y-4">
-                        <div>
-                            <input type="text" class="w-full bg-white border border-[#e5e1da] p-3 rounded-full focus:ring-2 focus:ring-emerald-200 outline-none text-sm placeholder:text-gray-400" placeholder="Nama anda">
+                
+                <div class="md:col-span-7 bg-[#f8fafc] border border-slate-200 p-8 rounded-lg">
+                    <form class="space-y-4">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-[11px] font-bold uppercase tracking-wider text-slate-600 block mb-1">Nama Penuh</label>
+                                <input type="text" class="w-full bg-white border border-slate-300 p-2.5 text-sm rounded focus:outline-none focus:border-[#1e3a8a] transition" placeholder="Sila nyatakan nama">
+                            </div>
+                            <div>
+                                <label class="text-[11px] font-bold uppercase tracking-wider text-slate-600 block mb-1">Alamat Emel Rasmi</label>
+                                <input type="email" class="w-full bg-white border border-slate-300 p-2.5 text-sm rounded focus:outline-none focus:border-[#1e3a8a] transition" placeholder="contoh@agensi.gov.my">
+                            </div>
                         </div>
                         <div>
-                            <input type="email" class="w-full bg-white border border-[#e5e1da] p-3 rounded-full focus:ring-2 focus:ring-emerald-200 outline-none text-sm placeholder:text-gray-400" placeholder="Alamat emel">
+                            <label class="text-[11px] font-bold uppercase tracking-wider text-slate-600 block mb-1">Subjek / Urusan</label>
+                            <input type="text" class="w-full bg-white border border-slate-300 p-2.5 text-sm rounded focus:outline-none focus:border-[#1e3a8a] transition" placeholder="Tajuk permohonan/pertanyaan">
                         </div>
                         <div>
-                            <textarea class="w-full bg-white border border-[#e5e1da] p-4 rounded-[20px] focus:ring-2 focus:ring-emerald-200 outline-none text-sm placeholder:text-gray-400" rows="4" placeholder="Tulis mesej anda..."></textarea>
+                            <label class="text-[11px] font-bold uppercase tracking-wider text-slate-600 block mb-1">Perincian Mesej</label>
+                            <textarea class="w-full bg-white border border-slate-300 p-3 text-sm rounded focus:outline-none focus:border-[#1e3a8a] transition" rows="4" placeholder="Tuliskan kenyataan rasmi anda di sini..."></textarea>
                         </div>
-                        <button type="button" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 px-6 rounded-full transition">Hantar Mesej</button>
+                        <button type="button" class="bg-[#1e3a8a] hover:bg-[#172554] text-white text-xs font-bold uppercase tracking-wider px-6 py-3 rounded transition shadow-sm">
+                            Hantar Borang Rasmi
+                        </button>
                     </form>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer class="py-10 px-6 text-center text-gray-600 bg-[#e5e1da]/50 mt-10 rounded-t-[50px]">
-        <div class="container mx-auto">
-            <span class="text-3xl">🌿</span>
-            <p class="text-sm mt-3">&copy; 2026 Unit Kawalan Penyakit Tidak Berjangkit (NCD).</p>
-            <p class="text-xs mt-1">Laman web ini dibina dengan kasih sayang untuk kesejahteraan anda.</p>
+    <footer class="bg-[#0f172a] text-slate-400 py-12 px-6 text-xs border-t border-slate-800">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <p class="font-bold text-slate-200 mb-1">Unit Kawalan Penyakit Tidak Berjangkit (NCD)</p>
+                <p>&copy; 2026 Hak Cipta Terpelihara. Hak cipta terpelihara di bawah sektor kesihatan awam.</p>
+            </div>
+            <div class="text-slate-500 text-[11px]">
+                Sesuai dipaparkan menggunakan pelayar moden dengan resolusi minimum 1280x720.
+            </div>
         </div>
     </footer>
 
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
