@@ -145,3 +145,67 @@
 
     <div id="result">
         <h2>Keputusan Ujian Anda</h2>
+        <p id="scoreText"></p>
+        <div id="badgeText" class="badge"></div>
+        <p id="analysisText" style="margin-top: 15px; line-height: 1.5;"></p>
+    </div>
+</div>
+
+<script>
+    function calculateResult() {
+        const form = document.getElementById('quizForm');
+        
+        // Memastikan semua soalan telah dijawab
+        if (!form.checkValidity()) {
+            alert("Sila jawab semua soalan terlebih dahulu!");
+            return;
+        }
+
+        let totalScore = 0;
+        const totalQuestions = 4; // Jumlah soalan
+
+        // Mengira jumlah skor berdasarkan pilihan jawapan
+        for (let i = 1; i <= totalQuestions; i++) {
+            const checkedOption = document.querySelector(`input[name="q${i}"]:checked`);
+            if (checkedOption) {
+                totalScore += parseInt(checkedOption.value);
+            }
+        }
+
+        // Paparkan bahagian keputusan
+        const resultDiv = document.getElementById('result');
+        const scoreText = document.getElementById('scoreText');
+        const badgeText = document.getElementById('badgeText');
+        const analysisText = document.getElementById('analysisText');
+
+        resultDiv.style.display = 'block';
+        scoreText.innerHTML = `Jumlah Skor Anda: <strong>${totalScore}</strong>`;
+
+        // Logik Analisis Keputusan (Skor penuh teoritikal: 40)
+        if (totalScore >= 30) {
+            badgeText.innerText = "Kecenderungan Otak Feminin (Kreatif & Empati)";
+            analysisText.innerText = "Sistem pemikiran anda mempunyai 'wiring' yang kuat ke arah kecerdasan emosi, gerak hati yang tajam, dan kebolehan mengendali pelbagai perkara dalam satu masa (multitasking). Anda sangat baik dalam komunikasi interpersonal dan memahami nuansa sosial.";
+            resultDiv.style.backgroundColor = "#fce4ec";
+            resultDiv.style.borderColor = "#f8bbd0";
+            document.querySelector('#result h2').style.color = "#c2185b";
+        } else if (totalScore >= 15 && totalScore < 30) {
+            badgeText.innerText = "Otak Seimbang (Fleksibel)";
+            analysisText.innerText = "Anda berada di zon tengah yang seimbang. Anda mempunyai fleksibiliti untuk berfikir secara logik dan taktikal apabila diperlukan, tetapi pada masa yang sama mengekalkan tahap empati dan kreativiti yang baik dalam kehidupan seharian.";
+            resultDiv.style.backgroundColor = "#fff3e0";
+            resultDiv.style.borderColor = "#ffe0b2";
+            document.querySelector('#result h2').style.color = "#e65100";
+        } else {
+            badgeText.innerText = "Kecenderungan Otak Maskulin (Logik & Analitikal)";
+            analysisText.innerText = "Sistem pemikiran anda lebih berwayar ke arah penyelesaian masalah secara struktur, logik, dan keupayaan spatial yang kuat (seperti membaca arah/peta). Anda lebih fokus kepada fakta, data, dan menyelesaikan satu tugasan dengan mendalam sebelum beralih ke tugasan lain.";
+            resultDiv.style.backgroundColor = "#e3f2fd";
+            resultDiv.style.borderColor = "#bbdefb";
+            document.querySelector('#result h2').style.color = "#0d47a1";
+        }
+
+        // Skrin akan skrol ke bahagian keputusan secara automatik
+        resultDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>
