@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brain Wiring Test (30 Soalan Penuh)</title>
+    <title>Brain Wiring Test (Bilingual)</title>
     <style>
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -19,7 +19,7 @@
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            max-width: 700px;
+            max-width: 750px;
             width: 100%;
         }
         h1 {
@@ -32,6 +32,13 @@
             color: #7f8c8d;
             margin-bottom: 25px;
             font-size: 14px;
+        }
+        .en-text {
+            color: #57606f;
+            font-style: italic;
+            font-size: 0.95em;
+            display: block;
+            margin-top: 2px;
         }
         .gender-select {
             background-color: #f8f9fa;
@@ -60,12 +67,11 @@
             display: block;
             background-color: #f8f9fa;
             padding: 10px 15px;
-            margin: 5px 0;
+            margin: 8px 0;
             border: 1px solid #dcdde1;
             border-radius: 6px;
             cursor: pointer;
             transition: 0.2s;
-            font-size: 14px;
         }
         .options label:hover {
             background-color: #e1bee7;
@@ -73,6 +79,13 @@
         }
         .options input {
             margin-right: 10px;
+            float: left;
+            margin-top: 5px;
+        }
+        .option-text {
+            display: block;
+            margin-left: 25px;
+            font-size: 14px;
         }
         button {
             display: block;
@@ -111,6 +124,11 @@
             border-radius: 4px;
             font-weight: bold;
             margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .result-langblock {
+            margin-bottom: 15px;
+            line-height: 1.6;
         }
     </style>
 </head>
@@ -118,293 +136,446 @@
 
 <div class="container">
     <h1>Brain Wiring Test</h1>
-    <p class="subtitle">Kuiz Lengkap 30 Soalan (Allan & Barbara Pease)</p>
+    <p class="subtitle">Kuiz 30 Soalan (Dwi-Bahasa / Bilingual) — Allan & Barbara Pease</p>
     
     <form id="quizForm">
         <div class="gender-select">
-            <p style="margin-top:0; font-weight:bold;">Sila pilih jantina anda untuk pengiraan skor yang tepat:</p>
-            <label><input type="radio" name="gender" value="lelaki" required> Lelaki</label>
-            <label><input type="radio" name="gender" value="wanita"> Wanita</label>
+            <p style="margin-top:0; font-weight:bold;">Sila pilih jantina biologi anda / <span style="font-weight:normal; font-style:italic;">Please select your biological gender:</span></p>
+            <label><input type="radio" name="gender" value="lelaki" required> Lelaki / Male</label>
+            <label><input type="radio" name="gender" value="wanita"> Wanita / Female</label>
         </div>
 
         <div class="question">
-            <p>1. Apabila membaca peta atau kompas, anda biasanya:</p>
+            <p>1. Apabila membaca peta atau kompas, anda biasanya:
+               <span class="en-text">When reading a map or compass, you usually:</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q1" value="A" required> Menghadapi kesukaran dan kerap meminta bantuan.</label>
-                <label><input type="radio" name="q1" value="B"> Memusingkan peta mengikut arah perjalanan anda.</label>
-                <label><input type="radio" name="q1" value="C"> Tiada masalah membaca peta atau arah jalan.</label>
+                <label>
+                    <input type="radio" name="q1" value="A" required>
+                    <span class="option-text">Menghadapi kesukaran dan kerap meminta bantuan.<br><span class="en-text">Have difficulty and frequently ask for help.</span></span>
+                </label>
+                <label>
+                    <input type="radio" name="q1" value="B">
+                    <span class="option-text">Memusingkan peta mengikut arah perjalanan anda.<br><span class="en-text">Turn the map to face the direction you are going.</span></span>
+                </label>
+                <label>
+                    <input type="radio" name="q1" value="C">
+                    <span class="option-text">Tiada masalah membaca peta atau arah jalan.<br><span class="en-text">Have no difficulty reading maps or directions.</span></span>
+                </label>
             </div>
         </div>
 
         <div class="question">
-            <p>2. Anda sedang memasak resipi yang rumit. Radio sedang berbunyi dan rakan anda memanggil. Anda akan:</p>
+            <p>2. Anda sedang memasak resipi yang rumit. Radio sedang berbunyi dan rakan anda memanggil. Anda akan:
+               <span class="en-text">You are cooking a complicated recipe. The radio is on and a friend calls. You would:</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q2" value="A" required> Meneruskan memasak sambil mendengar radio dan bersembang.</label>
-                <label><input type="radio" name="q2" value="B"> Menutup radio tetapi masih boleh memasak sambil bersembang.</label>
-                <label><input type="radio" name="q2" value="C"> Mengatakan anda akan hubungi mereka semula selepas selesai memasak.</label>
+                <label>
+                    <input type="radio" name="q2" value="A" required>
+                    <span class="option-text">Meneruskan memasak sambil mendengar radio dan bersembang.<br><span class="en-text">Keep cooking while listening to the radio and chatting.</span></span>
+                </label>
+                <label>
+                    <input type="radio" name="q2" value="B">
+                    <span class="option-text">Menutup radio tetapi masih boleh memasak sambil bersembang.<br><span class="en-text">Turn the radio off but keep cooking and talking.</span></span>
+                </label>
+                <label>
+                    <input type="radio" name="q2" value="C">
+                    <span class="option-text">Mengatakan anda akan hubungi mereka semula selepas selesai memasak.<br><span class="en-text">Say you will call them back when you are finished cooking.</span></span>
+                </label>
             </div>
         </div>
 
         <div class="question">
-            <p>3. Orang baru mengenali anda biasanya mendapati anda:</p>
+            <p>3. Orang baru mengenali anda biasanya mendapati anda:
+               <span class="en-text">People who have newly met you usually find you:</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q3" value="A" required> Mudah mesra, peramah dan cepat serasi.</label>
-                <label><input type="radio" name="q3" value="B"> Sederhana, bergantung kepada keadaan.</label>
-                <label><input type="radio" name="q3" value="C"> Pendiam, menyendiri dan mengambil masa untuk mesra.</label>
+                <label>
+                    <input type="radio" name="q3" value="A" required>
+                    <span class="option-text">Mudah mesra, peramah dan cepat serasi.<br><span class="en-text">Friendly, outgoing, and easy to get along with.</span></span>
+                </label>
+                <label>
+                    <input type="radio" name="q3" value="B">
+                    <span class="option-text">Sederhana, bergantung kepada keadaan.<br><span class="en-text">Moderate, depending on the situation.</span></span>
+                </label>
+                <label>
+                    <input type="radio" name="q3" value="C">
+                    <span class="option-text">Pendiam, menyendiri dan mengambil masa untuk mesra.<br><span class="en-text">Quiet, reserved, and take time to warm up.</span></span>
+                </label>
             </div>
         </div>
 
         <div class="question">
-            <p>4. Apabila seseorang menceritakan masalah mereka, anda cenderung untuk:</p>
+            <p>4. Apabila seseorang menceritakan masalah mereka, anda cenderung untuk:
+               <span class="en-text">When someone tells you their problems, you tend to:</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q4" value="A" required> Menunjukkan simpati dan sangat memahami perasaan mereka.</label>
-                <label><input type="radio" name="q4" value="B"> Mengatakan masalah itu tidaklah seteruk mana dan cuba menenangkan mereka.</label>
-                <label><input type="radio" name="q4" value="C"> Memberikan cadangan atau nasihat logik untuk menyelesaikan masalah.</label>
+                <label>
+                    <input type="radio" name="q4" value="A" required>
+                    <span class="option-text">Menunjukkan simpati dan sangat memahami perasaan mereka.<br><span class="en-text">Show sympathy and deeply understand their feelings.</span></span>
+                </label>
+                <label>
+                    <input type="radio" name="q4" value="B">
+                    <span class="option-text">Mengatakan masalah itu tidaklah seteruk mana dan cuba menenangkan mereka.<br><span class="en-text">Say the problem isn't that bad and try to reassure them.</span></span>
+                </label>
+                <label>
+                    <input type="radio" name="q4" value="C">
+                    <span class="option-text">Memberikan cadangan atau nasihat logik untuk menyelesaikan masalah.<br><span class="en-text">Offer logical suggestions or advice to solve the problem.</span></span>
+                </label>
             </div>
         </div>
 
         <div class="question">
-            <p>5. Apabila melihat filem atau drama yang sedih, anda biasanya:</p>
+            <p>5. Apabila melihat filem atau drama yang sedih, anda biasanya:
+               <span class="en-text">When watching a sad movie or drama, you usually:</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q5" value="A" required> Menangis atau berasa sangat terkesan dalam hati.</label>
-                <label><input type="radio" name="q5" value="B"> Berasa sedih tetapi cuba mengawal emosi/air mata.</label>
-                <label><input type="radio" name="q5" value="C"> Menganggapnya sekadar lakonan semata-mata dan tidak terkesan.</label>
+                <label>
+                    <input type="radio" name="q5" value="A" required>
+                    <span class="option-text">Menangis atau berasa sangat terkesan dalam hati.<br><span class="en-text">Cry or feel deeply moved inside.</span></span>
+                </label>
+                <label>
+                    <input type="radio" name="q5" value="B">
+                    <span class="option-text">Berasa sedih tetapi cuba mengawal emosi/air mata.<br><span class="en-text">Feel sad but try to control your emotions/tears.</span></span>
+                </label>
+                <label>
+                    <input type="radio" name="q5" value="C">
+                    <span class="option-text">Menganggapnya sekadar lakonan semata-mata dan tidak terkesan.<br><span class="en-text">Consider it just an act and remain unaffected.</span></span>
+                </label>
             </div>
         </div>
 
         <div class="question">
-            <p>6. Anda berada di dalam kereta yang sesat jalan. Anda akan:</p>
+            <p>6. Anda berada di dalam kereta yang sesat jalan. Anda akan:
+               <span class="en-text">You are in a car and get lost. You would:</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q6" value="A" required> Bertanya arah jalan kepada orang tempatan dengan segera.</label>
-                <label><input type="radio" name="q6" value="B"> Menggunakan aplikasi navigasi (GPS) atau peta dengan gigih.</label>
-                <label><input type="radio" name="q6" value="C"> Terus memandu menggunakan logik peribadi untuk mencari jalan keluar.</label>
+                <label>
+                    <input type="radio" name="q6" value="A" required>
+                    <span class="option-text">Bertanya arah jalan kepada orang tempatan dengan segera.<br><span class="en-text">Ask locals for directions immediately.</span></span>
+                </label>
+                <label>
+                    <input type="radio" name="q6" value="B">
+                    <span class="option-text">Menggunakan aplikasi navigasi (GPS) atau peta dengan gigih.<br><span class="en-text">Use a navigation app (GPS) or map persistently.</span></span>
+                </label>
+                <label>
+                    <input type="radio" name="q6" value="C">
+                    <span class="option-text">Terus memandu menggunakan logik peribadi untuk mencari jalan keluar.<br><span class="en-text">Keep driving using personal logic to find your way out.</span></span>
+                </label>
             </div>
         </div>
 
         <div class="question">
-            <p>7. Apabila menerangkan sesuatu idea kepada orang lain, anda biasanya:</p>
+            <p>7. Apabila menerangkan sesuatu idea kepada orang lain, anda biasanya:
+               <span class="en-text">When explaining an idea to others, you usually:</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q7" value="A" required> Menggunakan tangan, gerak badan, dan ekspresi muka yang banyak.</label>
-                <label><input type="radio" name="q7" value="B"> Menerangkan dengan jelas, menggunakan beberapa ekspresi muka.</label>
-                <label><input type="radio" name="q7" value="C"> Berbahasa secara terus, padat, fakta dan kurang ekspresi.</label>
+                <label>
+                    <input type="radio" name="q7" value="A" required>
+                    <span class="option-text">Menggunakan tangan, gerak badan, dan ekspresi muka yang banyak.<br><span class="en-text">Use gestures, body language, and a lot of facial expressions.</span></span>
+                </label>
+                <label>
+                    <input type="radio" name="q7" value="B">
+                    <span class="option-text">Menerangkan dengan jelas, menggunakan beberapa ekspresi muka.<br><span class="en-text">Explain clearly, using some facial expressions.</span></span>
+                </label>
+                <label>
+                    <input type="radio" name="q7" value="C">
+                    <span class="option-text">Berbahasa secara terus, padat, fakta dan kurang ekspresi.<br><span class="en-text">Speak directly, concisely, using facts with little expression.</span></span>
+                </label>
             </div>
         </div>
 
         <div class="question">
-            <p>8. Selepas melalui hari yang sangat penat, anda lebih suka:</p>
+            <p>8. Selepas melalui hari yang sangat penat, anda lebih suka:
+               <span class="en-text">After a very tiring day, you prefer to:</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q8" value="A" required> Meluahkan dan menceritakan segala yang berlaku kepada keluarga/rakan.</label>
-                <label><input type="radio" name="q8" value="B"> Mendengar cerita orang lain atau membaca/menonton televisyen.</label>
-                <label><input type="radio" name="q8" value="C"> Bersendirian dan tidak mahu diganggu oleh sesiapa.</label>
+                <label>
+                    <input type="radio" name="q8" value="A" required>
+                    <span class="option-text">Meluahkan dan menceritakan segala yang berlaku kepada keluarga/rakan.<br><span class="en-text">Vent and talk about everything that happened to family/friends.</span></span>
+                </label>
+                <label>
+                    <input type="radio" name="q8" value="B">
+                    <span class="option-text">Mendengar cerita orang lain atau membaca/menonton televisyen.<br><span class="en-text">Listen to others' stories or read/watch television.</span></span>
+                </label>
+                <label>
+                    <input type="radio" name="q8" value="C">
+                    <span class="option-text">Bersendirian dan tidak mahu diganggu oleh sesiapa.<br><span class="en-text">Be alone and not want to be disturbed by anyone.</span></span>
+                </label>
             </div>
         </div>
 
         <div class="question">
-            <p>9. Jika anda mendengar bunyi tangisan bayi atau kucing di luar rumah pada waktu malam:</p>
+            <p>9. Jika anda mendengar bunyi tangisan bayi atau kucing di luar rumah pada waktu malam:
+               <span class="en-text">If you hear a baby or a cat crying outside at night:</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q9" value="A" required> Anda terjaga serta-merta dan tahu dari arah mana bunyi itu datang.</label>
-                <label><input type="radio" name="q9" value="B"> Anda terjaga tetapi tidak pasti arah bunyi tersebut.</label>
-                <label><input type="radio" name="q9" value="C"> Anda terus tidur dan langsung tidak mendengarnya.</label>
+                <label>
+                    <input type="radio" name="q9" value="A" required>
+                    <span class="option-text">Anda terjaga serta-merta dan tahu dari arah mana bunyi itu datang.<br><span class="en-text">You wake up instantly and know exactly which direction it is coming from.</span></span>
+                </label>
+                <label>
+                    <input type="radio" name="q9" value="B">
+                    <span class="option-text">Anda terjaga tetapi tidak pasti arah bunyi tersebut.<br><span class="en-text">You wake up but are not sure of the direction of the sound.</span></span>
+                </label>
+                <label>
+                    <input type="radio" name="q9" value="C">
+                    <span class="option-text">Anda terus tidur dan langsung tidak mendengarnya.<br><span class="en-text">You sleep right through it and do not hear it at all.</span></span>
+                </label>
             </div>
         </div>
 
         <div class="question">
-            <p>10. Di tempat perjumpaan sosial (majlis/parti), anda biasanya:</p>
+            <p>10. Di tempat perjumpaan sosial (majlis/parti), anda biasanya:
+               <span class="en-text">At a social gathering (party/event), you usually:</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q10" value="A" required> Bersembang dengan ramai orang termasuk orang yang baru dikenali.</label>
-                <label><input type="radio" name="q10" value="B"> Duduk bersama kumpulan kecil orang yang anda sudah kenali sahaja.</label>
-                <label><input type="radio" name="q10" value="C"> Berada di sudut yang sunyi atau cepat-cepat mahu pulang.</label>
+                <label>
+                    <input type="radio" name="q10" value="A" required>
+                    <span class="option-text">Bersembang dengan ramai orang termasuk orang yang baru dikenali.<br><span class="en-text">Chat with many people, including strangers.</span></span>
+                </label>
+                <label>
+                    <input type="radio" name="q10" value="B">
+                    <span class="option-text">Duduk bersama kumpulan kecil orang yang anda sudah kenali sahaja.<br><span class="en-text">Sit with a small group of people you already know.</span></span>
+                </label>
+                <label>
+                    <input type="radio" name="q10" value="C">
+                    <span class="option-text">Berada di sudut yang sunyi atau cepat-cepat mahu pulang.<br><span class="en-text">Stay in a quiet corner or want to go home quickly.</span></span>
+                </label>
             </div>
         </div>
 
         <div class="question">
-            <p>11. Kebolehan anda mengecam wajah orang yang lama tidak berjumpa:</p>
+            <p>11. Kebolehan anda mengecam wajah orang yang lama tidak berjumpa:
+               <span class="en-text">Your ability to recognize faces of people you haven't seen in a long time:</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q11" value="A" required> Sangat baik, malah boleh ingat nama dan butiran tentang mereka.</label>
-                <label><input type="radio" name="q11" value="B"> Boleh ingat wajah, tetapi sukar untuk ingat nama mereka.</label>
-                <label><input type="radio" name="q11" value="C"> Sangat lemah, selalunya langsung tidak ingat langsung.</label>
+                <label><input type="radio" name="q11" value="A" required><span class="option-text">Sangat baik, boleh ingat nama/butiran.<br><span class="en-text">Very good, can remember names/details.</span></span></label>
+                <label><input type="radio" name="q11" value="B"><span class="option-text">Boleh ingat wajah, sukar ingat nama.<br><span class="en-text">Can remember faces, hard to remember names.</span></span></label>
+                <label><input type="radio" name="q11" value="C"><span class="option-text">Sangat lemah, selalunya tak ingat.<br><span class="en-text">Very poor, usually don't remember at all.</span></span></label>
             </div>
         </div>
 
         <div class="question">
-            <p>12. Apabila anda membeli perabot yang perlu dipasang sendiri (*DIY*), anda:</p>
+            <p>12. Apabila membeli perabot yang perlu dipasang sendiri (DIY), anda:
+               <span class="en-text">When buying self-assembly (DIY) furniture, you:</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q12" value="A" required> Meminta bantuan orang lain untuk memasangnya bagi pihak anda.</label>
-                <label><input type="radio" name="q12" value="B"> Membaca manual arahan dengan teliti langkah demi langkah sebelum memasang.</label>
-                <label><input type="radio" name="q12" value="C"> Terus memasangnya mengikut logik rupa bentuk tanpa membaca manual.</label>
+                <label><input type="radio" name="q12" value="A" required><span class="option-text">Meminta bantuan orang lain untuk memasangnya.<br><span class="en-text">Ask someone else to assemble it for you.</span></span></label>
+                <label><input type="radio" name="q12" value="B"><span class="option-text">Membaca manual arahan langkah demi langkah.<br><span class="en-text">Read the instruction manual step-by-step.</span></span></label>
+                <label><input type="radio" name="q12" value="C"><span class="option-text">Terus memasang mengikut logik rupa bentuk tanpa manual.<br><span class="en-text">Assemble it using shape logic without the manual.</span></span></label>
             </div>
         </div>
 
         <div class="question">
-            <p>13. Anda meletakkan kereta (parking) di ruang yang sempit. Anda biasanya:</p>
+            <p>13. Anda meletakkan kereta (parking) di ruang yang sempit. Anda biasanya:
+               <span class="en-text">You are parking a car in a tight space. You usually:</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q13" value="A" required> Berasa gementar dan kerap kali gagal melakukannya dengan kemas.</label>
-                <label><input type="radio" name="q13" value="B"> Mengambil masa yang agak lama tetapi akhirnya berjaya.</label>
-                <label><input type="radio" name="q13" value="C"> Boleh masuk dengan cepat, mudah, dan tepat sekali cuba.</label>
+                <label><input type="radio" name="q13" value="A" required><span class="option-text">Berasa gementar dan kerap gagal melakukannya dengan kemas.<br><span class="en-text">Feel nervous and often fail to do it neatly.</span></span></label>
+                <label><input type="radio" name="q13" value="B"><span class="option-text">Mengambil masa yang agak lama tetapi akhirnya berjaya.<br><span class="en-text">Take quite a bit of time but eventually succeed.</span></span></label>
+                <label><input type="radio" name="q13" value="C"><span class="option-text">Boleh masuk dengan cepat, mudah, dan tepat sekali cuba.<br><span class="en-text">Can slip in quickly, easily, and accurately in one go.</span></span></label>
             </div>
         </div>
 
         <div class="question">
-            <p>14. Apabila bersembang dengan rakan, berapa kerap anda menukar topik?</p>
+            <p>14. Apabila bersembang dengan rakan, berapa kerap anda menukar topik?
+               <span class="en-text">When chatting with friends, how often do you change topics?</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q14" value="A" required> Sangat kerap, perbualan melompat dari satu topik ke topik lain secara rawak.</label>
-                <label><input type="radio" name="q14" value="B"> Sederhana, bertukar topik jika topik lama sudah habis dibahas.</label>
-                <label><input type="radio" name="q14" value="C"> Sangat jarang, fokus kepada satu topik utama sehingga selesai.</label>
+                <label><input type="radio" name="q14" value="A" required><span class="option-text">Sangat kerap, melompat dari satu topik ke topik lain secara rawak.<br><span class="en-text">Very often, jumping from one topic to another randomly.</span></span></label>
+                <label><input type="radio" name="q14" value="B"><span class="option-text">Sederhana, bertukar topik jika topik lama sudah habis.<br><span class="en-text">Moderately, changing when the old topic is exhausted.</span></span></label>
+                <label><input type="radio" name="q14" value="C"><span class="option-text">Sangat jarang, fokus kepada satu topik utama sehingga selesai.<br><span class="en-text">Very rarely, focusing on one main topic until it is done.</span></span></label>
             </div>
         </div>
 
         <div class="question">
-            <p>15. Jika pasangan atau rakan anda kelihatan kecewa atau sedih, anda:</p>
+            <p>15. Jika pasangan atau rakan anda kelihatan kecewa atau sedih, anda:
+               <span class="en-text">If your partner or friend looks upset or sad, you:</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q15" value="A" required> Dapat mengesannya serta-merta walaupun mereka cuba menyembunyikannya.</label>
-                <label><input type="radio" name="q15" value="B"> Menyedarinya selepas melihat perubahan ketara pada tingkah laku mereka.</label>
-                <label><input type="radio" name="q15" value="C"> Langsung tidak perasan sehinggalah mereka sendiri yang memberitahu.</label>
+                <label><input type="radio" name="q15" value="A" required><span class="option-text">Dapat mengesannya serta-merta walaupun mereka menyembunyikannya.<br><span class="en-text">Can detect it instantly even if they try to hide it.</span></span></label>
+                <label><input type="radio" name="q15" value="B"><span class="option-text">Menyedarinya selepas melihat perubahan ketara pada tingkah laku.<br><span class="en-text">Notice it after seeing obvious changes in behavior.</span></span></label>
+                <label><input type="radio" name="q15" value="C"><span class="option-text">Langsung tidak perasan sehinggalah mereka memberitahu.<br><span class="en-text">Don't notice at all until they tell you themselves.</span></span></label>
             </div>
         </div>
 
         <div class="question">
-            <p>16. Apabila berfikir untuk menyelesaikan sesuatu masalah, anda lebih suka:</p>
+            <p>16. Apabila berfikir untuk menyelesaikan sesuatu masalah, anda lebih suka:
+               <span class="en-text">When thinking about solving a problem, you prefer to:</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q16" value="A" required> Berbincang secara berkumpulan untuk mendapatkan pelbagai idea.</label>
-                <label><input type="radio" name="q16" value="B"> Memikirkan beberapa alternatif secara rawak dalam minda.</label>
-                <label><input type="radio" name="q16" value="C"> Berfikir secara mendalam sendirian, menyusun strategi yang konkrit.</label>
+                <label><input type="radio" name="q16" value="A" required><span class="option-text">Berbincang secara berkumpulan untuk dapatkan idea.<br><span class="en-text">Discuss in a group to brainstorm various ideas.</span></span></label>
+                <label><input type="radio" name="q16" value="B"><span class="option-text">Memikirkan beberapa alternatif secara rawak dalam minda.<br><span class="en-text">Think of a few alternatives randomly in your mind.</span></span></label>
+                <label><input type="radio" name="q16" value="C"><span class="option-text">Berfikir secara mendalam sendirian, menyusun strategi konkrit.<br><span class="en-text">Think deeply alone, mapping out a concrete strategy.</span></span></label>
             </div>
         </div>
 
         <div class="question">
-            <p>17. Keupayaan anda untuk menyanyi mengikut lirik dan nada lagu (pitching):</p>
+            <p>17. Keupayaan anda untuk menyanyi mengikut lirik dan nada lagu (pitching):
+               <span class="en-text">Your ability to sing along with lyrics and stay in tune (pitching):</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q17" value="A" required> Sangat baik, boleh menyanyi dengan merdu dan mengikut nada dengan tepat.</label>
-                <label><input type="radio" name="q17" value="B"> Sederhana, kadang-kadang lari nada tetapi masih boleh menyanyi.</label>
-                <label><input type="radio" name="q17" value="C"> Sangat teruk, sumbang dan tidak tahu membezakan nada muzik.</label>
+                <label><input type="radio" name="q17" value="A" required><span class="option-text">Sangat baik, boleh menyanyi merdu mengikut nada dengan tepat.<br><span class="en-text">Very good, can sing beautifully and accurately in tune.</span></span></label>
+                <label><input type="radio" name="q17" value="B"><span class="option-text">Sederhana, kadang-kadang lari nada tetapi masih boleh menyanyi.<br><span class="en-text">Average, sometimes off-key but still okay.</span></span></label>
+                <label><input type="radio" name="q17" value="C"><span class="option-text">Sangat teruk, sumbang dan tak tahu beza nada muzik.<br><span class="en-text">Very poor, tone-deaf and can't differentiate musical notes.</span></span></label>
             </div>
         </div>
 
         <div class="question">
-            <p>18. Apabila membaca buku atau menonton filem, anda paling tertarik dengan:</p>
+            <p>18. Apabila membaca buku atau menonton filem, anda paling tertarik dengan:
+               <span class="en-text">When reading a book or watching a movie, you are most attracted to:</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q18" value="A" required> Hubungan emosi dan perwatakan watak-watak di dalamnya.</label>
-                <label><input type="radio" name="q18" value="B"> Jalan cerita (plot) yang menarik secara keseluruhan.</label>
-                <label><input type="radio" name="q18" value="C"> Aksi, misteri, sains, fakta, atau penyelesaian konflik.</label>
+                <label><input type="radio" name="q18" value="A" required><span class="option-text">Hubungan emosi dan perwatakan watak.<br><span class="en-text">Emotional relationships and character development.</span></span></label>
+                <label><input type="radio" name="q18" value="B"><span class="option-text">Jalan cerita (plot) yang menarik secara keseluruhan.<br><span class="en-text">An interesting plotline as a whole.</span></span></label>
+                <label><input type="radio" name="q18" value="C"><span class="option-text">Aksi, misteri, sains, fakta, atau penyelesaian konflik.<br><span class="en-text">Action, mystery, science, facts, or conflict resolution.</span></span></label>
             </div>
         </div>
 
         <div class="question">
-            <p>19. Keputusan peperiksaan atau ujian anda di sekolah dahulu:</p>
+            <p>19. Keputusan peperiksaan atau ujian anda di sekolah dahulu:
+               <span class="en-text">Your exam or test results at school back then were:</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q19" value="A" required> Lebih cemerlang dalam subjek Bahasa, Sastera atau Kesenian.</label>
-                <label><input type="radio" name="q19" value="B"> Seimbang dalam semua subjek.</label>
-                <label><input type="radio" name="q19" value="C"> Lebih cemerlang dalam subjek Matematik, Sains atau Teknikal.</label>
+                <label><input type="radio" name="q19" value="A" required><span class="option-text">Lebih cemerlang dalam subjek Bahasa, Sastera atau Seni.<br><span class="en-text">More excellent in Languages, Literature, or Arts.</span></span></label>
+                <label><input type="radio" name="q19" value="B"><span class="option-text">Seimbang dalam semua subjek.<br><span class="en-text">Balanced across all subjects.</span></span></label>
+                <label><input type="radio" name="q19" value="C"><span class="option-text">Lebih cemerlang dalam subjek Matematik, Sains atau Teknikal.<br><span class="en-text">More excellent in Mathematics, Science, or Technical subjects.</span></span></label>
             </div>
         </div>
 
         <div class="question">
-            <p>20. Dalam hujah atau perdebatan, anda biasanya mempertahankan diri dengan:</p>
+            <p>20. Dalam hujah atau perdebatan, anda biasanya mempertahankan diri dengan:
+               <span class="en-text">In an argument or debate, you usually defend yourself by:</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q20" value="A" required> Menggunakan gerak hati, nilai moral, atau kesan emosi.</label>
-                <label><input type="radio" name="q20" value="B"> Gabungan emosi dan sedikit bukti fakta.</label>
-                <label><input type="radio" name="q20" value="C"> Menggunakan hujah logik, fakta empirikal, dan data yang sah.</label>
+                <label><input type="radio" name="q20" value="A" required><span class="option-text">Menggunakan gerak hati, nilai moral, atau kesan emosi.<br><span class="en-text">Using intuition, moral values, or emotional impacts.</span></span></label>
+                <label><input type="radio" name="q20" value="B"><span class="option-text">Gabungan emosi dan sedikit bukti fakta.<br><span class="en-text">A combination of emotion and some factual evidence.</span></span></label>
+                <label><input type="radio" name="q20" value="C"><span class="option-text">Menggunakan hujah logik, fakta empirikal, dan data yang sah.<br><span class="en-text">Using logical arguments, empirical facts, and valid data.</span></span></label>
             </div>
         </div>
 
         <div class="question">
-            <p>21. Pengurusan masa anda dalam kehidupan seharian adalah:</p>
+            <p>21. Pengurusan masa anda dalam kehidupan seharian adalah:
+               <span class="en-text">Your time management in daily life is:</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q21" value="A" required> Fleksibel, jadual boleh berubah mengikut mood dan keadaan semasa.</label>
-                <label><input type="radio" name="q21" value="B"> Sederhana, cuba mengikut jadual tetapi tidak terlalu ketat.</label>
-                <label><input type="radio" name="q21" value="C"> Sangat berdisiplin, teratur, dan mengikut jadual waktu yang ditetapkan.</label>
+                <label><input type="radio" name="q21" value="A" required><span class="option-text">Fleksibel, jadual boleh berubah ikut mood dan keadaan.<br><span class="en-text">Flexible, schedules can change based on mood and situation.</span></span></label>
+                <label><input type="radio" name="q21" value="B"><span class="option-text">Sederhana, cuba ikut jadual tetapi tidak terlalu ketat.<br><span class="en-text">Moderate, trying to follow a schedule but not too strictly.</span></span></label>
+                <label><input type="radio" name="q21" value="C"><span class="option-text">Sangat berdisiplin, teratur, ikut jadual waktu ditetapkan.<br><span class="en-text">Very disciplined, organized, following set timetables.</span></span></label>
             </div>
         </div>
 
         <div class="question">
-            <p>22. Apabila anda mengemas rumah atau bilik tidur, anda:</p>
+            <p>22. Apabila anda mengemas rumah atau bilik tidur, anda:
+               <span class="en-text">When you tidy up your house or bedroom, you:</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q22" value="A" required> Mengemas secara rawak, asalkan nampak bersih di mata kasar.</label>
-                <label><input type="radio" name="q22" value="B"> Mengemas mengikut keperluan ruang.</label>
-                <label><input type="radio" name="q22" value="C"> Menyusun barangan mengikut kategori khusus (warna, saiz, fungsi).</label>
+                <label><input type="radio" name="q22" value="A" required><span class="option-text">Mengemas secara rawak, asalkan bersih di mata kasar.<br><span class="en-text">Tidy up randomly, as long as it looks clean to the eye.</span></span></label>
+                <label><input type="radio" name="q22" value="B"><span class="option-text">Mengemas mengikut keperluan ruang.<br><span class="en-text">Tidy up according to the needs of the space.</span></span></label>
+                <label><input type="radio" name="q22" value="C"><span class="option-text">Menyusun barang mengikut kategori (warna, saiz, fungsi).<br><span class="en-text">Arrange items by specific categories (color, size, function).</span></span></label>
             </div>
         </div>
 
         <div class="question">
-            <p>23. Sewaktu memandu atau berjalan, adakah anda perasan kedai-kedai baru dibuka?</p>
+            <p>23. Sewaktu memandu atau berjalan, adakah anda perasan kedai baru dibuka?
+               <span class="en-text">While driving or walking, do you notice newly opened shops?</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q23" value="A" required> Ya, saya sangat peka dengan perubahan visual di sekeliling saya.</label>
-                <label><input type="radio" name="q23" value="B"> Kadang-kadang perasan jika kedai itu besar atau menarik perhatian.</label>
-                <label><input type="radio" name="q23" value="C"> Jarang perasan, saya hanya fokus pada jalan raya ke destinasi saya.</label>
+                <label><input type="radio" name="q23" value="A" required><span class="option-text">Ya, saya sangat peka dengan perubahan visual sekeliling.<br><span class="en-text">Yes, I am very perceptive to visual changes around me.</span></span></label>
+                <label><input type="radio" name="q23" value="B"><span class="option-text">Kadang-kadang perasan jika kedai itu besar/menarik perhatian.<br><span class="en-text">Sometimes, if the shop is large or catches attention.</span></span></label>
+                <label><input type="radio" name="q23" value="C"><span class="option-text">Jarang perasan, hanya fokus pada jalan raya ke destinasi.<br><span class="en-text">Rarely, I just focus on the road to my destination.</span></span></label>
             </div>
         </div>
 
         <div class="question">
-            <p>24. Cita-cita atau kerjaya impian anda cenderung ke arah:</p>
+            <p>24. Cita-cita atau kerjaya impian anda cenderung ke arah:
+               <span class="en-text">Your ambition or dream career tends toward:</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q24" value="A" required> Kaunseling, Perubatan, Kebajikan, Guru, Seni atau Khidmat Pelanggan.</label>
-                <label><input type="radio" name="q24" value="B"> Pengurusan, Perniagaan, atau Pentadbiran Awam.</label>
-                <label><input type="radio" name="q24" value="C"> Kejuruteraan, IT/Pengaturcaraan, Sains Makmal, Kewangan atau Akauntan.</label>
+                <label><input type="radio" name="q24" value="A" required><span class="option-text">Kaunseling, Perubatan, Guru, Seni atau Khidmat Pelanggan.<br><span class="en-text">Counseling, Medicine, Teaching, Arts, or Customer Service.</span></span></label>
+                <label><input type="radio" name="q24" value="B"><span class="option-text">Pengurusan, Perniagaan, atau Pentadbiran Awam.<br><span class="en-text">Management, Business, or Public Administration.</span></span></label>
+                <label><input type="radio" name="q24" value="C"><span class="option-text">Kejuruteraan, IT, Sains Makmal, Kewangan atau Akauntan.<br><span class="en-text">Engineering, IT, Laboratory Science, Finance, or Accounting.</span></span></label>
             </div>
         </div>
 
         <div class="question">
-            <p>25. Apabila anda membeli pakaian baru, faktor utama pemilihan anda ialah:</p>
+            <p>25. Apabila anda membeli pakaian baru, faktor utama pemilihan anda ialah:
+               <span class="en-text">When you buy new clothes, your main selection factor is:</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q25" value="A" required> Perasaan selesa, gaya keunikan, dan bagaimana ia menonjolkan personaliti.</label>
-                <label><input type="radio" name="q25" value="B"> Trend semasa dan kesesuaian majlis.</label>
-                <label><input type="radio" name="q25" value="C"> Ketahanan fabrik, fungsi poket, praktikaliti, dan harga berbaloi.</label>
+                <label><input type="radio" name="q25" value="A" required><span class="option-text">Rasa selesa, gaya unik, tonjol personaliti.<br><span class="en-text">Comfort, unique style, and personal expression.</span></span></label>
+                <label><input type="radio" name="q25" value="B"><span class="option-text">Trend semasa dan kesesuaian majlis.<br><span class="en-text">Current trends and suitability for occasions.</span></span></label>
+                <label><input type="radio" name="q25" value="C"><span class="option-text">Ketahanan fabrik, fungsi poket, praktikal dan berbaloi.<br><span class="en-text">Fabric durability, pocket functions, practicality, and value.</span></span></label>
             </div>
         </div>
 
         <div class="question">
-            <p>26. Apabila anda melayari internet (social media/news), anda lebih suka membaca:</p>
+            <p>26. Apabila anda melayari internet, anda lebih suka membaca:
+               <span class="en-text">When browsing the internet, you prefer to read about:</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q26" value="A" required> Kisah hidup orang, gaya hidup, gosip, atau tips perhubungan.</label>
-                <label><input type="radio" name="q26" value="B"> Berita semasa, politik, atau isu-isu tular dunia.</label>
-                <label><input type="radio" name="q26" value="C"> Gadget baru, sukan, dokumentari, fakta sejarah atau pelaburan.</label>
+                <label><input type="radio" name="q26" value="A" required><span class="option-text">Kisah hidup, gaya hidup, gosip, atau tips perhubungan.<br><span class="en-text">Human stories, lifestyle, gossip, or relationship tips.</span></span></label>
+                <label><input type="radio" name="q26" value="B"><span class="option-text">Berita semasa, politik, atau isu tular dunia.<br><span class="en-text">Current news, politics, or viral world issues.</span></span></label>
+                <label><input type="radio" name="q26" value="C"><span class="option-text">Gadget, sukan, dokumentari, fakta sejarah, pelaburan.<br><span class="en-text">Gadgets, sports, documentaries, history, or investments.</span></span></label>
             </div>
         </div>
 
         <div class="question">
-            <p>27. Bagaimanakah anda menggambarkan kebolehan anda melakukan pelbagai kerja (multitasking)?</p>
+            <p>27. Bagaimanakah anda menggambarkan kebolehan anda melakukan multitasking?
+               <span class="en-text">How would you describe your multitasking ability?</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q27" value="A" required> Sangat hebat, boleh membuat 3 hingga 4 kerja serentak dengan lancar.</label>
-                <label><input type="radio" name="q27" value="B"> Boleh buat 2 kerja serentak, tetapi tidak boleh terlalu bising.</label>
-                <label><input type="radio" name="q27" value="C"> Sangat lemah, saya hanya boleh fokus pada SATU kerja sahaja pada satu masa.</label>
+                <label><input type="radio" name="q27" value="A" required><span class="option-text">Sangat hebat, boleh buat 3 hingga 4 kerja serentak dengan lancar.<br><span class="en-text">Excellent, can smoothly do 3 to 4 tasks at the same time.</span></span></label>
+                <label><input type="radio" name="q27" value="B"><span class="option-text">Boleh buat 2 kerja serentak, asalkan keadaan tidak terlalu bising.<br><span class="en-text">Can do 2 tasks at once, provided it is not too noisy.</span></span></label>
+                <label><input type="radio" name="q27" value="C"><span class="option-text">Sangat lemah, saya hanya boleh fokus pada SATU kerja sahaja.<br><span class="en-text">Very poor, I can only focus on ONE task at a time.</span></span></label>
             </div>
         </div>
 
         <div class="question">
-            <p>28. Pandangan anda tentang intuisi (gerak hati/sixth sense):</p>
+            <p>28. Pandangan anda tentang intuisi (gerak hati / sixth sense):
+               <span class="en-text">Your view on intuition (gut feeling / sixth sense):</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q28" value="A" required> Sangat percaya, gerak hati saya sering kali betul dan menyelamatkan saya.</label>
-                <label><input type="radio" name="q28" value="B"> Percaya, tetapi ia mestilah disokong dengan sedikit bukti logik.</label>
-                <label><input type="radio" name="q28" value="C"> Karut, semua keputusan dalam hidup mestilah bersandarkan fakta nyata.</label>
+                <label><input type="radio" name="q28" value="A" required><span class="option-text">Sangat percaya, gerak hati saya sering kali betul.<br><span class="en-text">Strongly believe, my gut feelings are often correct.</span></span></label>
+                <label><input type="radio" name="q28" value="B"><span class="option-text">Percaya, tetapi ia mesti disokong bukti logik.<br><span class="en-text">Believe, but it must be supported by some logical evidence.</span></span></label>
+                <label><input type="radio" name="q28" value="C"><span class="option-text">Karut, semua keputusan mesti bersandarkan fakta.<br><span class="en-text">Nonsense, all decisions must rely on reality and facts.</span></span></label>
             </div>
         </div>
 
         <div class="question">
-            <p>29. Di dalam rumah, jika ada barang yang tersorok atau hilang (contoh: kunci kereta), anda:</p>
+            <p>29. Di dalam rumah, jika ada barang yang tersorok atau hilang (cth: kunci):
+               <span class="en-text">At home, if an object is hidden or lost (e.g., keys):</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q29" value="A" required> Boleh menjumpainya dengan cepat kerana ingatan visual kedudukan barang amat kuat.</label>
-                <label><input type="radio" name="q29" value="B"> Mengambil masa mencarinya di merata tempat secara rawak.</label>
-                <label><input type="radio" name="q29" value="C"> Selalunya berputus asa dan meminta orang lain tolong carikan.</label>
+                <label><input type="radio" name="q29" value="A" required><span class="option-text">Boleh jumpa dengan cepat kerana ingatan visual yang kuat.<br><span class="en-text">Can find it quickly because of a strong visual memory.</span></span></label>
+                <label><input type="radio" name="q29" value="B"><span class="option-text">Mengambil masa mencarinya di merata tempat secara rawak.<br><span class="en-text">Take time searching for it in various places randomly.</span></span></label>
+                <label><input type="radio" name="q29" value="C"><span class="option-text">Selalunya berputus asa dan minta orang lain carikan.<br><span class="en-text">Usually give up and ask someone else to find it.</span></span></label>
             </div>
         </div>
 
         <div class="question">
-            <p>30. Apabila tidur di hotel atau tempat baru yang asing, anda:</p>
+            <p>30. Apabila tidur di hotel atau tempat baru yang asing, anda:
+               <span class="en-text">When sleeping in a hotel or an unfamiliar new place, you:</span>
+            </p>
             <div class="options">
-                <label><input type="radio" name="q30" value="A" required> Sukar tidur lena kerana suasana bunyi dan katil yang berbeza.</label>
-                <label><input type="radio" name="q30" value="B"> Mengambil masa sedikit untuk menyesuaikan diri sebelum terlelap.</label>
-                <label><input type="radio" name="q30" value="C"> Boleh tidur lena dengan mudah tanpa sebarang masalah gangguan persekitaran.</label>
+                <label><input type="radio" name="q30" value="A" required><span class="option-text">Sukar tidur lena kerana suasana bunyi dan katil berbeza.<br><span class="en-text">Find it hard to sleep soundly due to different sounds/bed.</span></span></label>
+                <label><input type="radio" name="q30" value="B"><span class="option-text">Mengambil masa sedikit untuk suaikan diri sebelum terlelap.<br><span class="en-text">Take a bit of time to adjust before falling asleep.</span></span></label>
+                <label><input type="radio" name="q30" value="C"><span class="option-text">Boleh tidur lena dengan mudah tanpa sebarang masalah.<br><span class="en-text">Can sleep soundly easily without any trouble.</span></span></label>
             </div>
         </div>
 
-        <button type="button" onclick="calculateResult()">Hantar & Lihat Keputusan</button>
+        <button type="button" onclick="calculateResult()">Hantar & Lihat Keputusan / Submit & View Result</button>
     </form>
 
     <div id="result">
-        <h2>Keputusan Ujian Anda</h2>
+        <h2>Keputusan Ujian Anda / Your Test Result</h2>
         <p id="scoreText"></p>
         <div id="badgeText" class="badge"></div>
-        <p id="analysisText" style="margin-top: 15px; line-height: 1.5;"></p>
+        
+        <div class="result-langblock" id="analysisBM"></div>
+        <hr style="border: 0; border-top: 1px dashed #bdc3c7; margin: 15px 0;">
+        <div class="result-langblock" id="analysisEN" style="font-style: italic; color: #4b5563;"></div>
     </div>
 </div>
 
@@ -412,24 +583,21 @@
     function calculateResult() {
         const form = document.getElementById('quizForm');
         
-        // Pastikan jantina dan semua soalan dijawab
         if (!form.checkValidity()) {
-            alert("Sila pilih jantina dan jawab SEMUA 30 soalan sebelum hantar!");
+            alert("Sila pilih jantina dan jawab SEMUA 30 soalan! / Please select gender and answer ALL 30 questions!");
             return;
         }
 
         const gender = document.querySelector('input[name="gender"]:checked').value;
         let totalScore = 0;
 
-        // Sistem Pemarkahan Rasmi Buku Allan & Barbara Pease
-        // Jawapan A, B, C mempunyai nilai berbeza bergantung jantina subjek.
         for (let i = 1; i <= 30; i++) {
             const checkedOption = document.querySelector(`input[name="q${i}"]:checked`).value;
             
             if (gender === 'lelaki') {
                 if (checkedOption === 'A') totalScore += 10;
                 else if (checkedOption === 'B') totalScore += 5;
-                else if (checkedOption === 'C') totalScore += -5; // Skor negatif untuk C bagi lelaki
+                else if (checkedOption === 'C') totalScore += -5;
             } else {
                 if (checkedOption === 'A') totalScore += 15;
                 else if (checkedOption === 'B') totalScore += 5;
@@ -440,49 +608,51 @@
         const resultDiv = document.getElementById('result');
         const scoreText = document.getElementById('scoreText');
         const badgeText = document.getElementById('badgeText');
-        const analysisText = document.getElementById('analysisText');
+        const analysisBM = document.getElementById('analysisBM');
+        const analysisEN = document.getElementById('analysisEN');
 
         resultDiv.style.display = 'block';
-        scoreText.innerHTML = `Jantina: <strong>${gender.toUpperCase()}</strong> | Jumlah Skor Anda: <strong>${totalScore}</strong>`;
+        scoreText.innerHTML = `Jantina/Gender: <strong>${gender.toUpperCase()}</strong> | Jumlah Skor/Total Score: <strong>${totalScore}</strong>`;
 
-        // Skala Analisis Skor Sebenar
         if (totalScore >= 180) {
-            badgeText.innerText = "Kecenderungan Otak Feminin Tulen";
-            analysisText.innerText = "Minda anda diprogramkan dengan keupayaan empati yang sangat tinggi, pemikiran kreatif, ekspresif, dan gerak hati (intuisi) yang tajam. Anda sangat berbakat dalam membaca isyarat emosi, bahasa badan manusia, serta berkebolehan melakukan pelbagai kerja (multitasking) secara serentak. Walau bagaimanapun, anda mungkin kadang-kala bergelut dengan pemikiran spasial yang rigid (seperti membaca peta teknikal tanpa petunjuk).";
-            resultDiv.style.backgroundColor = "#fce4ec";
-            resultDiv.style.borderColor = "#f8bbd0";
-            document.querySelector('#result h2').style.color = "#c2185b";
+            badgeText.innerText = "Otak Feminin Tulen / Purely Female Brain Wiring";
+            analysisBM.innerText = "Sistem pemikiran anda diprogramkan dengan keupayaan empati yang sangat tinggi, pemikiran kreatif, ekspresif, dan gerak hati yang tajam. Anda sangat berbakat dalam membaca isyarat emosi, bahasa badan manusia, serta berkebolehan melakukan pelbagai kerja (multitasking).";
+            analysisEN.innerText = "Your thought system is programmed with very high empathy, creative and expressive thinking, and sharp intuition. You are highly talented at reading emotional cues and human body language, and are highly capable of multitasking.";
+            setResultColors("#fce4ec", "#f8bbd0", "#c2185b");
         } 
         else if (totalScore >= 150 && totalScore < 180) {
-            badgeText.innerText = "Kecenderungan Otak Feminin";
-            analysisText.innerText = "Minda anda lebih cenderung kepada corak pemikiran feminin. Anda menghargai hubungan interpersonal yang baik, fleksibel dalam menguruskan tugasan, dan mempunyai kecerdasan emosi yang sihat dalam kehidupan seharian. Anda selesa bersembang dan meluahkan perasaan.";
-            resultDiv.style.backgroundColor = "#f3e5f5";
-            resultDiv.style.borderColor = "#e1bee7";
-            document.querySelector('#result h2').style.color = "#4a148c";
+            badgeText.innerText = "Kecenderungan Otak Feminin / Female Brain Leanings";
+            analysisBM.innerText = "Minda anda lebih cenderung kepada corak pemikiran feminin. Anda menghargai hubungan interpersonal yang baik, fleksibel dalam menguruskan tugasan, dan mempunyai kecerdasan emosi yang sihat dalam kehidupan seharian.";
+            analysisEN.innerText = "Your mind leans toward a female thinking pattern. You value strong interpersonal relationships, remain flexible in task management, and possess healthy emotional intelligence in your daily life.";
+            setResultColors("#f3e5f5", "#e1bee7", "#4a148c");
         }
         else if (totalScore >= 50 && totalScore < 150) {
-            badgeText.innerText = "Otak Seimbang (Androgynous/Neutron Brain)";
-            analysisText.innerText = "Anda mempunyai corak pemikiran yang sangat seimbang dan fleksibel (neutral). Anda boleh berfikir secara logik, analitikal, dan berstruktur apabila berhadapan masalah teknikal, namun pada masa yang sama kekal mempunyai empati dan komunikasi yang baik dengan orang sekeliling. Golongan ini biasanya sangat efisien dalam menyelesaikan konflik kerana memahami kedua-dua sudut pandang (logik vs emosi).";
-            resultDiv.style.backgroundColor = "#fff3e0";
-            resultDiv.style.borderColor = "#ffe0b2";
-            document.querySelector('#result h2').style.color = "#e65100";
+            badgeText.innerText = "Otak Seimbang / Balanced Brain (Neutral)";
+            analysisBM.innerText = "Anda mempunyai corak pemikiran yang sangat seimbang dan fleksibel. Anda boleh berfikir secara logik dan analitikal apabila berhadapan masalah teknikal, namun pada masa yang sama kekal mempunyai empati dan komunikasi yang baik dengan orang sekeliling.";
+            analysisEN.innerText = "You have a highly balanced and flexible thinking pattern. You can think logically and analytically when facing technical issues, yet simultaneously maintain empathy and strong communication with those around you.";
+            setResultColors("#fff3e0", "#ffe0b2", "#e65100");
         } 
         else if (totalScore >= 0 && totalScore < 50) {
-            badgeText.innerText = "Kecenderungan Otak Maskulin";
-            analysisText.innerText = "Minda anda lebih menjurus kepada pemikiran maskulin. Anda lebih selesa bekerja atau berfikir menggunakan struktur yang jelas, fakta, data, dan hujah yang kukuh. Anda lebih gemar menyelesaikan satu masalah dengan fokus (single-tasking) berbanding mencampuradukkan pelbagai hal, dan anda mempunyai keupayaan navigasi atau spasial yang baik.";
-            resultDiv.style.backgroundColor = "#e3f2fd";
-            resultDiv.style.borderColor = "#bbdefb";
-            document.querySelector('#result h2').style.color = "#0d47a1";
+            badgeText.innerText = "Kecenderungan Otak Maskulin / Male Brain Leanings";
+            analysisBM.innerText = "Minda anda lebih menjurus kepada pemikiran maskulin. Anda lebih selesa bekerja menggunakan struktur yang jelas, fakta, data, dan hujah yang kukuh. Anda lebih gemar menyelesaikan masalah secara fokus (single-tasking).";
+            analysisEN.innerText = "Your mind gravitates toward male thinking patterns. You feel more comfortable working with clear structures, facts, data, and solid arguments. You prefer focusing heavily on one task at a time (single-tasking).";
+            setResultColors("#e3f2fd", "#bbdefb", "#0d47a1");
         }
         else {
-            badgeText.innerText = "Kecenderungan Otak Maskulin Tulen";
-            analysisText.innerText = "Minda anda diprogramkan sepenuhnya dengan 'wiring' maskulin yang sangat kuat. Logik, analisis data, keupayaan mekanikal, dan pemikiran spasial ruang (seperti pemanduan, arah komputer, membaiki barangan) adalah kekuatan utama anda. Anda sangat jarang dipengaruhi oleh emosi luaran dalam membuat keputusan penting. Anda lebih suka bersendirian atau diam apabila menghadapi tekanan yang tinggi.";
-            resultDiv.style.backgroundColor = "#e1f5fe";
-            resultDiv.style.borderColor = "#b3e5fc";
-            document.querySelector('#result h2').style.color = "#01579b";
+            badgeText.innerText = "Otak Maskulin Tulen / Purely Male Brain Wiring";
+            analysisBM.innerText = "Minda anda diprogramkan sepenuhnya dengan 'wiring' maskulin yang sangat kuat. Logik, analisis data, keupayaan mekanikal, dan pemikiran ruang adalah kekuatan utama anda. Anda jarang dipengaruhi oleh emosi dalam membuat keputusan.";
+            analysisEN.innerText = "Your mind is fully programmed with a very strong male 'wiring'. Logic, data analysis, mechanical aptitude, and spatial thinking are your core strengths. You are rarely influenced by external emotions when making decisions.";
+            setResultColors("#e1f5fe", "#b3e5fc", "#01579b");
         }
 
         resultDiv.scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function setResultColors(bg, border, text) {
+        const resultDiv = document.getElementById('result');
+        resultDiv.style.backgroundColor = bg;
+        resultDiv.style.borderColor = border;
+        document.querySelector('#result h2').style.color = text;
     }
 </script>
 
