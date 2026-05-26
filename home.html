@@ -91,11 +91,11 @@
             </footer>
         </section>
 
-        <section class="w-[38%] h-full bg-[#1b263b] flex flex-col relative">
+        <section class="w-[38%] h-full bg-[#000000] flex flex-col relative">
             
             <div class="flex-1 relative overflow-hidden">
-                <video id="myVideo" class="absolute inset-0 w-full h-full object-cover hidden fade-in" muted playsinline></video>
-                <img id="myImage" class="absolute inset-0 w-full h-full object-cover hidden fade-in" alt="Health Poster">
+                <video id="myVideo" class="absolute inset-0 w-full h-full object-contain hidden fade-in" muted playsinline></video>
+                <img id="myImage" class="absolute inset-0 w-full h-full object-contain hidden fade-in" alt="Health Poster">
             </div>
 
             <div class="w-full h-[3px] bg-white/5">
@@ -137,15 +137,15 @@
         // DATA PLAYLIST (HYBRID)
         const playlist = [
             {
-                type: "image",
-                url: "food.jpg", // Ganti dengan fail anda
+                type: "video",
+                url: "media-player/video-01.mp4", // Ganti dengan fail anda
                 title: "Integriti <span class='font-bold'>Nutrisi</span>",
                 desc: "Pilih hidangan berasaskan tumbuhan dan protein berkualiti untuk kesihatan jantung yang optimum.",
                 duration: 6000
             },
             {
                 type: "video",
-                url: "rabbit.mp4", // Ganti dengan fail anda
+                url: "media-player/video-02.mp4", // Ganti dengan fail anda
                 title: "Gerakan <span class='font-bold'>30 Minit</span>",
                 desc: "Aktiviti fizikal harian dapat mengurangkan risiko penyakit tidak berjangkit (NCD) sebanyak 40%."
             }
