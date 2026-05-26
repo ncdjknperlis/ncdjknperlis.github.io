@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal NCD JKN Perlis | Minimalist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        
+        /* Animasi Ticker */
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .animate-marquee {
+            display: inline-block;
+            white-space: nowrap;
+            animation: marquee 30s linear infinite;
+        }
+
+        /* Custom Transition */
+        .fade-in { animation: fadeIn 0.5s ease-in; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Hide scrollbar */
+        ::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="h-screen w-screen overflow-hidden flex flex-col bg-[#FBFBFB] text-[#1A1A1A] antialiased">
+
+    <header class="w-full py-5 px-12 bg-white border-b border-gray-100 flex items-center justify-between z-20">
+        <div class="flex items-center space-x-4">
+            <div class="w-1 h-8 bg-[#101e33]"></div>
+            <h2 class="text-[10px] sm:text-xs font-bold tracking-[0.2em] uppercase text-[#101e33] leading-tight">
+                Unit Kawalan Penyakit Tidak Berjangkit (NCD)<br>
+                <span class="text-gray-400 font-medium text-[9px]">Jabatan Kesihatan Negeri Perlis</span>
+            </h2>
+        </div>
+        <div class="text-[10px] text-gray-300 font-medium uppercase tracking-widest">
+            Sistem Akses Digital v2.0
+        </div>
+    </header>
+
+    <main class="flex flex-1 overflow-hidden">
+        
+        <section class="w-[62%] h-full bg-white px-16 py-12 flex flex-col">
+            <div class="mb-12">
+                <h1 class="text-4xl font-light tracking-tighter text-[#101e33] mb-2">Pusat Akses <span class="font-bold">Digital</span></h1>
+                <p class="text-sm text-gray-400 font-light">Pilih modul sistem untuk navigasi pantas.</p>
+            </div>
+
+            <div class="flex-1 space-y-0">
+                <a href="#" class="group flex items-center justify-between py-8 border-b border-gray-50 hover:bg-gray-50/50 transition-all duration-500 px-4 -mx-4 rounded-xl">
+                    <div class="flex items-center space-x-8">
+                        <span class="text-xs font-medium text-gray-300 group-hover:text-[#101e33] transition-colors">01</span>
+                        <div>
+                            <h3 class="text-lg font-semibold text-[#101e33] group-hover:translate-x-1 transition-transform duration-300">Sistem Janji Temu</h3>
+                            <p class="text-xs text-gray-400 font-light mt-1">Pengurusan jadual klinik dan temujanji pakar.</p>
+                        </div>
+                    </div>
+                    <div class="opacity-0 group-hover:opacity-100 transition-opacity text-[#101e33] text-sm">Akses ↗</div>
+                </a>
+
+                <a href="#" class="group flex items-center justify-between py-8 border-b border-gray-50 hover:bg-gray-50/50 transition-all duration-500 px-4 -mx-4 rounded-xl">
+                    <div class="flex items-center space-x-8">
+                        <span class="text-xs font-medium text-gray-300 group-hover:text-[#101e33] transition-colors">02</span>
+                        <div>
+                            <h3 class="text-lg font-semibold text-[#101e33] group-hover:translate-x-1 transition-transform duration-300">Saringan Kendiri NCD</h3>
+                            <p class="text-xs text-gray-400 font-light mt-1">Semakan risiko kesihatan, BMI & tekanan darah.</p>
+                        </div>
+                    </div>
+                    <div class="opacity-0 group-hover:opacity-100 transition-opacity text-[#101e33] text-sm">Akses ↗</div>
+                </a>
+
+                <a href="#" class="group flex items-center justify-between py-8 border-b border-gray-50 hover:bg-gray-50/50 transition-all duration-500 px-4 -mx-4 rounded-xl">
+                    <div class="flex items-center space-x-8">
+                        <span class="text-xs font-medium text-gray-300 group-hover:text-[#101e33] transition-colors">03</span>
+                        <div>
+                            <h3 class="text-lg font-semibold text-[#101e33] group-hover:translate-x-1 transition-transform duration-300">Rekod Digital MyHealth</h3>
+                            <p class="text-xs text-gray-400 font-light mt-1">Akses sejarah perubatan dan imunisasi kebangsaan.</p>
+                        </div>
+                    </div>
+                    <div class="opacity-0 group-hover:opacity-100 transition-opacity text-[#101e33] text-sm">Akses ↗</div>
+                </a>
+            </div>
+
+            <footer class="mt-8 pt-6 border-t border-gray-50">
+                <p class="text-[10px] text-gray-300 tracking-widest uppercase">© 2026 JKN PERLIS • Bahagian Penyakit Tidak Berjangkit</p>
+            </footer>
+        </section>
+
+        <section class="w-[38%] h-full bg-[#1b263b] flex flex-col relative">
+            
+            <div class="flex-1 relative overflow-hidden">
+                <video id="myVideo" class="absolute inset-0 w-full h-full object-cover hidden fade-in" muted playsinline></video>
+                <img id="myImage" class="absolute inset-0 w-full h-full object-cover hidden fade-in" alt="Health Poster">
+            </div>
+
+            <div class="w-full h-[3px] bg-white/5">
+                <div id="progressBar" class="h-full bg-white transition-all duration-100 ease-linear w-0"></div>
+            </div>
+
+            <div class="p-10 bg-[#1b263b] text-white">
+                <div class="mb-8">
+                    <span class="text-[9px] font-bold tracking-[0.3em] text-white/40 uppercase">Info Semasa</span>
+                    <h3 id="promoTitle" class="text-xl font-light mt-2 leading-tight">-</h3>
+                    <p id="promoDesc" class="text-xs text-white/50 font-light mt-3 leading-relaxed">-</p>
+                </div>
+                
+                <div class="flex items-center justify-between pt-6 border-t border-white/5">
+                    <div class="flex space-x-6">
+                        <button onclick="changeMedia(-1)" class="text-[10px] tracking-widest text-white/40 hover:text-white transition-colors uppercase font-bold">Prev</button>
+                        <button onclick="changeMedia(1)" class="text-[10px] tracking-widest text-white/40 hover:text-white transition-colors uppercase font-bold">Next</button>
+                    </div>
+                    <button id="playPauseBtn" onclick="togglePlay()" class="w-12 h-12 flex items-center justify-center bg-white rounded-full text-[#1b263b] hover:scale-105 transition-transform shadow-xl">
+                        <svg id="playIcon" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        <svg id="pauseIcon" class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="w-full bg-[#101e33] py-3 overflow-hidden z-20">
+        <div class="animate-marquee text-white/90 text-[11px] font-medium tracking-wide">
+            <span class="mx-8">[ PENGUMUMAN ] Saringan Kesihatan NHMS bermula di Klinik Kesihatan berdekatan anda. Pemeriksaan adalah percuma.</span>
+            <span class="mx-8">|</span>
+            <span class="mx-8">Kawal pengambilan garam dan gula untuk mencegah Hipertensi dan Diabetes.</span>
+            <span class="mx-8">|</span>
+            <span class="mx-8">Sila pastikan data MySejahtera anda dikemaskini sebelum pendaftaran.</span>
+        </div>
+    </footer>
+
+    <script>
+        // DATA PLAYLIST (HYBRID)
+        const playlist = [
+            {
+                type: "image",
+                url: "food.jpg", // Ganti dengan fail anda
+                title: "Integriti <span class='font-bold'>Nutrisi</span>",
+                desc: "Pilih hidangan berasaskan tumbuhan dan protein berkualiti untuk kesihatan jantung yang optimum.",
+                duration: 6000
+            },
+            {
+                type: "video",
+                url: "rabbit.mp4", // Ganti dengan fail anda
+                title: "Gerakan <span class='font-bold'>30 Minit</span>",
+                desc: "Aktiviti fizikal harian dapat mengurangkan risiko penyakit tidak berjangkit (NCD) sebanyak 40%."
+            }
+        ];
+
+        let currentIndex = 0;
+        let isPlaying = true;
+        let imageTimer = null;
+        let progressInterval = null;
+        let imgStartTime = 0;
+        let imgElapsedTime = 0;
+
+        const video = document.getElementById("myVideo");
+        const image = document.getElementById("myImage");
+        const progressBar = document.getElementById("progressBar");
+        const playPauseBtn = document.getElementById("playPauseBtn");
+        const playIcon = document.getElementById("playIcon");
+        const pauseIcon = document.getElementById("pauseIcon");
+        const promoTitle = document.getElementById("promoTitle");
+        const promoDesc = document.getElementById("promoDesc");
+
+        // Media Update Progress
+        video.addEventListener('timeupdate', () => {
+            if (playlist[currentIndex].type === "video") {
+                const percentage = (video.currentTime / video.duration) * 100;
+                progressBar.style.width = `${percentage}%`;
+            }
+        });
+
+        video.onended = () => changeMedia(1);
+
+        window.onload = () => loadMedia();
+
+        function loadMedia() {
+            clearTimeout(imageTimer);
+            clearInterval(progressInterval);
+            video.pause();
+            
+            video.classList.add("hidden");
+            image.classList.add("hidden");
+
+            const media = playlist[currentIndex];
+            promoTitle.innerHTML = media.title;
+            promoDesc.innerText = media.desc;
+            progressBar.style.width = "0%";
+
+            if (media.type === "video") {
+                video.classList.remove("hidden");
+                video.src = media.url;
+                if (isPlaying) video.play().catch(e => console.log(e));
+            } else {
+                image.classList.remove("hidden");
+                image.src = media.url;
+                if (isPlaying) startImageTimer();
+            }
+            updateBtnIcon();
+        }
+
+        function startImageTimer() {
+            const dur = playlist[currentIndex].duration;
+            imgStartTime = Date.now() - imgElapsedTime;
+
+            progressInterval = setInterval(() => {
+                imgElapsedTime = Date.now() - imgStartTime;
+                let perc = (imgElapsedTime / dur) * 100;
+                if (perc >= 100) perc = 100;
+                progressBar.style.width = `${perc}%`;
+            }, 50);
+
+            imageTimer = setTimeout(() => {
+                imgElapsedTime = 0;
+                changeMedia(1);
+            }, dur - imgElapsedTime);
+        }
+
+        function changeMedia(dir) {
+            currentIndex = (currentIndex + dir + playlist.length) % playlist.length;
+            imgElapsedTime = 0;
+            loadMedia();
+        }
+
+        function togglePlay() {
+            isPlaying = !isPlaying;
+            const media = playlist[currentIndex];
+            if (isPlaying) {
+                if (media.type === "video") video.play(); else startImageTimer();
+            } else {
+                if (media.type === "video") video.pause(); 
+                else { clearTimeout(imageTimer); clearInterval(progressInterval); }
+            }
+            updateBtnIcon();
+        }
+
+        function updateBtnIcon() {
+            if (isPlaying) {
+                playIcon.classList.add("hidden");
+                pauseIcon.classList.remove("hidden");
+            } else {
+                playIcon.classList.remove("hidden");
+                pauseIcon.classList.add("hidden");
+            }
+        }
+    </script>
+</body>
+</html>
