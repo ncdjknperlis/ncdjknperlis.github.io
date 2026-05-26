@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portal NCD JKN Perlis | Minimalist Loading</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
         
@@ -24,17 +24,35 @@
         .fade-in { animation: fadeIn 0.5s ease-in-out forwards; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        .fade-out { animation: fadeOut 0.6s ease-in-out forwards; }
-        @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; visibility: hidden; } }
-
-        /* Hide scrollbar */
+        /* Hide scrollbar untuk elemen global tetapi kekalkan fungsi skrol */
         ::-webkit-scrollbar { display: none; }
+        
+        /* Gaya skrol halus dan minimalis untuk bahagian pengumuman */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+            display: block;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.03);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* Gaya Tulisan Menegak Apabila Collapse */
+        .vertical-text {
+            writing-mode: vertical-rl;
+            transform: rotate(180deg);
+        }
     </style>
 </head>
 <body class="h-screen w-screen overflow-hidden flex flex-col bg-[#FBFBFB] text-[#1A1A1A] antialiased">
 
-    <div id="loadingScreen" class="fixed inset-0 bg-[#FBFBFB] z-50 flex flex-col items-center justify-center space-y-4 transition-all duration-2000">
-        <!-- <div class="w-12 h-12 border-2 border-[#101e33] border-t-transparent rounded-full animate-spin"></div> -->
+    <div id="loadingScreen" class="fixed inset-0 bg-[#FBFBFB] z-50 flex flex-col items-center justify-center space-y-4 transition-opacity duration-1000 ease-in-out">
         <div class="text-center animate-pulse">
             <img src="images/logo.png" style="max-width: 150px;" class="w-full h-auto max-h-full object-contain mx-auto">
             <h1 class="text-4xl font-bold tracking-tighter text-[#101e33] mb-2">Selamat Datang</h1>
@@ -58,15 +76,27 @@
         </div>
     </header>
 
-    <main class="flex flex-1 overflow-hidden">
+    <main class="flex flex-1 overflow-hidden relative">
 
-        <section class="w-[65%] h-full bg-white px-16 py-12 flex flex-col">
+        <button id="togglePanelBtn" onclick="toggleMediaPanel()" class="absolute right-4 top-4 z-40 w-10 h-10 flex items-center justify-center rounded-full bg-white shadow-md border border-gray-100 text-[#101e33] hover:bg-gray-50 transition-all duration-300 active:scale-95 group">
+            <svg id="toggleIcon" class="w-4 h-4 transform transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
+            </svg>
+        </button>
+
+        <div id="collapsedText" class="absolute right-3 top-20 bottom-4 z-30 flex items-center justify-center hidden fade-in pointer-events-none">
+            <span class="vertical-text text-[10px] font-bold tracking-[0.3em] text-slate-400 uppercase select-none">
+                ▲ PAPAR PENGUMUMAN & MEDIA
+            </span>
+        </div>
+
+        <section id="infoColumn" class="w-[85%] h-full bg-white px-16 py-12 flex flex-col transition-all duration-500 ease-in-out border-r border-gray-50">
             <div class="mb-12">
                 <h1 class="text-4xl font-light tracking-tighter text-[#101e33] mb-2">Selamat <span class="font-bold">Datang</span></h1>
                 <p class="text-sm text-gray-400 font-light">Pilih modul sistem untuk navigasi pantas.</p>
             </div>
 
-            <div class="grid grid-cols-4 gap-4 w-full">
+            <div id="gridContainer" class="grid grid-cols-4 gap-4 w-full transition-all duration-500">
                     
                     <a href="https://sistem-janjitemu-klinik.gov.my" target="_blank" class="group flex flex-col justify-between p-6 h-48 bg-white border border-gray-100 rounded-xl hover:bg-gray-50/80 hover:border-gray-200 transition-all duration-300 shadow-sm hover:shadow-md">
                         <div class="space-y-2">
@@ -120,43 +150,77 @@
             </footer>
         </section>
 
-        <section class="w-[35%] h-full bg-[#000000] flex flex-col relative">
+        <section id="mediaColumn" class="w-[15%] h-full bg-[#1b263b] flex flex-col relative transition-all duration-500 ease-in-out transform translate-x-0 origin-right">
             
-            <button id="muteBtn" onclick="toggleMute()" class="absolute top-4 right-4 z-30 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-white hover:bg-white/20 transition-all active:scale-95 hidden">
-                <svg id="unmuteIcon" class="w-5 h-5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z"/></svg>
-                <svg id="muteIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 9.75 19.5 12m0 0 2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6 4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z"/></svg>
-            </button>
+            <div class="p-5 flex-1 max-h-[calc(100vh-320px)] overflow-y-auto custom-scrollbar">
+                <span class="text-[10px] font-bold tracking-[0.25em] text-white/40 uppercase block mb-3 sticky top-0 bg-[#1b263b] pb-2 z-10">Pengumuman Penting</span>
+                <ul class="space-y-1 text-xs text-white/70 font-light list-none">
+                    <li class="p-2 border-b border-white/5 leading-relaxed rounded-lg hover:bg-white/5 hover:text-white hover:pl-4 transition-all duration-300 cursor-default">
+                        &bull; Mesyuarat Penyelarasan Unit NCD bersama Klinik Kesihatan Daerah akan diadakan pada Khamis ini.
+                    </li>
+                    <li class="p-2 border-b border-white/5 leading-relaxed rounded-lg hover:bg-white/5 hover:text-white hover:pl-4 transition-all duration-300 cursor-default">
+                        &bull; Mohon semua petugas kaunter memastikan data saringan MySejahtera disemak sebelum pendaftaran pautan.
+                    </li>
+                    <li class="p-2 border-b border-white/5 leading-relaxed rounded-lg hover:bg-white/5 hover:text-white hover:pl-4 transition-all duration-300 cursor-default">
+                        &bull; Kempen Kesedaran Diabetes peringkat negeri bakal dilancarkan di Kangar pertengahan bulan depan.
+                    </li>
+                    <li class="p-2 border-b border-white/5 leading-relaxed rounded-lg hover:bg-white/5 hover:text-white hover:pl-4 transition-all duration-300 cursor-default">
+                        &bull; Hebahan: Saringan Kesihatan bergerak Unit Kesihatan Komuniti JKN akan melawat fasiliti luar bandar minggu hadapan.
+                    </li>
+                    <li class="p-2 border-b border-white/5 leading-relaxed rounded-lg hover:bg-white/5 hover:text-white hover:pl-4 transition-all duration-300 cursor-default">
+                        &bull; Peringatan: Kemas kini data inventori peralatan klinik (NCD kits) selewat-lewatnya hujung bulan ini.
+                    </li>
+                </ul>
+            </div>
             
-            <div class="flex-1 relative overflow-hidden flex items-center justify-center">
+            <div class="h-44 max-h-[180px] bg-black/20 relative overflow-hidden flex items-center justify-center flex-shrink-0">
                 <video id="myVideo" class="w-full h-auto max-h-full object-contain hidden fade-in" muted playsinline></video>
-                <img id="myImage" class="w-full h-auto max-h-full object-contain hidden fade-in" alt="Health Poster">
+                <img id="myImage" class="w-full h-auto max-h-full object-contain mx-auto hidden fade-in" alt="Health Poster">
             </div>
 
-            <div class="w-full h-[3px] bg-white/5">
+            <div class="w-full h-[3px] bg-white/5 flex-shrink-0">
                 <div id="progressBar" class="h-full bg-white transition-all duration-100 ease-linear w-0"></div>
             </div>
 
-            <div class="p-10 bg-[#1b263b] text-white">
-                <div class="mb-8">
+            <div class="p-5 bg-[#1b263b] text-white flex-shrink-0 border-t border-white/5">
+                <div class="mb-4">
                     <span class="text-[9px] font-bold tracking-[0.3em] text-white/40 uppercase">Info Semasa</span>
-                    <h3 id="promoTitle" class="text-xl font-light mt-2 leading-tight">-</h3>
-                    <p id="promoDesc" class="text-xs text-white/50 font-light mt-3 leading-relaxed">-</p>
+                    <h3 id="promoTitle" class="text-sm font-light mt-1 leading-tight text-ellipsis overflow-hidden whitespace-nowrap">-</h3>
+                    <p id="promoDesc" class="text-xs text-white/50 font-light mt-1.5 leading-relaxed hidden">-</p>
                 </div>
                 
-                <div class="flex items-center justify-between pt-6 border-t border-white/5">
-                    <div class="flex space-x-6">
-                        <button onclick="changeMedia(-1)" class="text-[10px] tracking-widest text-white/40 hover:text-white transition-colors uppercase font-bold">Prev</button>
-                        <button onclick="changeMedia(1)" class="text-[10px] tracking-widest text-white/40 hover:text-white transition-colors uppercase font-bold">Next</button>
+                <div class="flex items-center justify-between pt-4 border-t border-white/5">
+                    <div class="flex space-x-4">
+                        <button onclick="changeMedia(-1)" class="text-white/40 hover:text-white transition-colors p-1" title="Pengumuman Sebelumnya">
+                            <svg class="w-4 h-4 transform -scale-x-100" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M12 18.75l-3.75-2.5H5.25A1.5 1.5 0 013 14.75v-5.5A1.5 1.5 0 014.25 7.75h3l3.75-2.5v13.5z" />
+                            </svg>
+                        </button>
+                        <button onclick="changeMedia(1)" class="text-white/40 hover:text-white transition-colors p-1" title="Pengumuman Seterusnya">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M12 18.75l-3.75-2.5H5.25A1.5 1.5 0 013 14.75v-5.5A1.5 1.5 0 014.25 7.75h3l3.75-2.5v13.5z" />
+                            </svg>
+                        </button>
                     </div>
-                    <button id="playPauseBtn" onclick="togglePlay()" class="w-12 h-12 flex items-center justify-center bg-white rounded-full text-[#1b263b] hover:scale-105 transition-transform shadow-xl">
-                        <svg id="playIcon" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                        <svg id="pauseIcon" class="w-4 h-4 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-                    </button>
+                    
+                    <div class="flex items-center space-x-2">
+                        <button id="muteBtn" onclick="toggleMute()" class="w-8 h-8 flex items-center justify-center rounded-full bg-white/5 border border-white/10 text-white/60 hover:text-white hover:bg-white/10 transition-all active:scale-95 invisible">
+                            <svg id="unmuteIcon" class="w-3.5 h-3.5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z"/></svg>
+                            <svg id="muteIcon" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 9.75 19.5 12m0 0 2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6 4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z"/></svg>
+                        </button>
+
+                        <button id="playPauseBtn" onclick="togglePlay()" class="w-8 h-8 flex items-center justify-center bg-white rounded-full text-[#1b263b] hover:scale-105 transition-transform shadow-xl">
+                            <svg id="playIcon" class="w-2.5 h-2.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            <svg id="pauseIcon" class="w-2.5 h-2.5 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
     </main>
 
+    <header></header> 
+    
     <footer class="w-full bg-[#101e33] py-3 overflow-hidden z-20">
         <div class="animate-marquee text-white/90 text-[11px] font-medium tracking-wide">
             <span class="mx-8">[ PENGUMUMAN ] Saringan Kesihatan NHMS bermula di Klinik Kesihatan berdekatan anda. Pemeriksaan adalah percuma.</span>
@@ -166,7 +230,6 @@
     </footer>
 
     <script>
-        // Sila pastikan susunan media anda betul (Contoh: Video pertama untuk lancarkan autoplay)
         const playlist = [
             {
                 type: "video",
@@ -189,6 +252,7 @@
         let progressInterval = null;
         let imgStartTime = 0;
         let imgElapsedTime = 0;
+        let isPanelOpen = true; 
 
         const video = document.getElementById("myVideo");
         const image = document.getElementById("myImage");
@@ -204,6 +268,12 @@
         const unmuteIcon = document.getElementById("unmuteIcon");
         const loadingScreen = document.getElementById("loadingScreen");
 
+        const infoColumn = document.getElementById("infoColumn");
+        const mediaColumn = document.getElementById("mediaColumn");
+        const toggleIcon = document.getElementById("toggleIcon");
+        const gridContainer = document.getElementById("gridContainer");
+        const collapsedText = document.getElementById("collapsedText");
+
         video.addEventListener('timeupdate', () => {
             if (playlist[currentIndex].type === "video") {
                 const percentage = (video.currentTime / video.duration) * 100;
@@ -213,15 +283,57 @@
 
         video.onended = () => changeMedia(1);
 
-        // LOGIK BARU: Sembunyikan Loading Screen selepas seluruh window & media sedia
         window.onload = () => {
             loadMedia();
             
-            // Beri delay 1 saat supaya transisi nampak tenang dan smooth
             setTimeout(() => {
-                loadingScreen.classList.add("fade-out");
-            }, 2500);
+                loadingScreen.style.opacity = "0";
+                
+                setTimeout(() => {
+                    loadingScreen.style.display = "none";
+                }, 1000);
+            }, 1500);
         };
+
+        function toggleMediaPanel() {
+            if (isPanelOpen) {
+                mediaColumn.classList.add("w-0", "translate-x-full", "opacity-0");
+                mediaColumn.classList.remove("w-[15%]", "translate-x-0", "opacity-100");
+                
+                infoColumn.classList.add("w-full");
+                infoColumn.classList.remove("w-[85%]");
+                
+                gridContainer.classList.add("grid-cols-5");
+                gridContainer.classList.remove("grid-cols-4");
+                
+                toggleIcon.classList.add("rotate-180");
+                
+                // DIUBAH: Tunjukkan teks pengumuman menegak masa panel ditutup
+                collapsedText.classList.remove("hidden");
+                
+                if (isPlaying) togglePlay(); 
+                
+                isPanelOpen = false;
+            } else {
+                mediaColumn.classList.add("w-[15%]", "translate-x-0", "opacity-100");
+                mediaColumn.classList.remove("w-0", "translate-x-full", "opacity-0");
+                
+                infoColumn.classList.add("w-[85%]");
+                infoColumn.classList.remove("w-full");
+                
+                gridContainer.classList.add("grid-cols-4");
+                gridContainer.classList.remove("grid-cols-5");
+                
+                toggleIcon.classList.remove("rotate-180");
+                
+                // DIUBAH: Sembunyikan semula teks pengumuman menegak masa panel dibuka
+                collapsedText.classList.add("hidden");
+                
+                if (!isPlaying) togglePlay();
+
+                isPanelOpen = true;
+            }
+        }
 
         function loadMedia() {
             clearTimeout(imageTimer);
@@ -230,7 +342,7 @@
             
             video.classList.add("hidden");
             image.classList.add("hidden");
-            muteBtn.classList.add("hidden");
+            muteBtn.classList.add("invisible");
 
             const media = playlist[currentIndex];
             promoTitle.innerHTML = media.title;
@@ -239,9 +351,9 @@
 
             if (media.type === "video") {
                 video.classList.remove("hidden");
-                muteBtn.classList.remove("hidden");
+                muteBtn.classList.remove("invisible"); 
                 video.src = media.url;
-                video.load(); // Paksa muat data video di latar belakang
+                video.load(); 
                 if (isPlaying) video.play().catch(e => console.log(e));
             } else {
                 image.classList.remove("hidden");
