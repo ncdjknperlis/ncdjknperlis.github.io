@@ -111,8 +111,7 @@
                 </a>
                 
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-4 sm:p-6 md:p-12 flex flex-col justify-end pointer-events-none">
-                    <span class="inline-block text-[8px] md:text-[10px] font-extrabold tracking-[0.2em] bg-amber-400 text-[#0b1424] uppercase px-2 md:px-3 py-0.5 md:py-1 rounded-full w-max mb-1.5 md:mb-2 shadow-sm">
-                        Kempen Kesedaran Komuniti
+                    <span id="sliderHead" class="inline-block text-[8px] md:text-[10px] font-extrabold tracking-[0.2em] bg-amber-400 text-[#0b1424] uppercase px-2 md:px-3 py-0.5 md:py-1 rounded-full w-max mb-1.5 md:mb-2 shadow-sm">
                     </span>
                     <h2 id="sliderTitle" class="text-base sm:text-2xl md:text-3xl font-black text-white leading-tight tracking-tight line-clamp-1 md:line-clamp-none">-</h2>
                     <p id="sliderDesc" class="text-[11px] sm:text-sm text-slate-300 font-light mt-0.5 md:mt-1.5 max-w-3xl leading-relaxed line-clamp-2 md:line-clamp-none">-</p>
@@ -369,17 +368,26 @@
     <script>
         const sliderData = [
             {
+                img: "images/slider/slider-00.png", 
+                head: "Kalendar",
+                title: "Sambutan Hari Kesihatan",
+                desc: "Kawalan Penyakit Tidak Berjangkit"
+            },
+            {
                 img: "images/slider/slider-01.png", 
+                head: "Promosi Kesihatan",
                 title: "Perangi Diabetes: Kurangkan Gula Dalam Minuman Anda",
                 desc: "Jom mulakan gaya hidup sihat hari ini dengan memilih air kosong. Kesihatan optimum bermula dari tabiat harian yang bijak."
             },
             {
                 img: "images/slider/slider-02.png", 
+                head: "Promosi Kesihatan",
                 title: "Saringan Kesihatan Percuma Komuniti Perlis",
                 desc: "Kunjungi Klinik Kesihatan terdekat untuk pemeriksaan percuma tekanan darah, kolesterol, and gula dalam darah."
             },
             {
                 img: "images/slider/slider-03.png", 
+                head: "Promosi Kesihatan",
                 title: "Gaya Hidup Aktif: 30 Minit Senaman Sehari",
                 desc: "Lakukan aktiviti fizikal sekurang-kurangnya 30 minit sehari untuk mengekalkan berat badan ideal dan jantung yang kuat."
             }
@@ -389,6 +397,7 @@
         let sliderTimer = null;
 
         const sliderImage = document.getElementById("sliderImage");
+        const sliderHead = document.getElementById("sliderHead");
         const sliderTitle = document.getElementById("sliderTitle");
         const sliderDesc = document.getElementById("sliderDesc");
         const sliderLink = document.getElementById("sliderLink");
@@ -402,6 +411,7 @@
             const currentItem = sliderData[currentSliderIndex];
             if(sliderImage) {
                 sliderImage.src = currentItem.img;
+                sliderHead.innerHTML = currentItem.head;
                 sliderTitle.innerHTML = currentItem.title;
                 sliderDesc.innerText = currentItem.desc;
                 sliderLink.href = "#"; 
