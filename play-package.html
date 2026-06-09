@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Koleksi Kapsul NCD | JKN Perlis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <style>body { font-family: 'Inter', sans-serif; }</style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#FBFBFB] text-[#1A1A1A] antialiased">
+
+    <!-- HEADER (Kekal Konsisten) -->
+    <header class="w-full py-3 md:py-5 px-4 md:px-12 bg-white border-b border-gray-100 flex flex-row items-center justify-between gap-2 z-20 flex-shrink-0">
+        <div class="flex items-center space-x-2 md:space-x-4">
+            <img src="images/logo.png" style="max-width: 32px;" class="w-full h-auto object-contain mx-auto md:max-w-[50px]">
+            <img src="images/logo-ncd/logo-ncd-default.png" style="max-width: 90px;" class="md:max-w-[150px]">
+            <div class="w-[1px] h-5 md:h-8 bg-gray-200"></div>
+            <h2 class="text-[8px] md:text-xs font-bold tracking-[0.10em] md:tracking-[0.2em] uppercase text-[#101e33] leading-tight">
+                Unit NCD<br>
+                <span class="text-gray-400 font-medium text-[7px] md:text-[9px]">JKN Perlis</span>
+            </h2>
+        </div>
+        <div class="flex items-center space-x-2">
+            <a href="info-ncd.html" class="text-xs font-bold text-gray-700 hover:text-[#101e33] border border-gray-200 px-3 py-1.5 rounded-xl bg-white transition-all shadow-sm active:scale-95">
+                ← Kembali ke Hub Sumber
+            </a>
+        </div>
+    </header>
+
+    <!-- CONTAINER UTAMA -->
+    <main class="flex-1 w-full max-w-2xl mx-auto px-4 py-8 md:py-12 flex flex-col justify-start">
+        
+        <!-- Kad Tajuk Utama Kumpulan -->
+        <div class="w-full p-6 bg-white border border-purple-100 rounded-2xl shadow-sm mb-6">
+            <span class="inline-block text-[9px] font-extrabold tracking-wider bg-purple-50 text-purple-600 uppercase px-2.5 py-1 rounded-md mb-2">
+                Koleksi Kapsul Berbilang Bahan
+            </span>
+            <h2 id="packageTitle" class="text-xl md:text-2xl font-bold text-[#101e33] tracking-tight leading-tight">-</h2>
+            <p id="packageDesc" class="text-xs md:text-sm text-gray-500 font-light mt-2 leading-relaxed">-</p>
+        </div>
+
+        <!-- REKABENTUK SENARAI BAHAN (Suntikan Senarai Bersama Thumbnail) -->
+        <div class="w-full space-y-3 mb-24" id="materialsListContainer">
+            <!-- JavaScript akan menyuntik senarai fail ke mari -->
+        </div>
+
+    </main>
+
+    <!-- FOOTER LIGHT MELEKAT -->
+    <footer class="w-full bg-white py-4 px-6 text-center border-t border-gray-100 mt-auto flex-shrink-0">
+        <p class="text-[10px] md:text-xs font-medium text-gray-400 tracking-wide">
+            Hak Cipta © 2026 Unit Kawalan Penyakit Tidak Berjangkit, Bahagian Kesihatan Awam, Jabatan Kesihatan Negeri Perlis
+        </p>
+    </footer>
+
+    <!-- ENGINE DECODER UNTUK JANA LIST SECARA DINAMIK -->
+    <script>
+        window.onload = () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            const title = urlParams.get('title');
+            const desc = urlParams.get('desc');
+            const materialsString = urlParams.get('materials'); // Membaca teks JSON array string
+
+            const txtTitle = document.getElementById("packageTitle");
+            const txtDesc = document.getElementById("packageDesc");
+            const listContainer = document.getElementById("materialsListContainer");
+
+            if (title) txtTitle.innerText = decodeURIComponent(title);
+            if (desc) txtDesc.innerText = decodeURIComponent(desc);
+
+            if (materialsString) {
+                try {
+                    // Tukar semula JSON String kepada Array Object asal
+                    const materialsArray = JSON.parse(decodeURIComponent(materialsString));
+                    listContainer.innerHTML = ""; // Bersihkan kontainer
+
+                    materialsArray.forEach(mat => {
+                        const row = document.createElement("div");
+                        row.className = "flex items-center justify-between p-3 bg-white hover:bg-gray-50 border border-gray-100 rounded-xl transition-all group shadow-sm";
+                        
+                        // Letakkan fallback imej sekiranya thumb tiada
+                        const finalThumb = mat.thumb || "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=80&q=80";
+
+                        row.innerHTML = `
+                            <div class="flex items-center space-x-3 overflow-hidden pr-2">
+                                <img src="${finalThumb}" alt="Pratonton" loading="lazy" class="w-10 h-10 object-cover rounded-lg border border-gray-100 flex-shrink-0">
+                                <div class="overflow-hidden">
+                                    <p class="text-xs font-bold text-gray-700 truncate group-hover:text-[#101e33] transition-colors leading-tight">${mat.name}</p>
+                                    <span class="text-[9px] font-extrabold px-1.5 py-0.2 mt-0.5 inline-block rounded bg-gray-100 text-gray-400 uppercase tracking-wide">${mat.type}</span>
+                                </div>
+                            </div>
+                            <a href="${mat.url}" target="_blank" class="py-1.5 px-3.5 bg-white border border-gray-200 hover:border-[#101e33] text-gray-600 hover:text-[#101e33] text-[11px] font-extrabold rounded-lg transition-all shadow-sm flex-shrink-0 active:scale-95">
+                                Buka ↗
+                            </a>
+                        `;
+                        listContainer.appendChild(row);
+                    });
+                } catch (e) {
+                    console.error("Gagal membaca data bahan: ", e);
+                    listContainer.innerHTML = "<div class='text-center text-xs text-gray-400 py-6'>Ralat semasa memuatkan senarai fail.</div>";
+                }
+            }
+        };
+    </script>
+</body>
+</html>

@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NCD JKN Perlis</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Montserrat:wght@700;800&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+    <link rel="manifest" href="favicon/site.webmanifest">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3, .font-display { font-family: 'Montserrat', sans-serif; }
+
+        /* Custom height untuk slider mengikut keperluan spesifik anda */
+        .slider-container {
+            height: 300px; /* 📱 UBAH DI SINI UNTUK SMARTPHONE */
+        }
+        @media (min-width: 768px) {
+            .slider-container {
+                height: 500px; /* 💻 UBAH DI SINI UNTUK LAPTOP / SKRIN BESAR */
+            }
+        }
+        @keyframes marquee {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+        .animate-marquee {
+            animation: marquee 40s linear infinite;
+        }
+        /* Memperlahankan pergerakan teks sedikit apabila cursor di-hover untuk memudahkan bacaan */
+        .hover\:pause-marquee:hover {
+            animation-play-state: paused;
+        }
+    </style>
+</head>
+<body class="bg-[#f8fafc] text-[#0f172a] antialiased">
+
+    <div class="bg-[#2b459a] text-xs text-white/80 py-2 px-6 border-b border-[#2b459a]/20 tracking-wider font-medium hidden sm:block">
+        <div class="container mx-auto flex justify-between items-center">
+            <span>PORTAL RASMI UNIT KAWALAN PENYAKIT TIDAK BERJANGKIT (NCD), JABATAN KESIHATAN NEGERI PERLIS</span>
+        </div>
+    </div>
+
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200">
+        <div class="container mx-auto px-6 py-0 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <img src="images/logo-ncd/logo-ncd-default.png" style="width:250px">
+            </div>
+            
+            <button id="menuBtn" class="md:hidden text-slate-700 hover:text-[#2b459a] p-2 focus:outline-none z-50">
+                <i data-lucide="menu" id="burgerIcon" class="w-6 h-6 block"></i>
+                <i data-lucide="x" id="closeIcon" class="w-6 h-6 hidden"></i>
+            </button>
+
+            <nav id="navMenu" class="hidden absolute top-full left-0 w-full bg-white border-b border-slate-200 p-6 space-y-4 md:space-y-0 shadow-lg md:shadow-none md:border-none md:static md:w-auto md:bg-transparent md:p-0 md:flex items-center md:space-x-8 text-sm font-semibold tracking-wide z-40">
+                <a href="#profil" class="block text-slate-600 hover:text-[#2b459a] transition py-1 md:py-0">Profil Unit</a>
+                
+                <div class="relative group py-1 md:py-2">
+                    <button class="flex items-center gap-1 text-slate-600 group-hover:text-[#2b459a] transition font-semibold w-full text-left md:w-auto focus:outline-none">
+                        Info NCD <i data-lucide="chevron-down" class="w-4 h-4 transition-transform group-hover:rotate-180 hidden md:inline"></i>
+                    </button>
+                    <div class="md:absolute left-0 mt-2 w-full md:w-56 bg-slate-50 md:bg-white border-l-2 md:border-l-0 md:border border-slate-200 md:rounded-lg md:shadow-lg md:opacity-0 md:invisible md:group-hover:opacity-100 md:group-hover:visible transition-all duration-200 pl-4 md:pl-0 overflow-hidden mt-2 md:mt-2">
+                        <div class="py-1">
+                            <a href="#teras" class="block px-4 py-2 text-xs text-slate-700 hover:bg-slate-100 hover:text-[#2b459a] font-medium">Penyakit Kardiovaskular</a>
+                            <a href="#teras" class="block px-4 py-2 text-xs text-slate-700 hover:bg-slate-100 hover:text-[#2b459a] font-medium">Diabetes Melitus</a>
+                            <a href="#teras" class="block px-4 py-2 text-xs text-slate-700 hover:bg-slate-100 hover:text-[#2b459a] font-medium">Onkologi (Kanser)</a>
+                            <a href="#teras" class="block px-4 py-2 text-xs text-slate-700 hover:bg-slate-100 hover:text-[#2b459a] font-medium">Respiratori Kronik</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative group py-1 md:py-2">
+                    <button class="flex items-center gap-1 text-slate-600 group-hover:text-[#2b459a] transition font-semibold w-full text-left md:w-auto focus:outline-none">
+                        Program & Aktiviti <i data-lucide="chevron-down" class="w-4 h-4 transition-transform group-hover:rotate-180 hidden md:inline"></i>
+                    </button>
+                    <div class="md:absolute left-0 mt-2 w-full md:w-48 bg-slate-50 md:bg-white border-l-2 md:border-l-0 md:border border-slate-200 md:rounded-lg md:shadow-lg md:opacity-0 md:invisible md:group-hover:opacity-100 md:group-hover:visible transition-all duration-200 pl-4 md:pl-0 overflow-hidden mt-2 md:mt-2">
+                        <div class="py-1">
+                            <a href="#intervensi" class="block px-4 py-2 text-xs text-slate-700 hover:bg-slate-100 hover:text-[#2b459a] font-medium">KOSPEN Komuniti</a>
+                            <a href="#intervensi" class="block px-4 py-2 text-xs text-slate-700 hover:bg-slate-100 hover:text-[#2b459a] font-medium">KOSPEN Plus</a>
+                            <a href="#intervensi" class="block px-4 py-2 text-xs text-slate-700 hover:bg-slate-100 hover:text-[#2b459a] font-medium">Perkhidmatan mQuit</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="relative group py-1 md:py-2">
+                    <button class="flex items-center gap-1 text-slate-600 group-hover:text-[#2b459a] transition font-semibold w-full text-left md:w-auto focus:outline-none">
+                        Sistem <i data-lucide="chevron-down" class="w-4 h-4 transition-transform group-hover:rotate-180 hidden md:inline"></i>
+                    </button>
+                    <div class="md:absolute left-0 mt-2 w-full md:w-48 bg-slate-50 md:bg-white border-l-2 md:border-l-0 md:border border-slate-200 md:rounded-lg md:shadow-lg md:opacity-0 md:invisible md:group-hover:opacity-100 md:group-hover:visible transition-all duration-200 pl-4 md:pl-0 overflow-hidden mt-2 md:mt-2">
+                        <div class="py-1">
+                            <a href="sistem/brain-wiring-test.html" class="block px-4 py-2 text-xs text-slate-700 hover:bg-slate-100 hover:text-[#2b459a] font-medium">Brain Wiring Test</a>
+                            <a href="#intervensi" class="block px-4 py-2 text-xs text-slate-700 hover:bg-slate-100 hover:text-[#2b459a] font-medium">KOSPEN Plus</a>
+                            <a href="#intervensi" class="block px-4 py-2 text-xs text-slate-700 hover:bg-slate-100 hover:text-[#2b459a] font-medium">Perkhidmatan mQuit</a>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#hubungi" class="inline-block bg-[#2b459a] text-white px-5 py-2 rounded font-medium hover:bg-[#1f3375] transition text-xs uppercase tracking-wider w-full md:w-auto text-center mt-2 md:mt-0">Hubungi Kami</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Image slider -->
+    <section class="relative w-full overflow-hidden bg-slate-900 slider-container">
+        <div id="slider" class="relative w-full h-full flex transition-transform duration-700 ease-in-out">
+            
+            <div class="w-full h-full flex-shrink-0 relative">
+                <img src="images/slider/slider-example.png" alt="Kempen NCD 1" class="w-full h-full object-cover opacity-85">
+                <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex items-center px-12 md:px-24">
+                    <div class="text-white max-w-xl">
+                        <h2 class="text-2xl md:text-4xl font-bold font-display mb-2">Saringan Awal KOSPEN</h2>
+                        <p class="text-sm md:text-base text-slate-200">Kenali status kesihatan anda melalui saringan komuniti secara percuma di lokaliti terpilih.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full h-full flex-shrink-0 relative">
+                <img src="https://picsum.photos/1920/1080?random=2" alt="Kempen NCD 2" class="w-full h-full object-cover opacity-85">
+                <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex items-center px-12 md:px-24">
+                    <div class="text-white max-w-xl">
+                        <h2 class="text-2xl md:text-4xl font-bold font-display mb-2">Gaya Hidup Aktif Perlis</h2>
+                        <p class="text-sm md:text-base text-slate-200">Tingkatkan aktiviti fizikal harian demi jantung yang lebih kuat dan sihat.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full h-full flex-shrink-0 relative">
+                <img src="https://picsum.photos/1920/1080?random=3" alt="Kempen NCD 3" class="w-full h-full object-cover opacity-85">
+                <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex items-center px-12 md:px-24">
+                    <div class="text-white max-w-xl">
+                        <h2 class="text-2xl md:text-4xl font-bold font-display mb-2">Amalan Suku Suku Separuh</h2>
+                        <p class="text-sm md:text-base text-slate-200">Ubah tabiat pemakanan anda hari ini untuk mencegah risiko penyakit diabetes melitus.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full h-full flex-shrink-0 relative">
+                <img src="https://picsum.photos/1920/1080?random=4" alt="Kempen NCD 4" class="w-full h-full object-cover opacity-85">
+                <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex items-center px-12 md:px-24">
+                    <div class="text-white max-w-xl">
+                        <h2 class="text-2xl md:text-4xl font-bold font-display mb-2">Klinik mQuit JKN Perlis</h2>
+                        <p class="text-sm md:text-base text-slate-200">Dapatkan sokongan profesional untuk berhenti merokok demi kesihatan respiratori keluarga.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full h-full flex-shrink-0 relative">
+                <img src="https://picsum.photos/1920/1080?random=5" alt="Kempen NCD 5" class="w-full h-full object-cover opacity-85">
+                <div class="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent flex items-center px-12 md:px-24">
+                    <div class="text-white max-w-xl">
+                        <h2 class="text-2xl md:text-4xl font-bold font-display mb-2">Kesedaran Kanser Awam</h2>
+                        <p class="text-sm md:text-base text-slate-200">Lakukan pemeriksaan berkala untuk pengesanan awal kanser. Mencegah menyelamatkan nyawa.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <button id="prevBtn" class="absolute left-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full transition z-20">
+            <i data-lucide="chevron-left" class="w-6 h-6"></i>
+        </button>
+        <button id="nextBtn" class="absolute right-4 top-1/2 -translate-y-1/2 bg-black/40 hover:bg-black/60 text-white p-2 rounded-full transition z-20">
+            <i data-lucide="chevron-right" class="w-6 h-6"></i>
+        </button>
+
+        <div class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 z-20">
+            <div class="dot w-2 h-2 rounded-full bg-white transition-all duration-300" data-index="0"></div>
+            <div class="dot w-2 h-2 rounded-full bg-white/50 transition-all duration-300" data-index="1"></div>
+            <div class="dot w-2 h-2 rounded-full bg-white/50 transition-all duration-300" data-index="2"></div>
+            <div class="dot w-2 h-2 rounded-full bg-white/50 transition-all duration-300" data-index="3"></div>
+            <div class="dot w-2 h-2 rounded-full bg-white/50 transition-all duration-300" data-index="4"></div>
+        </div>
+    </section>
+
+    <div class="bg-[#ffbd59] text-white py-2 px-6 flex items-center shadow-sm relative z-30 overflow-hidden border-b border-[#3cae4e]/20">
+        <div class="flex items-center gap-2 bg-[#2b459a] text-xs font-bold uppercase tracking-wider px-3 py-1 rounded shadow-sm shrink-0 z-10 mr-4">
+            <i data-lucide="megaphone" class="w-3.5 h-3.5 animate-pulse"></i>
+            <span class="hidden sm:block">Pemberitahuan</span>
+        </div>
+        
+        <div class="w-full overflow-hidden relative flex items-center h-6">
+            <p class="absolute inline-block whitespace-nowrap text-xs md:text-sm font-medium tracking-wide animate-marquee hover:pause-marquee text-black">
+                📢 [TERKINI] Saringan Kesihatan KOSPEN fasa baharu akan dijalankan di semua lokaliti Kangar bermula minggu hadapan. • 🩺 Pastikan anda melakukan pemeriksaan tekanan darah dan paras gula secara berkala di Klinik Kesihatan terdekat. • 🚭 Kempen Perlis Bebas Asap Rokok: Daftar program mQuit sekarang untuk bimbingan profesional.
+            </p>
+        </div>
+    </div>
+
+    <section class="relative bg-white py-24 border-b border-slate-200 overflow-hidden">
+        <div class="container mx-auto px-6 grid md:grid-cols-12 gap-12 items-center">
+            <div class="md:col-span-7 z-10">
+                <span class="inline-block bg-slate-100 text-[#2b459a] text-[11px] font-bold tracking-widest uppercase px-3 py-1 rounded-sm mb-6 border border-slate-200">
+                    Sektor Kesihatan Awam Perlis
+                </span>
+                <h1 class="text-4xl md:text-5xl font-extrabold text-[#0f172a] tracking-tight leading-none mb-6">
+                    Menangani Faktor Risiko NCD Secara <span class="text-[#3cae4e]">Komprehensif.</span>
+                </h1>
+                <p class="text-slate-600 text-base md:text-lg max-w-xl leading-relaxed mb-8 font-normal">
+                    Melaksanakan advokasi berpaksikan data, saringan klinikal berkala, dan intervensi berfokus untuk mengurangkan beban penyakit tidak berjangkit dalam populasi negeri Perlis.
+                </p>
+                <div class="flex flex-wrap gap-4">
+                    <a href="#teras" class="bg-[#2b459a] hover:bg-[#1f3375] text-white font-medium text-sm tracking-wide px-6 py-3 rounded transition flex items-center gap-2">
+                        Data Kesihatan <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="md:col-span-5 relative hidden md:block">
+                <div class="absolute inset-0 bg-gradient-to-tr from-slate-100 to-transparent rounded-2xl transform rotate-3"></div>
+                <div class="bg-[#2b459a]/5 border-2 border-dashed border-[#2b459a]/20 p-8 rounded-2xl relative z-10">
+                    <div class="space-y-4">
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-center gap-4">
+                            <div class="bg-red-50 text-red-600 p-2 rounded-lg"><i data-lucide="heart" class="w-5 h-5"></i></div>
+                            <div><p class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Kardiovaskular</p><p class="text-sm font-bold text-slate-800">Pemantauan Tekanan Darah</p></div>
+                        </div>
+                        <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100 flex items-center gap-4">
+                            <div class="bg-emerald-50 text-[#3cae4e] p-2 rounded-lg"><i data-lucide="droplet" class="w-5 h-5"></i></div>
+                            <div><p class="text-xs text-slate-500 font-semibold uppercase tracking-wider">Metabolik</p><p class="text-sm font-bold text-slate-800">Saringan Glukosa Komuniti</p></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="profil" class="py-20 bg-[#f8fafc]">
+        <div class="container mx-auto px-6">
+            <div class="grid md:grid-cols-12 gap-8 items-start">
+                <div class="md:col-span-4 sticky top-24">
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-[#3cae4e] mb-3">Mengenai Pejabat Kami</h2>
+                    <h3 class="text-3xl font-bold tracking-tight text-[#0f172a] leading-tight">Objektif & Mandat Struktur</h3>
+                    <div class="w-12 h-1 bg-[#2b459a] mt-4"></div>
+                </div>
+                <div class="md:col-span-8 bg-white border border-slate-200 p-8 md:p-12 rounded-lg shadow-sm grid md:grid-cols-2 gap-8">
+                    <div>
+                        <h4 class="font-display font-bold text-slate-900 mb-3 text-base uppercase tracking-wider">Visi Utama</h4>
+                        <p class="text-sm text-slate-600 leading-relaxed">Menjadi peneraju dalam pembentukan dasar, strategi inovatif, dan pemantauan epidemiologi bagi mewujudkan masyarakat Perlis yang responsif terhadap kesihatan kendiri.</p>
+                    </div>
+                    <div>
+                        <h4 class="font-display font-bold text-slate-900 mb-3 text-base uppercase tracking-wider">Misi Sektor</h4>
+                        <p class="text-sm text-slate-600 leading-relaxed">Memperkukuh sistem sokongan kesihatan awam melalui integrasi teknologi saringan, latihan kepakaran, dan pemerkasaan fasiliti kesihatan primer di seluruh negeri Perlis.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="teras" class="py-20 bg-white border-t border-b border-slate-200">
+        <div class="container mx-auto px-6">
+            <div class="max-w-2xl mb-16">
+                <h2 class="text-xs font-bold uppercase tracking-widest text-[#3cae4e] mb-3">Skop Pengawasan</h2>
+                <h3 class="text-3xl font-bold tracking-tight text-[#0f172a]">4 Kluster Penyakit Utama (NCD)</h3>
+            </div>
+            
+            <div class="grid md:grid-cols-4 gap-0 border-l border-t border-slate-200">
+                <div class="p-8 border-r border-b border-slate-200 hover:bg-slate-50 transition group">
+                    <span class="text-xs font-mono font-bold text-slate-400 block mb-6">01 / KLUSTER KARDIO</span>
+                    <h4 class="font-bold text-lg text-slate-900 mb-3 group-hover:text-[#2b459a] transition">Penyakit Kardiovaskular</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">Pengawasan ke atas morbiditi berkaitan serangan jantung, hipertensi kronik, dan kejadian strok dalam populasi bersasar.</p>
+                </div>
+                <div class="p-8 border-r border-b border-slate-200 hover:bg-slate-50 transition group">
+                    <span class="text-xs font-mono font-bold text-slate-400 block mb-6">02 / KLUSTER ENDOKRIN</span>
+                    <h4 class="font-bold text-lg text-slate-900 mb-3 group-hover:text-[#2b459a] transition">Diabetes Melitus</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">Fokus kepada pendaftaran kes baharu, pengurusan rintangan insulin, dan pencegahan komplikasi jangka panjang.</p>
+                </div>
+                <div class="p-8 border-r border-b border-slate-200 hover:bg-slate-50 transition group">
+                    <span class="text-xs font-mono font-bold text-slate-400 block mb-6">03 / KLUSTER ONKOLOGI</span>
+                    <h4 class="font-bold text-lg text-slate-900 mb-3 group-hover:text-[#2b459a] transition">Onkologi (Kanser)</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">Sokongan terhadap program saringan awal kanser serviks, payudara, dan kolorektal demi intervensi awal.</p>
+                </div>
+                <div class="p-8 border-r border-b border-slate-200 hover:bg-slate-50 transition group">
+                    <span class="text-xs font-mono font-bold text-slate-400 block mb-6">04 / KLUSTER RESPIRATORI</span>
+                    <h4 class="font-bold text-lg text-slate-900 mb-3 group-hover:text-[#2b459a] transition">Respiratori Kronik</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed">Pemantauan penyakit saluran pernafasan obstruktif kronik (COPD) dan asma tegar melalui klinik pakar primer.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="intervensi" class="py-20 bg-[#f8fafc]">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row md:justify-between md:items-end mb-12">
+                <div>
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-[#3cae4e] mb-3">Pelaksanaan Lapangan</h2>
+                    <h3 class="text-3xl font-bold tracking-tight text-[#0f172a]">Inisiatif Aktif JKN Perlis</h3>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white border border-slate-200 p-8 rounded shadow-sm">
+                    <div class="w-10 h-10 bg-[#2b459a]/10 text-[#2b459a] flex items-center justify-center rounded mb-6">
+                        <i data-lucide="users" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="font-bold text-lg text-slate-900 mb-2">Program KOSPEN</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-4">Komuniti Sihat Pembina Negara. Struktur mobilisasi sukarelawan untuk saringan kesihatan di lokaliti perumahan sekitar Perlis.</p>
+                </div>
+                <div class="bg-white border border-slate-200 p-8 rounded shadow-sm">
+                    <div class="w-10 h-10 bg-[#3cae4e]/10 text-[#3cae4e] flex items-center justify-center rounded mb-6">
+                        <i data-lucide="shield-check" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="font-bold text-lg text-slate-900 mb-2">KOSPEN Plus Tempat Kerja</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-4">Intervensi khusus di jabatan kerajaan dan sektor swasta Perlis bagi mengawal faktor risiko obesiti serta pemanduan gaya hidup sihat.</p>
+                </div>
+                <div class="bg-white border border-slate-200 p-8 rounded shadow-sm">
+                    <div class="w-10 h-10 bg-red-100 text-red-600 flex items-center justify-center rounded mb-6">
+                        <i data-lucide="ban" class="w-5 h-5"></i>
+                    </div>
+                    <h4 class="font-bold text-lg text-slate-900 mb-2">Perkhidmatan mQuit</h4>
+                    <p class="text-xs text-slate-600 leading-relaxed mb-4">Akreditasi perkhidmatan berhenti merokok di klinik kesihatan daerah negeri Perlis untuk membantu komuniti bebas daripada tabiat merokok.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="hubungi" class="py-20 bg-white border-t border-slate-200">
+        <div class="container mx-auto px-6 max-w-6xl">
+            <div class="grid md:grid-cols-12 gap-12">
+                <div class="md:col-span-5">
+                    <h2 class="text-xs font-bold uppercase tracking-widest text-[#3cae4e] mb-3">Saluran Komunikasi</h2>
+                    <h3 class="text-3xl font-bold tracking-tight text-[#0f172a] mb-6">Pertanyaan & Urusan Rasmi</h3>
+                    <p class="text-sm text-slate-600 leading-relaxed mb-8">
+                        Sila gunakan saluran di bawah atau borang rasmi bagi sebarang urusan surat-menyurat, permohonan data epidemiologi NCD, atau kolaborasi program bersama JKN Perlis.
+                    </p>
+                    <div class="space-y-4 text-xs font-medium text-slate-700">
+                        <div class="flex items-start gap-3">
+                            <i data-lucide="map-pin" class="w-4 h-4 text-[#2b459a] shrink-0 mt-0.5"></i>
+                            <span>Jabatan Kesihatan Negeri Perlis, Jalan办事处 (Sila kemas kini alamat penuh).</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="phone" class="w-4 h-4 text-[#2b459a]"></i>
+                            <span>+604-XXXX XXX</span>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <i data-lucide="mail" class="w-4 h-4 text-[#2b459a]"></i>
+                            <span>ncd.jknperlis@moh.gov.my</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-7 bg-[#f8fafc] border border-slate-200 p-8 rounded-lg">
+                    <form class="space-y-4">
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div>
+                                <label class="text-[11px] font-bold uppercase tracking-wider text-slate-600 block mb-1">Nama Penuh</label>
+                                <input type="text" class="w-full bg-white border border-slate-300 p-2.5 text-sm rounded focus:outline-none focus:border-[#2b459a] transition" placeholder="Nama penuh anda">
+                            </div>
+                            <div>
+                                <label class="text-[11px] font-bold uppercase tracking-wider text-slate-600 block mb-1">Alamat Emel Rasmi</label>
+                                <input type="email" class="w-full bg-white border border-slate-300 p-2.5 text-sm rounded focus:outline-none focus:border-[#2b459a] transition" placeholder="contoh@mel.com">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="text-[11px] font-bold uppercase tracking-wider text-slate-600 block mb-1">Subjek / Urusan</label>
+                            <input type="text" class="w-full bg-white border border-slate-300 p-2.5 text-sm rounded focus:outline-none focus:border-[#2b459a] transition" placeholder="Tajuk perkara">
+                        </div>
+                        <div>
+                            <label class="text-[11px] font-bold uppercase tracking-wider text-slate-600 block mb-1">Perincian Mesej</label>
+                            <textarea class="w-full bg-white border border-slate-300 p-3 text-sm rounded focus:outline-none focus:border-[#2b459a] transition" rows="4" placeholder="Tulis mesej atau pertanyaan rasmi anda..."></textarea>
+                        </div>
+                        <button type="button" class="bg-[#2b459a] hover:bg-[#1f3375] text-white text-xs font-bold uppercase tracking-wider px-6 py-3 rounded transition shadow-sm">
+                            Hantar Borang Rasmi
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-[#0f172a] text-slate-400 py-12 px-6 text-xs border-t border-slate-800">
+        <div class="container mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
+            <div>
+                <p class="font-bold text-slate-200 mb-1">Unit Kawalan Penyakit Tidak Berjangkit (NCD) JKN Perlis</p>
+                <p>&copy; 2026 Jabatan Kesihatan Negeri Perlis. Hak Cipta Terpelihara.</p>
+            </div>
+            <div class="text-slate-500 text-[11px]">
+                Dioptimumkan untuk paparan GitHub Pages.
+            </div>
+        </div>
+    </footer>
+
+    <div class="fixed bottom-4 right-4 w-60 md:w-80 bg-white border-4 border-[#2b459a] rounded-xl shadow-2xl z-50 overflow-hidden transform transition-all duration-300 hover:scale-105">
+        
+        <div class="bg-[#2b459a] text-white py-1.5 px-3 flex justify-between items-center">
+            <span class="text-[10px] md:text-xs font-bold uppercase tracking-wider flex items-center gap-1.5">
+                <i data-lucide="video" class="w-3 h-3 text-[#3cae4e]"></i>
+                Kempen NCD JKN Perlis
+            </span>
+            <button onclick="this.parentElement.parentElement.style.display='none'" class="text-white hover:text-red-300 transition focus:outline-none">
+                <i data-lucide="x" class="w-4 h-4"></i>
+            </button>
+        </div>
+
+        <div class="w-full aspect-video bg-black">
+            <iframe 
+                src="https://drive.google.com/file/d/1QlKgZAfWDNHRhAbJQ3wA-67x--eFpyS1/preview?autoplay=1&mute=1" 
+                class="w-full h-full border-none" 
+                allow="autoplay; encrypted-media" 
+                allowfullscreen>
+            </iframe>
+        </div>
+        
+    </div>
+
+    <script>
+        // Init Icons
+        lucide.createIcons();
+
+        // SLIDER JAVASCRIPT LOGIC
+        const sliderContainer = document.querySelector('.slider-container');
+        const slider = document.getElementById('slider');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const dots = document.querySelectorAll('.dot');
+        
+        let currentIndex = 0;
+        const totalSlides = 5;
+        const slideIntervalTime = 5000; // Auto-slide setiap 5 saat
+        let slideInterval; // Pembolehubah untuk menyimpan masa
+
+        function updateSlider() {
+            // Gerakkan slider mengikut peratusan index
+            slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            // Kemaskini status Dots indikator
+            dots.forEach((dot, index) => {
+                if (index === currentIndex) {
+                    dot.classList.remove('bg-white/50');
+                    dot.classList.add('bg-white', 'w-4'); // Dot aktif jadi lebar sedikit
+                } else {
+                    dot.classList.remove('bg-white', 'w-4');
+                    dot.classList.add('bg-white/50');
+                }
+            });
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateSlider();
+        }
+
+        // Fungsi untuk mulakan auto-slide
+        function startSlide() {
+            slideInterval = setInterval(nextSlide, slideIntervalTime);
+        }
+
+        // Fungsi untuk hentikan auto-slide
+        function stopSlide() {
+            clearInterval(slideInterval);
+        }
+
+        // Event Listeners Klik
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        // Klik pada Dots terus pergi ke slide spesifik
+        dots.forEach(dot => {
+            dot.addEventListener('click', (e) => {
+                currentIndex = parseInt(e.target.getAttribute('data-index'));
+                updateSlider();
+            });
+        });
+
+        // --- CIRI BAHARU: PAUSE ON HOVER ---
+        // Apabila cursor masuk ke kawasan slider, hentikan pusingan gambar
+        sliderContainer.addEventListener('mouseenter', stopSlide);
+        
+        // Apabila cursor keluar dari kawasan slider, sambung semula pusingan gambar
+        sliderContainer.addEventListener('mouseleave', startSlide);
+
+        // Jalankan auto-slide buat kali pertama
+        startSlide();
+
+        // Init paparan pertama slider
+        updateSlider();
+
+        // LOGIK UNTUK MOBILE MENU (DENGAN SISTEM KAWALAN CSS KANAN/KIRI)
+        const menuBtn = document.getElementById('menuBtn');
+        const navMenu = document.getElementById('navMenu');
+        const burgerIcon = document.getElementById('burgerIcon');
+        const closeIcon = document.getElementById('closeIcon');
+
+        menuBtn.addEventListener('click', () => {
+            // Toggle menu utama (Buka / Tutup)
+            navMenu.classList.toggle('hidden');
+            
+            // Semak jika menu sedang tersembunyi atau terbuka
+            if (navMenu.classList.contains('hidden')) {
+                // Jika menu tutup: Paparkan burger, sembunyikan pangkah
+                burgerIcon.classList.remove('hidden');
+                burgerIcon.classList.add('block');
+                
+                closeIcon.classList.remove('block');
+                closeIcon.classList.add('hidden');
+            } else {
+                // Jika menu buka: Sembunyikan burger, paparkan pangkah
+                burgerIcon.classList.remove('block');
+                burgerIcon.classList.add('hidden');
+                
+                closeIcon.classList.remove('hidden');
+                closeIcon.classList.add('block');
+            }
+        });
+
+        // Tutup menu secara automatik jika pengguna klik mana-mana pautan menu (Mobile)
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth < 768) {
+                    navMenu.classList.add('hidden');
+                    // Set semula ikon ke bentuk burger asal
+                    burgerIcon.classList.remove('hidden');
+                    burgerIcon.classList.add('block');
+                    closeIcon.classList.remove('block');
+                    closeIcon.classList.add('hidden');
+                }
+            });
+        });
+
+        // Memastikan video dimainkan dengan muted untuk autoplay (Sokongan ralat pelayar)
+        const floatingVideo = document.getElementById('floatingVideo');
+        if (floatingVideo) {
+            floatingVideo.muted = true; // Wajib untuk autoplay moden
+            floatingVideo.play().catch(error => {
+                // Ralat biasa jika pelayar menyekat autoplay secara mutlak
+                console.log("Autoplay disekat. Pengguna perlu berinteraksi.");
+            });
+        }
+    </script>
+</body>
+</html>

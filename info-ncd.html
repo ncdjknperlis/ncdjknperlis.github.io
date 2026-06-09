@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pusat Sumber NCD | JKN Perlis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- FAVICON (Mengikut reka bentuk tab pelayar web yang kita bincangkan) -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.02); }
+        ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#FBFBFB] text-[#1A1A1A] antialiased">
+
+    <!-- HEADER (Konsisten dengan tema Light + Butang Kembali Utama) -->
+    <header class="w-full py-3 md:py-5 px-4 md:px-12 bg-white border-b border-gray-100 flex flex-row items-center justify-between gap-2 z-20 flex-shrink-0">
+        <div class="flex items-center space-x-2 md:space-x-4">
+            <img src="images/logo.png" style="max-width: 32px;" class="w-full h-auto object-contain mx-auto md:max-w-[50px]">
+            <img src="images/logo-ncd/logo-ncd-default.png" style="max-width: 90px;" class="md:max-w-[150px]">
+            <div class="w-[1px] h-5 md:h-8 bg-gray-200"></div>
+            <h2 class="text-[8px] md:text-xs font-bold tracking-[0.10em] md:tracking-[0.2em] uppercase text-[#101e33] leading-tight">
+                Unit NCD<br>
+                <span class="text-gray-400 font-medium text-[7px] md:text-[9px]">JKN Perlis</span>
+            </h2>
+        </div>
+        
+        <div class="flex items-center space-x-2 md:space-x-6">
+            <div class="tracking-widest text-right hidden sm:block">
+                <h1 class="text-xl md:text-4xl font-light tracking-tighter text-gray-400">Pusat Sumber <span class="font-bold text-[#101e33]">Digital</span></h1>
+            </div>
+            <div class="w-[1px] h-6 bg-gray-200 hidden sm:block"></div>
+            <div class="flex items-center space-x-2">
+                <!-- Pautan balik ke fail pendaratan asal (landing page) -->
+                <a href="index.html" class="text-xs font-bold text-[#101e33] hover:text-amber-500 border border-gray-200 px-3 py-1.5 rounded-xl bg-gray-50 transition-all shadow-sm active:scale-95">
+                    ← Utama
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- KANDUNGAN UTAMA -->
+    <main class="flex-1 w-full max-w-7xl mx-auto px-4 md:px-12 py-8">
+        
+        <!-- Seksyen Pengenalan -->
+        <div class="mb-8">
+            <span class="inline-block text-[8px] md:text-[10px] font-extrabold tracking-[0.2em] bg-amber-400 text-[#0b1424] uppercase px-3 py-1 rounded-full w-max shadow-sm">
+                Pusat Sumber NCD
+            </span>
+            <h2 class="text-2xl md:text-3xl font-black text-[#101e33] tracking-tight mt-2">Bahan Promosi & Pendidikan NCD</h2>
+            <p class="text-xs md:text-sm text-gray-500 font-light mt-1">Akses terus garis panduan klinikal (CPG), infografik kesedaran, dan video promosi kesihatan Unit NCD Perlis.</p>
+        </div>
+
+        <!-- TAB PENAPIS AL-MENU ZUS (Filter Tabs) -->
+        <div class="flex flex-wrap gap-2 mb-8 pb-4 border-b border-gray-100">
+            <button onclick="changeCategory('all')" id="tab-all" class="tab-btn py-2 px-4 text-xs font-bold rounded-xl bg-[#101e33] text-white shadow-sm transition-all">
+                Semua Bahan
+            </button>
+            <button onclick="changeCategory('cpg')" id="tab-cpg" class="tab-btn py-2 px-4 text-xs font-bold rounded-xl bg-white text-gray-600 border border-gray-200 shadow-sm hover:bg-gray-50 transition-all">
+                Bahan Kursus & CPG
+            </button>
+            <button onclick="changeCategory('infografik')" id="tab-infografik" class="tab-btn py-2 px-4 text-xs font-bold rounded-xl bg-white text-gray-600 border border-gray-200 shadow-sm hover:bg-gray-50 transition-all">
+                Infografik Kesihatan
+            </button>
+            <button onclick="changeCategory('video')" id="tab-video" class="tab-btn py-2 px-4 text-xs font-bold rounded-xl bg-white text-gray-600 border border-gray-200 shadow-sm hover:bg-gray-50 transition-all">
+                Galeri Video
+            </button>
+        </div>
+
+        <!-- CONTAINER GRID UTAMA: JavaScript akan suntik kad ke sini secara automatik -->
+        <div id="resourceGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+        <!-- BUTANG OPTIMASI: Memastikan laman web dibuka laju, papar berperingkat -->
+        <div class="w-full flex justify-center mt-12 mb-24">
+            <button id="loadMoreBtn" onclick="renderMore()" class="hidden py-3 px-8 text-xs font-bold bg-[#101e33] text-white hover:bg-[#1d3557] rounded-xl transition-all shadow-md active:scale-95">
+                Papar Lebih Banyak Bahan ⚡
+            </button>
+        </div>
+    </main>
+
+    <!-- FOOTER FIX (Sama gaya dengan Landing Page yang kita ubah suai tegar) -->
+    <footer class="fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur-sm py-4 px-6 text-center border-t border-gray-100 z-20 flex-shrink-0">
+        <p class="text-[10px] md:text-xs font-medium text-gray-400 tracking-wide">
+            Hak Cipta © 2026 Unit Kawalan Penyakit Tidak Berjangkit, Bahagian Kesihatan Awam, Jabatan Kesihatan Negeri Perlis
+        </p>
+    </footer>
+
+    <!-- ================= SISTEM PENGURUSAN DATA SUMBER DYNAMIC ================= -->
+    <!-- 1. PANGGIL DATA DAHULU (Wajib di atas) -->
+    <script src="resources-data.js"></script>
+
+    <!-- 2. PANGGIL ENJIN FUNGSI KEMUDIAN (Wajib di bawah data) -->
+    <script src="info-ncd.js"></script>
+</body>
+</html>

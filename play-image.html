@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Paparan Infografik NCD | JKN Perlis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <style>body { font-family: 'Inter', sans-serif; }</style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#FBFBFB] text-[#1A1A1A] antialiased">
+
+    <!-- HEADER (Konsisten 100%) -->
+    <header class="w-full py-3 md:py-5 px-4 md:px-12 bg-white border-b border-gray-100 flex flex-row items-center justify-between gap-2 z-20 flex-shrink-0">
+        <div class="flex items-center space-x-2 md:space-x-4">
+            <img src="images/logo.png" style="max-width: 32px;" class="w-full h-auto object-contain mx-auto md:max-w-[50px]">
+            <img src="images/logo-ncd/logo-ncd-default.png" style="max-width: 90px;" class="md:max-w-[150px]">
+            <div class="w-[1px] h-5 md:h-8 bg-gray-200"></div>
+            <h2 class="text-[8px] md:text-xs font-bold tracking-[0.10em] md:tracking-[0.2em] uppercase text-[#101e33] leading-tight">
+                Unit NCD<br>
+                <span class="text-gray-400 font-medium text-[7px] md:text-[9px]">JKN Perlis</span>
+            </h2>
+        </div>
+        <div class="flex items-center space-x-2">
+            <a href="info-ncd.html" class="text-xs font-bold text-gray-700 hover:text-[#101e33] border border-gray-200 px-3 py-1.5 rounded-xl bg-white transition-all shadow-sm active:scale-95">
+                ← Kembali ke Hub Sumber
+            </a>
+        </div>
+    </header>
+
+    <!-- RUANGAN TAYANGAN INFOGRAFIK IMAGINATIF -->
+    <main class="flex-1 w-full max-w-4xl mx-auto px-4 py-8 md:py-12 flex flex-col items-center justify-center">
+        
+        <!-- Bingkai Gambar Kreatif (Ada Butang Klik Buka Tab Baru Asal Fail Di Atas Gambar) -->
+        <div class="w-full max-w-2xl bg-white border border-gray-100 rounded-2xl shadow-xl overflow-hidden p-3 relative group">
+            <div class="w-full h-auto bg-gray-50 rounded-xl overflow-hidden flex items-center justify-center border border-gray-50">
+                <img id="mainImageDisplay" src="" alt="Infografik" class="w-full h-auto max-h-[70vh] object-contain transition-transform duration-300 group-hover:scale-[1.01]">
+            </div>
+            
+            <!-- Link Akses Muat Turun Resolusi Penuh -->
+            <div class="absolute top-6 right-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <a id="hdDownloadLink" href="#" target="_blank" class="py-2 px-3.5 bg-black/70 backdrop-blur-md text-white text-xs font-bold rounded-xl hover:bg-black transition-colors shadow-lg">
+                    Buka Resolusi Penuh ↗
+                </a>
+            </div>
+        </div>
+
+        <!-- Kad Maklumat Deskripsi Fail Semasa -->
+        <div class="w-full max-w-2xl mt-6 p-6 bg-white border border-gray-100 rounded-2xl shadow-sm">
+            <span class="inline-block text-[9px] font-extrabold tracking-wider bg-emerald-50 text-emerald-600 uppercase px-2.5 py-1 rounded-md mb-2">
+                Paparan Galeri Infografik
+            </span>
+            <h2 id="imageTitle" class="text-xl md:text-2xl font-bold text-[#101e33] tracking-tight leading-tight">-</h2>
+            <p id="imageDesc" class="text-xs md:text-sm text-gray-500 font-light mt-2 leading-relaxed">-</p>
+        </div>
+    </main>
+
+    <!-- FOOTER LIGHT KAKU -->
+    <footer class="w-full bg-white py-4 px-6 text-center border-t border-gray-100 mt-auto flex-shrink-0">
+        <p class="text-[10px] md:text-xs font-medium text-gray-400 tracking-wide">
+            Hak Cipta © 2026 Unit Kawalan Penyakit Tidak Berjangkit, Bahagian Kesihatan Awam, Jabatan Kesihatan Negeri Perlis
+        </p>
+    </footer>
+
+    <!-- ENGINE DECODER URL PARAMETER IMED -->
+    <script>
+        window.onload = () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            const imgFileName = urlParams.get('img'); // Mengambil nama fail imej
+            const title = urlParams.get('title');
+            const desc = urlParams.get('desc');
+
+            const imgDisplay = document.getElementById("mainImageDisplay");
+            const hdLink = document.getElementById("hdDownloadLink");
+            const txtTitle = document.getElementById("imageTitle");
+            const txtDesc = document.getElementById("imageDesc");
+
+            if (imgFileName) {
+                // Sila letakkan poster grafik bersaiz besar di dalam folder images/resources/ anda
+                // Untuk fasa ujian awal, enjin ini akan membaca semula imej mockup dari internet sekiranya nama mengandungi 'webp'
+                const finalSrc = imgFileName.startsWith('info-') 
+                    ? `images/resources/${imgFileName}`
+                    : imgFileName;
+
+                // Untuk fasa semakan dummy, jika fail local tiada, ia akan meluncurkan gambar Unsplash sebagai sandaran visual
+                imgDisplay.src = imgFileName === "info-gula.webp" 
+                    ? "https://images.unsplash.com/photo-1543362906-acfc16c67564?auto=format&fit=crop&w=1200&q=80"
+                    : (imgFileName === "info-strok.webp" ? "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=1200&q=80" : finalSrc);
+                
+                hdLink.href = imgDisplay.src;
+            }
+            
+            if (title) txtTitle.innerText = decodeURIComponent(title);
+            if (desc) txtDesc.innerText = decodeURIComponent(desc);
+        };
+    </script>
+</body>
+</html>

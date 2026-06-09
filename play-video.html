@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pemain Media NCD | JKN Perlis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600;700;800&display=swap" rel="stylesheet">
+    <link class="flex" rel="icon" type="image/png" href="images/logo.png">
+    <style>body { font-family: 'Inter', sans-serif; }</style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#FBFBFB] text-[#1A1A1A] antialiased">
+
+    <!-- HEADER (Sama dengan Landing Page & Info-NCD) -->
+    <header class="w-full py-3 md:py-5 px-4 md:px-12 bg-white border-b border-gray-100 flex flex-row items-center justify-between gap-2 z-20 flex-shrink-0">
+        <div class="flex items-center space-x-2 md:space-x-4">
+            <img src="images/logo.png" style="max-width: 32px;" class="w-full h-auto object-contain mx-auto md:max-w-[50px]">
+            <img src="images/logo-ncd/logo-ncd-default.png" style="max-width: 90px;" class="md:max-w-[150px]">
+            <div class="w-[1px] h-5 md:h-8 bg-gray-200"></div>
+            <h2 class="text-[8px] md:text-xs font-bold tracking-[0.10em] md:tracking-[0.2em] uppercase text-[#101e33] leading-tight">
+                Unit NCD<br>
+                <span class="text-gray-400 font-medium text-[7px] md:text-[9px]">JKN Perlis</span>
+            </h2>
+        </div>
+        <div class="flex items-center space-x-2">
+            <!-- Butang untuk patah balik ke Hub Sumber dengan selamat -->
+            <a href="info-ncd.html" class="text-xs font-bold text-gray-700 hover:text-[#101e33] border border-gray-200 px-3 py-1.5 rounded-xl bg-white transition-all shadow-sm active:scale-95">
+                ← Kembali ke Hub Sumber
+            </a>
+        </div>
+    </header>
+
+    <!-- RUANGAN TAYANGAN VIDEO -->
+    <main class="flex-1 w-full max-w-4xl mx-auto px-4 py-8 md:py-12 flex flex-col justify-center">
+        
+        <!-- Pemain Video Utama (Hanya memuatkan bandwidth fail video di sini!) -->
+        <div class="w-full aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border border-gray-100 relative">
+            <video id="videoPlayer" class="w-full h-full object-contain" controls autoplay>
+                <source id="videoSource" src="" type="video/mp4">
+                Pelayar anda tidak menyokong pemain video ini.
+            </video>
+        </div>
+
+        <!-- Maklumat Kontekstual Dinamik Video Di Bawah Player -->
+        <div class="mt-6 p-6 bg-white border border-gray-100 rounded-2xl shadow-sm">
+            <span class="inline-block text-[9px] font-extrabold tracking-wider bg-rose-50 text-rose-600 uppercase px-2.5 py-1 rounded-md mb-2">
+                Paparan Media Digital
+            </span>
+            <h2 id="videoTitle" class="text-xl md:text-2xl font-bold text-[#101e33] tracking-tight leading-tight">-</h2>
+            <p id="videoDesc" class="text-xs md:text-sm text-gray-500 font-light mt-2 leading-relaxed">-</p>
+        </div>
+    </main>
+
+    <!-- FOOTER BARU LIGHT -->
+    <footer class="w-full bg-white py-4 px-6 text-center border-t border-gray-100 mt-auto flex-shrink-0">
+        <p class="text-[10px] md:text-xs font-medium text-gray-400 tracking-wide">
+            Hak Cipta © 2026 Unit Kawalan Penyakit Tidak Berjangkit, Bahagian Kesihatan Awam, Jabatan Kesihatan Negeri Perlis
+        </p>
+    </footer>
+
+    <!-- LOGIK ENGINE UTK BACA URL PARAMETER -->
+    <script>
+        // Apabila halaman dibuka, skrip akan terus membaca data dari alamat URL
+        window.onload = () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            
+            const videoId = urlParams.get('v'); // Mengambil ID video (cth: video-01)
+            const title = urlParams.get('title'); // Mengambil Tajuk
+            const desc = urlParams.get('desc'); // Mengambil Huraian
+
+            const player = document.getElementById("videoPlayer");
+            const source = document.getElementById("videoSource");
+            const txtTitle = document.getElementById("videoTitle");
+            const txtDesc = document.getElementById("videoDesc");
+
+            if (videoId) {
+                // Cantumkan ID video untuk membentuk laluan folder media tempatan anda yang sebenar
+                source.src = `media-player/${videoId}.mp4`;
+                player.load(); // Paksa pemain video membaca sumber baharu
+            }
+            
+            if (title) txtTitle.innerText = decodeURIComponent(title);
+            if (desc) txtDesc.innerText = decodeURIComponent(desc);
+        };
+    </script>
+</body>
+</html>
