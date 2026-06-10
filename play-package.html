@@ -55,53 +55,44 @@
         </p>
     </footer>
 
+    <script src="resources-data.js"></script>
     <!-- ENGINE DECODER UNTUK JANA LIST SECARA DINAMIK -->
     <script>
         window.onload = () => {
             const urlParams = new URLSearchParams(window.location.search);
-            
-            const title = urlParams.get('title');
-            const desc = urlParams.get('desc');
-            const materialsString = urlParams.get('materials'); // Membaca teks JSON array string
+            const id = urlParams.get('id');
 
             const txtTitle = document.getElementById("packageTitle");
             const txtDesc = document.getElementById("packageDesc");
             const listContainer = document.getElementById("materialsListContainer");
 
-            if (title) txtTitle.innerText = decodeURIComponent(title);
-            if (desc) txtDesc.innerText = decodeURIComponent(desc);
+            if (id !== null && resourcesData[id]) {
+                const item = resourcesData[id];
 
-            if (materialsString) {
-                try {
-                    // Tukar semula JSON String kepada Array Object asal
-                    const materialsArray = JSON.parse(decodeURIComponent(materialsString));
-                    listContainer.innerHTML = ""; // Bersihkan kontainer
+                txtTitle.innerText = item.title;
+                txtDesc.innerText = item.desc;
+                listContainer.innerHTML = ""; // Bersihkan list
 
-                    materialsArray.forEach(mat => {
-                        const row = document.createElement("div");
-                        row.className = "flex items-center justify-between p-3 bg-white hover:bg-gray-50 border border-gray-100 rounded-xl transition-all group shadow-sm";
-                        
-                        // Letakkan fallback imej sekiranya thumb tiada
-                        const finalThumb = mat.thumb || "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=80&q=80";
+                // Membaca senarai materials terus daripada fail resources-data.js!
+                item.materials.forEach(mat => {
+                    const row = document.createElement("div");
+                    row.className = "flex items-center justify-between p-3 bg-white hover:bg-gray-50 border border-gray-100 rounded-xl transition-all group shadow-sm";
+                    const finalThumb = mat.thumb || "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=80&q=80";
 
-                        row.innerHTML = `
-                            <div class="flex items-center space-x-3 overflow-hidden pr-2">
-                                <img src="${finalThumb}" alt="Pratonton" loading="lazy" class="w-10 h-10 object-cover rounded-lg border border-gray-100 flex-shrink-0">
-                                <div class="overflow-hidden">
-                                    <p class="text-xs font-bold text-gray-700 truncate group-hover:text-[#101e33] transition-colors leading-tight">${mat.name}</p>
-                                    <span class="text-[9px] font-extrabold px-1.5 py-0.2 mt-0.5 inline-block rounded bg-gray-100 text-gray-400 uppercase tracking-wide">${mat.type}</span>
-                                </div>
+                    row.innerHTML = `
+                        <div class="flex items-center space-x-3 overflow-hidden pr-2">
+                            <img src="${finalThumb}" alt="Pratonton" loading="lazy" class="w-10 h-10 object-cover rounded-lg border border-gray-100 flex-shrink-0">
+                            <div class="overflow-hidden">
+                                <p class="text-xs font-bold text-gray-700 truncate group-hover:text-[#101e33] transition-colors leading-tight">${mat.name}</p>
+                                <span class="text-[9px] font-extrabold px-1.5 py-0.2 mt-0.5 inline-block rounded bg-gray-100 text-gray-400 uppercase tracking-wide">${mat.type}</span>
                             </div>
-                            <a href="${mat.url}" target="_blank" class="py-1.5 px-3.5 bg-white border border-gray-200 hover:border-[#101e33] text-gray-600 hover:text-[#101e33] text-[11px] font-extrabold rounded-lg transition-all shadow-sm flex-shrink-0 active:scale-95">
-                                Buka ↗
-                            </a>
-                        `;
-                        listContainer.appendChild(row);
-                    });
-                } catch (e) {
-                    console.error("Gagal membaca data bahan: ", e);
-                    listContainer.innerHTML = "<div class='text-center text-xs text-gray-400 py-6'>Ralat semasa memuatkan senarai fail.</div>";
-                }
+                        </div>
+                        <a href="${mat.url}" target="_blank" class="py-1.5 px-3.5 bg-white border border-gray-200 hover:border-[#101e33] text-gray-600 hover:text-[#101e33] text-[11px] font-extrabold rounded-lg transition-all shadow-sm flex-shrink-0 active:scale-95">
+                            Buka ↗
+                        </a>
+                    `;
+                    listContainer.appendChild(row);
+                });
             }
         };
     </script>
