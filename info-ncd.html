@@ -5,97 +5,111 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pusat Sumber NCD | JKN Perlis</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- FAVICON (Mengikut reka bentuk tab pelayar web yang kita bincangkan) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="images/logo.png">
-    
     <style>
         body { font-family: 'Inter', sans-serif; }
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: rgba(0,0,0,0.02); }
-        ::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.1); border-radius: 10px; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col bg-[#FBFBFB] text-[#1A1A1A] antialiased">
 
-    <!-- HEADER (Konsisten dengan tema Light + Butang Kembali Utama) -->
     <header class="w-full py-3 md:py-5 px-4 md:px-12 bg-white border-b border-gray-100 flex flex-row items-center justify-between gap-2 z-20 flex-shrink-0">
         <div class="flex items-center space-x-2 md:space-x-4">
             <img src="images/logo.png" style="max-width: 32px;" class="w-full h-auto object-contain mx-auto md:max-w-[50px]">
             <img src="images/logo-ncd/logo-ncd-default.png" style="max-width: 90px;" class="md:max-w-[150px]">
-            <div class="w-[1px] h-5 md:h-8 bg-gray-200"></div>
+            <div class="w-[1px] h-5 md:h-8 bg-gray-200 mx-1 md:mx-2"></div>
             <h2 class="text-[8px] md:text-xs font-bold tracking-[0.10em] md:tracking-[0.2em] uppercase text-[#101e33] leading-tight">
-                Unit NCD<br>
-                <span class="text-gray-400 font-medium text-[7px] md:text-[9px]">JKN Perlis</span>
+                Kawalan Penyakit Tidak Berjangkit (NCD)<br>
+                <span class="text-gray-400 font-medium text-[7px] md:text-[9px]">Jabatan Kesihatan Negeri Perlis</span>
             </h2>
         </div>
-        
-        <div class="flex items-center space-x-2 md:space-x-6">
-            <div class="tracking-widest text-right hidden sm:block">
-                <h1 class="text-xl md:text-4xl font-light tracking-tighter text-gray-400">Pusat Sumber <span class="font-bold text-[#101e33]">Digital</span></h1>
-            </div>
-            <div class="w-[1px] h-6 bg-gray-200 hidden sm:block"></div>
-            <div class="flex items-center space-x-2">
-                <!-- Pautan balik ke fail pendaratan asal (landing page) -->
-                <a href="index.html" class="text-xs font-bold text-[#101e33] hover:text-amber-500 border border-gray-200 px-3 py-1.5 rounded-xl bg-gray-50 transition-all shadow-sm active:scale-95">
-                    ← Utama
-                </a>
-            </div>
-        </div>
+        <a href="index.html" class="text-xs font-bold text-gray-700 hover:text-[#101e33] border border-gray-200 px-3 py-1.5 rounded-xl bg-white transition-all shadow-sm active:scale-95">
+            ← Utama
+        </a>
     </header>
 
-    <!-- KANDUNGAN UTAMA -->
-    <main class="flex-1 w-full max-w-7xl mx-auto px-4 md:px-12 py-8">
+    <main class="flex-1 w-full flex flex-col">
         
-        <!-- Seksyen Pengenalan -->
-        <div class="mb-8">
-            <span class="inline-block text-[8px] md:text-[10px] font-extrabold tracking-[0.2em] bg-amber-400 text-[#0b1424] uppercase px-3 py-1 rounded-full w-max shadow-sm">
-                Pusat Sumber NCD
-            </span>
-            <h2 class="text-2xl md:text-3xl font-black text-[#101e33] tracking-tight mt-2">Bahan Promosi & Pendidikan NCD</h2>
-            <p class="text-xs md:text-sm text-gray-500 font-light mt-1">Akses terus garis panduan klinikal (CPG), infografik kesedaran, dan video promosi kesihatan Unit NCD Perlis.</p>
+        <div class="w-full bg-[#F4F5F7] border-b border-gray-200/60 py-10 mb-8">
+            <div class="max-w-7xl mx-auto px-4 md:px-12">
+                
+                <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-6">
+                    
+                    <div class="max-w-2xl">
+                        <h1 class="text-2xl md:text-3xl font-extrabold text-[#101e33] tracking-tight leading-none">
+                            Bahan Promosi & Pembelajaran NCD
+                        </h1>
+                        <p class="text-xs md:text-sm text-gray-400 font-light mt-3 leading-relaxed">
+                            Akses terus garis panduan klinikal (CPG), infografik kesedaran, dan video promosi kesihatan Unit NCD Perlis.
+                        </p>
+                    </div>
+
+                    <div class="w-full md:w-auto flex flex-col sm:flex-row items-center gap-2 flex-shrink-0 md:mt-2">
+                        
+                        <div class="relative flex items-center w-full md:w-64">
+                            <span class="absolute left-4 text-gray-400 text-xs">🔍</span>
+                            <input 
+                                type="text" 
+                                id="searchInput" 
+                                oninput="handleSearch()" 
+                                placeholder="Cari bahan kesihatan..." 
+                                class="w-full pl-10 pr-4 py-2.5 text-xs bg-white border border-gray-200 rounded-xl focus:outline-none focus:border-[#101e33] focus:ring-1 focus:ring-[#101e33] shadow-sm transition-all placeholder-gray-400 font-medium"
+                            >
+                        </div>
+
+                        <div class="relative w-full sm:w-auto">
+                            <select 
+                                id="sortSelect" 
+                                onchange="handleSortChange()" 
+                                class="w-full sm:w-auto pl-3 pr-8 py-2.5 text-xs bg-white border border-gray-200 rounded-xl focus:outline-none focus:border-[#101e33] shadow-sm font-bold text-gray-600 appearance-none cursor-pointer"
+                            >
+                                <option value="default">↕ Susunan Asal</option>
+                                <option value="az">🔤 Tajuk: A ke Z</option>
+                                <option value="za">🔤 Tajuk: Z ke A</option>
+                                <option value="type-cpg">📄 Jenis: CPG Dahulu</option>
+                                <option value="type-infografik">🎨 Jenis: Infografik Dahulu</option>
+                                <option value="type-video">🎬 Jenis: Video Dahulu</option>
+                            </select>
+                            <span class="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-[9px]">▼</span>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
         </div>
+        <div class="w-full max-w-7xl mx-auto px-4 md:px-12 pb-24">
 
-        <!-- TAB PENAPIS AL-MENU ZUS (Filter Tabs) -->
-        <div class="flex flex-wrap gap-2 mb-8 pb-4 border-b border-gray-100">
-            <button onclick="changeCategory('all')" id="tab-all" class="tab-btn py-2 px-4 text-xs font-bold rounded-xl bg-[#101e33] text-white shadow-sm transition-all">
-                Semua Bahan
-            </button>
-            <button onclick="changeCategory('cpg')" id="tab-cpg" class="tab-btn py-2 px-4 text-xs font-bold rounded-xl bg-white text-gray-600 border border-gray-200 shadow-sm hover:bg-gray-50 transition-all">
-                Bahan Kursus & CPG
-            </button>
-            <button onclick="changeCategory('infografik')" id="tab-infografik" class="tab-btn py-2 px-4 text-xs font-bold rounded-xl bg-white text-gray-600 border border-gray-200 shadow-sm hover:bg-gray-50 transition-all">
-                Infografik Kesihatan
-            </button>
-            <button onclick="changeCategory('video')" id="tab-video" class="tab-btn py-2 px-4 text-xs font-bold rounded-xl bg-white text-gray-600 border border-gray-200 shadow-sm hover:bg-gray-50 transition-all">
-                Galeri Video
-            </button>
-        </div>
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-8">
+                <div class="flex flex-wrap gap-2">
+                    <button id="tab-all" onclick="changeCategory('all')" class="tab-btn px-4 py-2 text-xs font-bold rounded-xl transition-all shadow-sm bg-[#101e33] text-white">Semua Bahan</button>
+                    <button id="tab-cpg" onclick="changeCategory('cpg')" class="tab-btn px-4 py-2 text-xs font-bold rounded-xl transition-all shadow-sm bg-white text-gray-600 border border-gray-200 hover:bg-gray-50">Bahan Kursus & CPG</button>
+                    <button id="tab-infografik" onclick="changeCategory('infografik')" class="tab-btn px-4 py-2 text-xs font-bold rounded-xl transition-all shadow-sm bg-white text-gray-600 border border-gray-200 hover:bg-gray-50">Infografik Kesihatan</button>
+                    <button id="tab-video" onclick="changeCategory('video')" class="tab-btn px-4 py-2 text-xs font-bold rounded-xl transition-all shadow-sm bg-white text-gray-600 border border-gray-200 hover:bg-gray-50">Galeri Video</button>
+                </div>
 
-        <!-- CONTAINER GRID UTAMA: JavaScript akan suntik kad ke sini secara automatik -->
-        <div id="resourceGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+                <div class="text-right flex-shrink-0">
+                    <span id="materialCount" class="text-xs font-bold text-gray-400 bg-gray-50 border border-gray-100 px-3 py-1.5 rounded-xl shadow-sm">
+                        Menampilkan: 0 bahan
+                    </span>
+                </div>
+            </div>
 
-        <!-- BUTANG OPTIMASI: Memastikan laman web dibuka laju, papar berperingkat -->
-        <div class="w-full flex justify-center mt-12 mb-24">
-            <button id="loadMoreBtn" onclick="renderMore()" class="hidden py-3 px-8 text-xs font-bold bg-[#101e33] text-white hover:bg-[#1d3557] rounded-xl transition-all shadow-md active:scale-95">
-                Papar Lebih Banyak Bahan ⚡
-            </button>
+            <div id="resourceGrid">
+                </div>
+
+            <div id="paginationContainer"></div>
+
         </div>
     </main>
 
-    <!-- FOOTER FIX (Sama gaya dengan Landing Page yang kita ubah suai tegar) -->
-    <footer class="fixed bottom-0 left-0 w-full bg-white/95 backdrop-blur-sm py-4 px-6 text-center border-t border-gray-100 z-20 flex-shrink-0">
+    <footer class="w-full bg-white py-4 px-6 text-center border-t border-gray-100 flex-shrink-0">
         <p class="text-[10px] md:text-xs font-medium text-gray-400 tracking-wide">
             Hak Cipta © 2026 Unit Kawalan Penyakit Tidak Berjangkit, Bahagian Kesihatan Awam, Jabatan Kesihatan Negeri Perlis
         </p>
     </footer>
 
-    <!-- ================= SISTEM PENGURUSAN DATA SUMBER DYNAMIC ================= -->
-    <!-- 1. PANGGIL DATA DAHULU (Wajib di atas) -->
     <script src="resources-data.js"></script>
-
-    <!-- 2. PANGGIL ENJIN FUNGSI KEMUDIAN (Wajib di bawah data) -->
     <script src="info-ncd.js"></script>
 </body>
 </html>

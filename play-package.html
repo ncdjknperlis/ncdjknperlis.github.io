@@ -11,52 +11,74 @@
 </head>
 <body class="min-h-screen flex flex-col bg-[#FBFBFB] text-[#1A1A1A] antialiased">
 
-    <!-- HEADER (Kekal Konsisten) -->
+    <!-- HEADER -->
     <header class="w-full py-3 md:py-5 px-4 md:px-12 bg-white border-b border-gray-100 flex flex-row items-center justify-between gap-2 z-20 flex-shrink-0">
         <div class="flex items-center space-x-2 md:space-x-4">
             <img src="images/logo.png" style="max-width: 32px;" class="w-full h-auto object-contain mx-auto md:max-w-[50px]">
             <img src="images/logo-ncd/logo-ncd-default.png" style="max-width: 90px;" class="md:max-w-[150px]">
-            <div class="w-[1px] h-5 md:h-8 bg-gray-200"></div>
+            <!-- Menggunakan CSS Border sebagai separator | yang lebih kemas -->
+            <div class="w-[1px] h-5 md:h-8 bg-gray-200 mx-1 md:mx-2"></div>
             <h2 class="text-[8px] md:text-xs font-bold tracking-[0.10em] md:tracking-[0.2em] uppercase text-[#101e33] leading-tight">
                 Unit NCD<br>
                 <span class="text-gray-400 font-medium text-[7px] md:text-[9px]">JKN Perlis</span>
             </h2>
         </div>
-        <div class="flex items-center space-x-2">
-            <a href="info-ncd.html" class="text-xs font-bold text-gray-700 hover:text-[#101e33] border border-gray-200 px-3 py-1.5 rounded-xl bg-white transition-all shadow-sm active:scale-95">
-                ← Kembali ke Hub Sumber
-            </a>
-        </div>
+        <a href="info-ncd.html" class="text-xs font-bold text-gray-700 hover:text-[#101e33] border border-gray-200 px-3 py-1.5 rounded-xl bg-white transition-all shadow-sm active:scale-95">
+            ← Hub Sumber
+        </a>
     </header>
 
     <!-- CONTAINER UTAMA -->
-    <main class="flex-1 w-full max-w-2xl mx-auto px-4 py-8 md:py-12 flex flex-col justify-start">
+    <main class="flex-1 w-full max-w-6xl mx-auto px-4 py-8 md:py-12">
         
-        <!-- Kad Tajuk Utama Kumpulan -->
-        <div class="w-full p-6 bg-white border border-purple-100 rounded-2xl shadow-sm mb-6">
-            <span class="inline-block text-[9px] font-extrabold tracking-wider bg-purple-50 text-purple-600 uppercase px-2.5 py-1 rounded-md mb-2">
-                Koleksi Kapsul Berbilang Bahan
-            </span>
-            <h2 id="packageTitle" class="text-xl md:text-2xl font-bold text-[#101e33] tracking-tight leading-tight">-</h2>
-            <p id="packageDesc" class="text-xs md:text-sm text-gray-500 font-light mt-2 leading-relaxed">-</p>
-        </div>
+        <!-- GRID DUA KOLUM (KIRI: SENARAI BAHAN | KANAN: KOTAK QR CODE) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+            
+            <!-- KOLUM KIRI: SENARAI KAPSUL & FAIL (2/3 ruang) -->
+            <div class="md:col-span-2 flex flex-col space-y-4">
+                <!-- Kad Tajuk Utama Kumpulan -->
+                <div class="w-full p-6 bg-white border border-purple-100 rounded-2xl shadow-sm">
+                    <span class="inline-block text-[9px] font-extrabold tracking-wider bg-purple-50 text-purple-600 uppercase px-2.5 py-1 rounded-md mb-2">
+                        Koleksi Kapsul Berbilang Bahan
+                    </span>
+                    <h2 id="packageTitle" class="text-xl font-bold text-[#101e33] tracking-tight leading-tight">-</h2>
+                    <p id="packageDesc" class="text-xs md:text-sm text-gray-500 font-light mt-2 leading-relaxed">-</p>
+                </div>
 
-        <!-- REKABENTUK SENARAI BAHAN (Suntikan Senarai Bersama Thumbnail) -->
-        <div class="w-full space-y-3 mb-24" id="materialsListContainer">
-            <!-- JavaScript akan menyuntik senarai fail ke mari -->
-        </div>
+                <!-- Kontainer Senarai Fail Dinamik -->
+                <div class="w-full space-y-3" id="materialsListContainer">
+                    <!-- Suntikan senarai fail oleh JS -->
+                </div>
+            </div>
 
+            <!-- KOLUM KANAN: KOTAK QR CODE AUTOMATIK (1/3 ruang) -->
+            <div class="bg-white border border-purple-100 p-6 rounded-2xl shadow-sm text-center flex flex-col items-center">
+                <p class="text-xs font-bold text-[#101e33] mb-1">Imbas & Kongsi Pakej</p>
+                <p class="text-[10px] text-purple-400 font-medium mb-4 leading-tight">Akses folder kompilasi ini di telefon</p>
+                
+                <!-- Petak QR -->
+                <div class="w-40 h-40 bg-purple-50/30 flex items-center justify-center rounded-xl p-2 border border-purple-100">
+                    <img id="qrCodeDisplay" src="" alt="QR Code" class="w-full h-full object-contain hidden">
+                    <div id="qrLoading" class="text-[10px] text-purple-400 font-bold animate-pulse">Menjana QR...</div>
+                </div>
+                
+                <div class="mt-4 text-[10px] text-gray-400 bg-gray-50 p-3 rounded-xl border border-gray-50 leading-relaxed text-left w-full">
+                    📂 <span class="font-semibold text-purple-600">Info Pakej Digital:</span> Kod QR ini mengandungi pautan langsung ke seluruh arkib paparan ini. Pengguna boleh membuka mana-mana fail di dalam senarai secara berasingan selepas imbasan dibuat.
+                </div>
+            </div>
+
+        </div>
     </main>
 
-    <!-- FOOTER LIGHT MELEKAT -->
+    <!-- FOOTER -->
     <footer class="w-full bg-white py-4 px-6 text-center border-t border-gray-100 mt-auto flex-shrink-0">
-        <p class="text-[10px] md:text-xs font-medium text-gray-400 tracking-wide">
-            Hak Cipta © 2026 Unit Kawalan Penyakit Tidak Berjangkit, Bahagian Kesihatan Awam, Jabatan Kesihatan Negeri Perlis
+        <p class="text-[10px] font-medium text-gray-400 tracking-wide">
+            Hak Cipta © 2026 Unit Kawalan Penyakit Tidak Berjangkit, JKN Perlis
         </p>
     </footer>
 
+    <!-- ENGINE DECODER & DYNAMIC QR CODE -->
     <script src="resources-data.js"></script>
-    <!-- ENGINE DECODER UNTUK JANA LIST SECARA DINAMIK -->
     <script>
         window.onload = () => {
             const urlParams = new URLSearchParams(window.location.search);
@@ -71,9 +93,9 @@
 
                 txtTitle.innerText = item.title;
                 txtDesc.innerText = item.desc;
-                listContainer.innerHTML = ""; // Bersihkan list
+                listContainer.innerHTML = "";
 
-                // Membaca senarai materials terus daripada fail resources-data.js!
+                // Membaca senarai fail di dalam objek materials
                 item.materials.forEach(mat => {
                     const row = document.createElement("div");
                     row.className = "flex items-center justify-between p-3 bg-white hover:bg-gray-50 border border-gray-100 rounded-xl transition-all group shadow-sm";
@@ -84,15 +106,29 @@
                             <img src="${finalThumb}" alt="Pratonton" loading="lazy" class="w-10 h-10 object-cover rounded-lg border border-gray-100 flex-shrink-0">
                             <div class="overflow-hidden">
                                 <p class="text-xs font-bold text-gray-700 truncate group-hover:text-[#101e33] transition-colors leading-tight">${mat.name}</p>
-                                <span class="text-[9px] font-extrabold px-1.5 py-0.2 mt-0.5 inline-block rounded bg-gray-100 text-gray-400 uppercase tracking-wide">${mat.type}</span>
+                                <span class="text-[9px] font-extrabold px-1.5 py-0.2 mt-0.5 inline-block rounded bg-purple-50 text-purple-600 uppercase tracking-wide">${mat.type}</span>
                             </div>
                         </div>
-                        <a href="${mat.url}" target="_blank" class="py-1.5 px-3.5 bg-white border border-gray-200 hover:border-[#101e33] text-gray-600 hover:text-[#101e33] text-[11px] font-extrabold rounded-lg transition-all shadow-sm flex-shrink-0 active:scale-95">
+                        <a href="${mat.url}" target="_blank" class="py-1.5 px-3.5 bg-white border border-gray-200 hover:border-purple-600 text-gray-600 hover:text-purple-600 text-[11px] font-extrabold rounded-lg transition-all shadow-sm flex-shrink-0 active:scale-95">
                             Buka ↗
                         </a>
                     `;
                     listContainer.appendChild(row);
                 });
+            }
+
+            // AUTO-JANA QR CODE BAGI LIVE URL SEKARANG (DISATUKAN)
+            const currentURL = window.location.href; 
+            const qrImage = document.getElementById("qrCodeDisplay");
+            const qrLoading = document.getElementById("qrLoading");
+            
+            if (qrImage && currentURL) {
+                // Menjana imej QR menggunakan API percuma berdasarkan ID pautan semasa
+                qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(currentURL)}`;
+                qrImage.onload = () => {
+                    qrImage.classList.remove("hidden");
+                    if(qrLoading) qrLoading.classList.add("hidden");
+                };
             }
         };
     </script>
