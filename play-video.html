@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pemain Media NCD | JKN Perlis</title>
+    <title>Pemain Video NCD | JKN Perlis</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600;700;800&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="images/logo.png">
@@ -11,47 +11,68 @@
 </head>
 <body class="min-h-screen flex flex-col bg-[#FBFBFB] text-[#1A1A1A] antialiased">
 
+    <!-- HEADER -->
     <header class="w-full py-3 md:py-5 px-4 md:px-12 bg-white border-b border-gray-100 flex flex-row items-center justify-between gap-2 z-20 flex-shrink-0">
         <div class="flex items-center space-x-2 md:space-x-4">
             <img src="images/logo.png" style="max-width: 32px;" class="w-full h-auto object-contain mx-auto md:max-w-[50px]">
             <img src="images/logo-ncd/logo-ncd-default.png" style="max-width: 90px;" class="md:max-w-[150px]">
-            <div class="w-[1px] h-5 md:h-8 bg-gray-200"></div>
+            <div class="w-[1px] h-5 md:h-8 bg-gray-200 mx-1 md:mx-2"></div>
             <h2 class="text-[8px] md:text-xs font-bold tracking-[0.10em] md:tracking-[0.2em] uppercase text-[#101e33] leading-tight">Unit NCD<br><span class="text-gray-400 font-medium text-[7px] md:text-[9px]">JKN Perlis</span></h2>
         </div>
         <a href="info-ncd.html" class="text-xs font-bold text-gray-700 hover:text-[#101e33] border border-gray-200 px-3 py-1.5 rounded-xl bg-white transition-all shadow-sm active:scale-95">← Hub Sumber</a>
     </header>
 
-    <main class="flex-1 w-full max-w-6xl mx-auto px-4 py-8 md:py-12">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+    <!-- MAIN CONTENT -->
+    <main class="flex-1 w-full max-w-4xl mx-auto px-4 py-8">
+        <div class="flex flex-col space-y-4">
             
-            <div class="md:col-span-2 flex flex-col space-y-6">
-                <div class="w-full aspect-video bg-black rounded-2xl overflow-hidden shadow-xl border border-gray-100 relative">
-                    <video id="videoPlayer" class="w-full h-full object-contain" controls autoplay>
-                        <source id="videoSource" src="" type="video/mp4">
-                    </video>
-                </div>
-                <div class="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm">
+            <!-- Video Frame (Menggunakan iframe Player rasmi Google Drive) -->
+            <div class="w-full aspect-video bg-black rounded-2xl overflow-hidden shadow-xl border border-gray-100 relative h-[60vh]">
+                <iframe id="mainVideoIframe" src="" class="w-full h-full border-0 bg-black" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+            </div>
+
+            <!-- Detail Box + Share Button -->
+            <div class="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                <div class="flex-1">
                     <span class="inline-block text-[9px] font-extrabold tracking-wider bg-rose-50 text-rose-600 uppercase px-2.5 py-1 rounded-md mb-2">Paparan Media Digital</span>
                     <h2 id="videoTitle" class="text-xl font-bold text-[#101e33] tracking-tight leading-tight">-</h2>
                     <p id="videoDesc" class="text-xs md:text-sm text-gray-500 font-light mt-2 leading-relaxed">-</p>
                 </div>
-            </div>
-
-            <div class="bg-white border border-gray-100 p-6 rounded-2xl shadow-sm text-center flex flex-col items-center">
-                <p class="text-xs font-bold text-[#101e33] mb-1">Imbas & Kongsi</p>
-                <p class="text-[10px] text-gray-400 font-light mb-4 leading-tight">Bawa fail video ini ke telefon pintar anda</p>
                 
-                <div class="w-40 h-40 bg-gray-50 flex items-center justify-center rounded-xl p-2 border border-gray-100">
-                    <img id="qrCodeDisplay" src="" alt="QR Code" class="w-full h-full object-contain hidden">
-                    <div id="qrLoading" class="text-[10px] text-gray-400 font-medium animate-pulse">Menjana QR...</div>
-                </div>
-                <div class="mt-4 text-[10px] text-gray-400 bg-gray-50 p-3 rounded-xl border border-gray-50 leading-relaxed text-left w-full">
-                    💡 <span class="font-semibold text-gray-500">Nota Kakitangan:</span> Halakan kamera telefon pesakit ke petak kod di atas untuk akses tontonan mobile segera.
-                </div>
+                <button onclick="openShareModal()" class="w-full md:w-auto flex-shrink-0 flex items-center justify-center space-x-1.5 py-2.5 px-5 bg-[#101e33] hover:bg-rose-600 text-white text-xs font-bold rounded-xl transition-all shadow-sm active:scale-95 self-end md:self-start">
+                    <span>🔗</span> <span>Kongsi Bahan</span>
+                </button>
             </div>
 
         </div>
     </main>
+
+    <!-- MODAL POP-UP SHARE BOX -->
+    <div id="shareModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300 px-4">
+        <div class="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-sm border border-gray-100 transform scale-95 transition-transform duration-300" id="modalBox">
+            <div class="flex items-center justify-between pb-3 border-b border-gray-100">
+                <h3 class="text-sm font-bold text-[#101e33]">Kongsi Sumber Digital</h3>
+                <button onclick="closeShareModal()" class="text-gray-400 hover:text-gray-600 text-sm font-bold">✕</button>
+            </div>
+            <div class="flex flex-col items-center py-4 bg-gray-50/50 rounded-xl my-4 border border-gray-50">
+                <div class="w-36 h-36 bg-white p-2 rounded-lg border border-gray-100 flex items-center justify-center">
+                    <img id="qrCodeDisplay" src="" alt="QR Code" class="w-full h-full hidden">
+                    <div id="qrLoading" class="text-[10px] text-gray-400 animate-pulse">Menjana QR...</div>
+                </div>
+                <p class="text-[10px] text-gray-400 mt-2">Halakan kamera untuk imbas & simpan</p>
+            </div>
+            <div class="space-y-1.5 mb-4">
+                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Salin Pautan Halaman</label>
+                <div class="flex space-x-1">
+                    <input type="text" id="shareUrlInput" readonly class="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-xs text-gray-500 focus:outline-none truncate">
+                    <button onclick="copyToClipboard()" id="copyBtn" class="bg-gray-100 hover:bg-gray-200 text-[#101e33] font-bold text-xs px-3 rounded-xl transition-colors border border-gray-200">Salin</button>
+                </div>
+            </div>
+            <a id="whatsappShareLink" href="#" target="_blank" class="w-full py-2.5 bg-[#25D366] hover:bg-[#20ba5a] text-white text-xs font-bold rounded-xl flex items-center justify-center space-x-2 transition-all shadow-sm active:scale-95">
+                <span class="text-sm">💬</span> <span>Hantar ke WhatsApp</span>
+            </a>
+        </div>
+    </div>
 
     <footer class="w-full bg-white py-4 px-6 text-center border-t border-gray-100 mt-auto">
         <p class="text-[10px] text-gray-400 font-medium">Hak Cipta © 2026 Unit Kawalan Penyakit Tidak Berjangkit, JKN Perlis</p>
@@ -59,36 +80,51 @@
 
     <script src="resources-data.js"></script>
     <script>
+        const modal = document.getElementById("shareModal");
+        const modalBox = document.getElementById("modalBox");
+
         window.onload = () => {
             const urlParams = new URLSearchParams(window.location.search);
             const id = urlParams.get('id');
-
-            const player = document.getElementById("videoPlayer");
-            const source = document.getElementById("videoSource");
-            const txtTitle = document.getElementById("videoTitle");
-            const txtDesc = document.getElementById("videoDesc");
-
+            
             if (id !== null && resourcesData[id]) {
                 const item = resourcesData[id];
-                source.src = `media-player/${item.videoUrl}`;
-                txtTitle.innerText = item.title;
-                txtDesc.innerText = item.desc;
-                player.load();
+                const iframe = document.getElementById("mainVideoIframe");
+
+                let targetUrl = item.videoUrl;
+
+                // Memastikan pautan dihantar ke mod /preview yang mempunyai pemain video terbina dalam Drive
+                if (targetUrl.includes("drive.google.com") && targetUrl.includes("/view")) {
+                    targetUrl = targetUrl.replace("/view", "/preview");
+                } else if (targetUrl.includes("drive.google.com") && !targetUrl.includes("/preview")) {
+                    // Jika tiada perkataan /view atau /preview, kita append /preview di hujungnya
+                    if(targetUrl.endsWith("/")) targetUrl = targetUrl + "preview";
+                    else targetUrl = targetUrl + "/preview";
+                }
+
+                iframe.src = targetUrl;
+                document.getElementById("videoTitle").innerText = item.title;
+                document.getElementById("videoDesc").innerText = item.desc;
             }
 
-            // AUTO-JANA QR CODE BAGI LIVE URL SEKARANG
-            const currentURL = window.location.href; 
+            const currentURL = window.location.href;
+            document.getElementById("shareUrlInput").value = currentURL;
+            document.getElementById("whatsappShareLink").href = `https://api.whatsapp.com/send?text=${encodeURIComponent('Sila layari bahan promosi Unit NCD JKN Perlis ini: ' + currentURL)}`;
+
             const qrImage = document.getElementById("qrCodeDisplay");
             const qrLoading = document.getElementById("qrLoading");
-            
             if (qrImage && currentURL) {
-                qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(currentURL)}`;
+                qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(currentURL)}`;
                 qrImage.onload = () => {
                     qrImage.classList.remove("hidden");
                     if(qrLoading) qrLoading.classList.add("hidden");
                 };
             }
         };
+
+        function openShareModal() { modal.classList.remove("hidden"); setTimeout(() => { modal.classList.remove("opacity-0"); modalBox.classList.remove("scale-95"); }, 10); }
+        function closeShareModal() { modal.classList.add("opacity-0"); modalBox.classList.add("scale-95"); setTimeout(() => modal.classList.add("hidden"), 300); }
+        function copyToClipboard() { const copyText = document.getElementById("shareUrlInput"); copyText.select(); copyText.setSelectionRange(0, 99999); navigator.clipboard.writeText(copyText.value); const btn = document.getElementById("copyBtn"); btn.innerText = "✓ Disalin"; btn.className = "bg-emerald-50 text-emerald-600 border border-emerald-200 text-xs px-3 rounded-xl"; setTimeout(() => { btn.innerText = "Salin"; btn.className = "bg-gray-100 hover:bg-gray-200 text-[#101e33] font-bold text-xs px-3 rounded-xl transition-colors border border-gray-200"; }, 2000); }
     </script>
 </body>
 </html>

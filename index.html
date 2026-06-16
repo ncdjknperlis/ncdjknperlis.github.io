@@ -41,7 +41,7 @@
 </head>
 <body class="h-screen w-screen overflow-x-hidden md:overflow-hidden flex flex-col bg-[#FBFBFB] text-[#1A1A1A] antialiased">
 
-    <!-- HEADER: Memaparkan logo, tajuk, dan ikon sosial/butang loceng pengumuman -->
+    <!-- HEADER: Memaparkan logo, tajuk, dan ikon sosial -->
     <header class="w-full py-3 md:py-5 px-4 md:px-12 bg-white border-b border-gray-100 flex flex-row items-center justify-between gap-2 z-20 flex-shrink-0">
         <div class="flex items-center space-x-2 md:space-x-4">
             <img src="images/logo.png" style="max-width: 32px;" class="w-full h-auto object-contain mx-auto md:max-w-[50px]">
@@ -75,8 +75,8 @@
                     </svg>
                 </a>
 
-                <!-- Butang Loceng Pengumuman Mobile (Mempunyai Dot Notifikasi Merah) -->
-                <button onclick="toggleMobileMedia()" class="md:hidden w-8 h-8 flex items-center justify-center rounded-full bg-[#101e33] text-white shadow-sm hover:scale-105 active:scale-95 relative" title="Papar Pengumuman">
+                <!-- Butang Loceng Mobile -->
+                <button onclick="toggleMobileMedia()" class="md:hidden w-8 h-8 flex items-center justify-center rounded-full bg-[#101e33] text-white shadow-sm relative">
                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
                     </svg>
@@ -88,59 +88,45 @@
 
     <main class="flex flex-col md:flex-row flex-1 md:overflow-hidden relative w-full">
 
-        <!-- BUTANG TOGGLE PANEL DESKTOP ASAL -->
-        <button id="togglePanelBtn" onclick="toggleMediaPanel()" class="hidden md:flex absolute right-4 top-4 z-40 w-10 h-10 flex items-center justify-center rounded-full bg-[#101e33] text-white shadow-md border border-gray-200 transition-all duration-300 active:scale-95 group group-hover:scale-110">
-            <svg id="toggleIcon" class="w-5 h-5 transform transition-transform duration-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
+        <!-- BUTANG TOGGLE PANEL DESKTOP -->
+        <button id="togglePanelBtn" onclick="toggleMediaPanel()" class="hidden md:flex absolute right-4 top-4 z-40 w-10 h-10 flex items-center justify-center rounded-full bg-[#101e33] text-white shadow-md border border-gray-200 transition-all duration-300 active:scale-95 group hover:scale-110">
+            <svg id="toggleIcon" class="w-5 h-5 transform transition-transform duration-500 rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M13.5 4.5 21 12m0 0-7.5 7.5M21 12H3"/>
             </svg>
         </button>
 
-        <div id="collapsedText" class="absolute right-3 top-20 bottom-4 z-30 flex items-center justify-center hidden fade-in pointer-events-none">
-            <span class="vertical-text text-[10px] font-bold tracking-[0.3em] text-gray-400 uppercase select-none">
-                ▲ PAPAR PENGUMUMAN & MEDIA
-            </span>
-        </div>
-
-        <!-- SECTION KIRI: KANDUNGAN UTAMA (SLIDER & MENU) -->
-        <section id="infoColumn" class="w-full md:w-[85%] h-full bg-[#FBFBFB] flex flex-col transition-all duration-500 ease-in-out border-b md:border-b-0 md:border-r border-gray-100 flex-shrink-0 relative overflow-hidden">
+        <!-- SECTION KIRI: KANDUNGAN UTAMA (Slider & Modul) -->
+        <section id="infoColumn" class="w-full md:w-[100%] h-full bg-[#FBFBFB] flex flex-col transition-all duration-500 ease-in-out border-b md:border-b-0 md:border-r border-gray-100 flex-shrink-0 relative overflow-y-auto custom-scrollbar">
             
             <!-- IMAGE SLIDER -->
             <div class="w-full relative overflow-hidden bg-gray-100 h-48 sm:h-64 md:h-80 flex-shrink-0 shadow-md group" onmouseenter="pauseSlider()" onmouseleave="resumeSlider()">
                 <a id="sliderLink" href="#">
                     <img id="sliderImage" class="w-full h-full object-cover fade-in" src="" alt="Info Banner">
                 </a>
-                
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-4 sm:p-6 md:p-12 flex flex-col justify-end pointer-events-none">
-                    <span id="sliderHead" class="inline-block text-[8px] md:text-[10px] font-extrabold tracking-[0.2em] bg-amber-400 text-[#0b1424] uppercase px-2 md:px-3 py-0.5 md:py-1 rounded-full w-max mb-1.5 md:mb-2 shadow-sm">
-                    </span>
+                    <span id="sliderHead" class="inline-block text-[8px] md:text-[10px] font-extrabold tracking-[0.2em] bg-amber-400 text-[#0b1424] uppercase px-2 md:px-3 py-0.5 md:py-1 rounded-full w-max mb-1.5 md:mb-2 shadow-sm"></span>
                     <h2 id="sliderTitle" class="text-base sm:text-2xl md:text-3xl font-black text-white leading-tight tracking-tight line-clamp-1 md:line-clamp-none">-</h2>
                     <p id="sliderDesc" class="text-[11px] sm:text-sm text-slate-300 font-light mt-0.5 md:mt-1.5 max-w-3xl leading-relaxed line-clamp-2 md:line-clamp-none">-</p>
                 </div>
-
-                <button onclick="changeSlider(-1)" class="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity border border-white/10 hover:bg-black/70 hover:scale-105 active:scale-95 text-sm md:text-lg z-10">
-                    &#10094;
-                </button>
-                <button onclick="changeSlider(1)" class="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity border border-white/10 hover:bg-black/70 hover:scale-105 active:scale-95 text-sm md:text-lg z-10">
-                    &#10095;
-                </button>
+                <button onclick="changeSlider(-1)" class="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity border border-white/10 hover:bg-black/70 text-sm z-10">&#10094;</button>
+                <button onclick="changeSlider(1)" class="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 rounded-full bg-black/50 text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity border border-white/10 hover:bg-black/70 text-sm z-10">&#10095;</button>
             </div>
 
-            <!-- MODUL MENU GRID (Padding diselaraskan sepadan imej rujukan mobile) -->
-            <div class="w-full flex-1 px-4 sm:px-6 md:px-12 py-4 md:py-8 overflow-y-auto custom-scrollbar">
+            <!-- MODUL MENU GRID (6 Kolum) -->
+            <div class="w-full px-4 sm:px-6 md:px-12 py-4 md:py-8">
                 <div class="mb-3 md:mb-4">
                     <h2 class="text-lg md:text-xl font-bold text-[#101e33] tracking-tight">Modul Navigasi</h2>
                     <p class="text-xs md:text-sm text-gray-500 font-light mt-0.5">Pilih modul sistem untuk navigasi pantas ke sistem berkaitan.</p>
                 </div>
 
                 <div id="gridContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-3 w-full pb-24">
-
                     <!-- Kad 0 -->
                     <a href="info-ncd.html" class="group flex flex-col justify-between h-56 sm:h-64 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
-                        <img src="images/card/card-00.png" alt="e-Diabetes Banner" class="w-full h-20 sm:h-24 object-cover">
+                        <img src="images/card/card-00.png" alt="Pusat Sumber Banner" class="w-full h-20 sm:h-24 object-cover">
                         <div class="flex-1 p-3 sm:p-4 flex flex-col justify-between">
                             <div class="space-y-0.5 sm:space-y-2">
                                 <span class="text-[9px] md:text-[10px] font-bold text-amber-500 uppercase tracking-wider block">Pautan</span>
-                                <h3 class="text-xs sm:text-base font-bold text-[#101e33] group-hover:text-amber-600 transition-colors leading-tight tracking-tight">Pusat Sumber NCD</h3>
+                                <h3 class="text-xs sm:text-base font-bold text-[#101e33] group-hover:text-amber-600 transition-colors leading-tight tracking-tight">Hub Sumber NCD</h3>
                                 <p class="text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Akses terus garis panduan klinikal (CPG), infografik kesedaran, dan video promosi kesihatan Unit NCD Perlis.</p>
                             </div>
                             <div class="text-right text-[10px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
@@ -199,19 +185,7 @@
                         </div>
                     </a>
 
-                    <!-- Kad 5 -->
-                    <!-- <a href="#" class="group flex flex-col justify-between h-56 sm:h-64 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
-                        <img src="images/card/card-06.png" alt="iQuit Banner" class="w-full h-20 sm:h-24 object-cover">
-                        <div class="flex-1 p-3 sm:p-4 flex flex-col justify-between">
-                            <div class="space-y-0.5 sm:space-y-2">
-                                <span class="text-[9px] md:text-[10px] font-bold text-rose-600 uppercase tracking-wider block">06 / Sistem</span>
-                                <h3 class="text-xs sm:text-base font-bold text-[#101e33] group-hover:text-rose-600 transition-colors leading-tight tracking-tight">iQuit</h3>
-                                <p class="text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Klinik berhenti merokok bagi negeri Perlis.</p>
-                            </div>
-                            <div class="text-right text-[10px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
-                        </div>
-                    </a> -->
-                    <!-- Kad 5 (iQuit) - Diubah suai dengan Dwi-Butang (Dashboard & Admin) -->
+                    <!-- Kad 5 (iQuit) -->
                     <div class="group flex flex-col justify-between h-56 sm:h-64 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 overflow-hidden p-0">
                         <img src="images/card/card-05.png" alt="iQuit Banner" class="w-full h-20 sm:h-24 object-cover">
                         <div class="flex-1 p-3 sm:p-4 flex flex-col justify-between overflow-hidden">
@@ -220,28 +194,20 @@
                                 <h3 class="text-xs sm:text-base font-bold text-[#101e33] leading-tight tracking-tight">iQuit</h3>
                                 <p class="text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Klinik berhenti merokok bagi negeri Perlis.</p>
                             </div>
-                            
-                            <!-- DWU-BUTANG AKSES (Gantikan '#' dengan link sistem iQuit yang sebenar) -->
                             <div class="grid grid-cols-2 gap-2 pt-2 border-t border-gray-50 flex-shrink-0 w-full">
-                                <!-- Butang Dashboard -->
-                                <a href="https://perlis.moh.gov.my/pubjknpls/iquit/eis/public_dashboard" target="_blank" class="py-1 md:py-1.5 px-1 text-center text-[10px] md:text-[11px] font-bold bg-[#101e33] text-white hover:bg-[#1d3557] rounded-lg transition-colors shadow-sm active:scale-95 whitespace-nowrap">
-                                    Dashboard
-                                </a>
-                                <!-- Butang Admin -->
-                                <a href="https://perlis.moh.gov.my/pubjknpls/iquit/" target="_blank" class="py-1 md:py-1.5 px-1 text-center text-[10px] md:text-[11px] font-bold bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200 rounded-lg transition-colors shadow-sm active:scale-95 whitespace-nowrap">
-                                    Ujian Fagerström
-                                </a>
+                                <a href="https://perlis.moh.gov.my/pubjknpls/iquit/eis/public_dashboard" target="_blank" class="py-1 md:py-1.5 px-1 text-center text-[10px] md:text-[11px] font-bold bg-[#101e33] text-white hover:bg-[#1d3557] rounded-lg transition-colors shadow-sm active:scale-95 whitespace-nowrap">Dashboard</a>
+                                <a href="https://perlis.moh.gov.my/pubjknpls/iquit/" target="_blank" class="py-1 md:py-1.5 px-1 text-center text-[10px] md:text-[11px] font-bold bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200 rounded-lg transition-colors shadow-sm whitespace-nowrap">Ujian</a>
                             </div>
                         </div>
                     </div>
 
                     <!-- Kad 6 -->
                     <a href="https://script.google.com/a/macros/moh.gov.my/s/AKfycbx2ES0gysZ5p_o-x9Yhuppza7OzqCwzFP_Lhbis8ipiJtgGUWswiRiUGWbSKtf0Mcla/exec" target="_blank" class="group flex flex-col justify-between h-56 sm:h-64 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
-                        <img src="images/card/card-06.png" alt="MyKursus Banner" class="w-full h-20 sm:h-24 object-cover">
+                        <img src="images/card/card-06.png" alt="e-KOSPEN Banner" class="w-full h-20 sm:h-24 object-cover">
                         <div class="flex-1 p-3 sm:p-4 flex flex-col justify-between">
                             <div class="space-y-0.5 sm:space-y-2">
                                 <span class="text-[9px] md:text-[10px] font-bold text-sky-600 uppercase tracking-wider block">Sistem</span>
-                                <h3 class="text-xs sm:text-base font-bold text-[#101e33] group-hover:text-sky-600 transition-colors leading-tight tracking-tight">e-KOSPEN</h3>
+                                <h3 class="text-xs sm:text-base font-bold text-[#101e33] group-hover:text-sky-600 transition-colors leading-tight tracking-tight line-clamp-2">e-KOSPEN</h3>
                                 <p class="text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Akses pengurusan KOSPEN Perlis.</p>
                             </div>
                             <div class="text-right text-[10px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
@@ -250,11 +216,11 @@
 
                     <!-- Kad 7 -->
                     <a href="https://myhealth.gov.my" target="_blank" class="group flex flex-col justify-between h-56 sm:h-64 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
-                        <img src="images/card/card-07.png" alt="MyKursus Banner" class="w-full h-20 sm:h-24 object-cover">
+                        <img src="images/card/card-07.png" alt="e-Portal Banner" class="w-full h-20 sm:h-24 object-cover">
                         <div class="flex-1 p-3 sm:p-4 flex flex-col justify-between">
                             <div class="space-y-0.5 sm:space-y-2">
                                 <span class="text-[9px] md:text-[10px] font-bold text-sky-600 uppercase tracking-wider block">Sistem</span>
-                                <h3 class="text-xs sm:text-base font-bold text-[#101e33] group-hover:text-sky-600 transition-colors leading-tight tracking-tight">e-Portal Kesihatan Mental</h3>
+                                <h3 class="text-xs sm:text-base font-bold text-[#101e33] group-hover:text-sky-600 transition-colors leading-tight tracking-tight line-clamp-2">e-Portal Kesihatan Mental</h3>
                                 <p class="text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Akses pengurusan Kesihatan Mental di Perlis.</p>
                             </div>
                             <div class="text-right text-[10px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
@@ -263,11 +229,11 @@
 
                     <!-- Kad 8 -->
                     <a href="https://lung-app.netlify.app/" target="_blank" class="group flex flex-col justify-between h-56 sm:h-64 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
-                        <img src="images/card/card-08.png" alt="MyKursus Banner" class="w-full h-20 sm:h-24 object-cover">
+                        <img src="images/card/card-08.png" alt="NALURY Banner" class="w-full h-20 sm:h-24 object-cover">
                         <div class="flex-1 p-3 sm:p-4 flex flex-col justify-between">
                             <div class="space-y-0.5 sm:space-y-2">
                                 <span class="text-[9px] md:text-[10px] font-bold text-sky-600 uppercase tracking-wider block">Sistem</span>
-                                <h3 class="text-xs sm:text-base font-bold text-[#101e33] group-hover:text-sky-600 transition-colors leading-tight tracking-tight">National Lung Health Registry (NALURY)</h3>
+                                <h3 class="text-xs sm:text-base font-bold text-[#101e33] group-hover:text-sky-600 transition-colors leading-tight tracking-tight line-clamp-2">National Lung Health Registry (NALURY)</h3>
                                 <p class="text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Akses pengurusan pesakit berkaitan kesihatan paru-paru.</p>
                             </div>
                             <div class="text-right text-[10px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
@@ -280,99 +246,132 @@
                         <div class="flex-1 p-3 sm:p-4 flex flex-col justify-between">
                             <div class="space-y-0.5 sm:space-y-2">
                                 <span class="text-[9px] md:text-[10px] font-bold text-sky-600 uppercase tracking-wider block">Sistem</span>
-                                <h3 class="text-xs sm:text-base font-bold text-[#101e33] group-hover:text-sky-600 transition-colors leading-tight tracking-tight">Sistem MyKursus</h3>
+                                <h3 class="text-xs sm:text-base font-bold text-[#101e33] group-hover:text-sky-600 transition-colors leading-tight tracking-tight line-clamp-2">Sistem MyKursus</h3>
                                 <p class="text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Akses kursus/bengkel/latihan yang dianjukan oleh NCD JKN Perlis.</p>
                             </div>
                             <div class="text-right text-[10px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
                         </div>
                     </a>
 
-                    
+                    <!-- Kad 10 -->
+                    <a href="https://myhealth.gov.my" target="_blank" class="group flex flex-col justify-between h-56 sm:h-64 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
+                        <img src="images/card/card-10.png" alt="OSCA Banner" class="w-full h-20 sm:h-24 object-cover">
+                        <div class="flex-1 p-3 sm:p-4 flex flex-col justify-between">
+                            <div class="space-y-0.5 sm:space-y-2">
+                                <span class="text-[9px] md:text-[10px] font-bold text-sky-600 uppercase tracking-wider block">Sistem</span>
+                                <h3 class="text-xs sm:text-base font-bold text-[#101e33] group-hover:text-sky-600 transition-colors leading-tight tracking-tight line-clamp-2">Sistem One Stop Centre for Addiction (OSCA)</h3>
+                                <p class="text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Akses ke sistem pengurusan OSCA Klinik Kesihatan Kuala Perlis.</p>
+                            </div>
+                            <div class="text-right text-[10px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
+                        </div>
+                    </a>
 
-                    
+                    <!-- Kad 11 -->
+                    <a href="https://myhealth.gov.my" target="_blank" class="group flex flex-col justify-between h-56 sm:h-64 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
+                        <img src="images/card/card-11.png" alt="Akta 852 Banner" class="w-full h-20 sm:h-24 object-cover">
+                        <div class="flex-1 p-3 sm:p-4 flex flex-col justify-between">
+                            <div class="space-y-0.5 sm:space-y-2">
+                                <span class="text-[9px] md:text-[10px] font-bold text-sky-600 uppercase tracking-wider block">Sistem</span>
+                                <h3 class="text-xs sm:text-base font-bold text-[#101e33] group-hover:text-sky-600 transition-colors leading-tight tracking-tight line-clamp-2">Sistem Akta 852</h3>
+                                <p class="text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Akses ke sistem pengurusan promosi dan pelaporan Akta 852: Akta Kawalan Produk Merokok Demi Kesihatan Awam 2024.</p>
+                            </div>
+                            <div class="text-right text-[10px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
+                        </div>
+                    </a>
 
-                    
+                    <!-- Kad 12 -->
+                    <a href="https://sites.google.com/moh.gov.my/sistem/reten-mimo" target="_blank" class="group flex flex-col justify-between h-56 sm:h-64 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
+                        <img src="images/card/card-12.png" alt="MIMO Banner" class="w-full h-20 sm:h-24 object-cover">
+                        <div class="flex-1 p-3 sm:p-4 flex flex-col justify-between">
+                            <div class="space-y-0.5 sm:space-y-2">
+                                <span class="text-[9px] md:text-[10px] font-bold text-sky-600 uppercase tracking-wider block">Sistem</span>
+                                <h3 class="text-xs sm:text-base font-bold text-[#101e33] group-hover:text-sky-600 transition-colors leading-tight tracking-tight line-clamp-2">Sistem MIMO</h3>
+                                <p class="text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Akses sistem <i>Multidisciplinary Integrated Management of Obesity</i> (MIMO).</p>
+                            </div>
+                            <div class="text-right text-[10px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
+                        </div>
+                    </a>
                 </div>
             </div>
 
-            <!-- Footer Ringkas Melekat -->
-            <footer class="absolute bottom-0 left-0 w-full bg-white/95 backdrop-blur-sm py-3 md:py-4 px-4 text-center border-t border-gray-100 z-20 flex-shrink-0">
-                <p class="text-[9px] md:text-xs font-medium text-gray-400 tracking-wide">
-                    Hak Cipta © 2026 Unit Kawalan Penyakit Tidak Berjangkit, Bahagian Kesihatan Awam, Jabatan Kesihatan Negeri Perlis
-                </p>
-            </footer>
+            <div class="w-full pb-16"></div>
         </section>
 
-        <!-- SECTION KANAN: MEDIA PANEL (DIUBAH: Ditambah Animasi Slide Transisi Mutlak untuk Smartphone) -->
-        <section id="mediaColumn" class="fixed md:relative inset-0 md:inset-auto z-50 md:z-10 w-full md:w-[15%] h-full bg-gray-50 flex flex-col border-l border-gray-100 overflow-y-auto md:overflow-visible transition-all duration-500 ease-in-out transform translate-x-full md:translate-x-0 opacity-0 md:opacity-100 pointer-events-none md:pointer-events-auto">
+        <!-- SECTION KANAN: MEDIA PANEL (PENGUMUMAN & VIDEO UTAMA) -->
+        <section id="mediaColumn" class="fixed md:relative inset-y-0 right-0 md:inset-y-auto z-50 md:z-10 w-full md:w-[0%] h-full bg-gray-50 border-l border-gray-100 overflow-y-auto md:overflow-visible transition-all duration-500 ease-in-out transform translate-x-full md:translate-x-0 md:flex flex-col flex-shrink-0">
             
-            <!-- Butang Close (Hanya berfungsi & kelihatan dalam paparan Mobile) -->
+            <!-- DIBAIKI: Kapsul pemegang dipindahkan ke sini mengikut lakaran edited-image.png -->
+            <!-- Ia menggunakan class -left-[35px] supaya melekat di sisi luar kiri, ikut bergerak keluar masuk dengan panel -->
+            <div 
+                id="collapsedText" 
+                onclick="toggleMediaPanel()" 
+                class="absolute -left-[35px] top-1/2 -translate-y-1/2 z-30 flex items-center justify-center fade-in cursor-pointer hidden md:flex group"
+                title="Klik untuk kawalan panel"
+            >
+                <span class="vertical-text text-[10px] font-extrabold tracking-[0.25em] text-[#101e33] bg-white border border-gray-200/80 px-2 py-5 rounded-l-xl shadow-md uppercase select-none transition-all duration-300 group-hover:bg-gray-50 group-hover:text-amber-500">
+                    ◀ Papar Pengumuman & Media
+                </span>
+            </div>
+
+            <!-- Butang Close Mobile -->
             <div class="p-4 flex justify-end md:hidden bg-white border-b flex-shrink-0">
-                <button onclick="toggleMobileMedia()" class="text-gray-500 font-bold text-xs flex items-center space-x-1 p-2 bg-gray-100 hover:bg-gray-200 rounded-xl px-4 transition-colors active:scale-95">
-                    <span>Tutup Log</span> ✕
-                </button>
+                <button onclick="toggleMobileMedia()" class="text-gray-500 font-bold text-xs p-2 bg-gray-100 rounded-xl px-4">Tutup Log ✕</button>
             </div>
 
-            <!-- Senarai Pengumuman -->
-            <div class="p-4 md:p-6 flex-1 md:max-h-[calc(100vh-320px)] overflow-y-auto custom-scrollbar">
-                <span class="text-[10px] font-bold tracking-[0.25em] text-[#101e33] uppercase block mb-3 md:mb-4 sticky top-0 bg-gray-50 pb-2 z-10">Pengumuman Penting</span>
-                <ul class="space-y-2 text-xs text-gray-600 font-light list-none">
-                    <li class="p-3 bg-white border border-gray-200/60 leading-relaxed rounded-xl hover:bg-gray-100 hover:text-black hover:pl-5 transition-all duration-300 cursor-default">
-                        &bull; Mesyuarat Penyelarasan Unit NCD bersama Klinik Kesihatan Daerah akan diadakan pada Khamis ini.
-                    </li>
-                    <li class="p-3 bg-white border border-gray-200/60 leading-relaxed rounded-xl hover:bg-gray-100 hover:text-black hover:pl-5 transition-all duration-300 cursor-default">
-                        &bull; Mohon semua petugas kaunter memastikan data saringan MySejahtera disemak sebelum pendaftaran pautan.
-                    </li>
-                    <li class="p-3 bg-white border border-gray-200/60 leading-relaxed rounded-xl hover:bg-gray-100 hover:text-black hover:pl-5 transition-all duration-300 cursor-default">
-                        &bull; Kempen Kesedaran Diabetes peringkat negeri bakal dilancarkan di Kangar pertengahan bulan depan.
-                    </li>
-                </ul>
-            </div>
-            
-            <!-- Video Box -->
-            <div class="h-40 md:h-44 bg-black/5 rounded-t-2xl mx-4 overflow-hidden border border-gray-200 relative flex items-center justify-center flex-shrink-0 shadow-sm mt-4 md:mt-0">
-                <video id="myVideo" class="w-full h-auto max-h-full object-contain hidden fade-in" autoplay muted playsinline></video>
-                <img id="myImage" class="w-full h-auto max-h-full object-contain mx-auto hidden fade-in" alt="Health Poster">
-            </div>
-
-            <div class="mx-4 h-[4px] bg-gray-200 flex-shrink-0">
-                <div id="progressBar" class="h-full bg-[#101e33] transition-all duration-100 ease-linear w-0"></div>
-            </div>
-
-            <!-- Panel Butang Kawalan Audio & Play -->
-            <div class="p-4 md:p-6 bg-gray-50 text-[#1A1A1A] flex-shrink-0 border-t border-gray-200 mb-20 md:mb-0">
-                <div class="mb-4 md:mb-5">
-                    <span class="text-[9px] font-bold tracking-[0.3em] text-gray-400 uppercase">Info Semasa</span>
-                    <h3 id="promoTitle" class="text-xs md:text-sm font-bold mt-1 text-[#101e33] tracking-tight leading-tight text-ellipsis overflow-hidden whitespace-nowrap">-</h3>
-                    <p id="promoDesc" class="text-[11px] text-gray-500 mt-0.5 md:mt-1 font-light leading-snug line-clamp-2"></p>
+            <!-- Kontainer Utama Isi Kandungan -->
+            <div id="mediaInner" class="w-full flex-1 flex flex-col hidden opacity-0 transition-opacity duration-300">
+                
+                <!-- Senarai Pengumuman -->
+                <div class="p-4 md:p-6 flex-1 md:max-h-[calc(100vh-320px)] overflow-y-auto custom-scrollbar flex-shrink-0">
+                    <span class="text-[10px] font-bold tracking-[0.25em] text-[#101e33] uppercase block mb-3 sticky top-0 bg-gray-50 pb-2 z-10">Pengumuman Penting</span>
+                    <ul class="space-y-2 text-xs text-gray-600 font-light list-none">
+                        <li class="p-3 bg-white border border-gray-200/60 leading-relaxed rounded-xl hover:bg-gray-100 hover:text-black transition-all cursor-default">&bull; Mesyuarat Penyelarasan Unit NCD bersama Klinik Kesihatan Daerah akan diadakan pada Kamis ini.</li>
+                        <li class="p-3 bg-white border border-gray-200/60 leading-relaxed rounded-xl hover:bg-gray-100 hover:text-black transition-all cursor-default">&bull; Mohon semua petugas kaunter memastikan data saringan MySejahtera disemak sebelum pendaftaran pautan.</li>
+                        <li class="p-3 bg-white border border-gray-200/60 leading-relaxed rounded-xl hover:bg-gray-100 hover:text-black transition-all cursor-default">&bull; Kempen Kesedaran Diabetes peringkat negeri bakal lancarkan di Kangar pertengahan bulan depan.</li>
+                    </ul>
                 </div>
                 
-                <div class="flex items-center justify-between pt-3 md:pt-4 border-t border-gray-200">
-                    <div class="flex space-x-4 md:space-x-5">
-                        <button onclick="changeMedia(-1)" class="text-gray-400 hover:text-[#101e33] transition-colors p-1" title="Pengumuman Sebelumnya">
-                            <svg class="w-4 h-4 transform -scale-x-100" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M12 18.75l-3.75-2.5H5.25A1.5 1.5 0 013 14.75v-5.5A1.5 1.5 0 014.25 7.75h3l3.75-2.5v13.5z" />
-                            </svg>
-                        </button>
-                        <button onclick="changeMedia(1)" class="text-gray-400 hover:text-[#101e33] transition-colors p-1" title="Pengumuman Seterusnya">
-                            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" stroke-width="2.5">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-                            </svg>
-                        </button>
+                <!-- Video Box -->
+                <div class="h-40 md:h-44 bg-black/5 rounded-t-2xl mx-4 overflow-hidden border border-gray-200 relative flex items-center justify-center flex-shrink-0 shadow-sm mt-4 md:mt-0">
+                    <video id="myVideo" class="w-full h-auto max-h-full object-contain hidden fade-in" autoplay muted playsinline></video>
+                    <img id="myImage" class="w-full h-auto max-h-full object-contain mx-auto hidden fade-in" alt="Health Poster">
+                </div>
+
+                <div class="mx-4 h-[4px] bg-gray-200 flex-shrink-0">
+                    <div id="progressBar" class="h-full bg-[#101e33] transition-all duration-100 ease-linear w-0"></div>
+                </div>
+
+                <!-- Kawalan Audio & Play -->
+                <div class="p-4 md:p-6 bg-gray-50 text-[#1A1A1A] flex-shrink-0 border-t border-gray-200 mb-20 md:mb-0">
+                    <div class="mb-4">
+                        <span class="text-[9px] font-bold tracking-[0.3em] text-gray-400 uppercase">Info Semasa</span>
+                        <h3 id="promoTitle" class="text-xs md:text-sm font-bold mt-1 text-[#101e33] tracking-tight leading-tight text-ellipsis overflow-hidden whitespace-nowrap">-</h3>
+                        <p id="promoDesc" class="text-[11px] text-gray-500 mt-0.5 font-light leading-snug line-clamp-2"></p>
                     </div>
                     
-                    <div class="flex items-center space-x-2 md:space-x-3">
-                        <button id="muteBtn" onclick="toggleMute()" class="w-8 h-8 md:w-9 md:h-9 flex items-center justify-center rounded-full bg-white border border-gray-200 text-gray-500 hover:text-[#101e33] hover:bg-gray-100 transition-all active:scale-95 invisible hover:scale-105">
-                            <svg id="unmuteIcon" class="w-3.5 h-3.5 md:w-4 md:h-4 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z"/></svg>
-                            <svg id="muteIcon" class="w-3.5 h-3.5 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 9.75 19.5 12m0 0 2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6 4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z"/></svg>
-                        </button>
-
-                        <button id="playPauseBtn" onclick="togglePlay()" class="w-8 h-8 md:w-9 md:h-9 flex items-center justify-center bg-[#101e33] text-white rounded-full transition-transform shadow-md hover:scale-110 active:scale-95">
-                            <svg id="playIcon" class="w-3 h-3 md:w-3.5 md:h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
-                            <svg id="pauseIcon" class="w-3 h-3 md:w-3.5 md:h-3.5 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-                        </button>
+                    <div class="flex items-center justify-between pt-3 border-t border-gray-200">
+                        <div class="flex space-x-4">
+                            <button onclick="changeMedia(-1)" class="text-gray-400 hover:text-[#101e33] p-1">
+                                <svg class="w-4 h-4 transform -scale-x-100" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M12 18.75l-3.75-2.5H5.25A1.5 1.5 0 013 14.75v-5.5A1.5 1.5 0 014.25 7.75h3l3.75-2.5v13.5z" /></svg>
+                            </button>
+                            <button onclick="changeMedia(1)" class="text-gray-400 hover:text-[#101e33] p-1">
+                                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+                            </button>
+                        </div>
+                        
+                        <div class="flex items-center space-x-2">
+                            <button id="muteBtn" onclick="toggleMute()" class="w-8 h-8 flex items-center justify-center rounded-full bg-white border border-gray-200 text-gray-500 hover:text-[#101e33] hover:scale-105 transition-all active:scale-95 invisible">
+                                <svg id="unmuteIcon" class="w-3.5 h-3.5 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M19.114 5.636a9 9 0 0 1 0 12.728M16.463 8.288a5.25 5.25 0 0 1 0 7.424M6.75 8.25l4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z"/></svg>
+                                <svg id="muteIcon" class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 9.75 19.5 12m0 0 2.25 2.25M19.5 12l2.25-2.25M19.5 12l-2.25 2.25m-10.5-6 4.72-4.72a.75.75 0 0 1 1.28.53v15.88a.75.75 0 0 1-1.28.53l-4.72-4.72H4.51c-.88 0-1.704-.507-1.938-1.354A9.009 9.009 0 0 1 2.25 12c0-.83.112-1.633.322-2.396C2.806 8.756 3.63 8.25 4.51 8.25H6.75Z"/></svg>
+                            </button>
+                            <button id="playPauseBtn" onclick="togglePlay()" class="w-8 h-8 flex items-center justify-center bg-[#101e33] text-white rounded-full transition-transform shadow-md hover:scale-110 active:scale-95">
+                                <svg id="playIcon" class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                                <svg id="pauseIcon" class="w-3 h-3 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                            </button>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </section>
     </main>
@@ -380,30 +379,10 @@
     <!-- ================= JAVASCRIPT LOGIK KAWALAN ================= -->
     <script>
         const sliderData = [
-            {
-                img: "images/slider/slider-00.png", 
-                head: "Kalendar",
-                title: "Sambutan Hari Kesihatan",
-                desc: "Kawalan Penyakit Tidak Berjangkit"
-            },
-            {
-                img: "images/slider/slider-01.png", 
-                head: "Promosi Kesihatan",
-                title: "Perangi Diabetes: Kurangkan Gula Dalam Minuman Anda",
-                desc: "Jom mulakan gaya hidup sihat hari ini dengan memilih air kosong. Kesihatan optimum bermula dari tabiat harian yang bijak."
-            },
-            {
-                img: "images/slider/slider-02.png", 
-                head: "Promosi Kesihatan",
-                title: "Saringan Kesihatan Percuma Komuniti Perlis",
-                desc: "Kunjungi Klinik Kesihatan terdekat untuk pemeriksaan percuma tekanan darah, kolesterol, and gula dalam darah."
-            },
-            {
-                img: "images/slider/slider-03.png", 
-                head: "Promosi Kesihatan",
-                title: "Gaya Hidup Aktif: 30 Minit Senaman Sehari",
-                desc: "Lakukan aktiviti fizikal sekurang-kurangnya 30 minit sehari untuk mengekalkan berat badan ideal dan jantung yang kuat."
-            }
+            { img: "images/slider/slider-00.png", head: "Kalendar", title: "Sambutan Hari Kesihatan", desc: "Kawalan Penyakit Tidak Berjangkit" },
+            { img: "images/slider/slider-01.png", head: "Promosi Kesihatan", title: "Perangi Diabetes: Kurangkan Gula Dalam Minuman Anda", desc: "Jom mulakan gaya hidup sihat hari ini dengan memilih air kosong." },
+            { img: "images/slider/slider-02.png", head: "Promosi Kesihatan", title: "Saringan Kesihatan Percuma Komuniti Perlis", desc: "Kunjungi Klinik Kesihatan terdekat untuk pemeriksaan percuma tekanan darah, kolesterol, and gula dalam darah." },
+            { img: "images/slider/slider-03.png", head: "Promosi Kesihatan", title: "Gaya Hidup Aktif: 30 Minit Senaman Sehari", desc: "Lakukan aktiviti fizikal sekurang-kurangnya 30 minit sehari." }
         ];
 
         let currentSliderIndex = 0;
@@ -415,11 +394,7 @@
         const sliderDesc = document.getElementById("sliderDesc");
         const sliderLink = document.getElementById("sliderLink");
 
-        function initSlider() {
-            updateSliderContent();
-            startSliderAutoPlay();
-        }
-
+        function initSlider() { updateSliderContent(); startSliderAutoPlay(); }
         function updateSliderContent() {
             const currentItem = sliderData[currentSliderIndex];
             if(sliderImage) {
@@ -430,50 +405,30 @@
                 sliderLink.href = "#"; 
             }
         }
-
         function pauseSlider() { clearInterval(sliderTimer); }
         function resumeSlider() { startSliderAutoPlay(); }
-
-        function startSliderAutoPlay() {
-            clearInterval(sliderTimer);
-            sliderTimer = setInterval(() => { changeSlider(1); }, 5000); 
-        }
-
+        function startSliderAutoPlay() { clearInterval(sliderTimer); sliderTimer = setInterval(() => { changeSlider(1); }, 5000); }
         function changeSlider(dir) {
             currentSliderIndex = (currentSliderIndex + dir + sliderData.length) % sliderData.length;
-            if(sliderImage) {
-                sliderImage.classList.remove("fade-in");
-                void sliderImage.offsetWidth; 
-                sliderImage.classList.add("fade-in");
-            }
+            if(sliderImage) { sliderImage.classList.remove("fade-in"); void sliderImage.offsetWidth; sliderImage.classList.add("fade-in"); }
             updateSliderContent();
         }
 
         const playlist = [
-            {
-                type: "video",
-                url: "media-player/video-01.mp4", 
-                title: "Gerakan <span class='font-bold'>30 Minit</span> Setiap Hari",
-                desc: "Aktiviti fizikal harian secara konsisten dapat mengurangkan risiko penyakit tidak berjangkit (NCD) sebanyak 40%."
-            },
-            {
-                type: "video",
-                url: "media-player/video-02.mp4", 
-                title: "Integriti <span class='font-bold'>Nutrisi</span> Untuk Jantung Sihat",
-                desc: "Pilih hidangan berasaskan tumbuhan dan protein berkualiti. Amalkan pinggan sihat Malaysia: Suku-Suku Separuh.",
-                duration: 6000
-            }
+            { type: "video", url: "media-player/video-01.mp4", title: "Gerakan <span class='font-bold'>30 Minit</span> Setiap Hari", desc: "Aktiviti fizikal harian secara konsisten dapat mengurangkan risiko penyakit tidak berjangkit (NCD) sebanyak 40%." },
+            { type: "video", url: "media-player/video-02.mp4", title: "Integriti <span class='font-bold'>Nutrisi</span> Untuk Jantung Sihat", desc: "Pilih hidangan berasaskan tumbuhan dan protein berkualiti. Amalkan pinggan sihat Malaysia: Suku-Suku Separuh." }
         ];
 
         let currentIndex = 0;
-        let isPlaying = true;
+        let isPlaying = false; 
         let isMutedByUser = true; 
 
         let imageTimer = null;
         let progressInterval = null;
         let imgStartTime = 0;
         let imgElapsedTime = 0;
-        let isPanelOpen = true; 
+        
+        let isPanelOpen = false; 
 
         const video = document.getElementById("myVideo");
         const image = document.getElementById("myImage");
@@ -483,30 +438,27 @@
         const pauseIcon = document.getElementById("pauseIcon");
         const promoTitle = document.getElementById("promoTitle");
         const promoDesc = document.getElementById("promoDesc");
-
         const muteBtn = document.getElementById("muteBtn");
         const muteIcon = document.getElementById("muteIcon");
         const unmuteIcon = document.getElementById("unmuteIcon");
 
         const infoColumn = document.getElementById("infoColumn");
         const mediaColumn = document.getElementById("mediaColumn");
+        const mediaInner = document.getElementById("mediaInner");
         const toggleIcon = document.getElementById("toggleIcon");
-        const gridContainer = document.getElementById("gridContainer");
         const collapsedText = document.getElementById("collapsedText");
 
-        // DIBAIKI: Fungsi animasi bertukar panel pengumuman versi Smartphone (Kesan Slide-In Premium)
         function toggleMobileMedia() {
             if (window.innerWidth >= 768) return; 
-
             if (mediaColumn.classList.contains("translate-x-full")) {
-                // SUNTIK MASUK (Buka)
-                mediaColumn.classList.remove("translate-x-full", "opacity-0", "pointer-events-none");
-                mediaColumn.classList.add("translate-x-0", "opacity-100", "pointer-events-auto");
+                mediaColumn.classList.remove("translate-x-full", "opacity-0");
+                mediaColumn.classList.add("translate-x-0", "opacity-100");
+                mediaInner.classList.remove("hidden", "opacity-0");
                 if (!isPlaying) togglePlay(); 
             } else {
-                // SUNTIK KELUAR (Tutup)
-                mediaColumn.classList.remove("translate-x-0", "opacity-100", "pointer-events-auto");
-                mediaColumn.classList.add("translate-x-full", "opacity-0", "pointer-events-none");
+                mediaColumn.classList.remove("translate-x-0", "opacity-100");
+                mediaColumn.classList.add("translate-x-full", "opacity-0");
+                mediaInner.classList.add("hidden", "opacity-0");
                 if (isPlaying) togglePlay(); 
             }
         }
@@ -517,28 +469,38 @@
                 progressBar.style.width = `${percentage}%`;
             }
         });
-
         video.onended = () => changeMedia(1);
 
-        // DIBAIKI: Logik pembahagian paparan asas untuk memastikan kestabilan mod Desktop & Mobile
+        // DIBAIKI: Logik susun atur responsif desktop-mobile yang mengawal pergerakan tab pemegang pintu
         function applyResponsiveLayout() {
             if (window.innerWidth < 768) {
                 infoColumn.style.width = "100%";
-                
-                // Set struktur asas animasi sembunyi pada mobile secara lalai
-                mediaColumn.style.width = "100%";
-                mediaColumn.classList.remove("md:flex", "translate-x-0", "opacity-100", "pointer-events-auto");
-                mediaColumn.classList.add("translate-x-full", "opacity-0", "pointer-events-none");
+                mediaColumn.classList.add("translate-x-full", "opacity-0");
+                mediaInner.classList.add("hidden", "opacity-0");
+                if(collapsedText) collapsedText.classList.add("hidden");
             } else {
-                // Mod Desktop Normal
-                mediaColumn.classList.remove("translate-x-full", "opacity-0", "pointer-events-none", "hidden");
-                mediaColumn.classList.add("translate-x-0", "opacity-100", "pointer-events-auto", "md:flex");
+                mediaColumn.classList.remove("translate-x-full", "opacity-0");
+                if(collapsedText) collapsedText.classList.remove("hidden");
+                
                 if (isPanelOpen) {
                     infoColumn.style.width = "85%";
                     mediaColumn.style.width = "15%";
+                    toggleIcon.classList.remove("rotate-180");
+                    
+                    // Tukar simbol teks kapsul kepada panah kanan (▶) kerana panel sedang terbuka
+                    if(collapsedText) collapsedText.innerHTML = `<span class="vertical-text text-[10px] font-extrabold tracking-[0.25em] text-[#101e33] bg-white border border-gray-200/80 px-2 py-5 rounded-l-xl shadow-md uppercase select-none transition-all duration-300 hover:bg-gray-50 hover:text-amber-500">▶ Sorok Pengumuman</span>`;
+                    
+                    mediaInner.classList.remove("hidden");
+                    setTimeout(() => mediaInner.classList.remove("opacity-0"), 50);
                 } else {
                     infoColumn.style.width = "100%";
                     mediaColumn.style.width = "0%";
+                    toggleIcon.classList.add("rotate-180");
+                    
+                    // Tukar simbol teks kapsul kepada panah kiri (◀) apabila panel tertutup
+                    if(collapsedText) collapsedText.innerHTML = `<span class="vertical-text text-[10px] font-extrabold tracking-[0.25em] text-[#101e33] bg-white border border-gray-200/80 px-2 py-5 rounded-l-xl shadow-md uppercase select-none transition-all duration-300 hover:bg-gray-50 hover:text-amber-500">◀ Papar Pengumuman</span>`;
+                    
+                    mediaInner.classList.add("hidden", "opacity-0");
                 }
             }
         }
@@ -548,37 +510,25 @@
             initSlider(); 
             applyResponsiveLayout();
         };
+        window.onresize = () => { applyResponsiveLayout(); };
 
         function toggleMediaPanel() {
             if (window.innerWidth < 768) return; 
             if (isPanelOpen) {
-                mediaColumn.style.width = "0%";
-                mediaColumn.classList.add("translate-x-full", "opacity-0");
-                mediaColumn.classList.remove("translate-x-0", "opacity-100");
-                infoColumn.style.width = "100%";
-                toggleIcon.classList.add("rotate-180");
-                collapsedText.classList.remove("hidden");
-                if (isPlaying) togglePlay(); 
                 isPanelOpen = false;
+                applyResponsiveLayout();
+                if (isPlaying) togglePlay(); 
             } else {
-                mediaColumn.style.width = "15%";
-                mediaColumn.classList.add("translate-x-0", "opacity-100");
-                mediaColumn.classList.remove("w-0", "translate-x-full", "opacity-0");
-                infoColumn.style.width = "85%";
-                toggleIcon.classList.remove("rotate-180");
-                collapsedText.classList.add("hidden");
-                if (!isPlaying) togglePlay();
                 isPanelOpen = true;
+                applyResponsiveLayout();
+                if (!isPlaying) togglePlay();
             }
         }
-
-        window.onresize = () => { applyResponsiveLayout(); };
 
         function loadMedia() {
             clearTimeout(imageTimer);
             clearInterval(progressInterval);
             video.pause();
-            
             video.classList.add("hidden");
             image.classList.add("hidden");
             muteBtn.classList.add("invisible");
@@ -589,18 +539,12 @@
             progressBar.style.width = "0%";
 
             if (media.type === "video") {
-                video.classList.remove("hidden");
-                muteBtn.classList.remove("invisible"); 
                 video.src = media.url;
                 video.muted = isMutedByUser; 
                 video.load(); 
-                
-                if (isPlaying) {
-                    let playPromise = video.play();
-                    if (playPromise !== undefined) {
-                        playPromise.catch(error => { console.log("Autoplay blocked:", error); });
-                    }
-                }
+                video.classList.remove("hidden");
+                muteBtn.classList.remove("invisible"); 
+                if (isPlaying) { video.play().catch(e => console.log(e)); }
             } else {
                 image.classList.remove("hidden");
                 image.src = media.url;
@@ -622,11 +566,7 @@
             imageTimer = setTimeout(() => { imgElapsedTime = 0; changeMedia(1); }, dur - imgElapsedTime);
         }
 
-        function changeMedia(dir) {
-            currentIndex = (currentIndex + dir + playlist.length) % playlist.length;
-            loadMedia();
-        }
-
+        function changeMedia(dir) { currentIndex = (currentIndex + dir + playlist.length) % playlist.length; loadMedia(); }
         function togglePlay() {
             isPlaying = !isPlaying;
             const media = playlist[currentIndex];
@@ -637,12 +577,10 @@
             }
             updateBtnIcon();
         }
-
         function updateBtnIcon() {
             if (isPlaying) { playIcon.classList.add("hidden"); pauseIcon.classList.remove("hidden"); } 
             else { playIcon.classList.remove("hidden"); pauseIcon.classList.add("hidden"); }
         }
-
         function toggleMute() { isMutedByUser = !isMutedByUser; video.muted = isMutedByUser; updateMuteIcon(); }
         function updateMuteIcon() {
             if (isMutedByUser) { muteIcon.classList.remove("hidden"); unmuteIcon.classList.add("hidden"); } 
