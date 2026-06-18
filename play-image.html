@@ -26,7 +26,7 @@
     <main class="flex-1 w-full max-w-4xl mx-auto px-4 py-8">
         <div class="flex flex-col space-y-4">
             
-            <!-- Image Frame (Guna iframe untuk elak block Google Drive) -->
+            <!-- Image Frame -->
             <div class="w-full bg-white border border-gray-100 rounded-2xl shadow-xl overflow-hidden p-1 relative h-[65vh]">
                 <iframe id="mainImageIframe" src="" class="w-full h-full rounded-xl border-0 bg-gray-50" allow="autoplay"></iframe>
             </div>
@@ -83,6 +83,16 @@
         const modal = document.getElementById("shareModal");
         const modalBox = document.getElementById("modalBox");
 
+        // Fungsi Pintar: Auto-Convert sebarang link perkongsian Google Drive ke format Embed Preview
+        function cleanDriveUrl(url) {
+            if (!url || !url.includes("drive.google.com")) return url;
+            let target = url;
+            if (target.includes("/view")) target = target.replace("/view", "/preview");
+            if (target.includes("/edit")) target = target.split("/edit")[0] + "/preview";
+            if (target.includes("?usp=sharing")) target = target.split("?")[0] + "/preview";
+            return target;
+        }
+
         window.onload = () => {
             const urlParams = new URLSearchParams(window.location.search);
             const id = urlParams.get('id');
@@ -91,14 +101,10 @@
                 const item = resourcesData[id];
                 const iframe = document.getElementById("mainImageIframe");
                 
-                let targetUrl = item.imgUrl || item.pdfUrl; // ambil pautan utama data
+                // Membaca imgUrl atau pdfUrl secara selamat
+                let rawUrl = item.imgUrl || item.pdfUrl || "";
+                iframe.src = cleanDriveUrl(rawUrl);
 
-                // Tukar pautan /view kepada /preview untuk paparan iframe yang kemas tanpa sidebar Drive
-                if (targetUrl.includes("drive.google.com") && targetUrl.includes("/view")) {
-                    targetUrl = targetUrl.replace("/view", "/preview");
-                }
-
-                iframe.src = targetUrl;
                 document.getElementById("imageTitle").innerText = item.title;
                 document.getElementById("imageDesc").innerText = item.desc;
             }

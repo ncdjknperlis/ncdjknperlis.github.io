@@ -26,7 +26,7 @@
     <main class="flex-1 w-full max-w-4xl mx-auto px-4 py-8">
         <div class="flex flex-col space-y-4">
             
-            <!-- Video Frame (Menggunakan iframe Player rasmi Google Drive) -->
+            <!-- Video Frame -->
             <div class="w-full aspect-video bg-black rounded-2xl overflow-hidden shadow-xl border border-gray-100 relative h-[60vh]">
                 <iframe id="mainVideoIframe" src="" class="w-full h-full border-0 bg-black" allow="autoplay; encrypted-media" allowfullscreen></iframe>
             </div>
@@ -83,6 +83,16 @@
         const modal = document.getElementById("shareModal");
         const modalBox = document.getElementById("modalBox");
 
+        // Fungsi Pintar: Auto-Convert pautan share biasa ke mod streaming video Drive
+        function cleanDriveVideoUrl(url) {
+            if (!url || !url.includes("drive.google.com")) return url;
+            let target = url;
+            if (target.includes("/view")) target = target.replace("/view", "/preview");
+            if (target.includes("/edit")) target = target.split("/edit")[0] + "/preview";
+            if (target.includes("?usp=sharing")) target = target.split("?")[0] + "/preview";
+            return target;
+        }
+
         window.onload = () => {
             const urlParams = new URLSearchParams(window.location.search);
             const id = urlParams.get('id');
@@ -91,18 +101,9 @@
                 const item = resourcesData[id];
                 const iframe = document.getElementById("mainVideoIframe");
 
-                let targetUrl = item.videoUrl;
+                let rawUrl = item.videoUrl || "";
+                iframe.src = cleanDriveVideoUrl(rawUrl);
 
-                // Memastikan pautan dihantar ke mod /preview yang mempunyai pemain video terbina dalam Drive
-                if (targetUrl.includes("drive.google.com") && targetUrl.includes("/view")) {
-                    targetUrl = targetUrl.replace("/view", "/preview");
-                } else if (targetUrl.includes("drive.google.com") && !targetUrl.includes("/preview")) {
-                    // Jika tiada perkataan /view atau /preview, kita append /preview di hujungnya
-                    if(targetUrl.endsWith("/")) targetUrl = targetUrl + "preview";
-                    else targetUrl = targetUrl + "/preview";
-                }
-
-                iframe.src = targetUrl;
                 document.getElementById("videoTitle").innerText = item.title;
                 document.getElementById("videoDesc").innerText = item.desc;
             }

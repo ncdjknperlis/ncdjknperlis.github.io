@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galeri Infografik Bersiri NCD | JKN Perlis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Sembunyikan scrollbar untuk bahagian thumbnail navigation */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col bg-[#FBFBFB] text-[#1A1A1A] antialiased">
+
+    <header class="w-full py-3 md:py-5 px-4 md:px-12 bg-white border-b border-gray-100 flex flex-row items-center justify-between gap-2 z-20 flex-shrink-0">
+        <div class="flex items-center space-x-2 md:space-x-4">
+            <img src="images/logo.png" style="max-width: 32px;" class="w-full h-auto object-contain mx-auto md:max-w-[50px]">
+            <img src="images/logo-ncd/logo-ncd-default.png" style="max-width: 90px;" class="md:max-w-[150px]">
+            <div class="w-[1px] h-5 md:h-8 bg-gray-200 mx-1 md:mx-2"></div>
+            <h2 class="text-[8px] md:text-xs font-bold tracking-[0.10em] md:tracking-[0.2em] uppercase text-[#101e33] leading-tight">Unit NCD<br><span class="text-gray-400 font-medium text-[7px] md:text-[9px]">JKN Perlis</span></h2>
+        </div>
+        <a href="info-ncd.html" class="text-xs font-bold text-gray-700 hover:text-[#101e33] border border-gray-200 px-3 py-1.5 rounded-xl bg-white transition-all shadow-sm active:scale-95">← Hub Sumber</a>
+    </header>
+
+    <main class="flex-1 w-full max-w-4xl mx-auto px-4 py-6 flex flex-col justify-center">
+        
+        <div class="flex flex-col space-y-4">
+            
+            <div class="w-full bg-white border border-gray-100 rounded-2xl shadow-xl overflow-hidden p-1 relative h-[55vh] md:h-[60vh] flex items-center justify-center group">
+                
+                <iframe id="sliderIframe" src="" class="w-full h-full rounded-xl border-0 bg-gray-50" allow="autoplay" referrerpolicy="no-referrer"></iframe>
+                
+                <button onclick="changeSlide(-1)" class="absolute left-4 p-2.5 rounded-full bg-white/80 backdrop-blur-sm shadow-md border border-gray-100 text-gray-800 hover:bg-[#101e33] hover:text-white transition-all active:scale-90 md:opacity-0 group-hover:opacity-100 z-10 font-bold">
+                    ❮
+                </button>
+                
+                <button onclick="changeSlide(1)" class="absolute right-4 p-2.5 rounded-full bg-white/80 backdrop-blur-sm shadow-md border border-gray-100 text-gray-800 hover:bg-[#101e33] hover:text-white transition-all active:scale-90 md:opacity-0 group-hover:opacity-100 z-10 font-bold">
+                    ❯
+                </button>
+
+                <span id="pageBadge" class="absolute bottom-4 right-4 bg-black/60 backdrop-blur-xs text-white text-[10px] font-bold px-2.5 py-1 rounded-md tracking-wider z-10">
+                    Siri: 0 / 0
+                </span>
+            </div>
+
+            <div class="w-full bg-white border border-gray-100 rounded-xl p-2.5 shadow-sm">
+                <p class="text-[9px] font-bold text-gray-400 uppercase tracking-wider px-1 mb-1.5">Navigasi Halaman:</p>
+                <div id="thumbStripContainer" class="flex space-x-2 overflow-x-auto py-1 px-1 no-scrollbar scroll-smooth">
+                    </div>
+            </div>
+
+            <div class="p-5 bg-white border border-gray-100 rounded-2xl shadow-sm flex flex-col md:flex-row md:items-start md:justify-between gap-4">
+                <div class="flex-1 min-w-0">
+                    <span id="albumBadgeText" class="inline-block text-[9px] font-extrabold tracking-wider bg-purple-50 text-purple-600 uppercase px-2.5 py-1 rounded-md mb-2">Album Infografik Bersiri</span>
+                    <h2 id="albumTitle" class="text-lg md:text-xl font-bold text-[#101e33] tracking-tight leading-tight">-</h2>
+                    <p id="slideNameDisplay" class="text-xs font-bold text-purple-600 mt-1.5 flex items-center"><span class="mr-1">📌</span> <span id="currentSlideTitle">-</span></p>
+                    <p id="albumDesc" class="text-xs text-gray-400 font-light mt-1.5 leading-relaxed">-</p>
+                </div>
+                
+                <button onclick="openShareModal()" class="w-full md:w-auto flex-shrink-0 flex items-center justify-center space-x-1.5 py-2.5 px-5 bg-[#101e33] hover:bg-purple-600 text-white text-xs font-bold rounded-xl transition-all shadow-sm active:scale-95 self-end md:self-start">
+                    <span>🔗</span> <span>Kongsi Album</span>
+                </button>
+            </div>
+
+        </div>
+    </main>
+
+    <div id="shareModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300 px-4">
+        <div class="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-sm border border-gray-100 transform scale-95 transition-transform duration-300" id="modalBox">
+            <div class="flex items-center justify-between pb-3 border-b border-gray-100">
+                <h3 class="text-sm font-bold text-[#101e33]">Kongsi Sumber Digital</h3>
+                <button onclick="closeShareModal()" class="text-gray-400 hover:text-gray-600 text-sm font-bold">✕</button>
+            </div>
+            <div class="flex flex-col items-center py-4 bg-gray-50/50 rounded-xl my-4 border border-gray-50">
+                <div class="w-36 h-36 bg-white p-2 rounded-lg border border-gray-100 flex items-center justify-center">
+                    <img id="qrCodeDisplay" src="" alt="QR Code" class="w-full h-full hidden">
+                    <div id="qrLoading" class="text-[10px] text-gray-400 animate-pulse">Menjana QR...</div>
+                </div>
+                <p class="text-[10px] text-gray-400 mt-2">Halakan kamera untuk imbas & simpan</p>
+            </div>
+            <div class="space-y-1.5 mb-4">
+                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Salin Pautan Album</label>
+                <div class="flex space-x-1">
+                    <input type="text" id="shareUrlInput" readonly class="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-xs text-gray-500 focus:outline-none truncate">
+                    <button onclick="copyToClipboard()" id="copyBtn" class="bg-gray-100 hover:bg-gray-200 text-[#101e33] font-bold text-xs px-3 rounded-xl transition-colors border border-gray-200">Salin</button>
+                </div>
+            </div>
+            <a id="whatsappShareLink" href="#" target="_blank" class="w-full py-2.5 bg-[#25D366] hover:bg-[#20ba5a] text-white text-xs font-bold rounded-xl flex items-center justify-center space-x-2 transition-all shadow-sm active:scale-95">
+                <span class="text-sm">💬</span> <span>Hantar ke WhatsApp</span>
+            </a>
+        </div>
+    </div>
+
+    <footer class="w-full bg-white py-4 px-6 text-center border-t border-gray-100 mt-auto">
+        <p class="text-[10px] text-gray-400 font-medium">Hak Cipta © 2026 Unit Kawalan Penyakit Tidak Berjangkit, JKN Perlis</p>
+    </footer>
+
+    <script src="resources-data.js"></script>
+    <script>
+        const modal = document.getElementById("shareModal");
+        const modalBox = document.getElementById("modalBox");
+        
+        let albumItems = [];
+        let currentSlideIndex = 0;
+
+        function cleanDriveUrl(url) {
+            if (!url || !url.includes("drive.google.com")) return url;
+            let target = url;
+            if (target.includes("/view")) target = target.replace("/view", "/preview");
+            if (target.includes("/edit")) target = target.split("/edit")[0] + "/preview";
+            if (target.includes("?usp=sharing")) target = target.split("?")[0] + "/preview";
+            return target;
+        }
+
+        window.onload = () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const id = urlParams.get('id');
+
+            if (id !== null && resourcesData[id]) {
+                const albumData = resourcesData[id];
+                
+                document.getElementById("albumTitle").innerText = albumData.title;
+                document.getElementById("albumDesc").innerText = albumData.desc;
+                if(albumData.badgeText) document.getElementById("albumBadgeText").innerText = albumData.badgeText;
+
+                if (albumData.materials && Array.isArray(albumData.materials)) {
+                    albumItems = albumData.materials;
+                    buildThumbnails();
+                    loadSlide(0);
+                }
+            }
+
+            const currentURL = window.location.href;
+            document.getElementById("shareUrlInput").value = currentURL;
+            document.getElementById("whatsappShareLink").href = `https://api.whatsapp.com/send?text=${encodeURIComponent('Sila lihat album infografik bersiri Unit NCD JKN Perlis ini: ' + currentURL)}`;
+
+            const qrImage = document.getElementById("qrCodeDisplay");
+            const qrLoading = document.getElementById("qrLoading");
+            if (qrImage && currentURL) {
+                qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(currentURL)}`;
+                qrImage.onload = () => { qrImage.classList.remove("hidden"); if(qrLoading) qrLoading.classList.add("hidden"); };
+            }
+        };
+
+        function buildThumbnails() {
+            const thumbContainer = document.getElementById("thumbStripContainer");
+            thumbContainer.innerHTML = "";
+            
+            albumItems.forEach((item, index) => {
+                const btn = document.createElement("button");
+                btn.id = `thumb-btn-${index}`;
+                // Tetapan default thumbnail frame kecil
+                btn.className = `w-14 h-14 md:w-16 md:h-16 rounded-lg overflow-hidden border-2 flex-shrink-0 transition-all focus:outline-none bg-gray-50 p-0.5 transform active:scale-95 border-gray-200`;
+                btn.onclick = () => loadSlide(index);
+                
+                const defaultThumb = "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=100&q=80";
+                const imgUrl = item.thumb || defaultThumb;
+                
+                btn.innerHTML = `<img src="${imgUrl}" referrerpolicy="no-referrer" class="w-full h-full object-cover rounded-md pointer-events-none">`;
+                thumbContainer.appendChild(btn);
+            });
+        }
+
+        function loadSlide(index) {
+            if (albumItems.length === 0) return;
+            
+            // Urus sempadan indeks melampau
+            if (index >= albumItems.length) index = 0;
+            if (index < 0) index = albumItems.length - 1;
+            
+            // Padam border aktif lama, suntik border aktif baru
+            document.getElementById(`thumb-btn-${currentSlideIndex}`).classList.replace("border-purple-600", "border-gray-200");
+            document.getElementById(`thumb-btn-${currentSlideIndex}`).classList.remove("scale-105", "shadow-sm");
+            
+            currentSlideIndex = index;
+            
+            const activeBtn = document.getElementById(`thumb-btn-${currentSlideIndex}`);
+            activeBtn.classList.replace("border-gray-200", "border-purple-600");
+            activeBtn.classList.add("scale-105", "shadow-sm");
+            
+            // Auto-scroll ke butang aktif dalam strip
+            activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+
+            // Tukar src iframe utama
+            const item = albumItems[currentSlideIndex];
+            document.getElementById("sliderIframe").src = cleanDriveUrl(item.url);
+            
+            // Kemaskini teks info
+            document.getElementById("currentSlideTitle").innerText = item.name;
+            document.getElementById("pageBadge").innerText = `Siri: ${currentSlideIndex + 1} / ${albumItems.length}`;
+        }
+
+        function changeSlide(direction) {
+            loadSlide(currentSlideIndex + direction);
+        }
+
+        function openShareModal() { modal.classList.remove("hidden"); setTimeout(() => { modal.classList.remove("opacity-0"); modalBox.classList.remove("scale-95"); }, 10); }
+        function closeShareModal() { modal.classList.add("opacity-0"); modalBox.classList.add("scale-95"); setTimeout(() => modal.classList.add("hidden"), 300); }
+        function copyToClipboard() { const copyText = document.getElementById("shareUrlInput"); copyText.select(); copyText.setSelectionRange(0, 99999); navigator.clipboard.writeText(copyText.value); const btn = document.getElementById("copyBtn"); btn.innerText = "✓ Disalin"; btn.className = "bg-emerald-50 text-emerald-600 border border-emerald-200 text-xs px-3 rounded-xl"; setTimeout(() => { btn.innerText = "Salin"; btn.className = "bg-gray-100 hover:bg-gray-200 text-[#101e33] font-bold text-xs px-3 rounded-xl transition-colors border border-gray-200"; }, 2000); }
+    </script>
+</body>
+</html>

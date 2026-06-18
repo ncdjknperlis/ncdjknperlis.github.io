@@ -119,182 +119,177 @@
                     <p class="text-xs md:text-sm text-gray-500 font-light mt-0.5">Pilih modul sistem untuk navigasi pantas ke sistem berkaitan.</p>
                 </div>
 
-                <div id="gridContainer" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-3 w-full pb-24">
-                    <!-- Kad 0 -->
-                    <a href="info-ncd.html" class="group flex flex-col justify-between h-56 sm:h-64 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
-                        <img src="images/card/card-00.png" alt="Pusat Sumber Banner" class="w-full h-20 sm:h-24 object-cover">
-                        <div class="flex-1 p-3 sm:p-4 flex flex-col justify-between">
-                            <div class="space-y-0.5 sm:space-y-2">
-                                <span class="text-[9px] md:text-[10px] font-bold text-amber-500 uppercase tracking-wider block">Pautan</span>
-                                <h3 class="text-xs sm:text-base font-bold text-[#101e33] group-hover:text-amber-600 transition-colors leading-tight tracking-tight">Hub Sumber NCD</h3>
-                                <p class="text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Akses terus garis panduan klinikal (CPG), infografik kesedaran, dan video promosi kesihatan Unit NCD Perlis.</p>
+                <!-- DIBAIKI: Grid dikekalkan md:grid-cols-6 untuk desktop, tetapi di mobile menjadi 1 kolum penuh -->
+                <div id="gridContainer" class="grid grid-cols-1 md:grid-cols-6 gap-3 w-full pb-24">
+                    
+                    <a href="info-ncd.html" class="group flex flex-row md:flex-col justify-between h-24 md:h-56 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
+                        <img src="images/card/card-00.png" alt="Pusat Sumber Banner" class="w-28 h-full md:w-full md:h-20 sm:md:h-24 object-cover flex-shrink-0">
+                        <div class="flex-1 p-3 flex flex-col justify-between min-w-0">
+                            <div class="space-y-0.5">
+                                <span class="text-[8px] md:text-[10px] font-bold text-amber-500 uppercase tracking-wider block">Pautan</span>
+                                <h3 class="text-xs sm:text-sm md:text-base font-bold text-[#101e33] group-hover:text-amber-600 transition-colors leading-tight tracking-tight truncate md:whitespace-normal">Hub Sumber NCD</h3>
+                                <p class="hidden md:block text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Akses terus garis panduan klinikal (CPG), infografik kesedaran, dan video promosi kesihatan Unit NCD Perlis.</p>
                             </div>
-                            <div class="text-right text-[10px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
+                            <div class="text-right text-[9px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
                         </div>
                     </a>
 
-                    <!-- Kad 1 -->
-                    <a href="https://script.google.com/a/macros/moh.gov.my/s/AKfycbxQPQz_9qqwzyLGiTznyas-Io0CCHzObdYr5R1IKC4JYQn2II_NxRb6A0M2nQRopnQLTA/exec" target="_blank" class="group flex flex-col justify-between h-56 sm:h-64 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
-                        <img src="images/card/card-01.png" alt="e-Diabetes Banner" class="w-full h-20 sm:h-24 object-cover">
-                        <div class="flex-1 p-3 sm:p-4 flex flex-col justify-between">
-                            <div class="space-y-0.5 sm:space-y-2">
-                                <span class="text-[9px] md:text-[10px] font-bold text-amber-500 uppercase tracking-wider block">Sistem</span>
-                                <h3 class="text-xs sm:text-base font-bold text-[#101e33] group-hover:text-amber-600 transition-colors leading-tight tracking-tight">Sistem e-Diabetes</h3>
-                                <p class="text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Pengurusan pesakit diabetes mellitus (DM) di Perlis.</p>
+                    <a href="https://script.google.com/a/macros/moh.gov.my/s/AKfycbxQPQz_9qqwzyLGiTznyas-Io0CCHzObdYr5R1IKC4JYQn2II_NxRb6A0M2nQRopnQLTA/exec" target="_blank" class="group flex flex-row md:flex-col justify-between h-24 md:h-56 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
+                        <img src="images/card/card-01.png" alt="e-Diabetes Banner" class="w-28 h-full md:w-full md:h-20 sm:md:h-24 object-cover flex-shrink-0">
+                        <div class="flex-1 p-3 flex flex-col justify-between min-w-0">
+                            <div class="space-y-0.5">
+                                <span class="text-[8px] md:text-[10px] font-bold text-amber-500 uppercase tracking-wider block">Sistem</span>
+                                <h3 class="text-xs sm:text-sm md:text-base font-bold text-[#101e33] group-hover:text-amber-600 transition-colors leading-tight tracking-tight truncate md:whitespace-normal">Sistem e-Diabetes</h3>
+                                <p class="hidden md:block text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Pengurusan pesakit diabetes mellitus (DM) bagi negeri Perlis.</p>
                             </div>
-                            <div class="text-right text-[10px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
+                            <div class="text-right text-[9px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
                         </div>
                     </a>
 
-                    <!-- Kad 2 -->
-                    <a href="#" class="group flex flex-col justify-between h-56 sm:h-64 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
-                        <img src="images/card/card-02.png" alt="NHR Banner" class="w-full h-20 sm:h-24 object-cover">
-                        <div class="flex-1 p-4 flex flex-col justify-between">
-                            <div class="space-y-0.5 sm:space-y-2">
-                                <span class="text-[9px] md:text-[10px] font-bold text-rose-600 uppercase tracking-wider block">Sistem</span>
-                                <h3 class="text-xs sm:text-base font-bold text-[#101e33] group-hover:text-rose-600 transition-colors leading-tight tracking-tight">Sistem NHR</h3>
-                                <p class="text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Pengurusan pesakit hipertensi (darah tinggi) bagi negeri Perlis.</p>
+                    <a href="#" class="group flex flex-row md:flex-col justify-between h-24 md:h-56 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
+                        <img src="images/card/card-02.png" alt="NHR Banner" class="w-28 h-full md:w-full md:h-20 sm:md:h-24 object-cover flex-shrink-0">
+                        <div class="flex-1 p-3 flex flex-col justify-between min-w-0">
+                            <div class="space-y-0.5">
+                                <span class="text-[8px] md:text-[10px] font-bold text-rose-600 uppercase tracking-wider block">Sistem</span>
+                                <h3 class="text-xs sm:text-sm md:text-base font-bold text-[#101e33] group-hover:text-rose-600 transition-colors leading-tight tracking-tight truncate md:whitespace-normal">Sistem NHR</h3>
+                                <p class="hidden md:block text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Pengurusan pesakit hipertensi (darah tinggi) bagi negeri Perlis.</p>
                             </div>
-                            <div class="text-right text-[10px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
+                            <div class="text-right text-[9px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
                         </div>
                     </a>
 
-                    <!-- Kad 3 -->
-                    <a href="https://script.google.com/a/macros/moh.gov.my/s/AKfycbxEHRV0XTrIyep2uAGQXvTaTsQJq9zXFS7Oa2esDow_Be13cXsel0kO-KbG0WsQjlmP/exec" target="_blank" class="group flex flex-col justify-between h-56 sm:h-64 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
-                        <img src="images/card/card-03.png" alt="e-Saringan Banner" class="w-full h-20 sm:h-24 object-cover">
-                        <div class="flex-1 p-3 sm:p-4 flex flex-col justify-between">
-                            <div class="space-y-0.5 sm:space-y-2">
-                                <span class="text-[9px] md:text-[10px] font-bold text-emerald-600 uppercase tracking-wider block">Sistem</span>
-                                <h3 class="text-xs sm:text-base font-bold text-[#101e33] group-hover:text-emerald-600 transition-colors leading-tight tracking-tight">Sistem e-Saringan Komuniti</h3>
-                                <p class="text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Pengurusan saringan pesakit di lapangan.</p>
+                    <a href="https://script.google.com/a/macros/moh.gov.my/s/AKfycbxEHRV0XTrIyep2uAGQXvTaTsQJq9zXFS7Oa2esDow_Be13cXsel0kO-KbG0WsQjlmP/exec" target="_blank" class="group flex flex-row md:flex-col justify-between h-24 md:h-56 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
+                        <img src="images/card/card-03.png" alt="e-Saringan Banner" class="w-28 h-full md:w-full md:h-20 sm:md:h-24 object-cover flex-shrink-0">
+                        <div class="flex-1 p-3 flex flex-col justify-between min-w-0">
+                            <div class="space-y-0.5">
+                                <span class="text-[8px] md:text-[10px] font-bold text-emerald-600 uppercase tracking-wider block">Sistem</span>
+                                <h3 class="text-xs sm:text-sm md:text-base font-bold text-[#101e33] group-hover:text-emerald-600 transition-colors leading-tight tracking-tight truncate md:whitespace-normal">Sistem e-Saringan</h3>
+                                <p class="hidden md:block text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Pengurusan saringan faktor risiko komunitit dan lapangan (KOSPEN/ Bukan KOSPEN).</p>
                             </div>
-                            <div class="text-right text-[10px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
+                            <div class="text-right text-[9px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
                         </div>
                     </a>
 
-                    <!-- Kad 4 -->
-                    <a href="#" class="group flex flex-col justify-between h-56 sm:h-64 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
-                        <img src="images/card/card-04.png" alt="e-Kolon Banner" class="w-full h-20 sm:h-24 object-cover">
-                        <div class="flex-1 p-3 sm:p-4 flex flex-col justify-between">
-                            <div class="space-y-0.5 sm:space-y-2">
-                                <span class="text-[9px] md:text-[10px] font-bold text-purple-600 uppercase tracking-wider block">Sistem</span>
-                                <h3 class="text-xs sm:text-base font-bold text-[#101e33] group-hover:text-purple-600 transition-colors leading-tight tracking-tight">Sistem e-Kolon</h3>
-                                <p class="text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Pengurusan pesakit yang menjalani saringan kolorektal.</p>
+                    <a href="#" class="group flex flex-row md:flex-col justify-between h-24 md:h-56 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
+                        <img src="images/card/card-04.png" alt="e-Kolon Banner" class="w-28 h-full md:w-full md:h-20 sm:md:h-24 object-cover flex-shrink-0">
+                        <div class="flex-1 p-3 flex flex-col justify-between min-w-0">
+                            <div class="space-y-0.5">
+                                <span class="text-[8px] md:text-[10px] font-bold text-purple-600 uppercase tracking-wider block">Sistem</span>
+                                <h3 class="text-xs sm:text-sm md:text-base font-bold text-[#101e33] group-hover:text-purple-600 transition-colors leading-tight tracking-tight truncate md:whitespace-normal">Sistem e-Kolon</h3>
+                                <p class="hidden md:block text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Pengurusan klien / pesakit yang menjalani saringan kanser kolorektal negeri Perlis.</p>
                             </div>
-                            <div class="text-right text-[10px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
+                            <div class="text-right text-[9px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
                         </div>
                     </a>
 
-                    <!-- Kad 5 (iQuit) -->
-                    <div class="group flex flex-col justify-between h-56 sm:h-64 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 overflow-hidden p-0">
-                        <img src="images/card/card-05.png" alt="iQuit Banner" class="w-full h-20 sm:h-24 object-cover">
-                        <div class="flex-1 p-3 sm:p-4 flex flex-col justify-between overflow-hidden">
-                            <div class="space-y-0.5 sm:space-y-2">
-                                <span class="text-[9px] md:text-[10px] font-bold text-rose-600 uppercase tracking-wider block">Sistem</span>
-                                <h3 class="text-xs sm:text-base font-bold text-[#101e33] leading-tight tracking-tight">iQuit</h3>
-                                <p class="text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Klinik berhenti merokok bagi negeri Perlis.</p>
+                    <div class="group flex flex-row md:flex-col justify-between h-24 md:h-56 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md overflow-hidden p-0">
+                        <img src="images/card/card-05.png" alt="iQuit Banner" class="w-28 h-full md:w-full md:h-20 sm:md:h-24 object-cover flex-shrink-0">
+                        <div class="flex-1 p-3 flex flex-col justify-between min-w-0 overflow-hidden">
+                            <div class="space-y-0.5">
+                                <span class="text-[8px] md:text-[10px] font-bold text-rose-600 uppercase tracking-wider block">Sistem</span>
+                                <h3 class="text-xs sm:text-sm md:text-base font-bold text-[#101e33] leading-tight tracking-tight truncate md:whitespace-normal">iQuit Perlis</h3>
+                                <p class="hidden md:block text-[11px] text-gray-500 font-light leading-normal line-clamp-1">Sistem pendaftaran, pengurusan intervensi, pelaporan perkhidmatan berhenti merokok (KBM) Perlis.</p>
                             </div>
-                            <div class="grid grid-cols-2 gap-2 pt-2 border-t border-gray-50 flex-shrink-0 w-full">
-                                <a href="https://perlis.moh.gov.my/pubjknpls/iquit/eis/public_dashboard" target="_blank" class="py-1 md:py-1.5 px-1 text-center text-[10px] md:text-[11px] font-bold bg-[#101e33] text-white hover:bg-[#1d3557] rounded-lg transition-colors shadow-sm active:scale-95 whitespace-nowrap">Dashboard</a>
-                                <a href="https://perlis.moh.gov.my/pubjknpls/iquit/" target="_blank" class="py-1 md:py-1.5 px-1 text-center text-[10px] md:text-[11px] font-bold bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200 rounded-lg transition-colors shadow-sm whitespace-nowrap">Ujian</a>
+                            <div class="grid grid-cols-2 gap-2 pt-1 border-t border-gray-50 flex-shrink-0 w-full mt-1">
+                                <a href="https://perlis.moh.gov.my/pubjknpls/iquit/eis/public_dashboard" target="_blank" class="py-1 px-1 text-center text-[9px] md:text-[11px] font-bold bg-[#101e33] text-white hover:bg-[#1d3557] rounded-lg transition-colors shadow-sm active:scale-95 whitespace-nowrap">Dashboard</a>
+                                <a href="https://perlis.moh.gov.my/pubjknpls/iquit/" target="_blank" class="py-1 px-1 text-center text-[9px] md:text-[11px] font-bold bg-gray-100 text-gray-700 hover:bg-gray-200 border border-gray-200 rounded-lg transition-colors shadow-sm whitespace-nowrap">Ujian</a>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Kad 6 -->
-                    <a href="https://script.google.com/a/macros/moh.gov.my/s/AKfycbx2ES0gysZ5p_o-x9Yhuppza7OzqCwzFP_Lhbis8ipiJtgGUWswiRiUGWbSKtf0Mcla/exec" target="_blank" class="group flex flex-col justify-between h-56 sm:h-64 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
-                        <img src="images/card/card-06.png" alt="e-KOSPEN Banner" class="w-full h-20 sm:h-24 object-cover">
-                        <div class="flex-1 p-3 sm:p-4 flex flex-col justify-between">
-                            <div class="space-y-0.5 sm:space-y-2">
-                                <span class="text-[9px] md:text-[10px] font-bold text-sky-600 uppercase tracking-wider block">Sistem</span>
-                                <h3 class="text-xs sm:text-base font-bold text-[#101e33] group-hover:text-sky-600 transition-colors leading-tight tracking-tight line-clamp-2">e-KOSPEN</h3>
-                                <p class="text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Akses pengurusan KOSPEN Perlis.</p>
+                    <a href="https://script.google.com/a/macros/moh.gov.my/s/AKfycbx2ES0gysZ5p_o-x9Yhuppza7OzqCwzFP_Lhbis8ipiJtgGUWswiRiUGWbSKtf0Mcla/exec" target="_blank" class="group flex flex-row md:flex-col justify-between h-24 md:h-56 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
+                        <img src="images/card/card-06.png" alt="e-KOSPEN Banner" class="w-28 h-full md:w-full md:h-20 sm:md:h-24 object-cover flex-shrink-0">
+                        <div class="flex-1 p-3 flex flex-col justify-between min-w-0">
+                            <div class="space-y-0.5">
+                                <span class="text-[8px] md:text-[10px] font-bold text-sky-600 uppercase tracking-wider block">Sistem</span>
+                                <h3 class="text-xs sm:text-sm md:text-base font-bold text-[#101e33] group-hover:text-sky-600 transition-colors leading-tight tracking-tight truncate md:whitespace-normal">e-KOSPEN</h3>
+                                <p class="hidden md:block text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Sistem pelaporan aktiviti dan intervensi program Komuniti Sihat Perkasa Negara (KOSPEN) negeri Perlis.</p>
                             </div>
-                            <div class="text-right text-[10px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
+                            <div class="text-right text-[9px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
                         </div>
                     </a>
 
-                    <!-- Kad 7 -->
-                    <a href="https://myhealth.gov.my" target="_blank" class="group flex flex-col justify-between h-56 sm:h-64 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
-                        <img src="images/card/card-07.png" alt="e-Portal Banner" class="w-full h-20 sm:h-24 object-cover">
-                        <div class="flex-1 p-3 sm:p-4 flex flex-col justify-between">
-                            <div class="space-y-0.5 sm:space-y-2">
-                                <span class="text-[9px] md:text-[10px] font-bold text-sky-600 uppercase tracking-wider block">Sistem</span>
-                                <h3 class="text-xs sm:text-base font-bold text-[#101e33] group-hover:text-sky-600 transition-colors leading-tight tracking-tight line-clamp-2">e-Portal Kesihatan Mental</h3>
-                                <p class="text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Akses pengurusan Kesihatan Mental di Perlis.</p>
+                    <a href="#" class="group flex flex-row md:flex-col justify-between h-24 md:h-56 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
+                        <img src="images/card/card-07.png" alt="e-Portal Banner" class="w-28 h-full md:w-full md:h-20 sm:md:h-24 object-cover flex-shrink-0">
+                        <div class="flex-1 p-3 flex flex-col justify-between min-w-0">
+                            <div class="space-y-0.5">
+                                <span class="text-[8px] md:text-[10px] font-bold text-sky-600 uppercase tracking-wider block">Sistem</span>
+                                <h3 class="text-xs sm:text-sm md:text-base font-bold text-[#101e33] group-hover:text-sky-600 transition-colors leading-tight tracking-tight truncate md:whitespace-normal">e-Minda Perlis</h3>
+                                <p class="hidden md:block text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Sistem pengurusan saringan, intervensi, pelaporan program Kesihatan Mental / Psikososial negeri Perlis.</p>
                             </div>
-                            <div class="text-right text-[10px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
+                            <div class="text-right text-[9px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
                         </div>
                     </a>
 
-                    <!-- Kad 8 -->
-                    <a href="https://lung-app.netlify.app/" target="_blank" class="group flex flex-col justify-between h-56 sm:h-64 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
-                        <img src="images/card/card-08.png" alt="NALURY Banner" class="w-full h-20 sm:h-24 object-cover">
-                        <div class="flex-1 p-3 sm:p-4 flex flex-col justify-between">
-                            <div class="space-y-0.5 sm:space-y-2">
-                                <span class="text-[9px] md:text-[10px] font-bold text-sky-600 uppercase tracking-wider block">Sistem</span>
-                                <h3 class="text-xs sm:text-base font-bold text-[#101e33] group-hover:text-sky-600 transition-colors leading-tight tracking-tight line-clamp-2">National Lung Health Registry (NALURY)</h3>
-                                <p class="text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Akses pengurusan pesakit berkaitan kesihatan paru-paru.</p>
+                    <a href="https://lung-app.netlify.app/" target="_blank" class="group flex flex-row md:flex-col justify-between h-24 md:h-56 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
+                        <img src="images/card/card-08.png" alt="NALURY Banner" class="w-28 h-full md:w-full md:h-20 sm:md:h-24 object-cover flex-shrink-0">
+                        <div class="flex-1 p-3 flex flex-col justify-between min-w-0">
+                            <div class="space-y-0.5">
+                                <span class="text-[8px] md:text-[10px] font-bold text-sky-600 uppercase tracking-wider block">Sistem</span>
+                                <h3 class="text-xs sm:text-sm md:text-base font-bold text-[#101e33] group-hover:text-sky-600 transition-colors leading-tight tracking-tight truncate md:whitespace-normal">Aplikasi MyLung</h3>
+                                <p class="hidden md:block text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Alat saringan kesihatan paru-paru digital, penilaian risiko asma, COPD, kanser paru-paru komunitit.</p>
                             </div>
-                            <div class="text-right text-[10px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
+                            <div class="text-right text-[9px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
                         </div>
                     </a>
 
-                    <!-- Kad 9 -->
-                    <a href="https://myhealth.gov.my" target="_blank" class="group flex flex-col justify-between h-56 sm:h-64 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
-                        <img src="images/card/card-09.png" alt="MyKursus Banner" class="w-full h-20 sm:h-24 object-cover">
-                        <div class="flex-1 p-3 sm:p-4 flex flex-col justify-between">
-                            <div class="space-y-0.5 sm:space-y-2">
-                                <span class="text-[9px] md:text-[10px] font-bold text-sky-600 uppercase tracking-wider block">Sistem</span>
-                                <h3 class="text-xs sm:text-base font-bold text-[#101e33] group-hover:text-sky-600 transition-colors leading-tight tracking-tight line-clamp-2">Sistem MyKursus</h3>
-                                <p class="text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Akses kursus/bengkel/latihan yang dianjukan oleh NCD JKN Perlis.</p>
+                    <a href="#" target="_blank" class="group flex flex-row md:flex-col justify-between h-24 md:h-56 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
+                        <img src="images/card/card-09.png" alt="MyKursus Banner" class="w-28 h-full md:w-full md:h-20 sm:md:h-24 object-cover flex-shrink-0">
+                        <div class="flex-1 p-3 flex flex-col justify-between min-w-0">
+                            <div class="space-y-0.5">
+                                <span class="text-[8px] md:text-[10px] font-bold text-sky-600 uppercase tracking-wider block">Sistem</span>
+                                <h3 class="text-xs sm:text-sm md:text-base font-bold text-[#101e33] group-hover:text-sky-600 transition-colors leading-tight tracking-tight truncate md:whitespace-normal">Sistem MyCPD-NCD</h3>
+                                <p class="hidden md:block text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Sistem pengurusan latihan, pendaftaran bengkel, permohonan mata CPD dalaman Unit NCD Perlis.</p>
                             </div>
-                            <div class="text-right text-[10px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
+                            <div class="text-right text-[9px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
                         </div>
                     </a>
 
-                    <!-- Kad 10 -->
-                    <a href="https://myhealth.gov.my" target="_blank" class="group flex flex-col justify-between h-56 sm:h-64 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
-                        <img src="images/card/card-10.png" alt="OSCA Banner" class="w-full h-20 sm:h-24 object-cover">
-                        <div class="flex-1 p-3 sm:p-4 flex flex-col justify-between">
-                            <div class="space-y-0.5 sm:space-y-2">
-                                <span class="text-[9px] md:text-[10px] font-bold text-sky-600 uppercase tracking-wider block">Sistem</span>
-                                <h3 class="text-xs sm:text-base font-bold text-[#101e33] group-hover:text-sky-600 transition-colors leading-tight tracking-tight line-clamp-2">Sistem One Stop Centre for Addiction (OSCA)</h3>
-                                <p class="text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Akses ke sistem pengurusan OSCA Klinik Kesihatan Kuala Perlis.</p>
+                    <a href="#" target="_blank" class="group flex flex-row md:flex-col justify-between h-24 md:h-56 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
+                        <img src="images/card/card-10.png" alt="OSCA Banner" class="w-28 h-full md:w-full md:h-20 sm:md:h-24 object-cover flex-shrink-0">
+                        <div class="flex-1 p-3 flex flex-col justify-between min-w-0">
+                            <div class="space-y-0.5">
+                                <span class="text-[8px] md:text-[10px] font-bold text-sky-600 uppercase tracking-wider block">Sistem</span>
+                                <h3 class="text-xs sm:text-sm md:text-base font-bold text-[#101e33] group-hover:text-sky-600 transition-colors leading-tight tracking-tight truncate md:whitespace-normal">Sistem e-OSCA</h3>
+                                <p class="hidden md:block text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Modul pendaftaran, penilaian, intervensi One Stop Centre for Addiction (OSCA) Klinik Kesihatan Kuala Perlis.</p>
                             </div>
-                            <div class="text-right text-[10px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
+                            <div class="text-right text-[9px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
                         </div>
                     </a>
 
-                    <!-- Kad 11 -->
-                    <a href="https://myhealth.gov.my" target="_blank" class="group flex flex-col justify-between h-56 sm:h-64 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
-                        <img src="images/card/card-11.png" alt="Akta 852 Banner" class="w-full h-20 sm:h-24 object-cover">
-                        <div class="flex-1 p-3 sm:p-4 flex flex-col justify-between">
-                            <div class="space-y-0.5 sm:space-y-2">
-                                <span class="text-[9px] md:text-[10px] font-bold text-sky-600 uppercase tracking-wider block">Sistem</span>
-                                <h3 class="text-xs sm:text-base font-bold text-[#101e33] group-hover:text-sky-600 transition-colors leading-tight tracking-tight line-clamp-2">Sistem Akta 852</h3>
-                                <p class="text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Akses ke sistem pengurusan promosi dan pelaporan Akta 852: Akta Kawalan Produk Merokok Demi Kesihatan Awam 2024.</p>
+                    <a href="#" target="_blank" class="group flex flex-row md:flex-col justify-between h-24 md:h-56 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
+                        <img src="images/card/card-11.png" alt="Akta 852 Banner" class="w-28 h-full md:w-full md:h-20 sm:md:h-24 object-cover flex-shrink-0">
+                        <div class="flex-1 p-3 flex flex-col justify-between min-w-0">
+                            <div class="space-y-0.5">
+                                <span class="text-[8px] md:text-[10px] font-bold text-sky-600 uppercase tracking-wider block">Sistem</span>
+                                <h3 class="text-xs sm:text-sm md:text-base font-bold text-[#101e33] group-hover:text-sky-600 transition-colors leading-tight tracking-tight truncate md:whitespace-normal">Sistem Akta 852</h3>
+                                <p class="hidden md:block text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Sistem pelaporan advokasi, penguatkuasaan, pemantauan Akta Kawalan Produk Merokok Demi Kesihatan Awam 2024.</p>
                             </div>
-                            <div class="text-right text-[10px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
+                            <div class="text-right text-[9px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
                         </div>
                     </a>
 
-                    <!-- Kad 12 -->
-                    <a href="https://sites.google.com/moh.gov.my/sistem/reten-mimo" target="_blank" class="group flex flex-col justify-between h-56 sm:h-64 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
-                        <img src="images/card/card-12.png" alt="MIMO Banner" class="w-full h-20 sm:h-24 object-cover">
-                        <div class="flex-1 p-3 sm:p-4 flex flex-col justify-between">
-                            <div class="space-y-0.5 sm:space-y-2">
-                                <span class="text-[9px] md:text-[10px] font-bold text-sky-600 uppercase tracking-wider block">Sistem</span>
-                                <h3 class="text-xs sm:text-base font-bold text-[#101e33] group-hover:text-sky-600 transition-colors leading-tight tracking-tight line-clamp-2">Sistem MIMO</h3>
-                                <p class="text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Akses sistem <i>Multidisciplinary Integrated Management of Obesity</i> (MIMO).</p>
+                    <a href="https://sites.google.com/moh.gov.my/sistem/reten-mimo" target="_blank" class="group flex flex-row md:flex-col justify-between h-24 md:h-56 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0">
+                        <img src="images/card/card-12.png" alt="MIMO Banner" class="w-28 h-full md:w-full md:h-20 sm:md:h-24 object-cover flex-shrink-0">
+                        <div class="flex-1 p-3 flex flex-col justify-between min-w-0">
+                            <div class="space-y-0.5">
+                                <span class="text-[8px] md:text-[10px] font-bold text-sky-600 uppercase tracking-wider block">Sistem</span>
+                                <h3 class="text-xs sm:text-sm md:text-base font-bold text-[#101e33] group-hover:text-sky-600 transition-colors leading-tight tracking-tight truncate md:whitespace-normal">Sistem Reten MIMO</h3>
+                                <p class="hidden md:block text-[11px] text-gray-500 font-light leading-normal line-clamp-2">Pusat pengumpulan data reten bulanan program Multidisciplinary Integrated Management of Obesity (MIMO) Perlis.</p>
                             </div>
-                            <div class="text-right text-[10px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
+                            <div class="text-right text-[9px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
                         </div>
                     </a>
+
                 </div>
             </div>
 
-            <div class="w-full pb-16"></div>
+            <!-- DIBAIKI: Suntikan Footer Rasmi yang 100% Seragam & Sejajar dengan info-ncd.html -->
+            <footer class="w-full bg-white py-4 px-4 sm:px-6 md:px-12 text-center border-t border-gray-100 mt-auto shadow-inner z-20 flex-shrink-0">
+                <p class="text-[10px] text-gray-400 font-semibold tracking-wider uppercase">
+                    Hak Cipta © 2026 Unit Kawalan Penyakit Tidak Berjangkit (NCD), Jabatan Kesihatan Negeri Perlis
+                </p>
+            </footer>
         </section>
 
         <!-- SECTION KANAN: MEDIA PANEL (PENGUMUMAN & VIDEO UTAMA) -->
