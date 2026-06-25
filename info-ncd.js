@@ -26,13 +26,16 @@ function applyFilterAndRender() {
         let mappedCategory = 'all';
         let itemCat = item.category ? item.category.toLowerCase().trim() : '';
 
+        // GANTIKAN KEPADA BLOK KOD INI:
         if (itemCat === 'infografik' || itemCat === 'logo') {
-            mappedCategory = 'image_info'; // Kumpulan Imej / Infografik
+            mappedCategory = 'image_info'; 
         } else if (itemCat === 'video') {
-            mappedCategory = 'video';      // Kumpulan Video
+            mappedCategory = 'video';      
+        } else if (itemCat === 'latihan' || itemCat === 'modul_latihan') {
+            // 📚 TAMBAHAN BARU: Memetakan kategori data latihan terus ke pilihan dropdown
+            mappedCategory = 'latihan';   
         } else {
-            // Semua fail berbentuk PDF (bunting, poster, risalah, modul, buku, lain-lain) automatik masuk sini
-            mappedCategory = 'document';   // Kumpulan Dokumen / Risalah
+            mappedCategory = 'document';   
         }
 
         const matchesCategory = (currentCategory === 'all' || mappedCategory === currentCategory);
@@ -210,6 +213,30 @@ function renderGrid() {
                             <span class="text-[9px] md:text-[10px] text-gray-400 font-medium">${item.infoText || 'Format: PNG/JPG'}</span>
                             <a href="play-image.html?id=${originalIndex}" class="py-1 px-2 md:px-2.5 text-white text-[9px] md:text-[10px] font-bold rounded transition-colors active:scale-95 shadow-sm whitespace-nowrap ${currentButtonBg}">
                                 ${itemCat === 'logo' ? 'Papar Logo' : 'Papar Poster'}
+                            </a>
+                        </div>
+                    </div>
+                </div>`;
+        } else if (itemCat === 'modul_latihan' || itemCat === 'latihan'){
+            cardHtml = `
+                <!-- DIUBAH: h-28 di mobile (flex-row) & md:h-72 di desktop (flex-col) -->
+                <div class="bg-white border border-gray-100 rounded-xl shadow-sm md:hover:shadow-md md:hover:scale-[1.02] transition-all duration-300 overflow-hidden flex flex-row md:flex-col justify-between h-28 md:h-72">
+                    <!-- Image Container: Lebar tetap w-28 di mobile, automatik penuh di desktop -->
+                    <div class="w-28 md:w-full h-full md:h-28 overflow-hidden bg-gray-150 relative flex-shrink-0">
+                        <img src="${finalImgUrl}" alt="${item.title}" loading="lazy" referrerpolicy="no-referrer" class="w-full h-full object-cover">
+                        <span class="absolute top-2 left-2 text-[8px] font-bold ${item.badgeColorClass || 'text-sky-600 bg-sky-50'} px-2 py-0.5 rounded uppercase tracking-wider z-10">${item.badgeText || 'Dokumen'}</span>
+                    </div>
+                    <!-- Text Content Container -->
+                    <div class="p-2.5 md:p-3 flex-1 flex flex-col justify-between min-w-0">
+                        <div class="space-y-0.5">
+                            <h3 class="text-xs font-bold text-[#101e33] leading-tight line-clamp-2" title="${item.title}">${item.title}</h3>
+                            <!-- Deskripsi: hidden di mobile, dipaparkan semula (md:block) di desktop -->
+                            <p class="hidden md:block text-[11px] text-gray-500 font-light mt-1 line-clamp-2">${item.desc || ''}</p>
+                        </div>
+                        <div class="pt-1.5 md:pt-2 border-t border-gray-50 flex justify-between items-center flex-shrink-0 mt-1">
+                            <span class="text-[9px] md:text-[10px] text-gray-400 font-medium">${item.infoText || 'Format: PDF'}</span>
+                            <a href="play-image.html?id=${originalIndex}" class="py-1 px-2 md:px-2.5 bg-[#101e33] text-white text-[9px] md:text-[10px] font-bold rounded hover:bg-[#1d3557] transition-colors active:scale-95 shadow-sm whitespace-nowrap">
+                                Buka Fail
                             </a>
                         </div>
                     </div>

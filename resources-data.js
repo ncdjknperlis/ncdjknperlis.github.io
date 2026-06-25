@@ -116,27 +116,137 @@ const resourcesData = [
 
     // =========================================================================
     // TEMPLAT KATEGORI 3: 📄 DOKUMEN / RISALAH / BUNTING / MODUL / MERCHANDISE
-    // (Bahan di bawah kumpulan ini akan dibuka di fail: play-image.html sebagai PDF iframe)
+    // (Bahan di bawah kumpulan ini akan dibuka di fail: view-material.html sebagai PDF iframe)
     // =========================================================================
     {
-        title: "Nama Tajuk Dokumen / Risalah / Bunting / Buku Poket Anda Di Sini",
+        title: "CPG Type 2 Diabetes Mellitus",
         category: "cpg",        // Kekalkan perkataan 'cpg' (Enjin JS auto-map ini masuk tab Dokumen)
-        program: "mental",      // Pilihan program: mental / diabetes / hpt / hpl
+        program: "diabetes",      // Pilihan program: mental / diabetes / hpt / hpl
         desc: "Tuliskan huraian ringkas mengenai naskah modul, buku garis panduan, brosur lipat tiga, atau pelan bunting di sini.",
         imageUrl: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=600&q=80", // Gambar hiasan kad grid luar
-        imgUrl: "https://drive.google.com/file/d/MASUKKAN_ID_DRIVE_DI_SINI/preview", // Pautan pembaca PDF Google Drive
-        badgeText: "Risalah",    // Teks kecil pada kad (Contoh: Risalah / Modul / Bunting / Buku)
+        imgUrl: "https://drive.google.com/file/d/1QhGaygUGyCo_fwKUqFYyDLEzs3zTexdg/preview", // Pautan pembaca PDF Google Drive
+        badgeText: "Dokumen",    // Teks kecil pada kad (Contoh: Risalah / Modul / Bunting / Buku)
         badgeColorClass: "text-sky-600 bg-sky-50", // Warna badge biru khas dokumen
         infoText: "Format: PDF Drive"
     },
     {
-        title: "Contoh Bahan Kedua (Dokumen/Bunting)",
+        title: "Rujukan Pantas CPG Type 2 Diabetes Mellitus",
         category: "cpg",
-        program: "mental",
+        program: "diabetes",
         desc: "Penerangan bagi bahan dokumen kedua anda.",
         imageUrl: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=600&q=80",
-        imgUrl: "https://drive.google.com/file/d/MASUKKAN_ID_DRIVE_DI_SINI/preview",
-        badgeText: "Bunting",
+        imgUrl: "https://drive.google.com/file/d/1a9UbXlYaEn1dz-GW_Kv_7fBwR6cD90f8/preview",
+        badgeText: "Dokumen",
+        badgeColorClass: "text-sky-600 bg-sky-50",
+        infoText: "Format: PDF Drive"
+    },
+    {
+        title: "Diabetes Education Manual 2020",
+        category: "cpg",
+        program: "diabetes",
+        desc: "Penerangan bagi bahan dokumen kedua anda.",
+        imageUrl: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=600&q=80",
+        imgUrl: "https://drive.google.com/file/d/18YwYlZIGYuYcBmznAGDNpt27F5lea_0w/preview",
+        badgeText: "Dokumen",
+        badgeColorClass: "text-sky-600 bg-sky-50",
+        infoText: "Format: PDF Drive"
+    },
+    {
+        title: "Diabetes Mellitus: SIQ Investigation",
+        category: "cpg",
+        program: "diabetes",
+        desc: "Penerangan bagi bahan dokumen kedua anda.",
+        imageUrl: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=600&q=80",
+        imgUrl: "https://drive.google.com/file/d/1IdvZ1YbkSQtsMEnTxXpXyljzdZquobjU/preview",
+        badgeText: "Dokumen",
+        badgeColorClass: "text-sky-600 bg-sky-50",
+        infoText: "Format: PDF Drive"
+    },
+    {
+        title: "Lembaran Fakta Hari Diabetes Sedunia 2024",
+        category: "cpg",
+        program: "diabetes",
+        desc: "Penerangan bagi bahan dokumen kedua anda.",
+        imageUrl: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=600&q=80",
+        imgUrl: "https://drive.google.com/file/d/1NzIsicLXdglhfI7VsPG6aHPL-GBBCV2A/preview",
+        badgeText: "Dokumen",
+        badgeColorClass: "text-sky-600 bg-sky-50",
+        infoText: "Format: PDF Drive"
+    },
+    {
+        title: "Clinical Practice Guidelines (CPG) Management of Hypertension 5th Edition (2018)",
+        category: "cpg",
+        program: "hpt",
+        desc: "Penerangan bagi bahan dokumen kedua anda.",
+        imageUrl: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=600&q=80",
+        imgUrl: "https://drive.google.com/file/d/106rfF9KxDF9u61ypkjyWUTU5DKshbra3/preview",
+        badgeText: "Dokumen",
+        badgeColorClass: "text-sky-600 bg-sky-50",
+        infoText: "Format: PDF Drive"
+    },
+    {
+        title: "Clinical Practice Guidelines (CPG) Management of Hypertension 4th Edition",
+        category: "cpg",
+        program: "hpt",
+        desc: "Penerangan bagi bahan dokumen kedua anda.",
+        imageUrl: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=600&q=80",
+        imgUrl: "https://drive.google.com/file/d/1FIzk8IZBVQNS3KgaNwf7iUsuNPfeQ3fY/preview",
+        badgeText: "Dokumen",
+        badgeColorClass: "text-sky-600 bg-sky-50",
+        infoText: "Format: PDF Drive"
+    },
+    {
+        title: "Rujukan Pantas (Quick Reference) Hipertensi Perlis",
+        category: "cpg",
+        program: "hpt",
+        desc: "Penerangan bagi bahan dokumen kedua anda.",
+        imageUrl: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=600&q=80",
+        imgUrl: "https://drive.google.com/file/d/1EmefzUyxHh0FwdwRRsqkUD4RJgYrukh8/preview",
+        badgeText: "Dokumen",
+        badgeColorClass: "text-sky-600 bg-sky-50",
+        infoText: "Format: PDF Drive"
+    },
+    {
+        title: "Lembaran Fakta Hipertensi 2025",
+        category: "cpg",
+        program: "hpt",
+        desc: "Penerangan bagi bahan dokumen kedua anda.",
+        imageUrl: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=600&q=80",
+        imgUrl: "https://drive.google.com/file/d/1bjiO-NCRef0iz6W-tHPqZWfm87GBc7vk/preview",
+        badgeText: "Dokumen",
+        badgeColorClass: "text-sky-600 bg-sky-50",
+        infoText: "Format: PDF Drive"
+    },
+    {
+        title: "Lembaran Fakta Hari Hipertensi & Minggu Kesedaran Garam Sedunia 2024",
+        category: "cpg",
+        program: "hpt",
+        desc: "Penerangan bagi bahan dokumen kedua anda.",
+        imageUrl: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=600&q=80",
+        imgUrl: "https://drive.google.com/file/d/1JKl1rN08aGEBXcyQqElt8Y5rbio0e_17/preview",
+        badgeText: "Dokumen",
+        badgeColorClass: "text-sky-600 bg-sky-50",
+        infoText: "Format: PDF Drive"
+    },
+    {
+        title: "Clinical Practice Guidelines (CPG) Management of Dyslipidemia 6th Edition (2023)",
+        category: "cpg",
+        program: "hpl",
+        desc: "Penerangan bagi bahan dokumen kedua anda.",
+        imageUrl: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=600&q=80",
+        imgUrl: "https://drive.google.com/file/d/1AjhI2W7zQ9gS8f2zJNaKSe00eLfJv2NH/preview",
+        badgeText: "Dokumen",
+        badgeColorClass: "text-sky-600 bg-sky-50",
+        infoText: "Format: PDF Drive"
+    },
+    {
+        title: "Contoh Modul Latihan DM",
+        category: "latihan",
+        program: "diabetes",
+        desc: "Penerangan bagi bahan dokumen kedua anda.",
+        imageUrl: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=600&q=80",
+        imgUrl: "https://drive.google.com/file/d/1AjhI2W7zQ9gS8f2zJNaKSe00eLfJv2NH/preview",
+        badgeText: "Dokumen",
         badgeColorClass: "text-sky-600 bg-sky-50",
         infoText: "Format: PDF Drive"
     },

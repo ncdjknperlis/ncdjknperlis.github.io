@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pembaca Dokumen NCD | JKN Perlis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        ::-webkit-scrollbar { display: none; }
+
+        /* Custom Scrollbar Minimalis untuk Panel Maklumat */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+            display: block;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.02);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        /* ==========================================================================
+           ENJIN VARIABLES TEMA: SYNC DENGAN PORTAL UTAMA
+           ========================================================================== */
+        :root {
+            --bg-utama: #FBFBFB;
+            --bg-kad: #FFFFFF;
+            --border-warna: #F3F4F6;
+            --teks-tajuk: #101e33;
+            --teks-biasa: #1A1A1A;
+            --teks-sub: #9CA3AF;
+        }
+        [data-theme="dark"] {
+            --bg-utama: #0B132B;
+            --bg-kad: #1C2541;
+            --border-warna: #3A506B;
+            --teks-tajuk: #FFFFFF;
+            --teks-biasa: #E2E8F0;
+            --teks-sub: #94A3B8;
+        }
+        [data-theme="blue"] {
+            --bg-utama: #EBF4FA;
+            --bg-kad: #FFFFFF;
+            --border-warna: #B9D9EB;
+            --teks-tajuk: #0F4C81;
+            --teks-biasa: #1C3D5A;
+            --teks-sub: #5B7083;
+        }
+        [data-theme="emerald"] {
+            --bg-utama: #F0F9F4;
+            --bg-kad: #FFFFFF;
+            --border-warna: #C2E7D9;
+            --teks-tajuk: #064E3B;
+            --teks-biasa: #113F31;
+            --teks-sub: #6B8E80;
+        }
+        [data-theme="bronze"] {
+            --bg-utama: #F9F6F0;
+            --bg-kad: #FFFFFF;
+            --border-warna: #EADBC8;
+            --teks-tajuk: #5C3D2E;
+            --teks-biasa: #3A2618;
+            --teks-sub: #A084DC;
+        }
+        [data-theme="amethyst"] {
+            --bg-utama: #F3F1FA;
+            --bg-kad: #FFFFFF;
+            --border-warna: #E1D9F2;
+            --teks-tajuk: #4A2E80;
+            --teks-biasa: #26164D;
+            --teks-sub: #8C7BB3;
+        }
+
+        .dinamik-bg-utama { background-color: var(--bg-utama) !important; transition: all 0.3s ease; }
+        .dinamik-bg-kad { background-color: var(--bg-kad) !important; transition: all 0.3s ease; }
+        .dinamik-border { border-color: var(--border-warna) !important; transition: all 0.3s ease; }
+        .dinamik-teks-tajuk { color: var(--teks-tajuk) !important; }
+        .dinamik-teks-biasa { color: var(--teks-biasa) !important; transition: all 0.3s ease; }
+        .dinamik-teks-sub { color: var(--teks-sub) !important; }
+    </style>
+</head>
+<body class="h-screen w-screen overflow-hidden flex flex-col dinamik-bg-utama antialiased">
+
+    <header class="w-full py-2 md:py-3 px-4 md:px-12 bg-white border-b border-gray-100 flex flex-row items-center justify-between gap-2 z-20 flex-shrink-0 shadow-xs dinamik-bg-kad dinamik-border">
+        <div class="flex items-center space-x-2 md:space-x-3">
+            <img src="images/logo.png" style="max-width: 28px;" class="w-full h-auto object-contain mx-auto md:max-w-[42px]">
+            <img src="images/logo-ncd/logo-ncd-default.png" style="max-width: 80px;" class="md:max-w-[130px]">
+            <div class="w-[1px] h-4 md:h-6 bg-gray-200"></div>
+            <h2 class="text-[7.5px] md:text-[11px] font-bold tracking-[0.08em] md:tracking-[0.15em] uppercase text-[#101e33] leading-tight dinamik-teks-tajuk">
+                Kawalan Penyakit Tidak Berjangkit (NCD)<br>
+                <span class="text-gray-400 font-medium text-[6.5px] md:text-[8px] dinamik-teks-sub">Jabatan Kesihatan Negeri Perlis</span>
+            </h2>
+        </div>
+        
+        <div class="flex items-center space-x-2 md:space-x-5">
+            <div class="tracking-widest text-right hidden sm:block">
+                <h1 class="text-lg md:text-2xl font-light tracking-tighter text-gray-400">Pusat Akses <span class="font-bold text-[#101e33] dinamik-teks-tajuk">Digital</span></h1>
+            </div>
+            
+            <div class="w-[1px] h-5 bg-gray-200 hidden sm:block"></div>
+
+            <div class="relative inline-block text-left z-30">
+                <select id="themeSelect" onchange="tukarTemaSistem(this.value)" class="dinamik-bg-utama dinamik-teks-tajuk border dinamik-border text-[11px] font-bold py-1.5 px-2.5 rounded-xl focus:outline-none cursor-pointer shadow-xs transition-all">
+                    <option value="default">⚪ Default</option>
+                    <option value="dark">🌙 Mod Gelap</option>
+                    <option value="blue">🔵 Mod Biru</option>
+                    <option value="emerald">🟢 Mod Zamrud</option>
+                    <option value="bronze">🍂 Mod Gangsa</option>
+                    <option value="amethyst">🍇 Mod Amethis</option>
+                </select>
+            </div>
+            
+            <div class="flex items-center">
+                <a href="info-ncd.html" class="flex items-center justify-center space-x-1.5 px-3 py-1.5 rounded-xl bg-[#101e33] text-white text-[11px] font-bold transition-all duration-300 shadow-sm hover:bg-[#1d3557] hover:scale-105 active:scale-95" title="Kembali ke Senarai">
+                    <span>←</span> <span>Kembali</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex-1 w-full flex flex-col md:flex-row overflow-hidden">
+        
+        <div class="w-full md:w-[360px] lg:w-[400px] border-b md:border-b-0 md:border-r border-gray-100 p-5 flex flex-col flex-shrink-0 justify-between overflow-y-auto custom-scrollbar dinamik-bg-kad dinamik-border">
+            <div class="space-y-4">
+                <span id="docBadge" class="inline-block text-[10px] font-extrabold tracking-wider uppercase px-2.5 py-1 rounded-md bg-sky-50 text-sky-600">
+                    DOKUMEN
+                </span>
+
+                <h1 id="docTitle" class="text-base md:text-lg font-black tracking-tight leading-tight text-[#101e33] dinamik-teks-tajuk">
+                    Memuatkan Dokumen...
+                </h1>
+
+                <div class="w-12 h-[2px] bg-gray-200 dinamik-border"></div>
+
+                <div class="space-y-1.5">
+                    <h3 class="text-[10px] font-bold tracking-widest text-gray-400 uppercase dinamik-teks-sub">Ringkasan Kandungan</h3>
+                    <p id="docDesc" class="text-xs md:text-[13px] leading-relaxed text-gray-600 dinamik-teks-biasa font-light">
+                        Sila tunggu sekejap, maklumat fail sedang diambil daripada pangkalan data sistem.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-6 pt-4 border-t border-gray-100 flex flex-col gap-3 dinamik-border">
+                <div class="flex flex-col gap-1.5">
+                    <div class="flex items-center justify-between text-[11px]">
+                        <span class="text-gray-400 font-medium dinamik-teks-sub">Skop Portfolio:</span>
+                        <span id="docProgram" class="font-bold text-[#101e33] dinamik-teks-tajuk uppercase tracking-wider">UMUM</span>
+                    </div>
+                    <div class="flex items-center justify-between text-[11px]">
+                        <span class="text-gray-400 font-medium dinamik-teks-sub">Format Sumber:</span>
+                        <span id="docFormat" class="font-semibold text-emerald-600">PDF Pratonton KKM</span>
+                    </div>
+                </div>
+
+                <button onclick="bukaModalKongsi()" class="w-full flex items-center justify-center space-x-2 py-2 rounded-xl border border-gray-200 bg-gray-50/50 hover:bg-gray-100/80 text-gray-700 text-xs font-bold tracking-wide transition-all duration-200 active:scale-95 shadow-xs dinamik-border dinamik-bg-utama dinamik-teks-tajuk">
+                    <span>🔗</span> <span>Kongsi Bahan & Dapatkan QR</span>
+                </button>
+            </div>
+        </div>
+
+        <div class="flex-1 bg-zinc-800 p-2 md:p-3 flex items-center justify-center relative">
+            <iframe 
+                id="pdfViewerFrame" 
+                src="" 
+                class="w-full h-full rounded-xl shadow-2xl bg-white border border-transparent"
+                allow="autoplay"
+                style="color-scheme: light;"
+            ></iframe>
+        </div>
+
+    </div>
+
+    <div id="modalKongsi" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 opacity-0 pointer-events-none transition-all duration-300 backdrop-blur-xs">
+        <div class="w-full max-w-sm bg-white rounded-3xl p-6 shadow-2xl scale-95 transition-all duration-300 flex flex-col items-center text-center border dinamik-bg-kad dinamik-border relative">
+            
+            <button onclick="tutupModalKongsi()" class="absolute top-4 right-4 w-7 h-7 flex items-center justify-center rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 font-bold transition-all text-xs dinamik-bg-utama dinamik-teks-tajuk">✕</button>
+
+            <div class="w-12 h-12 rounded-2xl bg-sky-50 flex items-center justify-center text-xl mb-3">📱</div>
+            <h3 class="text-sm font-black text-[#101e33] dinamik-teks-tajuk">Imbas Kod QR Dokumen</h3>
+            <p class="text-[11px] text-gray-400 font-medium mt-1 max-w-[240px] leading-relaxed dinamik-teks-sub">Imbas menggunakan telefon pintar untuk akses terus atau muat turun dokumen ini.</p>
+            
+            <div class="my-5 p-3 border border-gray-100 rounded-2xl bg-white shadow-inner flex items-center justify-center w-[160px] h-[160px]">
+                <img id="qrcodeContainer" src="" alt="Menjana QR..." class="w-full h-full object-contain">
+            </div>
+
+            <div class="w-full bg-gray-50 border border-gray-100 rounded-xl p-2 flex items-center justify-between text-left mb-2 dinamik-bg-utama dinamik-border">
+                <span id="pautanSalisText" class="text-[10px] text-gray-400 truncate flex-1 pr-3 font-medium dinamik-teks-sub">Memuatkan url...</span>
+                <button onclick="salinPautanPortal()" id="btnSalin" class="bg-[#101e33] hover:bg-[#1d3557] text-white text-[9px] font-black uppercase tracking-wider px-3 py-1.5 rounded-lg transition-all active:scale-95 whitespace-nowrap">Salin</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="resources-data.js"></script>
+    <script>
+        let currentShareUrl = "";
+
+        // Enjin Pembaca & Penyuntik Maklumat Dokumen Dinamik
+        function muatKandunganDokumen() {
+            const params = new URLSearchParams(window.location.search);
+            const docId = params.get('id');
+            
+            if (typeof resourcesData !== 'undefined' && docId !== null) {
+                const item = resourcesData[docId];
+                if (item) {
+                    document.title = `${item.title} | Pembaca NCD`;
+                    document.getElementById('docTitle').innerText = item.title;
+                    
+                    if(item.desc) {
+                        document.getElementById('docDesc').innerText = item.desc;
+                    } else {
+                        document.getElementById('docDesc').innerText = "Tiada keterangan tambahan disediakan untuk dokumen ini.";
+                    }
+                    
+                    document.getElementById('docProgram').innerText = String(item.program || 'UMUM').toUpperCase();
+                    
+                    if(item.badgeText) {
+                        document.getElementById('docBadge').innerText = item.badgeText.toUpperCase();
+                    }
+
+                    if(item.infoText) {
+                        document.getElementById('docFormat').innerText = item.infoText;
+                    }
+
+                    let finalPdfUrl = item.imgUrl || item.url || '';
+                    if (finalPdfUrl.includes('/view')) {
+                        finalPdfUrl = finalPdfUrl.replace('/view', '/preview');
+                    }
+                    
+                    document.getElementById('pdfViewerFrame').src = finalPdfUrl;
+
+                    // Bina format pautan perkongsian tepat ke halaman dokumen ini
+                    currentShareUrl = window.location.origin + window.location.pathname + "?id=" + docId;
+                    document.getElementById('pautanSalisText').innerText = currentShareUrl;
+                }
+            }
+        }
+
+        // FUNGSI KAWALAN MODAL POPUP KONGSI (KEMASKINI API QR CODE 2026)
+        function bukaModalKongsi() {
+            const modal = document.getElementById('modalKongsi');
+            const qrImg = document.getElementById('qrcodeContainer');
+            
+            // KEMASKINI: Menggunakan API qrserver yang aktif, stabil, dan tersangat laju
+            qrImg.src = "https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=" + encodeURIComponent(currentShareUrl);
+
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.querySelector('div').classList.remove('scale-95');
+        }
+
+        function tutupModalKongsi() {
+            const modal = document.getElementById('modalKongsi');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.querySelector('div').classList.add('scale-95');
+            
+            // Reset balik perkataan butang salin
+            setTimeout(() => {
+                document.getElementById('btnSalin').innerText = "Salin";
+            }, 300);
+        }
+
+        function salinPautanPortal() {
+            navigator.clipboard.writeText(currentShareUrl).then(() => {
+                const btn = document.getElementById('btnSalin');
+                btn.innerText = "✓ Berjaya!";
+                setTimeout(() => { btn.innerText = "Salin"; }, 2000);
+            }).catch(err => {
+                console.error("Gagal menyalin pautan: ", err);
+            });
+        }
+
+        // Pemandu Sistem Tema Global
+        function tukarTemaSistem(tema) {
+            document.documentElement.setAttribute('data-theme', tema);
+            localStorage.setItem('pilihanTemaNCD_Global', tema);
+            const selectBox = document.getElementById('themeSelect');
+            if(selectBox) selectBox.value = tema;
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            muatKandunganDokumen();
+            const temaDisimpan = localStorage.getItem('pilihanTemaNCD_Global') || 'default';
+            tukarTemaSistem(temaDisimpan);
+        });
+    </script>
+</body>
+</html>

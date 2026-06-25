@@ -6,127 +6,166 @@
     <title>Paparan Infografik NCD | JKN Perlis</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600;700;800&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="images/logo.png">
-    <style>body { font-family: 'Inter', sans-serif; }</style>
-</head>
-<body class="min-h-screen flex flex-col bg-[#FBFBFB] text-[#1A1A1A] antialiased">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        ::-webkit-scrollbar { display: none; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; display: block; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0, 0, 0, 0.02); }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.1); border-radius: 10px; }
 
-    <!-- HEADER -->
-    <header class="w-full py-3 md:py-5 px-4 md:px-12 bg-white border-b border-gray-100 flex flex-row items-center justify-between gap-2 z-20 flex-shrink-0">
-        <div class="flex items-center space-x-2 md:space-x-4">
-            <img src="images/logo.png" style="max-width: 32px;" class="w-full h-auto object-contain mx-auto md:max-w-[50px]">
-            <img src="images/logo-ncd/logo-ncd-default.png" style="max-width: 90px;" class="md:max-w-[150px]">
-            <div class="w-[1px] h-5 md:h-8 bg-gray-200 mx-1 md:mx-2"></div>
-            <h2 class="text-[8px] md:text-xs font-bold tracking-[0.10em] md:tracking-[0.2em] uppercase text-[#101e33] leading-tight">Unit NCD<br><span class="text-gray-400 font-medium text-[7px] md:text-[9px]">JKN Perlis</span></h2>
+        :root {
+            --bg-utama: #FBFBFB; --bg-kad: #FFFFFF; --border-warna: #F3F4F6;
+            --teks-tajuk: #101e33; --teks-biasa: #1A1A1A; --teks-sub: #9CA3AF;
+        }
+        [data-theme="dark"] {
+            --bg-utama: #0B132B; --bg-kad: #1C2541; --border-warna: #3A506B;
+            --teks-tajuk: #FFFFFF; --teks-biasa: #E2E8F0; --teks-sub: #94A3B8;
+        }
+        [data-theme="blue"] {
+            --bg-utama: #EBF4FA; --bg-kad: #FFFFFF; --border-warna: #B9D9EB;
+            --teks-tajuk: #0F4C81; --teks-biasa: #1C3D5A; --teks-sub: #5B7083;
+        }
+        [data-theme="emerald"] {
+            --bg-utama: #F0F9F4; --bg-kad: #FFFFFF; --border-warna: #C2E7D9;
+            --teks-tajuk: #064E3B; --teks-biasa: #113F31; --teks-sub: #6B8E80;
+        }
+        [data-theme="bronze"] {
+            --bg-utama: #F9F6F0; --bg-kad: #FFFFFF; --border-warna: #EADBC8;
+            --teks-tajuk: #5C3D2E; --teks-biasa: #3A2618; --teks-sub: #A084DC;
+        }
+        [data-theme="amethyst"] {
+            --bg-utama: #F3F1FA; --bg-kad: #FFFFFF; --border-warna: #E1D9F2;
+            --teks-tajuk: #4A2E80; --teks-biasa: #26164D; --teks-sub: #8C7BB3;
+        }
+
+        .dinamik-bg-utama { background-color: var(--bg-utama) !important; transition: all 0.3s ease; }
+        .dinamik-bg-kad { background-color: var(--bg-kad) !important; transition: all 0.3s ease; }
+        .dinamik-border { border-color: var(--border-warna) !important; transition: all 0.3s ease; }
+        .dinamik-teks-tajuk { color: var(--teks-tajuk) !important; }
+        .dinamik-teks-biasa { color: var(--teks-biasa) !important; transition: all 0.3s ease; }
+        .dinamik-teks-sub { color: var(--teks-sub) !important; }
+    </style>
+</head>
+<body class="h-screen w-screen overflow-hidden flex flex-col dinamik-bg-utama antialiased">
+
+    <header class="w-full py-2 md:py-3 px-4 md:px-12 bg-white border-b border-gray-100 flex flex-row items-center justify-between gap-2 z-20 flex-shrink-0 shadow-xs dinamik-bg-kad dinamik-border">
+        <div class="flex items-center space-x-2 md:space-x-3">
+            <img src="images/logo.png" style="max-width: 28px;" class="w-full h-auto object-contain mx-auto md:max-w-[42px]">
+            <img src="images/logo-ncd/logo-ncd-default.png" style="max-width: 80px;" class="md:max-w-[130px]">
+            <div class="w-[1px] h-4 md:h-6 bg-gray-200"></div>
+            <h2 class="text-[7.5px] md:text-[11px] font-bold tracking-[0.08em] md:tracking-[0.15em] uppercase text-[#101e33] leading-tight dinamik-teks-tajuk">
+                Kawalan Penyakit Tidak Berjangkit (NCD)<br>
+                <span class="text-gray-400 font-medium text-[6.5px] md:text-[8px] dinamik-teks-sub">Jabatan Kesihatan Negeri Perlis</span>
+            </h2>
         </div>
-        <a href="info-ncd.html" class="text-xs font-bold text-gray-700 hover:text-[#101e33] border border-gray-200 px-3 py-1.5 rounded-xl bg-white transition-all shadow-sm active:scale-95">← Hub Sumber</a>
+        <div class="flex items-center space-x-2 md:space-x-5">
+            <div class="tracking-widest text-right hidden sm:block">
+                <h1 class="text-lg md:text-2xl font-light tracking-tighter text-gray-400">Pusat Akses <span class="font-bold text-[#101e33] dinamik-teks-tajuk">Digital</span></h1>
+            </div>
+            <div class="w-[1px] h-5 bg-gray-200 hidden sm:block"></div>
+            <select id="themeSelect" onchange="tukarTemaSistem(this.value)" class="dinamik-bg-utama dinamik-teks-tajuk border dinamik-border text-[11px] font-bold py-1.5 px-2.5 rounded-xl cursor-pointer focus:outline-none shadow-xs">
+                <option value="default">⚪ Default</option> <option value="dark">🌙 Mod Gelap</option> <option value="blue">🔵 Mod Biru</option> <option value="emerald">🟢 Mod Zamrud</option> <option value="bronze">🍂 Mod Gangsa</option> <option value="amethyst">🍇 Mod Amethis</option>
+            </select>
+            <a href="info-ncd.html" class="px-3 py-1.5 rounded-xl bg-[#101e33] text-white text-[11px] font-bold shadow-sm hover:bg-[#1d3557] active:scale-95">← Kembali</a>
+        </div>
     </header>
 
-    <!-- MAIN CONTENT -->
-    <main class="flex-1 w-full max-w-4xl mx-auto px-4 py-8">
-        <div class="flex flex-col space-y-4">
-            
-            <!-- Image Frame -->
-            <div class="w-full bg-white border border-gray-100 rounded-2xl shadow-xl overflow-hidden p-1 relative h-[65vh]">
-                <iframe id="mainImageIframe" src="" class="w-full h-full rounded-xl border-0 bg-gray-50" allow="autoplay"></iframe>
-            </div>
-
-            <!-- Detail Box + Share Button -->
-            <div class="p-6 bg-white border border-gray-100 rounded-2xl shadow-sm flex flex-col md:flex-row md:items-start md:justify-between gap-4">
-                <div class="flex-1">
-                    <span class="inline-block text-[9px] font-extrabold tracking-wider bg-emerald-50 text-emerald-600 uppercase px-2.5 py-1 rounded-md mb-2">Paparan Galeri Infografik</span>
-                    <h2 id="imageTitle" class="text-xl font-bold text-[#101e33] tracking-tight leading-tight">-</h2>
-                    <p id="imageDesc" class="text-xs md:text-sm text-gray-500 font-light mt-2 leading-relaxed">-</p>
+    <div class="flex-1 w-full flex flex-col md:flex-row overflow-hidden">
+        <div class="w-full md:w-[360px] lg:w-[400px] border-b md:border-b-0 md:border-r border-gray-100 p-5 flex flex-col flex-shrink-0 justify-between overflow-y-auto custom-scrollbar dinamik-bg-kad dinamik-border">
+            <div class="space-y-4">
+                <span id="itemBadge" class="inline-block text-[10px] font-extrabold tracking-wider uppercase px-2.5 py-1 rounded-md bg-amber-50 text-amber-600">INFOGRAFIK</span>
+                <h1 id="itemTitle" class="text-base md:text-lg font-black tracking-tight leading-tight text-[#101e33] dinamik-teks-tajuk">Memuatkan Poster...</h1>
+                <div class="w-12 h-[2px] bg-gray-200 dinamik-border"></div>
+                <div class="space-y-1.5">
+                    <h3 class="text-[10px] font-bold tracking-widest text-gray-400 uppercase dinamik-teks-sub">Keterangan Fail</h3>
+                    <p id="itemDesc" class="text-xs md:text-[13px] leading-relaxed text-gray-600 dinamik-teks-biasa font-light">Sedang mengambil maklumat fail daripada pangkalan data.</p>
                 </div>
-                
-                <button onclick="openShareModal()" class="w-full md:w-auto flex-shrink-0 flex items-center justify-center space-x-1.5 py-2.5 px-5 bg-[#101e33] hover:bg-emerald-600 text-white text-xs font-bold rounded-xl transition-all shadow-sm active:scale-95 self-end md:self-start">
-                    <span>🔗</span> <span>Kongsi Bahan</span>
+            </div>
+            <div class="mt-6 pt-4 border-t border-gray-100 flex flex-col gap-3 dinamik-border">
+                <div class="flex flex-col gap-1.5 text-[11px]">
+                    <div class="flex items-center justify-between"><span class="text-gray-400 dinamik-teks-sub">Skop Portfolio:</span><span id="itemProgram" class="font-bold text-[#101e33] dinamik-teks-tajuk uppercase">UMUM</span></div>
+                    <div class="flex items-center justify-between"><span class="text-gray-400 dinamik-teks-sub">Format Sumber:</span><span id="itemFormat" class="font-semibold text-amber-600">Imej Pratonton / Poster</span></div>
+                </div>
+                <button onclick="bukaModalKongsi()" class="w-full flex items-center justify-center space-x-2 py-2 rounded-xl border border-gray-200 bg-gray-50/50 hover:bg-gray-100 text-xs font-bold dinamik-border dinamik-bg-utama dinamik-teks-tajuk">
+                    <span>🔗</span> <span>Kongsi Bahan & Dapatkan QR</span>
                 </button>
             </div>
-
         </div>
-    </main>
 
-    <!-- MODAL POP-UP SHARE BOX -->
-    <div id="shareModal" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-50 flex items-center justify-center hidden opacity-0 transition-opacity duration-300 px-4">
-        <div class="bg-white rounded-2xl shadow-2xl p-6 w-full max-w-sm border border-gray-100 transform scale-95 transition-transform duration-300" id="modalBox">
-            <div class="flex items-center justify-between pb-3 border-b border-gray-100">
-                <h3 class="text-sm font-bold text-[#101e33]">Kongsi Sumber Digital</h3>
-                <button onclick="closeShareModal()" class="text-gray-400 hover:text-gray-600 text-sm font-bold">✕</button>
+        <div class="flex-1 bg-zinc-900 p-2 md:p-4 flex items-center justify-center overflow-auto">
+            <div class="w-full h-full rounded-xl overflow-hidden shadow-2xl relative bg-black flex items-center justify-center">
+                <iframe id="mainImageFrame" src="" class="w-full h-full border-none" allow="autoplay" style="color-scheme: light;"></iframe>
             </div>
-            <div class="flex flex-col items-center py-4 bg-gray-50/50 rounded-xl my-4 border border-gray-50">
-                <div class="w-36 h-36 bg-white p-2 rounded-lg border border-gray-100 flex items-center justify-center">
-                    <img id="qrCodeDisplay" src="" alt="QR Code" class="w-full h-full hidden">
-                    <div id="qrLoading" class="text-[10px] text-gray-400 animate-pulse">Menjana QR...</div>
-                </div>
-                <p class="text-[10px] text-gray-400 mt-2">Halakan kamera untuk imbas & simpan</p>
-            </div>
-            <div class="space-y-1.5 mb-4">
-                <label class="text-[10px] font-bold text-gray-400 uppercase tracking-wider">Salin Pautan Halaman</label>
-                <div class="flex space-x-1">
-                    <input type="text" id="shareUrlInput" readonly class="flex-1 bg-gray-50 border border-gray-200 rounded-xl px-3 py-2 text-xs text-gray-500 focus:outline-none truncate">
-                    <button onclick="copyToClipboard()" id="copyBtn" class="bg-gray-100 hover:bg-gray-200 text-[#101e33] font-bold text-xs px-3 rounded-xl transition-colors border border-gray-200">Salin</button>
-                </div>
-            </div>
-            <a id="whatsappShareLink" href="#" target="_blank" class="w-full py-2.5 bg-[#25D366] hover:bg-[#20ba5a] text-white text-xs font-bold rounded-xl flex items-center justify-center space-x-2 transition-all shadow-sm active:scale-95">
-                <span class="text-sm">💬</span> <span>Hantar ke WhatsApp</span>
-            </a>
         </div>
     </div>
 
-    <footer class="w-full bg-white py-4 px-6 text-center border-t border-gray-100 mt-auto">
-        <p class="text-[10px] text-gray-400 font-medium">Hak Cipta © 2026 Unit Kawalan Penyakit Tidak Berjangkit, JKN Perlis</p>
-    </footer>
+    <div id="modalKongsi" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 opacity-0 pointer-events-none transition-all duration-300 backdrop-blur-xs">
+        <div class="w-full max-w-sm bg-white rounded-3xl p-6 shadow-2xl scale-95 transition-all flex flex-col items-center text-center border dinamik-bg-kad dinamik-border relative">
+            <button onclick="tutupModalKongsi()" class="absolute top-4 right-4 w-7 h-7 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 font-bold text-xs dinamik-bg-utama dinamik-teks-tajuk">✕</button>
+            <div class="w-12 h-12 rounded-2xl bg-amber-50 flex items-center justify-center text-xl mb-3">🎨</div>
+            <h3 class="text-sm font-black text-[#101e33] dinamik-teks-tajuk">Imbas Kod QR Infografik</h3>
+            <p class="text-[11px] text-gray-400 mt-1 max-w-[240px] leading-relaxed dinamik-teks-sub">Imbas menggunakan peranti untuk paparan penuh infografik ini.</p>
+            <div class="my-5 p-3 border border-gray-100 rounded-2xl bg-white shadow-inner w-[160px] h-[160px] flex items-center justify-center">
+                <img id="qrcodeContainer" src="" alt="QR Loading..." class="w-full h-full object-contain">
+            </div>
+            <div class="w-full bg-gray-50 border border-gray-100 rounded-xl p-2 flex items-center justify-between text-left dinamik-bg-utama dinamik-border">
+                <span id="pautanSalisText" class="text-[10px] text-gray-400 truncate flex-1 pr-3 font-medium dinamik-teks-sub">Loading URL...</span>
+                <button onclick="salinPautanPortal()" id="btnSalin" class="bg-[#101e33] text-white text-[9px] font-black uppercase px-3 py-1.5 rounded-lg">Salin</button>
+            </div>
+        </div>
+    </div>
 
     <script src="resources-data.js"></script>
     <script>
-        const modal = document.getElementById("shareModal");
-        const modalBox = document.getElementById("modalBox");
-
-        // Fungsi Pintar: Auto-Convert sebarang link perkongsian Google Drive ke format Embed Preview
-        function cleanDriveUrl(url) {
-            if (!url || !url.includes("drive.google.com")) return url;
-            let target = url;
-            if (target.includes("/view")) target = target.replace("/view", "/preview");
-            if (target.includes("/edit")) target = target.split("/edit")[0] + "/preview";
-            if (target.includes("?usp=sharing")) target = target.split("?")[0] + "/preview";
-            return target;
-        }
-
-        window.onload = () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const id = urlParams.get('id');
-
-            if (id !== null && resourcesData[id]) {
+        let currentShareUrl = "";
+        function muatData() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            if (typeof resourcesData !== 'undefined' && id !== null) {
                 const item = resourcesData[id];
-                const iframe = document.getElementById("mainImageIframe");
-                
-                // Membaca imgUrl atau pdfUrl secara selamat
-                let rawUrl = item.imgUrl || item.pdfUrl || "";
-                iframe.src = cleanDriveUrl(rawUrl);
-
-                document.getElementById("imageTitle").innerText = item.title;
-                document.getElementById("imageDesc").innerText = item.desc;
+                if (item) {
+                    document.title = `${item.title} | Infografik NCD`;
+                    document.getElementById('itemTitle').innerText = item.title;
+                    document.getElementById('itemDesc').innerText = item.desc || "Tiada keterangan tambahan disediakan.";
+                    document.getElementById('itemProgram').innerText = String(item.program || 'UMUM').toUpperCase();
+                    if(item.badgeText) document.getElementById('itemBadge').innerText = item.badgeText.toUpperCase();
+                    if(item.infoText) document.getElementById('itemFormat').innerText = item.infoText;
+                    
+                    let targetUrl = item.imgUrl || item.url || '';
+                    if (targetUrl.includes('/view')) targetUrl = targetUrl.replace('/view', '/preview');
+                    document.getElementById('mainImageFrame').src = targetUrl;
+                    
+                    currentShareUrl = window.location.origin + window.location.pathname + "?id=" + id;
+                    document.getElementById('pautanSalisText').innerText = currentShareUrl;
+                }
             }
-
-            const currentURL = window.location.href;
-            document.getElementById("shareUrlInput").value = currentURL;
-            document.getElementById("whatsappShareLink").href = `https://api.whatsapp.com/send?text=${encodeURIComponent('Sila lihat poster infografik kesihatan Unit NCD JKN Perlis ini: ' + currentURL)}`;
-
-            const qrImage = document.getElementById("qrCodeDisplay");
-            const qrLoading = document.getElementById("qrLoading");
-            if (qrImage && currentURL) {
-                qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(currentURL)}`;
-                qrImage.onload = () => {
-                    qrImage.classList.remove("hidden");
-                    if(qrLoading) qrLoading.classList.add("hidden");
-                };
-            }
-        };
-
-        function openShareModal() { modal.classList.remove("hidden"); setTimeout(() => { modal.classList.remove("opacity-0"); modalBox.classList.remove("scale-95"); }, 10); }
-        function closeShareModal() { modal.classList.add("opacity-0"); modalBox.classList.add("scale-95"); setTimeout(() => modal.classList.add("hidden"), 300); }
-        function copyToClipboard() { const copyText = document.getElementById("shareUrlInput"); copyText.select(); copyText.setSelectionRange(0, 99999); navigator.clipboard.writeText(copyText.value); const btn = document.getElementById("copyBtn"); btn.innerText = "✓ Disalin"; btn.className = "bg-emerald-50 text-emerald-600 border border-emerald-200 text-xs px-3 rounded-xl"; setTimeout(() => { btn.innerText = "Salin"; btn.className = "bg-gray-100 hover:bg-gray-200 text-[#101e33] font-bold text-xs px-3 rounded-xl transition-colors border border-gray-200"; }, 2000); }
+        }
+        function bukaModalKongsi() {
+            const modal = document.getElementById('modalKongsi');
+            document.getElementById('qrcodeContainer').src = "https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=" + encodeURIComponent(currentShareUrl);
+            modal.classList.remove('opacity-0', 'pointer-events-none');
+            modal.querySelector('div').classList.remove('scale-95');
+        }
+        function tutupModalKongsi() {
+            const modal = document.getElementById('modalKongsi');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            modal.querySelector('div').classList.add('scale-95');
+        }
+        function salinPautanPortal() {
+            navigator.clipboard.writeText(currentShareUrl).then(() => {
+                const btn = document.getElementById('btnSalin'); btn.innerText = "✓ Berjaya!";
+                setTimeout(() => { btn.innerText = "Salin"; }, 2000);
+            });
+        }
+        function tukarTemaSistem(tema) {
+            document.documentElement.setAttribute('data-theme', tema);
+            localStorage.setItem('pilihanTemaNCD_Global', tema);
+            if(document.getElementById('themeSelect')) document.getElementById('themeSelect').value = tema;
+        }
+        window.addEventListener('DOMContentLoaded', () => {
+            muatData();
+            tukarTemaSistem(localStorage.getItem('pilihanTemaNCD_Global') || 'default');
+        });
     </script>
 </body>
 </html>

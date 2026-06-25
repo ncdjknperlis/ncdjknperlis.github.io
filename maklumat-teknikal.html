@@ -6,7 +6,7 @@
     <title>Manual Teknikal Kesihatan Awam NCD | JKN Perlis</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="icon" type="image/png" href="images/logo.png">
+    <link class="dinamik-logo-icon" rel="icon" type="image/png" href="images/logo.png">
     <style>
         body { font-family: 'Inter', sans-serif; }
         .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -22,52 +22,130 @@
         .custom-scrollbar::-webkit-scrollbar-track { background: rgba(0,0,0,0.01); }
         .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.08); border-radius: 99px; }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.2); }
+
+        /* ==========================================================================
+           ENJIN VARIABLES TEMA: CROSS-PAGE RETENTION (SERAGAM DENGAN INDEX)
+           ========================================================================== */
+        :root {
+            --bg-utama: #FAFAFA;
+            --bg-kad: #FFFFFF;
+            --border-warna: #F3F4F6;   /* gray-100 */
+            --teks-tajuk: #101e33;     
+            --teks-biasa: #1E1E1E;     
+            --teks-sub: #9CA3AF;       /* gray-400 */
+            --bg-input: #FFFFFF;
+        }
+
+        [data-theme="dark"] {
+            --bg-utama: #0B132B;       
+            --bg-kad: #1C2541;         
+            --border-warna: #3A506B;   
+            --teks-tajuk: #FFFFFF;     
+            --teks-biasa: #E2E8F0;     
+            --teks-sub: #94A3B8;       
+            --bg-input: #1C2541;
+        }
+
+        [data-theme="blue"] {
+            --bg-utama: #EBF4FA;       
+            --bg-kad: #FFFFFF;         
+            --border-warna: #B9D9EB;   
+            --teks-tajuk: #0F4C81;     
+            --teks-biasa: #1C3D5A;
+            --teks-sub: #5B7083;
+            --bg-input: #FFFFFF;
+        }
+
+        [data-theme="emerald"] {
+            --bg-utama: #F0F9F4;       
+            --bg-kad: #FFFFFF;
+            --border-warna: #C2E7D9;
+            --teks-tajuk: #064E3B;     
+            --teks-biasa: #113F31;
+            --teks-sub: #6B8E80;
+            --bg-input: #FFFFFF;
+        }
+
+        [data-theme="bronze"] {
+            --bg-utama: #F9F6F0;       
+            --bg-kad: #FFFFFF;
+            --border-warna: #EADBC8;
+            --teks-tajuk: #5C3D2E;     
+            --teks-biasa: #3A2618;
+            --teks-sub: #A084DC;
+            --bg-input: #FFFFFF;
+        }
+
+        [data-theme="amethyst"] {
+            --bg-utama: #F3F1FA;       
+            --bg-kad: #FFFFFF;
+            --border-warna: #E1D9F2;
+            --teks-tajuk: #4A2E80;     
+            --teks-biasa: #26164D;
+            --teks-sub: #8C7BB3;
+            --bg-input: #FFFFFF;
+        }
+
+        /* Kelas Pengikat Warna Mengatasi Hardcoded Tailwind */
+        .dinamik-bg-utama { background-color: var(--bg-utama) !important; transition: all 0.3s ease; }
+        .dinamik-bg-kad { background-color: var(--bg-kad) !important; transition: all 0.3s ease; }
+        .dinamik-border { border-color: var(--border-warna) !important; transition: all 0.3s ease; }
+        .dinamik-teks-tajuk { color: var(--teks-tajuk) !important; }
+        .dinamik-teks-biasa { color: var(--teks-biasa) !important; }
+        .dinamik-teks-sub { color: var(--teks-sub) !important; }
+        .dinamik-bg-input { background-color: var(--bg-input) !important; transition: all 0.3s ease; }
     </style>
 </head>
-<body class="h-screen w-screen overflow-hidden flex flex-col bg-[#FAFAFA] text-[#1E1E1E] antialiased">
+<body class="h-screen w-screen overflow-hidden flex flex-col bg-[#FAFAFA] text-[#1E1E1E] antialiased dinamik-bg-utama dinamik-teks-biasa">
 
-    <!-- HEADER NAVIGATION -->
-    <header class="w-full py-3.5 px-4 md:px-12 bg-white border-b border-gray-100 flex flex-row items-center justify-between gap-2 z-20 flex-shrink-0 shadow-xs">
+    <header class="w-full py-2 md:py-3 px-4 md:px-12 bg-white border-b border-gray-100 flex flex-row items-center justify-between gap-2 z-20 flex-shrink-0 shadow-xs dinamik-bg-kad dinamik-border">
         <div class="flex items-center space-x-3 md:space-x-4">
-            <img src="images/logo.png" style="max-width: 36px;" class="w-full h-auto object-contain md:max-w-[48px]">
-            <img src="images/logo-ncd/logo-ncd-default.png" style="max-width: 95px;" class="md:max-w-[140px]">
-            <div class="w-[1px] h-6 bg-gray-200"></div>
-            <h2 class="text-[8px] md:text-xs font-bold tracking-[0.12em] md:tracking-[0.18em] uppercase text-[#101e33] leading-tight">
+            <img src="images/logo.png" style="max-width: 28px;" class="w-full h-auto object-contain mx-auto md:max-w-[42px]">
+            <img src="images/logo-ncd/logo-ncd-default.png" style="max-width: 80px;" class="md:max-w-[130px]">
+            <div class="w-[1px] h-4 md:h-6 bg-gray-200"></div>
+            <h2 class="text-[7.5px] md:text-[11px] font-bold tracking-[0.08em] md:tracking-[0.15em] uppercase text-[#101e33] leading-tight dinamik-teks-tajuk">
                 Kawalan Penyakit Tidak Berjangkit (NCD)<br>
-                <span class="text-gray-400 font-medium text-[7px] md:text-[9px]">Jabatan Kesihatan Negeri Perlis</span>
+                <span class="text-gray-400 font-medium text-[6.5px] md:text-[8px] dinamik-teks-sub">Jabatan Kesihatan Negeri Perlis</span>
             </h2>
         </div>
-        <a href="index.html" class="text-xs font-bold text-gray-600 hover:text-[#101e33] border border-gray-200/80 px-3.5 py-1.5 rounded-xl bg-white transition-all shadow-xs hover:shadow-sm active:scale-95">← Hub Utama</a>
+
+        <div class="flex items-center space-x-2 md:space-x-5">
+            <div class="relative inline-block text-left z-30">
+                <select id="themeSelect" onchange="tukarTemaSistem(this.value)" class="dinamik-bg-utama dinamik-teks-tajuk border dinamik-border text-[11px] font-bold py-1.5 px-2.5 rounded-xl focus:outline-none cursor-pointer shadow-xs transition-all">
+                    <option value="default">⚪ Default</option>
+                    <option value="dark">🌙 Mod Gelap</option>
+                    <option value="blue">🔵 Mod Biru</option>
+                    <option value="emerald">🟢 Mod Zamrud</option>
+                    <option value="bronze">🍂 Mod Gangsa</option>
+                    <option value="amethyst">🍇 Mod Amethis</option>
+                </select>
+            </div>
+            <a href="index.html" class="text-xs font-bold text-gray-600 hover:text-[#101e33] border border-gray-200/80 px-3.5 py-1.5 rounded-xl bg-white transition-all shadow-xs hover:shadow-sm active:scale-95">← Hub Utama</a>
+        </div>
     </header>
 
-    <!-- CORE WORKSPACE -->
     <div class="flex flex-1 overflow-hidden w-full relative">
 
-        <!-- MOBILE SIDEBAR OVERLAY -->
         <div id="sidebarOverlay" onclick="toggleSidebar()" class="fixed inset-0 bg-black/30 backdrop-blur-xs z-30 hidden md:hidden opacity-0 transition-opacity duration-300"></div>
 
-        <!-- SIDEBAR PANEL -->
-        <aside id="technicalSidebar" class="fixed md:relative inset-y-0 left-0 z-40 w-76 md:w-76 bg-white border-r border-gray-100 flex flex-col flex-shrink-0 no-scrollbar overflow-y-auto transition-all duration-300 transform -translate-x-full md:translate-x-0 h-full">
-            <div class="p-4 border-b border-gray-100 flex-shrink-0 bg-[#FDFDFD] flex items-center justify-between">
+        <aside id="technicalSidebar" class="fixed md:relative inset-y-0 left-0 z-40 w-76 md:w-76 bg-white border-r border-gray-100 flex flex-col flex-shrink-0 no-scrollbar overflow-y-auto transition-all duration-300 transform -translate-x-full md:translate-x-0 h-full dinamik-bg-kad dinamik-border">
+            <div class="p-4 border-b border-gray-100 flex-shrink-0 bg-[#FDFDFD] flex items-center justify-between dinamik-border text-slate-800">
                 <div>
-                    <span class="text-[9px] font-bold tracking-[0.15em] text-gray-400 uppercase block">Struktur Dokumentasi</span>
-                    <h3 class="text-xs font-bold text-[#101e33] mt-0.5">14 Manual Operasi Teknikal</h3>
+                    <span class="text-[9px] font-bold tracking-[0.15em] text-gray-400 uppercase block dinamik-teks-sub">Struktur Dokumentasi</span>
+                    <h3 class="text-xs font-bold text-[#101e33] mt-0.5 dinamik-teks-tajuk">14 Manual Operasi Teknikal</h3>
                 </div>
-                <button onclick="toggleSidebar()" class="md:hidden text-gray-400 hover:text-gray-600 font-medium p-1 text-xs border border-gray-100 rounded-lg bg-white shadow-xs">✕ Close</button>
+                <button onclick="toggleSidebar()" class="md:hidden text-gray-400 hover:text-gray-600 font-medium p-1 text-xs border border-gray-100 rounded-lg bg-white shadow-xs dinamik-bg-utama dinamik-teks-biasa">✕ Close</button>
             </div>
             
             <nav id="technicalMenu" class="flex-1 p-2.5 space-y-1 overflow-y-auto custom-scrollbar">
-                <!-- Dijana Dinamik Melalui JavaScript -->
-            </nav>
+                </nav>
         </aside>
 
-        <!-- DESKTOP DRAWBOLT FLAP TOGGLE -->
         <button id="toggleSidebarBtn" onclick="toggleSidebar()" class="hidden md:flex absolute left-76 top-4 z-30 w-8 h-8 items-center justify-center rounded-full bg-[#101e33] text-white shadow-md border border-white/10 transition-all duration-300 active:scale-95 hover:scale-110 text-[10px]">
             ◀
         </button>
 
-        <!-- MAIN VIEWPORT DISPLAY -->
-        <section class="flex-1 bg-[#FAFAFA] flex flex-col overflow-y-auto custom-scrollbar h-full relative">
+        <section class="flex-1 bg-[#FAFAFA] flex flex-col overflow-y-auto custom-scrollbar h-full relative dinamik-bg-utama">
             
             <div class="w-full h-40 md:h-52 relative overflow-hidden bg-slate-900 flex-shrink-0">
                 <img id="programHeaderImg" src="" alt="Branding Banner" class="w-full h-full object-cover opacity-65 scale-105 transition-transform duration-700">
@@ -75,105 +153,100 @@
             </div>
 
             <div id="contentFrame" class="p-4 md:p-8 w-full max-w-4xl mx-auto space-y-5 pb-24 -mt-16 md:-mt-24 relative z-10 page-transition">
-                
-                <!-- MAIN HERO BLOCK -->
-                <div class="bg-white/80 backdrop-blur-xl p-5 md:p-6 border border-white rounded-3xl shadow-md flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                    <div class="space-y-1">
-                        <span id="techBadge" class="inline-block text-[8px] font-bold tracking-[0.1em] text-white uppercase px-2.5 py-0.5 rounded-md shadow-xs">KOD</span>
-                        <h1 id="techTitle" class="text-xl md:text-2xl font-extrabold text-[#101e33] tracking-tight leading-tight">-</h1>
-                        <p id="techSubtitle" class="text-xs md:text-sm text-gray-500 font-light leading-relaxed max-w-2xl">-</p>
+                <div class="bg-amber-50/80 backdrop-blur-md border border-amber-200/70 p-3.5 px-4 rounded-2xl flex items-center space-x-3 shadow-xs">
+                    <span class="text-lg flex-shrink-0">⚠️</span>
+                    <div class="min-w-0 flex-1">
+                        <h5 class="text-xs font-bold text-amber-900 leading-none">Modul Laman Masih Dalam Pembangunan</h5>
+                        <p class="text-[10.5px] text-amber-700/90 font-light mt-0.5 leading-tight">Unit NCD JKN Perlis sedang mengemas kini manual operasi, indikator KPI, dan pautan fail rujukan Google Drive bagi program ini secara berperingkat.</p>
                     </div>
                 </div>
 
-                <!-- SUB-GRID BLOCK -->
+                <div class="bg-white/80 backdrop-blur-xl p-5 md:p-6 border border-white rounded-3xl shadow-md flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 dinamik-bg-kad dinamik-border">
+                    <div class="space-y-1">
+                        <span id="techBadge" class="inline-block text-[8px] font-bold tracking-[0.1em] text-white uppercase px-2.5 py-0.5 rounded-md shadow-xs">KOD</span>
+                        <h1 id="techTitle" class="text-xl md:text-2xl font-extrabold text-[#101e33] tracking-tight leading-tight dinamik-teks-tajuk">-</h1>
+                        <p id="techSubtitle" class="text-xs md:text-sm text-gray-500 font-light leading-relaxed max-w-2xl dinamik-teks-sub">-</p>
+                    </div>
+                </div>
+
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="md:col-span-1 bg-white border border-gray-100 rounded-2xl p-5 shadow-xs flex flex-col justify-between space-y-4">
+                    <div class="md:col-span-1 bg-white border border-gray-100 rounded-2xl p-5 shadow-xs flex flex-col justify-between space-y-4 dinamik-bg-kad dinamik-border">
                         <div class="space-y-2.5">
                             <div class="flex items-center space-x-2 text-gray-400">
                                 <span class="text-base">🎯</span>
-                                <h3 class="text-[10px] font-extrabold uppercase tracking-wider">Skop & Objektif</h3>
+                                <h3 class="text-[10px] font-extrabold uppercase tracking-wider dinamik-teks-tajuk">Skop &amp; Objektif</h3>
                             </div>
-                            <p id="techObj" class="text-xs text-gray-600 font-light leading-relaxed">-</p>
+                            <p id="techObj" class="text-xs text-gray-600 font-light leading-relaxed dinamik-teks-biasa">-</p>
                         </div>
-                        <div class="pt-3 border-t border-gray-50">
-                            <span class="text-[9px] font-bold text-gray-400 block uppercase tracking-wide">Kumpulan Sasar:</span>
-                            <p id="techTarget" class="text-xs font-semibold text-gray-700 mt-0.5 leading-snug">-</p>
+                        <div class="pt-3 border-t border-gray-50 dinamik-border">
+                            <span class="text-[9px] font-bold text-gray-400 block uppercase tracking-wide dinamik-teks-sub">Kumpulan Sasar:</span>
+                            <p id="techTarget" class="text-xs font-semibold text-gray-700 mt-0.5 leading-snug dinamik-teks-tajuk">-</p>
                         </div>
                     </div>
 
-                    <div class="md:col-span-2 bg-white border border-gray-100 rounded-2xl p-5 shadow-xs space-y-3">
+                    <div class="md:col-span-2 bg-white border border-gray-100 rounded-2xl p-5 shadow-xs space-y-3 dinamik-bg-kad dinamik-border">
                         <div class="flex items-center space-x-2 text-gray-400">
                             <span class="text-base">📊</span>
-                            <h3 class="text-[10px] font-extrabold uppercase tracking-wider">Petunjuk Prestasi Utama (KPI Manual)</h3>
+                            <h3 class="text-[10px] font-extrabold uppercase tracking-wider dinamik-teks-tajuk">Petunjuk Prestasi Utama (KPI Manual)</h3>
                         </div>
                         <div id="techKpiContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
-                            <!-- Injeksi Dinamik -->
-                        </div>
+                            </div>
                     </div>
                 </div>
 
-                <!-- BARU: SEKSYEN MENU KALENDAR SAMBUTAN HARI KESIHATAN KKM -->
-                <div id="techCalendarSection" class="bg-white border border-gray-100 rounded-2xl p-5 shadow-xs space-y-3 w-full hidden">
-                    <div class="flex items-center space-x-2 text-gray-400 border-b border-gray-50 pb-2">
+                <div id="techCalendarSection" class="bg-white border border-gray-100 rounded-2xl p-5 shadow-xs space-y-3 w-full hidden dinamik-bg-kad dinamik-border">
+                    <div class="flex items-center space-x-2 text-gray-400 border-b border-gray-50 pb-2 dinamik-border">
                         <span class="text-base">📅</span>
-                        <h3 class="text-[10px] font-extrabold uppercase tracking-wider">Takwim Sambutan Hari Kesihatan Kebangsaan / Sedunia</h3>
+                        <h3 class="text-[10px] font-extrabold uppercase tracking-wider dinamik-teks-tajuk">Takwim Sambutan Hari Kesihatan Kebangsaan / Sedunia</h3>
                     </div>
-                    <div class="flex items-center space-x-4 p-3.5 bg-amber-50/40 border border-amber-100/70 rounded-xl">
-                        <div class="w-14 h-14 bg-white border-2 border-amber-400 rounded-xl shadow-xs flex flex-col items-center justify-center flex-shrink-0 overflow-hidden">
+                    <div class="flex items-center space-x-4 p-3.5 bg-amber-50/40 border border-amber-100/70 rounded-xl dinamik-border">
+                        <div class="w-14 h-14 bg-white border-2 border-amber-400 rounded-xl shadow-xs flex flex-col items-center justify-center flex-shrink-0 overflow-hidden dinamik-bg-kad">
                             <span id="calMonth" class="text-[8px] font-extrabold uppercase tracking-wider bg-amber-400 text-white w-full text-center py-0.5">BULAN</span>
-                            <span id="calDay" class="text-lg font-black text-slate-800 leading-tight">00</span>
+                            <span id="calDay" class="text-lg font-black text-slate-800 leading-tight dinamik-teks-tajuk">00</span>
                         </div>
                         <div class="min-w-0 flex-1">
-                            <h4 id="calEventTitle" class="text-xs font-bold text-[#101e33] truncate">-</h4>
-                            <p id="calEventDesc" class="text-[11px] text-gray-500 font-light mt-0.5 leading-tight">-</p>
+                            <h4 id="calEventTitle" class="text-xs font-bold text-[#101e33] truncate dinamik-teks-tajuk">-</h4>
+                            <p id="calEventDesc" class="text-[11px] text-gray-500 font-light mt-0.5 leading-tight dinamik-teks-sub">-</p>
                         </div>
                     </div>
                 </div>
 
-                <!-- JADUAL RETEN & PELAPORAN DATA -->
-                <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-xs space-y-3 w-full">
-                    <div class="flex items-center space-x-2 text-gray-400 border-b border-gray-50 pb-2">
+                <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-xs space-y-3 w-full dinamik-bg-kad dinamik-border">
+                    <div class="flex items-center space-x-2 text-gray-400 border-b border-gray-50 pb-2 dinamik-border">
                         <span class="text-base">📂</span>
-                        <h3 class="text-[10px] font-extrabold uppercase tracking-wider">Struktur Aliran Reten & Sistem KKM</h3>
+                        <h3 class="text-[10px] font-extrabold uppercase tracking-wider dinamik-teks-tajuk">Struktur Aliran Reten &amp; Sistem KKM</h3>
                     </div>
                     <div class="overflow-x-auto no-scrollbar">
                         <table class="w-full text-left text-xs border-collapse min-w-[500px]">
                             <thead>
-                                <tr class="text-gray-400 font-bold text-[9px] uppercase tracking-wider border-b border-gray-100">
+                                <tr class="text-gray-400 font-bold text-[9px] uppercase tracking-wider border-b border-gray-100 dinamik-border dinamik-teks-sub">
                                     <th class="pb-2 w-1/4">Sistem / Kod Reten</th>
                                     <th class="pb-2 w-1/2">Skop Ringkasan Data</th>
                                     <th class="pb-2 w-1/4 text-right">Kekerapan Pelaporan</th>
                                 </tr>
                             </thead>
-                            <tbody id="techTableBody" class="text-gray-700 font-medium divide-y divide-gray-50">
-                                <!-- Injeksi Dinamik -->
-                            </tbody>
+                            <tbody id="techTableBody" class="text-gray-700 font-medium divide-y divide-gray-50 dinamik-border">
+                                </tbody>
                         </table>
                     </div>
                 </div>
 
-                <!-- BUTANG HUBUNGAN GOOGLE DRIVE -->
                 <div id="techReferenceContainer" class="p-4 rounded-2xl flex items-center justify-between shadow-xs transition-all duration-300">
-                    <!-- Injeksi Dinamik -->
-                </div>
+                    </div>
             </div>
 
-            <!-- FOOTER -->
-            <footer class="w-full bg-white py-4 px-6 text-center border-t border-gray-100 mt-auto z-20 flex-shrink-0">
-                <p class="text-[10px] text-gray-400 font-medium tracking-wide uppercase">
+            <footer class="w-full bg-white py-4 px-6 text-center border-t border-gray-100 mt-auto z-20 flex-shrink-0 dinamik-bg-kad dinamik-border">
+                <p class="text-[10px] text-gray-400 font-medium tracking-wide uppercase dinamik-teks-sub">
                     Hak Cipta © 2026 Unit Kawalan Penyakit Tidak Berjangkit (NCD), Jabatan Kesihatan Negeri Perlis
                 </p>
             </footer>
         </section>
     </div>
 
-    <!-- FLOATING MENU BUTTON FOR MOBILE VIEW -->
     <button id="mobileMenuBtn" onclick="toggleSidebar()" class="md:hidden fixed bottom-6 right-6 z-50 flex items-center space-x-2 py-3 px-5 bg-[#101e33] text-white font-bold text-xs rounded-full shadow-2xl transition-all duration-300 border border-white/10 active:scale-90">
         <span>📂</span> <span>Pilih Manual</span>
     </button>
 
-    <!-- PROGRAM ENGINE SCRIPTS -->
-    <!-- ENJIN TEMA PINTAR, SUBMENU & TAKWIM MEGA BERSEPADU (EDISI EDISI KHAS 2026) -->
     <script>
         let isSidebarOpen = true;
 
@@ -353,7 +426,7 @@
                 headerImg: "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?auto=format&fit=crop&w=1200&q=80",
                 title: "7. Program OSCC, SCAN & Pencegahan Keganasan",
                 subtitle: "Sistem krisis sehenti (OSCC), pengesanan kes keganasan rumahtangga, kes penderaan kanak-kanak (SCAN), and navigasi pesakit kanser.",
-                obj: "Menyediakan rawatan perubatan kecemasan, perlindungan psikososial krisis, and dokumentasi medikolegal mangsa keganasan dan penderaan.",
+                obj: "Menyediakan rawatan perubatan kecemasan, perlindungan psikososial krisis, and documentation medikolegal mangsa keganasan dan penderaan.",
                 target: "Kanak-kanak disyaki didera/diabaikan, mangsa keganasan rumah tangga, and pesakit pengurusan navigasi kanser.",
                 kpi: [
                     { value: "< 60 Min", label: "Masa respon awal pasukan perubatan merawat krisis mangsa keganasan di bilik OSCC." },
@@ -430,7 +503,7 @@
                 title: "11. Program Pemantauan Vending Machine",
                 subtitle: "Sistem pemantauan pelabelan makanan sihat dan kawalan penjualan produk minuman tinggi gula pada mesin layan diri.",
                 obj: "Memastikan pematuhan garis panduan pemakanan sihat di premis kerajaan, sekolah, and fasiliti kesihatan.",
-                target: "Semua pengoperator mesin jualan makanan/minuman automatik yang beroperasi di zon kawalan agensi.",
+                target: "Mesin layan diri jualan makanan/minuman automatik di zon agensi.",
                 kpi: [
                     { value: "100%", label: "Audit penuh kepatuhan kriteria pelabelan kalori makanan dan had kandungan gula." },
                     { value: "Sifar", label: "Toleransi penjualan produk larangan (minuman bertenaga/gula tinggi) di zon KKM." }
@@ -439,7 +512,7 @@
                     { kod: "Reten Pemantauan Vending", desc: "Log pendaftaran premis, rekod kandungan kalori/gula produk, and borang pematuhan audit fizikal.", freq: "Setengah Tahun" }
                 ],
                 ref: "Garis Panduan Penjualan Makanan Sihat Melalui Mesin Layan Diri Bahagian Pemakanan KKM.",
-                downloadUrl: "https://drive.google.com/file/d/SILA_MASUKKAN_ID_FILE_DRIVE_DI_SINI/view?usp=sharing",
+                downloadUrl: "#",
                 calendar: null
             },
             cancer_registry: {
@@ -449,7 +522,7 @@
                 title: "12. Program National Cancer Registry (NCR)",
                 subtitle: "Sistem notifikasi mandatori pendaftaran kes baharu penyakit kanser bagi tujuan epidemiologi kanser.",
                 obj: "Mengumpul data komprehensif kejadian kes kanser, peringkat (staging), and taburan demografi untuk perancangan onkologi.",
-                target: "Semua pesakit yang disahkan menghidap kanser melalui diagnosis histopatologi (biopsi) atau sitologi.",
+                target: "Semua kes onkologi dan patologi kanser baru di negeri Perlis.",
                 kpi: [
                     { value: "< 30 Hari", label: "Tempoh maksimum pelaporan data kes kanser baharu dihantar selepas pengesahan makmal." },
                     { value: "Standard", label: "Kepatuhan pengkodan histologi berpandukan kod anatomi mikroskopi morfologi ICD-O." }
@@ -458,7 +531,7 @@
                     { kod: "Sistem e-Cancer Registry", desc: "Data klinikal jenis kanser, kaedah rawatan (pembedahan/kemoterapi), and status survival pesakit.", freq: "Setiap Kes Baru" }
                 ],
                 ref: "Manual Arahan Pendaftaran Kanser Kebangsaan, Malaysian National Cancer Registry (MNCR).",
-                downloadUrl: "https://drive.google.com/file/d/SILA_MASUKKAN_ID_FILE_DRIVE_DI_SINI/view?usp=sharing",
+                downloadUrl: "#",
                 calendar: null
             },
             obesiti: {
@@ -501,12 +574,11 @@
             }
         };
 
-        // BINA ITEM MENU SIDEBAR + BUTANG MEGA TAKWIM TAHUNAN
+        // BINA ITEM MENU SIDEBAR + SUBMENU ACCORDION
         function buildSidebarMenu() {
             const menuContainer = document.getElementById("technicalMenu");
             menuContainer.innerHTML = "";
 
-            // 1. Bina 14 Senarai Utama Terlebih Dahulu
             Object.keys(technicalData).forEach((key) => {
                 const item = technicalData[key];
                 const blockWrapper = document.createElement("div");
@@ -515,7 +587,7 @@
                 const mainBtn = document.createElement("button");
                 mainBtn.id = `menu-${key}`;
                 mainBtn.onclick = () => switchProgram(key);
-                mainBtn.className = `w-full flex items-center px-4 py-2.5 text-xs font-semibold rounded-xl transition-all duration-200 text-left border border-transparent text-gray-600 ${item.hoverBg}`;
+                mainBtn.className = `w-full flex items-center px-4 py-2.5 text-xs font-semibold rounded-xl transition-all duration-200 text-left border border-transparent text-gray-600 ${item.hoverBg} dinamik-teks-biasa`;
                 mainBtn.innerHTML = `<span class="truncate">${item.title}</span>`;
                 blockWrapper.appendChild(mainBtn);
 
@@ -524,19 +596,19 @@
                 subMenuContainer.className = "pl-6 pr-2 py-1 flex flex-col space-y-1 hidden";
 
                 const subItemObj = document.createElement("button");
-                subItemObj.className = "text-[11px] text-gray-400 hover:text-[#101e33] py-1 text-left font-medium transition-colors border-l-2 border-gray-100 pl-3 focus:outline-none";
+                subItemObj.className = "text-[11px] text-gray-400 hover:text-[#101e33] py-1 text-left font-medium transition-colors border-l-2 border-gray-100 pl-3 focus:outline-none dinamik-teks-sub";
                 subItemObj.innerText = "↳ Skop & Objektif";
                 subItemObj.onclick = (e) => { e.stopPropagation(); scrollToSection('techObj'); };
                 subMenuContainer.appendChild(subItemObj);
 
                 const subItemKpi = document.createElement("button");
-                subItemKpi.className = "text-[11px] text-gray-400 hover:text-[#101e33] py-1 text-left font-medium transition-colors border-l-2 border-gray-100 pl-3 focus:outline-none";
+                subItemKpi.className = "text-[11px] text-gray-400 hover:text-[#101e33] py-1 text-left font-medium transition-colors border-l-2 border-gray-100 pl-3 focus:outline-none dinamik-teks-sub";
                 subItemKpi.innerText = "↳ Indikator KPI";
                 subItemKpi.onclick = (e) => { e.stopPropagation(); scrollToSection('techKpiContainer'); };
                 subMenuContainer.appendChild(subItemKpi);
 
                 const subItemTable = document.createElement("button");
-                subItemTable.className = "text-[11px] text-gray-400 hover:text-[#101e33] py-1 text-left font-medium transition-colors border-l-2 border-gray-100 pl-3 focus:outline-none";
+                subItemTable.className = "text-[11px] text-gray-400 hover:text-[#101e33] py-1 text-left font-medium transition-colors border-l-2 border-gray-100 pl-3 focus:outline-none dinamik-teks-sub";
                 subItemTable.innerText = "↳ Aliran Reten & Sistem";
                 subItemTable.onclick = (e) => { e.stopPropagation(); scrollToSection('techTableBody'); };
                 subMenuContainer.appendChild(subItemTable);
@@ -545,9 +617,9 @@
                 menuContainer.appendChild(blockWrapper);
             });
 
-            // 2. SUNTIKAN KREATIF: Tambah Pembahagi Dan Butang Menu Takwim Mega KKM di Penghujung Sidebar
+            // Tambah Pembahagi Dan Butang Menu Takwim Mega KKM di Penghujung Sidebar
             const divider = document.createElement("div");
-            divider.className = "h-[1px] bg-gray-100 my-4 mx-2";
+            divider.className = "h-[1px] bg-gray-100 my-4 mx-2 dinamik-border";
             menuContainer.appendChild(divider);
 
             const calMenuBtn = document.createElement("button");
@@ -567,27 +639,15 @@
             }
         }
 
-        // FUNGSI UTAMA: MENJANA GRID KALENDAR INTERAKTIF 12 BULAN DI PANEL KANAN
-        // FUNGSI UTAMA (DIKEMASKINI): MENJANA GRID KALENDAR INTERAKTIF MULTI-EVENT 12 BULAN
+        // MENJANA GRID KALENDAR INTERAKTIF MULTI-EVENT 12 BULAN DI PANEL KANAN
         function displayMegaCalendar() {
-            // Set Banner Hero Khas untuk Kalendar
             document.getElementById("programHeaderImg").src = "https://images.unsplash.com/photo-1506784983877-45594efa4cbe?auto=format&fit=crop&w=1200&q=80";
-
-            // Matikan semua status aktif pada butang 14 program lama
-            Object.keys(technicalData).forEach((key) => {
-                document.getElementById(`menu-${key}`).className = `w-full flex items-center px-4 py-2.5 text-xs font-semibold rounded-xl transition-all duration-200 text-left border border-transparent text-gray-600 ${technicalData[key].hoverBg}`;
-                document.getElementById(`submenu-container-${key}`).classList.add("hidden");
-            });
-
-            // Warnakan Butang Menu Kalendar menjadi aktif (Emas Menyala)
-            document.getElementById("menu-mega-calendar").className = "w-full flex items-center px-4 py-3 text-xs font-bold rounded-xl border border-transparent bg-amber-500 text-white shadow-md shadow-amber-100";
 
             const contentFrame = document.getElementById("contentFrame");
             contentFrame.classList.remove("page-transition");
             void contentFrame.offsetWidth;
             contentFrame.classList.add("page-transition");
 
-            // Senarai Susunan Bulan Setahun
             const monthsArray = [
                 { m: "Jan", full: "Januari" }, { m: "Feb", full: "Februari" }, { m: "Mac", full: "Mac" },
                 { m: "Apr", full: "April" }, { m: "Mei", full: "Mei" }, { m: "Jun", full: "Jun" },
@@ -598,34 +658,26 @@
             let gridHtml = "";
 
             monthsArray.forEach(monthItem => {
-                // BARU: Kumpul semua program yang berkongsi bulan sambutan yang sama ke dalam tatasusunan (Array)
                 let matchedEvents = [];
-
                 Object.keys(technicalData).forEach(key => {
                     const item = technicalData[key];
                     if (item.calendar && item.calendar.month.toLowerCase() === monthItem.m.toLowerCase()) {
-                        matchedEvents.push({
-                            key: key,
-                            data: item
-                        });
+                        matchedEvents.push({ key: key, data: item });
                     }
                 });
 
                 if (matchedEvents.length > 0) {
-                    // JIKA ADA SAMBUTAN (Sama ada satu atau lebih)
                     let eventsHtml = "";
-                    
-                    // Bina sub-kad bagi setiap sambutan yang ditemui di dalam bulan tersebut
                     matchedEvents.forEach(event => {
                         const eData = event.data;
                         eventsHtml += `
-                            <div class="p-3 bg-gray-50/60 border-l-4 border border-gray-100 rounded-xl flex flex-col justify-between space-y-2" style="border-left-color: ${eData.badgeBg.includes('blue') ? '#2563eb' : eData.badgeBg.includes('red') ? '#dc2626' : eData.badgeBg.includes('emerald') ? '#059669' : eData.badgeBg.includes('purple') ? '#8b5cf6' : eData.badgeBg.includes('amber') ? '#d97706' : eData.badgeBg.includes('lime') ? '#65a30d' : eData.badgeBg.includes('rose') ? '#f43f5e' : eData.badgeBg.includes('sky') ? '#0ea5e9' : '#4b5563'}">
+                            <div class="p-3 bg-gray-50/60 border-l-4 border border-gray-100 rounded-xl flex flex-col justify-between space-y-2 dinamik-border" style="border-left-color: ${eData.badgeBg.includes('blue') ? '#2563eb' : eData.badgeBg.includes('red') ? '#dc2626' : eData.badgeBg.includes('emerald') ? '#059669' : eData.badgeBg.includes('purple') ? '#8b5cf6' : eData.badgeBg.includes('amber') ? '#d97706' : eData.badgeBg.includes('lime') ? '#65a30d' : eData.badgeBg.includes('rose') ? '#f43f5e' : eData.badgeBg.includes('sky') ? '#0ea5e9' : '#4b5563'}">
                                 <div class="flex items-center justify-between gap-2">
-                                    <h4 class="text-[11px] font-bold text-[#101e33] leading-tight truncate flex-1">${eData.calendar.title}</h4>
+                                    <h4 class="text-[11px] font-bold text-[#101e33] leading-tight truncate flex-1 dinamik-teks-tajuk">${eData.calendar.title}</h4>
                                     <span class="px-1.5 py-0.5 text-[9px] font-black text-white rounded-md flex-shrink-0 ${eData.badgeBg}">${eData.calendar.day} ${monthItem.m}</span>
                                 </div>
-                                <p class="text-[10px] text-gray-400 font-light leading-tight line-clamp-2">${eData.calendar.desc}</p>
-                                <button onclick="switchProgram('${event.key}')" class="w-full text-center py-1 bg-white hover:bg-gray-100 rounded-lg text-[9px] font-bold text-gray-600 transition-colors border border-gray-100 active:scale-95">
+                                <p class="text-[10px] text-gray-400 font-light leading-tight line-clamp-2 dinamik-teks-sub">${eData.calendar.desc}</p>
+                                <button onclick="switchProgram('${event.key}')" class="w-full text-center py-1 bg-white hover:bg-gray-100 rounded-lg text-[9px] font-bold text-gray-600 transition-colors border border-gray-100 active:scale-95 dinamik-bg-kad dinamik-border dinamik-teks-biasa">
                                     Lihat Manual ↗
                                 </button>
                             </div>
@@ -633,31 +685,29 @@
                     });
 
                     gridHtml += `
-                        <div class="bg-white border border-gray-100 rounded-2xl p-4 shadow-xs flex flex-col space-y-3">
-                            <span class="text-xs font-black text-slate-800 tracking-tight border-b border-gray-50 pb-1.5 block">${monthItem.full}</span>
+                        <div class="bg-white border border-gray-100 rounded-2xl p-4 shadow-xs flex flex-col space-y-3 dinamik-bg-kad dinamik-border">
+                            <span class="text-xs font-black text-slate-800 tracking-tight border-b border-gray-50 pb-1.5 block dinamik-teks-tajuk">${monthItem.full}</span>
                             <div class="flex flex-col space-y-2 overflow-y-auto max-h-[280px] no-scrollbar">
                                 ${eventsHtml}
                             </div>
                         </div>
                     `;
                 } else {
-                    // JIKA TIADA SAMBUTAN: Kekal kad pudar kosong yang minimalis
                     gridHtml += `
-                        <div class="bg-white/50 border border-gray-100/60 rounded-2xl p-4 flex flex-col justify-between min-h-[140px] opacity-60">
-                            <span class="text-xs font-semibold text-gray-400">${monthItem.full}</span>
-                            <p class="text-[10px] text-gray-300 font-light italic mt-4">Tiada takwim sambutan khusus</p>
+                        <div class="bg-white/50 border border-gray-100/60 rounded-2xl p-4 flex flex-col justify-between min-h-[140px] opacity-60 dinamik-border">
+                            <span class="text-xs font-semibold text-gray-400 dinamik-teks-sub">${monthItem.full}</span>
+                            <p class="text-[10px] text-gray-300 font-light italic mt-4 dinamik-teks-sub">Tiada takwim sambutan khusus</p>
                             <div class="h-6"></div>
                         </div>
                     `;
                 }
             });
 
-            // Suntik Reka Bentuk Penuh Baru ke dalam Frame Kanan
             contentFrame.innerHTML = `
-                <div class="bg-white/80 backdrop-blur-xl p-5 border border-white rounded-3xl shadow-md">
+                <div class="bg-white/80 backdrop-blur-xl p-5 border border-white rounded-3xl shadow-md dinamik-bg-kad dinamik-border">
                     <span class="inline-block text-[8px] font-extrabold tracking-wider text-white uppercase px-2.5 py-0.5 rounded-md shadow-xs bg-amber-500">TAKWIM INTERAKTIF</span>
-                    <h1 class="text-xl md:text-2xl font-black text-[#101e33] tracking-tight leading-tight mt-1">Takwim Sambutan Hari Kesihatan Kebangsaan / Sedunia</h1>
-                    <p class="text-xs text-gray-400 font-light leading-relaxed mt-1">Himpunan jadual kalendar kempen kesedaran awam di bawah portfolio Unit Kawalan Penyakit Tidak Berjangkit (NCD) KKM. Menyokong paparan berbilang acara dalam sebulan.</p>
+                    <h1 class="text-xl md:text-2xl font-black text-[#101e33] tracking-tight leading-tight mt-1 dinamik-teks-tajuk">Takwim Sambutan Hari Kesihatan Kebangsaan / Sedunia</h1>
+                    <p class="text-xs text-gray-400 font-light leading-relaxed mt-1 dinamik-teks-sub">Himpunan jadual kalendar kempen kesedaran awam di bawah portfolio Unit Kawalan Penyakit Tidak Berjangkit (NCD) KKM. Menyokong paparan berbilang acara dalam sebulan.</p>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 pt-2">
@@ -665,25 +715,46 @@
                 </div>
             `;
 
+            tapisWarnaButangMenu('menu-mega-calendar');
+
             if (window.innerWidth < 768) {
-                const sidebar = document.getElementById("technicalSidebar");
-                const overlay = document.getElementById("sidebarOverlay");
-                sidebar.classList.add("-translate-x-full");
-                overlay.classList.remove("opacity-100");
-                setTimeout(() => overlay.classList.add("hidden"), 300);
+                toggleSidebar();
             }
         }
 
-        // ENJIN SUNTIKAN KANDUNGAN PROGRAM STANDARD (SAMA SEPERTI ASAL)
-        // ENJIN SUNTIKAN KANDUNGAN PROGRAM STANDARD (DIKEMASKINI DENGAN BANNER PEMBANGUNAN)
+        function tapisWarnaButangMenu(activeId) {
+            Object.keys(technicalData).forEach((key) => {
+                const btn = document.getElementById(`menu-${key}`);
+                const subContainer = document.getElementById(`submenu-container-${key}`);
+                if (btn) {
+                    if (`menu-${key}` === activeId) {
+                        btn.className = `w-full flex items-center px-4 py-2.5 text-xs font-bold rounded-xl transition-all duration-200 text-left border border-transparent ${technicalData[key].activeMenuBg} shadow-md`;
+                        if (subContainer) subContainer.classList.remove("hidden");
+                    } else {
+                        btn.className = `w-full flex items-center px-4 py-2.5 text-xs font-semibold rounded-xl transition-all duration-200 text-left border border-transparent text-gray-600 ${technicalData[key].hoverBg} dinamik-teks-biasa`;
+                        if (subContainer) subContainer.classList.add("hidden");
+                    }
+                }
+            });
+
+            const megaCalBtn = document.getElementById("menu-mega-calendar");
+            if (megaCalBtn) {
+                if (activeId === 'menu-mega-calendar') {
+                    megaCalBtn.className = "w-full flex items-center px-4 py-3 text-xs font-bold rounded-xl border border-transparent bg-amber-500 text-white shadow-md shadow-amber-100";
+                } else {
+                    megaCalBtn.className = "w-full flex items-center px-4 py-3 text-xs font-bold rounded-xl border border-amber-200 bg-amber-50/40 text-amber-800 transition-all duration-300 shadow-xs hover:bg-amber-100/70";
+                }
+            }
+        }
+
+        // ENJIN SUNTIKAN KANDUNGAN PROGRAM STANDARD (DIKEMASKINI DENGAN STRUKTUR ASAL)
         function switchProgram(programKey) {
             const data = technicalData[programKey];
             if (!data) return;
 
-            // Kembalikan struktur HTML Frame Asal sekiranya ia baru lepas memaparkan Kalendar Mega
+            // RESTORE BENTUK STRUKTUR ASAL SUPAYA INFO DAN FIELD TIDAK LENYAP
             const contentFrame = document.getElementById("contentFrame");
             contentFrame.innerHTML = `
-                <!-- BARU: BANNER MAKLUMAN DALAM PEMBANGUNAN -->
                 <div class="bg-amber-50/80 backdrop-blur-md border border-amber-200/70 p-3.5 px-4 rounded-2xl flex items-center space-x-3 shadow-xs">
                     <span class="text-lg flex-shrink-0">⚠️</span>
                     <div class="min-w-0 flex-1">
@@ -692,70 +763,70 @@
                     </div>
                 </div>
 
-                <div class="bg-white/80 backdrop-blur-xl p-5 md:p-6 border border-white rounded-3xl shadow-md flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div class="bg-white/80 backdrop-blur-xl p-5 md:p-6 border border-white rounded-3xl shadow-md flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 dinamik-bg-kad dinamik-border">
                     <div class="space-y-1">
                         <span id="techBadge" class="inline-block text-[8px] font-bold tracking-[0.1em] text-white uppercase px-2.5 py-0.5 rounded-md shadow-xs">KOD</span>
-                        <h1 id="techTitle" class="text-xl md:text-2xl font-extrabold text-[#101e33] tracking-tight leading-tight">-</h1>
-                        <p id="techSubtitle" class="text-xs md:text-sm text-gray-500 font-light leading-relaxed max-w-2xl">-</p>
+                        <h1 id="techTitle" class="text-xl md:text-2xl font-extrabold text-[#101e33] tracking-tight leading-tight dinamik-teks-tajuk">-</h1>
+                        <p id="techSubtitle" class="text-xs md:text-sm text-gray-500 font-light leading-relaxed max-w-2xl dinamik-teks-sub">-</p>
                     </div>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    <div class="md:col-span-1 bg-white border border-gray-100 rounded-2xl p-5 shadow-xs flex flex-col justify-between space-y-4">
+                    <div class="md:col-span-1 bg-white border border-gray-100 rounded-2xl p-5 shadow-xs flex flex-col justify-between space-y-4 dinamik-bg-kad dinamik-border">
                         <div class="space-y-2.5">
                             <div class="flex items-center space-x-2 text-gray-400">
                                 <span class="text-base">🎯</span>
-                                <h3 class="text-[10px] font-extrabold uppercase tracking-wider">Skop &amp; Objektif</h3>
+                                <h3 class="text-[10px] font-extrabold uppercase tracking-wider dinamik-teks-tajuk">Skop &amp; Objektif</h3>
                             </div>
-                            <p id="techObj" class="text-xs text-gray-600 font-light leading-relaxed">-</p>
+                            <p id="techObj" class="text-xs text-gray-600 font-light leading-relaxed dinamik-teks-biasa">-</p>
                         </div>
-                        <div class="pt-3 border-t border-gray-50">
-                            <span class="text-[9px] font-bold text-gray-400 block uppercase tracking-wide">Kumpulan Sasar:</span>
-                            <p id="techTarget" class="text-xs font-semibold text-gray-700 mt-0.5 leading-snug">-</p>
+                        <div class="pt-3 border-t border-gray-50 dinamik-border">
+                            <span class="text-[9px] font-bold text-gray-400 block uppercase tracking-wide dinamik-teks-sub">Kumpulan Sasar:</span>
+                            <p id="techTarget" class="text-xs font-semibold text-gray-700 mt-0.5 leading-snug dinamik-teks-tajuk">-</p>
                         </div>
                     </div>
 
-                    <div class="md:col-span-2 bg-white border border-gray-100 rounded-2xl p-5 shadow-xs space-y-3">
+                    <div class="md:col-span-2 bg-white border border-gray-100 rounded-2xl p-5 shadow-xs space-y-3 dinamik-bg-kad dinamik-border">
                         <div class="flex items-center space-x-2 text-gray-400">
                             <span class="text-base">📊</span>
-                            <h3 class="text-[10px] font-extrabold uppercase tracking-wider">Petunjuk Prestasi Utama (KPI Manual)</h3>
+                            <h3 class="text-[10px] font-extrabold uppercase tracking-wider dinamik-teks-tajuk">Petunjuk Prestasi Utama (KPI Manual)</h3>
                         </div>
                         <div id="techKpiContainer" class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1"></div>
                     </div>
                 </div>
 
-                <div id="techCalendarSection" class="bg-white border border-gray-100 rounded-2xl p-5 shadow-xs space-y-3 w-full hidden">
-                    <div class="flex items-center space-x-2 text-gray-400 border-b border-gray-50 pb-2">
+                <div id="techCalendarSection" class="bg-white border border-gray-100 rounded-2xl p-5 shadow-xs space-y-3 w-full hidden dinamik-bg-kad dinamik-border">
+                    <div class="flex items-center space-x-2 text-gray-400 border-b border-gray-50 pb-2 dinamik-border">
                         <span class="text-base">📅</span>
-                        <h3 class="text-[10px] font-extrabold uppercase tracking-wider">Takwim Sambutan Hari Kesihatan Kebangsaan / Sedunia</h3>
+                        <h3 class="text-[10px] font-extrabold uppercase tracking-wider dinamik-teks-tajuk">Takwim Sambutan Hari Kesihatan Kebangsaan / Sedunia</h3>
                     </div>
-                    <div class="flex items-center space-x-4 p-3.5 bg-amber-50/40 border border-amber-100/70 rounded-xl">
-                        <div class="w-14 h-14 bg-white border-2 border-amber-400 rounded-xl shadow-xs flex flex-col items-center justify-center flex-shrink-0 overflow-hidden">
+                    <div class="flex items-center space-x-4 p-3.5 bg-amber-50/40 border border-amber-100/70 rounded-xl dinamik-border">
+                        <div class="w-14 h-14 bg-white border-2 border-amber-400 rounded-xl shadow-xs flex flex-col items-center justify-center flex-shrink-0 overflow-hidden dinamik-bg-kad">
                             <span id="calMonth" class="text-[8px] font-extrabold uppercase tracking-wider bg-amber-400 text-white w-full text-center py-0.5">BULAN</span>
-                            <span id="calDay" class="text-lg font-black text-slate-800 leading-tight">00</span>
+                            <span id="calDay" class="text-lg font-black text-slate-800 leading-tight dinamik-teks-tajuk">00</span>
                         </div>
                         <div class="min-w-0 flex-1">
-                            <h4 id="calEventTitle" class="text-xs font-bold text-[#101e33] truncate">-</h4>
-                            <p id="calEventDesc" class="text-[11px] text-gray-500 font-light mt-0.5 leading-tight">-</p>
+                            <h4 id="calEventTitle" class="text-xs font-bold text-[#101e33] truncate dinamik-teks-tajuk">-</h4>
+                            <p id="calEventDesc" class="text-[11px] text-gray-500 font-light mt-0.5 leading-tight dinamik-teks-sub">-</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-xs space-y-3 w-full">
-                    <div class="flex items-center space-x-2 text-gray-400 border-b border-gray-50 pb-2">
+                <div class="bg-white border border-gray-100 rounded-2xl p-5 shadow-xs space-y-3 w-full dinamik-bg-kad dinamik-border">
+                    <div class="flex items-center space-x-2 text-gray-400 border-b border-gray-50 pb-2 dinamik-border">
                         <span class="text-base">📂</span>
-                        <h3 class="text-[10px] font-extrabold uppercase tracking-wider">Struktur Aliran Reten &amp; Sistem KKM</h3>
+                        <h3 class="text-[10px] font-extrabold uppercase tracking-wider dinamik-teks-tajuk">Struktur Aliran Reten &amp; Sistem KKM</h3>
                     </div>
                     <div class="overflow-x-auto no-scrollbar">
                         <table class="w-full text-left text-xs border-collapse min-w-[500px]">
                             <thead>
-                                <tr class="text-gray-400 font-bold text-[9px] uppercase tracking-wider border-b border-gray-100">
+                                <tr class="text-gray-400 font-bold text-[9px] uppercase tracking-wider border-b border-gray-100 dinamik-border dinamik-teks-sub">
                                     <th class="pb-2 w-1/4">Sistem / Kod Reten</th>
                                     <th class="pb-2 w-1/2">Skop Ringkasan Data</th>
                                     <th class="pb-2 w-1/4 text-right">Kekerapan Pelaporan</th>
                                 </tr>
                             </thead>
-                            <tbody id="techTableBody" class="text-gray-700 font-medium divide-y divide-gray-50"></tbody>
+                            <tbody id="techTableBody" class="text-gray-700 font-medium divide-y divide-gray-50 dinamik-border"></tbody>
                         </table>
                     </div>
                 </div>
@@ -767,7 +838,7 @@
             void contentFrame.offsetWidth;
             contentFrame.classList.add("page-transition");
 
-            // Suntik Maklumat Teknikal Program Spt Biasa
+            // SUNTIK DATA DARI DATABASE
             document.getElementById("programHeaderImg").src = data.headerImg;
             const badge = document.getElementById("techBadge");
             badge.className = `inline-block text-[8px] font-extrabold tracking-wider text-white uppercase px-2.5 py-0.5 rounded-md shadow-xs ${data.badgeBg}`;
@@ -793,22 +864,22 @@
             kpiContainer.innerHTML = "";
             data.kpi.forEach(kpi => {
                 kpiContainer.innerHTML += `
-                    <div class="p-3.5 bg-gray-50/50 rounded-xl border border-gray-100 flex flex-col justify-center">
+                    <div class="p-3.5 bg-gray-50/50 rounded-xl border border-gray-100 flex flex-col justify-center dinamik-bg-utama dinamik-border">
                         <span class="text-xl md:text-2xl font-black ${data.themeColor} tracking-tight">${kpi.value}</span>
-                        <p class="text-[11px] text-gray-500 font-light mt-0.5 leading-tight">${kpi.label}</p>
+                        <p class="text-[11px] text-gray-500 font-light mt-0.5 leading-tight dinamik-teks-sub">${kpi.label}</p>
                     </div>
                 `;
             });
 
             const refContainer = document.getElementById("techReferenceContainer");
             if (data.downloadUrl && data.downloadUrl !== "#" && !data.downloadUrl.includes("SILA_MASUKKAN_ID")) {
-                refContainer.className = "p-4 bg-emerald-50/60 border border-emerald-100/80 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 shadow-xs";
+                refContainer.className = "p-4 bg-emerald-50/60 border border-emerald-100/80 rounded-2xl flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 shadow-xs dinamik-border";
                 refContainer.innerHTML = `
                     <div class="flex items-center space-x-3 min-w-0">
                         <span class="text-xl">📥</span>
                         <div class="min-w-0">
                             <span class="text-[9px] font-extrabold text-emerald-600 uppercase tracking-wider block">Garis Panduan Utama KKM (Google Drive Terpaut):</span>
-                            <p id="techRefDoc" class="text-xs font-bold text-[#101e33] truncate">${data.ref}</p>
+                            <p id="techRefDoc" class="text-xs font-bold text-[#101e33] truncate dinamik-teks-tajuk">${data.ref}</p>
                         </div>
                     </div>
                     <a href="${data.downloadUrl}" target="_blank" class="flex-shrink-0 w-full sm:w-auto text-center py-2 px-4 bg-emerald-600 text-white font-bold text-xs rounded-xl hover:bg-emerald-700 shadow-sm active:scale-95 transition-all">
@@ -816,12 +887,12 @@
                     </a>
                 `;
             } else {
-                refContainer.className = "p-4 bg-gray-50 border border-gray-100 rounded-2xl flex items-center space-x-3";
+                refContainer.className = "p-4 bg-gray-50 border border-gray-100 rounded-2xl flex items-center space-x-3 dinamik-bg-utama dinamik-border";
                 refContainer.innerHTML = `
                     <span class="text-xl text-gray-400">📄</span>
                     <div>
-                        <span class="text-[9px] font-bold text-gray-400 uppercase tracking-wider block">Dokumen Manual Rasmi (Butang Akses Ditutup):</span>
-                        <p id="techRefDoc" class="text-xs font-semibold text-gray-500">${data.ref}</p>
+                        <span class="text-[9px] font-bold text-gray-400 uppercase tracking-wider block dinamik-teks-sub">Dokumen Manual Rasmi (Butang Akses Ditutup):</span>
+                        <p id="techRefDoc" class="text-xs font-semibold text-gray-500 dinamik-teks-biasa">${data.ref}</p>
                     </div>
                 `;
             }
@@ -832,41 +903,41 @@
                 const bgRowClass = idx % 2 === 1 ? "bg-gray-50/30" : "bg-white";
                 tableBody.innerHTML += `
                     <tr class="${bgRowClass} transition-colors hover:bg-gray-50/50">
-                        <td class="py-3 text-[#101e33] font-bold text-xs">${row.kod}</td>
-                        <td class="py-3 text-gray-500 font-light leading-normal pr-4 text-xs">${row.desc}</td>
-                        <td class="py-3 text-right"><span class="px-2 py-0.5 bg-[#101e33]/5 text-[#101e33] rounded text-[10px] font-bold whitespace-nowrap">${row.freq}</span></td>
+                        <td class="py-3 text-[#101e33] font-bold text-xs dinamik-teks-tajuk">${row.kod}</td>
+                        <td class="py-3 text-gray-500 font-light leading-normal pr-4 text-xs dinamik-teks-biasa">${row.desc}</td>
+                        <td class="py-3 text-right"><span class="px-2 py-0.5 bg-[#101e33]/5 text-[#101e33] rounded text-[10px] font-bold whitespace-nowrap dinamik-teks-tajuk">${row.freq}</span></td>
                     </tr>
                 `;
             });
 
-            Object.keys(technicalData).forEach((key) => {
-                const btn = document.getElementById(`menu-${key}`);
-                const subContainer = document.getElementById(`submenu-container-${key}`);
-                
-                if (key === programKey) {
-                    btn.className = `w-full flex items-center px-4 py-2.5 text-xs font-bold rounded-xl transition-all duration-200 text-left border border-transparent ${data.activeMenuBg} shadow-md`;
-                    subContainer.classList.remove("hidden");
-                } else {
-                    btn.className = `w-full flex items-center px-4 py-2.5 text-xs font-semibold rounded-xl transition-all duration-200 text-left border border-transparent text-gray-600 ${technicalData[key].hoverBg}`;
-                    subContainer.classList.add("hidden");
-                }
-            });
-
-            document.getElementById("menu-mega-calendar").className = "w-full flex items-center px-4 py-3 text-xs font-bold rounded-xl border border-amber-200 bg-amber-50/40 text-amber-800 transition-all duration-300 shadow-xs hover:bg-amber-100/70";
+            tapisWarnaButangMenu(`menu-${programKey}`);
 
             if (window.innerWidth < 768) {
-                const sidebar = document.getElementById("technicalSidebar");
-                const overlay = document.getElementById("sidebarOverlay");
-                sidebar.classList.add("-translate-x-full");
-                overlay.classList.remove("opacity-100");
-                setTimeout(() => overlay.classList.add("hidden"), 300);
+                toggleSidebar();
+            }
+        }
+    </script>
+    <script>
+        // Enjin Pensuisan Tema Global (Sync Dengan Memori Browser)
+        function tukarTemaSistem(tema) {
+            document.documentElement.setAttribute('data-theme', tema);
+            localStorage.setItem('pilihanTemaNCD_Global', tema);
+            const selectBox = document.getElementById('themeSelect');
+            if(selectBox) {
+                selectBox.value = tema;
             }
         }
 
-        window.onload = () => {
+        window.addEventListener('DOMContentLoaded', () => {
             buildSidebarMenu();
+            
+            // Mengesan tema simpanan terdahulu
+            const temaDisimpan = localStorage.getItem('pilihanTemaNCD_Global') || 'default';
+            tukarTemaSistem(temaDisimpan);
+            
+            // Mengaktifkan program pertama (Diabetes) secara lalai
             switchProgram('diabetes');
-        };
+        });
     </script>
 </body>
 </html>
