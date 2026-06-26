@@ -26,7 +26,7 @@ const resourcesData = [
         desc: "Penerangan bagi bahan kedua anda.",
         imageUrl: "https://drive.google.com/thumbnail?sz=w600&id=1tOyRc7RbZ46jSau-Bc8m_3xBPinnqqPs",
         imgUrl: "https://drive.google.com/file/d/1tOyRc7RbZ46jSau-Bc8m_3xBPinnqqPs/preview",
-        badgeText: "Poster",
+        badgeText: "Infografik",
         badgeColorClass: "text-emerald-600 bg-emerald-50",
         infoText: "Format: Imej Drive"
     },
@@ -37,7 +37,7 @@ const resourcesData = [
         desc: "Penerangan bagi bahan kedua anda.",
         imageUrl: "https://drive.google.com/thumbnail?sz=w600&id=1mUZ39TwYS-qgook0BPpJeau5lsxmrs3P",
         imgUrl: "https://drive.google.com/file/d/1mUZ39TwYS-qgook0BPpJeau5lsxmrs3P/preview",
-        badgeText: "Poster",
+        badgeText: "Infografik",
         badgeColorClass: "text-emerald-600 bg-emerald-50",
         infoText: "Format: Imej Drive"
     },
@@ -48,7 +48,7 @@ const resourcesData = [
         desc: "Penerangan bagi bahan kedua anda.",
         imageUrl: "https://drive.google.com/thumbnail?sz=w600&id=1TX1Wwb-tsAUWa-BwFtovSoWdllhRUhH3",
         imgUrl: "https://drive.google.com/file/d/1TX1Wwb-tsAUWa-BwFtovSoWdllhRUhH3/preview",
-        badgeText: "Poster",
+        badgeText: "Infografik",
         badgeColorClass: "text-emerald-600 bg-emerald-50",
         infoText: "Format: Imej Drive"
     },
@@ -70,7 +70,7 @@ const resourcesData = [
         desc: "Penerangan bagi bahan kedua anda.",
         imageUrl: "https://drive.google.com/thumbnail?sz=w600&id=1v43h8t0qj97IumfS1joB8V6SIK-CfDAl",
         imgUrl: "https://drive.google.com/file/d/1v43h8t0qj97IumfS1joB8V6SIK-CfDAl/preview",
-        badgeText: "Poster",
+        badgeText: "Infografik",
         badgeColorClass: "text-emerald-600 bg-emerald-50",
         infoText: "Format: Imej Drive"
     },
@@ -124,7 +124,7 @@ const resourcesData = [
         program: "diabetes",      // Pilihan program: mental / diabetes / hpt / hpl
         desc: "Tuliskan huraian ringkas mengenai naskah modul, buku garis panduan, brosur lipat tiga, atau pelan bunting di sini.",
         imageUrl: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=600&q=80", // Gambar hiasan kad grid luar
-        imgUrl: "https://drive.google.com/file/d/1QhGaygUGyCo_fwKUqFYyDLEzs3zTexdg/preview", // Pautan pembaca PDF Google Drive
+        imgUrl: "https://drive.google.com/file/d/1QhGaygUGyCo_fwKUqFYyDLEzs3zTexdg/view", // Pautan pembaca PDF Google Drive
         badgeText: "Dokumen",    // Teks kecil pada kad (Contoh: Risalah / Modul / Bunting / Buku)
         badgeColorClass: "text-sky-600 bg-sky-50", // Warna badge biru khas dokumen
         infoText: "Format: PDF Drive"
@@ -250,6 +250,17 @@ const resourcesData = [
         badgeColorClass: "text-sky-600 bg-sky-50",
         infoText: "Format: PDF Drive"
     },
+    {
+        title: "Management of E-Cigarette or Vaping Product Use-Associated Lung Injury (EVALI)",
+        category: "cpg",
+        program: "rokok",
+        desc: "Penerangan bagi bahan dokumen kedua anda.",
+        imageUrl: "https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=600&q=80",
+        imgUrl: "https://www.moh.gov.my/images/04-penerbitan/penerbitan-klinikal/panduan-amalan-klinikal/e-CPG_Management_of_EVALI_for_Online_Publication.pdf",
+        badgeText: "Dokumen",
+        badgeColorClass: "text-sky-600 bg-sky-50",
+        infoText: "Format: PDF Drive"
+    },
 
     // TAMBAH INI DI DALAM FILE resources-data.js
     {
@@ -285,7 +296,7 @@ const resourcesData = [
         desc: "Koleksi infografik berkenaan maklumat asas yang perlu diketahui oleh pesakit Diabetes Mellitus atau kencing manis berkenaan ibadah puasa di bulan Ramadan.",
         // Gunakan ID Poster Siri 1 sebagai gambar hiasan kad utama di luar
         imageUrl: "https://drive.google.com/thumbnail?sz=w600&id=10jX9hA4kTlbUz63MP4WYvo_apNXoPTNQ",
-        badgeText: "Siri Infografik", // Label tersuai untuk membezakannya dengan pakej video/fail biasa
+        badgeText: "Album Infografik", // Label tersuai untuk membezakannya dengan pakej video/fail biasa
         badgeColorClass: "text-purple-600 bg-purple-50", 
         infoText: "6 Siri Infografik",
         materials: [
@@ -334,7 +345,7 @@ const resourcesData = [
         program: "diabetes",  // Ditapis di bawah program Diabetes
         desc: "Koleksi infografik berkenaan fakta dan statistik berkenaan Hari Diabetes Sedunia 2024.",
         imageUrl: "https://drive.google.com/thumbnail?sz=w600&id=1Gm06FvVVBsK0ysU06-IY9hekcXjxIDfG",
-        badgeText: "Siri Infografik", // Label tersuai untuk membezakannya dengan pakej video/fail biasa
+        badgeText: "Album Infografik", // Label tersuai untuk membezakannya dengan pakej video/fail biasa
         badgeColorClass: "text-purple-600 bg-purple-50", 
         infoText: "6 Siri Infografik",
         materials: [
@@ -383,7 +394,7 @@ const resourcesData = [
         program: "diabetes",  // Ditapis di bawah program Diabetes
         desc: "Koleksi infografik berkenaan fakta dan statistik berkenaan Hari Diabetes Sedunia 2025.",
         imageUrl: "https://drive.google.com/thumbnail?sz=w600&id=12DqTY_Uw36ueANPSKohgdzr-G8Q-c3wj",
-        badgeText: "Siri Infografik", // Label tersuai untuk membezakannya dengan pakej video/fail biasa
+        badgeText: "Album Infografik", // Label tersuai untuk membezakannya dengan pakej video/fail biasa
         badgeColorClass: "text-purple-600 bg-purple-50", 
         infoText: "5 Siri Infografik",
         materials: [
@@ -425,7 +436,7 @@ const resourcesData = [
         program: "hpl",  // Ditapis di bawah program Diabetes
         desc: "Koleksi infografik berkenaan fakta dan statistik berkenaan kawalan kolesterol atau dislipidemia.",
         imageUrl: "https://drive.google.com/thumbnail?sz=w600&id=1Ms8VGda-wgEO_88lq3hTyxKN2__XnVfq",
-        badgeText: "Siri Infografik", // Label tersuai untuk membezakannya dengan pakej video/fail biasa
+        badgeText: "Album Infografik", // Label tersuai untuk membezakannya dengan pakej video/fail biasa
         badgeColorClass: "text-purple-600 bg-purple-50", 
         infoText: "4 Siri Infografik",
         materials: [

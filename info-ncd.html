@@ -264,6 +264,9 @@
                     if (subTeks) subTeks.classList.add('dinamik-teks-biasa');
 
                     // B. SEMAK BADGE & REROUTE LINK SECARA PINTAR KELUAR DARI PLAY-IMAGE
+                    // ==========================================================================
+                    // PEMBAIKI UTAMA: SMART MULTI-MEDIA ROUTING (IMEJ, VIDEO, PDF & ALBUM)
+                    // ==========================================================================
                     const badgeElement = kad.querySelector('span[class*="absolute"]');
                     if (badgeElement && tajukKad && targetArray.length > 0) {
                         const badgeText = badgeElement.innerText.trim().toUpperCase();
@@ -273,26 +276,25 @@
                         const indeksJumpa = targetArray.findIndex(item => item.title.trim().toLowerCase() === teksTajukSemasa);
                         
                         if (indeksJumpa !== -1) {
-                            // PEMBAIKI UTAMA: Jika badge mengandung kata INFOGRAFIK atau PANDUAN (tanpa LATIHAN)
-                            if (badgeText.includes('INFOGRAFIK') || badgeText.includes('PANDUAN')) {
-                                const pautanTag = kad.querySelector('a');
-                                if (pautanTag) {
+                            const pautanTag = kad.querySelector('a');
+                            if (pautanTag) {
+                                pautanTag.setAttribute('target', '_self'); // Sentiasa buka di tab sama
+
+                                // 1. 📂 HALAMAN ALBUM: Jika lencana ada perkataan ALBUM
+                                if (badgeText.includes('ALBUM')) {
+                                    pautanTag.setAttribute('href', `play-album.html?id=${indeksJumpa}`);
+                                }
+                                // 2. 🎨 HALAMAN IMEJ SINGLE: Jika lencana ada perkataan INFOGRAFIK atau PANDUAN
+                                else if (badgeText.includes('INFOGRAFIK') || badgeText.includes('PANDUAN')) {
                                     pautanTag.setAttribute('href', `play-image.html?id=${indeksJumpa}`);
-                                    pautanTag.setAttribute('target', '_self');
-                                }
-                            } else if (badgeText.includes('VIDEO')) {
-                                // Kekalkan pautan video ke play-video asli anda
-                                const pautanTag = kad.querySelector('a');
-                                if (pautanTag) {
+                                } 
+                                // 3. 🎬 HALAMAN VIDEO: Jika lencana ada perkataan VIDEO
+                                else if (badgeText.includes('VIDEO')) {
                                     pautanTag.setAttribute('href', `play-video.html?id=${indeksJumpa}`);
-                                    pautanTag.setAttribute('target', '_self');
-                                }
-                            } else {
-                                // 📄 MODUL LATIHAN, DOKUMEN CPG, dan Risalah PDF akan automatik dihantar ke view-document.html
-                                const pautanTag = kad.querySelector('a');
-                                if (pautanTag) {
+                                } 
+                                // 4. 📄 HALAMAN PDF: Untuk Modul Latihan, Dokumen CPG, Buku, dan Risalah
+                                else {
                                     pautanTag.setAttribute('href', `view-document.html?id=${indeksJumpa}`);
-                                    pautanTag.setAttribute('target', '_self');
                                 }
                             }
                         }
