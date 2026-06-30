@@ -42,6 +42,19 @@
             --bg-utama: #F3F1FA; --bg-kad: #FFFFFF; --border-warna: #E1D9F2;
             --teks-tajuk: #4A2E80; --teks-biasa: #26164D; --teks-sub: #8C7BB3;
         }
+        /* Cari kod [data-theme="emerald"] dll dalam fail play-image/video/package/album, dan tampal ini */
+        [data-theme="winamp_orange"] {
+            --bg-utama: #1a1a1a; --bg-kad: #282828; --border-warna: #ff5722;
+            --teks-tajuk: #ff7043; --teks-biasa: #b0bec5; --teks-sub: #78909c;
+        }
+        [data-theme="winamp_classic"] {
+            --bg-utama: #0f1115; --bg-kad: #171a21; --border-warna: #00e676;
+            --teks-tajuk: #00e676; --teks-biasa: #90a4ae; --teks-sub: #4f5b66;
+        }
+        [data-theme="winamp_blue"] {
+            --bg-utama: #0a0e17; --bg-kad: #121824; --border-warna: #00e5ff;
+            --teks-tajuk: #00e5ff; --teks-biasa: #a1a8b8; --teks-sub: #3c485e;
+        }
 
         .dinamik-bg-utama { background-color: var(--bg-utama) !important; transition: all 0.3s ease; }
         .dinamik-bg-kad { background-color: var(--bg-kad) !important; transition: all 0.3s ease; }
@@ -69,7 +82,13 @@
             </div>
             <div class="w-[1px] h-5 bg-gray-200 hidden sm:block"></div>
             <select id="themeSelect" onchange="tukarTemaSistem(this.value)" class="dinamik-bg-utama dinamik-teks-tajuk border dinamik-border text-[11px] font-bold py-1.5 px-2.5 rounded-xl cursor-pointer focus:outline-none shadow-xs">
-                <option value="default">⚪ Default</option> <option value="dark">🌙 Mod Gelap</option> <option value="blue">🔵 Mod Biru</option> <option value="emerald">🟢 Mod Zamrud</option> <option value="bronze">🍂 Mod Gangsa</option> <option value="amethyst">🍇 Mod Amethis</option>
+                <option value="default">Lalai</option>
+                <option value="dark">Mod Gelap</option>
+                <option value="winamp_orange">Dark Orange</option>
+                <option value="winamp_classic">Dark Green</option>
+                <option value="winamp_blue">Dark Blue</option>
+                <option value="cyberpunk">Cyberpunk</option>
+                <option value="dracula">Green Purple</option>
             </select>
             <a href="info-ncd.html" class="px-3 py-1.5 rounded-xl bg-[#101e33] text-white text-[11px] font-bold shadow-sm hover:bg-[#1d3557] active:scale-95">← Kembali</a>
         </div>

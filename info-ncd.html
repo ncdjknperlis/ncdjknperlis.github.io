@@ -40,53 +40,46 @@
         }
 
         [data-theme="dark"] {
-            --bg-utama: #0B132B;       
+            --bg-utama: #0B132B;       /* Mod Gelap Korporat */
             --bg-kad: #1C2541;         
             --border-warna: #3A506B;   
-            --teks-tajuk: #FFFFFF;     
+            --teks-tajuk: #FFFFFF;     /* Teks bertukar putih automatik untuk kontra */
             --teks-biasa: #E2E8F0;     
             --teks-sub: #94A3B8;       
             --bg-input: #1C2541;
         }
-
-        [data-theme="blue"] {
-            --bg-utama: #EBF4FA;       
-            --bg-kad: #FFFFFF;         
-            --border-warna: #B9D9EB;   
-            --teks-tajuk: #0F4C81;     
-            --teks-biasa: #1C3D5A;
-            --teks-sub: #5B7083;
-            --bg-input: #FFFFFF;
+        /* Cari kod [data-theme="emerald"] dll dalam fail play-image/video/package/album, dan tampal ini */
+        [data-theme="winamp_orange"] {
+            --bg-utama: #1a1a1a; --bg-kad: #282828; --border-warna: #ff5722;
+            --teks-tajuk: #ff7043; --teks-biasa: #b0bec5; --teks-sub: #78909c;
         }
-
-        [data-theme="emerald"] {
-            --bg-utama: #F0F9F4;       
-            --bg-kad: #FFFFFF;
-            --border-warna: #C2E7D9;
-            --teks-tajuk: #064E3B;     
-            --teks-biasa: #113F31;
-            --teks-sub: #6B8E80;
-            --bg-input: #FFFFFF;
+        [data-theme="winamp_classic"] {
+            --bg-utama: #0f1115; --bg-kad: #171a21; --border-warna: #00e676;
+            --teks-tajuk: #00e676; --teks-biasa: #90a4ae; --teks-sub: #4f5b66;
         }
-
-        [data-theme="bronze"] {
-            --bg-utama: #F9F6F0;       
-            --bg-kad: #FFFFFF;
-            --border-warna: #EADBC8;
-            --teks-tajuk: #5C3D2E;     
-            --teks-biasa: #3A2618;
-            --teks-sub: #A084DC;
-            --bg-input: #FFFFFF;
+        [data-theme="winamp_blue"] {
+            --bg-utama: #0a0e17; --bg-kad: #121824; --border-warna: #00e5ff;
+            --teks-tajuk: #00e5ff; --teks-biasa: #a1a8b8; --teks-sub: #3c485e;
         }
-
-        [data-theme="amethyst"] {
-            --bg-utama: #F3F1FA;       
-            --bg-kad: #FFFFFF;
-            --border-warna: #E1D9F2;
-            --teks-tajuk: #4A2E80;     
-            --teks-biasa: #26164D;
-            --teks-sub: #8C7BB3;
-            --bg-input: #FFFFFF;
+        /* 🧬 Mod Cyberpunk 2077 */
+        [data-theme="cyberpunk"] {
+            --bg-utama: #0f1013;       
+            --bg-kad: #1a1b20;         
+            --border-warna: #fcee0a;   /* Kuning Cyberpunk menyala */
+            --teks-tajuk: #fcee0a;     
+            --teks-biasa: #00f0ff;     /* Teks Biru Neon */
+            --teks-sub: #ff0055;       
+            --bg-input: #141519;
+        }
+        /* 🌌 Mod Dracula Premium */
+        [data-theme="dracula"] {
+            --bg-utama: #1e1f29;       /* Ungu Gelap Dracula */
+            --bg-kad: #282a36;         
+            --border-warna: #ff79c6;   /* Merah Jambu Dracula */
+            --teks-tajuk: #50fa7b;     /* Hijau Terang */
+            --teks-biasa: #f8f8f2;     
+            --teks-sub: #bd93f9;       
+            --bg-input: #21222c;
         }
 
         /* Kelas Pengikat Warna Mengatasi Hardcoded Tailwind */
@@ -121,12 +114,13 @@
 
             <div class="relative inline-block text-left z-30">
                 <select id="themeSelect" onchange="tukarTemaSistem(this.value)" class="dinamik-bg-utama dinamik-teks-tajuk border dinamik-border text-[11px] font-bold py-1.5 px-2.5 rounded-xl focus:outline-none cursor-pointer shadow-xs transition-all">
-                    <option value="default">⚪ Default</option>
-                    <option value="dark">🌙 Mod Gelap</option>
-                    <option value="blue">🔵 Mod Biru</option>
-                    <option value="emerald">🟢 Mod Zamrud</option>
-                    <option value="bronze">🍂 Mod Gangsa</option>
-                    <option value="amethyst">🍇 Mod Amethis</option>
+                    <option value="default">Lalai</option>
+                    <option value="dark">Mod Gelap</option>
+                    <option value="winamp_orange">Dark Orange</option>
+                    <option value="winamp_classic">Dark Green</option>
+                    <option value="winamp_blue">Dark Blue</option>
+                    <option value="cyberpunk">Cyberpunk</option>
+                    <option value="dracula">Green Purple</option>
                 </select>
             </div>
             
@@ -238,7 +232,6 @@
     <script src="resources-data.js"></script>
     <script src="info-ncd.js"></script>
     <script>
-        // Enjin Pensuisan Tema Global (Sync Dengan Memori Browser)
         function tukarTemaSistem(tema) {
             document.documentElement.setAttribute('data-theme', tema);
             localStorage.setItem('pilihanTemaNCD_Global', tema);
@@ -249,61 +242,64 @@
             TerapkanTemaWarnaPadaKadDinamik();
         }
 
-        // KOD PEMBAIKI: MENERAPKAN WARNA TEMA GLOBAL & SMART PDF LINK VIEW ROUTING
+        // KOD KEMASKINI: MEMBETULKAN MATRIX ROUTING & PENERAPAN WARNA TEMA JAMINAN 100% BERFUNGSI
         function TerapkanTemaWarnaPadaKadDinamik() {
             setTimeout(() => {
+                // Mengesan tag div kontainer utama kad mengikut struktur binaan asal info-ncd.js semula
                 const kadDinamik = document.querySelectorAll('#resourceGrid > div');
                 const targetArray = window.resourcesData || [];
 
                 kadDinamik.forEach(kad => {
-                    // A. Ganti pewarnaan kad mengikut struktur tema variables
+                    // 1. Suntik semula kelas warna tema yang tersangkut sebelum ini
                     kad.classList.add('dinamik-bg-kad', 'dinamik-border');
                     const tajukKad = kad.querySelector('h3, h4');
                     if (tajukKad) tajukKad.classList.add('dinamik-teks-tajuk');
-                    const subTeks = kad.querySelector('p, span');
-                    if (subTeks) subTeks.classList.add('dinamik-teks-biasa');
+                    
+                    const subTeks = kad.querySelector('p');
+                    if (subTeks) {
+                        subTeks.classList.add('dinamik-teks-biasa');
+                        // Paksa semula penetapan CSS line-clamp-2 secara dinamik melalui engine browser
+                        subTeks.style.display = "-webkit-box";
+                        subTeks.style.webkitLineClamp = "2";
+                        subTeks.style.webkitBoxOrient = "vertical";
+                        subTeks.style.overflow = "hidden";
+                    }
+                    
+                    const metaSpan = kad.querySelector('div.pt-1 > span');
+                    if (metaSpan) metaSpan.classList.add('dinamik-teks-sub');
 
-                    // B. SEMAK BADGE & REROUTE LINK SECARA PINTAR KELUAR DARI PLAY-IMAGE
-                    // ==========================================================================
-                    // PEMBAIKI UTAMA: SMART MULTI-MEDIA ROUTING (IMEJ, VIDEO, PDF & ALBUM)
-                    // ==========================================================================
+                    // 2. SMART SYSTEM ROUTER: Ekstrak link dari tag <a> lutsinar di dalam kad secara selamat
+                    const pautanTag = kad.querySelector('a');
                     const badgeElement = kad.querySelector('span[class*="absolute"]');
-                    if (badgeElement && tajukKad && targetArray.length > 0) {
+                    
+                    if (badgeElement && tajukKad && pautanTag && targetArray.length > 0) {
                         const badgeText = badgeElement.innerText.trim().toUpperCase();
                         const teksTajukSemasa = tajukKad.innerText.trim().toLowerCase();
                         
-                        // Cari indeks item yang sepadan di dalam fail resources-data.js
-                        const indeksJumpa = targetArray.findIndex(item => item.title.trim().toLowerCase() === teksTajukSemasa);
+                        // Buat semakan padanan indeks fail data
+                        const indeksJumpa = targetArray.findIndex(item => (item.title || '').trim().toLowerCase() === teksTajukSemasa);
                         
                         if (indeksJumpa !== -1) {
-                            const pautanTag = kad.querySelector('a');
-                            if (pautanTag) {
-                                pautanTag.setAttribute('target', '_self'); // Sentiasa buka di tab sama
-
-                                // 1. 📂 HALAMAN ALBUM: Jika lencana ada perkataan ALBUM
-                                if (badgeText.includes('ALBUM')) {
-                                    pautanTag.setAttribute('href', `play-album.html?id=${indeksJumpa}`);
-                                }
-                                // 2. 🎨 HALAMAN IMEJ SINGLE: Jika lencana ada perkataan INFOGRAFIK atau PANDUAN
-                                else if (badgeText.includes('INFOGRAFIK') || badgeText.includes('PANDUAN')) {
-                                    pautanTag.setAttribute('href', `play-image.html?id=${indeksJumpa}`);
-                                } 
-                                // 3. 🎬 HALAMAN VIDEO: Jika lencana ada perkataan VIDEO
-                                else if (badgeText.includes('VIDEO')) {
-                                    pautanTag.setAttribute('href', `play-video.html?id=${indeksJumpa}`);
-                                } 
-                                // 4. 📄 HALAMAN PDF: Untuk Modul Latihan, Dokumen CPG, Buku, dan Risalah
-                                else {
-                                    pautanTag.setAttribute('href', `view-document.html?id=${indeksJumpa}`);
-                                }
+                            // Suntik hala tuju url mengikut jenis media secara mutlak tanpa ralat
+                            if (badgeText.includes('ALBUM') || badgeText.includes('SIRI')) {
+                                pautanTag.setAttribute('href', `play-album.html?id=${indeksJumpa}`);
+                            }
+                            else if (badgeText.includes('VIDEO') || badgeText.includes('KAPSUL')) {
+                                pautanTag.setAttribute('href', `play-video.html?id=${indeksJumpa}`);
+                            } 
+                            else if (badgeText.includes('INFOGRAFIK') || badgeText.includes('PANDUAN') || badgeText.includes('IMEJ') || badgeText.includes('POSTER') || badgeText.includes('LOGO')) {
+                                pautanTag.setAttribute('href', `play-image.html?id=${indeksJumpa}`);
+                            } 
+                            else {
+                                // 📄 Modul Latihan, Dokumen CPG, dan Risalah PDF dihantar ke view-document.html (DIJAMIN DIKLIK)
+                                pautanTag.setAttribute('href', `view-document.html?id=${indeksJumpa}`);
                             }
                         }
                     }
                 });
-            }, 80); // Beri delay 80ms agar info-ncd.js selesai render grid sepenuhnya
+            }, 80); 
         }
 
-        // Jalankan pemantauan mutasi (MutationObserver) untuk menangkap perubahan grid apabila user menapis (filter) carian
         const observer = new MutationObserver(() => {
             TerapkanTemaWarnaPadaKadDinamik();
         });

@@ -60,45 +60,38 @@
             --teks-sub: #94A3B8;       
             --bg-input: #1C2541;
         }
-
-        [data-theme="blue"] {
-            --bg-utama: #EBF4FA;       /* Mod Biru Laut */
-            --bg-kad: #FFFFFF;         
-            --border-warna: #B9D9EB;   
-            --teks-tajuk: #0F4C81;     
-            --teks-biasa: #1C3D5A;
-            --teks-sub: #5B7083;
-            --bg-input: #FFFFFF;
+        /* Cari kod [data-theme="emerald"] dll dalam fail play-image/video/package/album, dan tampal ini */
+        [data-theme="winamp_orange"] {
+            --bg-utama: #1a1a1a; --bg-kad: #282828; --border-warna: #ff5722;
+            --teks-tajuk: #ff7043; --teks-biasa: #b0bec5; --teks-sub: #78909c;
         }
-
-        [data-theme="emerald"] {
-            --bg-utama: #F0F9F4;       /* Mod Zamrud */
-            --bg-kad: #FFFFFF;
-            --border-warna: #C2E7D9;
-            --teks-tajuk: #064E3B;     
-            --teks-biasa: #113F31;
-            --teks-sub: #6B8E80;
-            --bg-input: #FFFFFF;
+        [data-theme="winamp_classic"] {
+            --bg-utama: #0f1115; --bg-kad: #171a21; --border-warna: #00e676;
+            --teks-tajuk: #00e676; --teks-biasa: #90a4ae; --teks-sub: #4f5b66;
         }
-
-        [data-theme="bronze"] {
-            --bg-utama: #F9F6F0;       /* Mod Gangsa Korporat */
-            --bg-kad: #FFFFFF;
-            --border-warna: #EADBC8;
-            --teks-tajuk: #5C3D2E;     
-            --teks-biasa: #3A2618;
-            --teks-sub: #A084DC;
-            --bg-input: #FFFFFF;
+        [data-theme="winamp_blue"] {
+            --bg-utama: #0a0e17; --bg-kad: #121824; --border-warna: #00e5ff;
+            --teks-tajuk: #00e5ff; --teks-biasa: #a1a8b8; --teks-sub: #3c485e;
         }
-
-        [data-theme="amethyst"] {
-            --bg-utama: #F3F1FA;       /* Mod Amethis / Indigo */
-            --bg-kad: #FFFFFF;
-            --border-warna: #E1D9F2;
-            --teks-tajuk: #4A2E80;     
-            --teks-biasa: #26164D;
-            --teks-sub: #8C7BB3;
-            --bg-input: #FFFFFF;
+        /* 🧬 Mod Cyberpunk 2077 */
+        [data-theme="cyberpunk"] {
+            --bg-utama: #0f1013;       
+            --bg-kad: #1a1b20;         
+            --border-warna: #fcee0a;   /* Kuning Cyberpunk menyala */
+            --teks-tajuk: #fcee0a;     
+            --teks-biasa: #00f0ff;     /* Teks Biru Neon */
+            --teks-sub: #ff0055;       
+            --bg-input: #141519;
+        }
+        /* 🌌 Mod Dracula Premium */
+        [data-theme="dracula"] {
+            --bg-utama: #1e1f29;       /* Ungu Gelap Dracula */
+            --bg-kad: #282a36;         
+            --border-warna: #ff79c6;   /* Merah Jambu Dracula */
+            --teks-tajuk: #50fa7b;     /* Hijau Terang */
+            --teks-biasa: #f8f8f2;     
+            --teks-sub: #bd93f9;       
+            --bg-input: #21222c;
         }
 
         /* Kelas Pengikat Warna Mengatasi Hardcoded Tailwind */
@@ -154,12 +147,13 @@
             
             <div class="relative inline-block text-left z-30">
                 <select id="themeSelect" onchange="tukarTemaManual(this.value)" class="dinamik-bg-utama dinamik-teks-tajuk border dinamik-border text-[11px] font-bold py-1.5 px-2.5 rounded-xl focus:outline-none cursor-pointer shadow-xs transition-all">
-                    <option value="default">⚪ Default (Putih)</option>
-                    <option value="dark">🌙 Mod Gelap</option>
-                    <option value="blue">🔵 Mod Biru Laut</option>
-                    <option value="emerald">🟢 Mod Zamrud</option>
-                    <option value="bronze">🍂 Mod Gangsa</option>
-                    <option value="amethyst">🍇 Mod Amethis</option>
+                    <option value="default">Lalai</option>
+                    <option value="dark">Mod Gelap</option>
+                    <option value="winamp_orange">Dark Orange</option>
+                    <option value="winamp_classic">Dark Green</option>
+                    <option value="winamp_blue">Dark Blue</option>
+                    <option value="cyberpunk">Cyberpunk</option>
+                    <option value="dracula">Green Purple</option>
                 </select>
             </div>
         </div>
@@ -349,13 +343,13 @@
                         </div>
                     </a>
 
-                    <a href="https://lung-app.netlify.app/" target="_blank" data-type="sistem" class="group flex flex-row md:flex-col justify-between h-24 md:h-56 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0 dinamik-bg-kad dinamik-border" data-nama="aplikasi mylung saringan kesihatan paru-paru digital asthma copd kanser paru">
+                    <a href="https://nalury.mrichealthcare.com/" target="_blank" data-type="sistem" class="group flex flex-row md:flex-col justify-between h-24 md:h-56 bg-white border border-gray-100 hover:border-gray-300 rounded-2xl transition-all duration-300 shadow-sm hover:shadow-md hover:scale-105 active:scale-95 overflow-hidden p-0 dinamik-bg-kad dinamik-border" data-nama="aplikasi mylung saringan kesihatan paru-paru digital asthma copd kanser paru">
                         <img src="images/card/card-08.png" alt="NALURY Banner" class="w-28 h-full md:w-full md:h-20 sm:md:h-24 object-cover flex-shrink-0">
                         <div class="flex-1 p-3 flex flex-col justify-between min-w-0">
                             <div class="space-y-0.5">
                                 <span class="text-[8px] md:text-[10px] font-bold text-sky-600 uppercase tracking-wider block">Sistem</span>
-                                <h3 class="text-xs sm:text-sm md:text-base font-bold text-[#101e33] group-hover:text-sky-600 transition-colors leading-tight tracking-tight truncate md:whitespace-normal dinamik-teks-tajuk">Aplikasi MyLung</h3>
-                                <p class="hidden md:block text-[11px] text-gray-500 font-light leading-normal line-clamp-2 dinamik-teks-sub">Alat saringan kesihatan paru-paru digital, penilaian risiko asma, COPD, kanser paru-paru komunitit.</p>
+                                <h3 class="text-xs sm:text-sm md:text-base font-bold text-[#101e33] group-hover:text-sky-600 transition-colors leading-tight tracking-tight truncate md:whitespace-normal dinamik-teks-tajuk">National Lung Health Registry (NALURY)</h3>
+                                <p class="hidden md:block text-[11px] text-gray-500 font-light leading-normal line-clamp-2 dinamik-teks-sub">Pemeriksaan kesihatan pernafasan dan penilaian risiko.</p>
                             </div>
                             <div class="text-right text-[9px] md:text-xs font-semibold text-gray-400 group-hover:text-[#101e33] transition-opacity pt-1">Akses ↗</div>
                         </div>

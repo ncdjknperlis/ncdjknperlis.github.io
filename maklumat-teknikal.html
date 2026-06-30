@@ -85,6 +85,19 @@
             --teks-sub: #8C7BB3;
             --bg-input: #FFFFFF;
         }
+        /* Cari kod [data-theme="emerald"] dll dalam fail play-image/video/package/album, dan tampal ini */
+        [data-theme="winamp_orange"] {
+            --bg-utama: #1a1a1a; --bg-kad: #282828; --border-warna: #ff5722;
+            --teks-tajuk: #ff7043; --teks-biasa: #b0bec5; --teks-sub: #78909c;
+        }
+        [data-theme="winamp_classic"] {
+            --bg-utama: #0f1115; --bg-kad: #171a21; --border-warna: #00e676;
+            --teks-tajuk: #00e676; --teks-biasa: #90a4ae; --teks-sub: #4f5b66;
+        }
+        [data-theme="winamp_blue"] {
+            --bg-utama: #0a0e17; --bg-kad: #121824; --border-warna: #00e5ff;
+            --teks-tajuk: #00e5ff; --teks-biasa: #a1a8b8; --teks-sub: #3c485e;
+        }
 
         /* Kelas Pengikat Warna Mengatasi Hardcoded Tailwind */
         .dinamik-bg-utama { background-color: var(--bg-utama) !important; transition: all 0.3s ease; }
@@ -118,6 +131,9 @@
                     <option value="emerald">🟢 Mod Zamrud</option>
                     <option value="bronze">🍂 Mod Gangsa</option>
                     <option value="amethyst">🍇 Mod Amethis</option>
+                    <option value="winamp_orange">🧡 Winamp: Orange Skin</option>
+                    <option value="winamp_classic">🎛️ Winamp: Classic Slate</option>
+                    <option value="winamp_blue">⚡ Winamp: Electric Blue</option>
                 </select>
             </div>
             <a href="index.html" class="text-xs font-bold text-gray-600 hover:text-[#101e33] border border-gray-200/80 px-3.5 py-1.5 rounded-xl bg-white transition-all shadow-xs hover:shadow-sm active:scale-95">← Hub Utama</a>
