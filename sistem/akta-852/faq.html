@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soalan Lazim Akta 852 | Unit NCD JKN Perlis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        ::-webkit-scrollbar { display: none; }
+
+        /* ==========================================================================
+           MATRIX PERTAHANAN TEMA GLOBAL (SEPADAN 100% DENGAN INDEX PORTAL ANDA)
+           ========================================================================== */
+        :root {
+            --bg-utama: #FBFBFB; --bg-kad: #FFFFFF; --border-warna: #F3F4F6;
+            --teks-tajuk: #101e33; --teks-biasa: #1A1A1A; --teks-sub: #9CA3AF;
+            --bg-input: #FFFFFF;
+        }
+        [data-theme="dark"] {
+            --bg-utama: #0B132B; --bg-kad: #1C2541; --border-warna: #3A506B;
+            --teks-tajuk: #FFFFFF; --teks-biasa: #E2E8F0; --teks-sub: #94A3B8;
+            --bg-input: #1C2541;
+        }
+        [data-theme="winamp_orange"] {
+            --bg-utama: #1a1a1a; --bg-kad: #282828; --border-warna: #ff5722;
+            --teks-tajuk: #ff7043; --teks-biasa: #b0bec5; --teks-sub: #78909c;
+            --bg-input: #212121;
+        }
+        [data-theme="winamp_classic"] {
+            --bg-utama: #0f1115; --bg-kad: #171a21; --border-warna: #00e676;
+            --teks-tajuk: #00e676; --teks-biasa: #90a4ae; --teks-sub: #4f5b66;
+            --bg-input: #12141c;
+        }
+        [data-theme="winamp_blue"] {
+            --bg-utama: #0a0e17; --bg-kad: #121824; --border-warna: #00e5ff;
+            --teks-tajuk: #00e5ff; --teks-biasa: #a1a8b8; --teks-sub: #3c485e;
+            --bg-input: #0e131f;
+        }
+        [data-theme="cyberpunk"] {
+            --bg-utama: #0f1013; --bg-kad: #1a1b20; --border-warna: #fcee0a;
+            --teks-tajuk: #fcee0a; --teks-biasa: #00f0ff; --teks-sub: #ff0055;
+            --bg-input: #141519;
+        }
+        [data-theme="dracula"] {
+            --bg-utama: #1e1f29; --bg-kad: #282a36; --border-warna: #ff79c6;
+            --teks-tajuk: #50fa7b; --teks-biasa: #f8f8f2; --teks-sub: #bd93f9;
+            --bg-input: #21222c;
+        }
+
+        .dinamik-bg-utama { background-color: var(--bg-utama) !important; transition: all 0.3s ease; }
+        .dinamik-bg-kad { background-color: var(--bg-kad) !important; transition: all 0.3s ease; }
+        .dinamik-border { border-color: var(--border-warna) !important; transition: all 0.3s ease; }
+        .dinamik-teks-tajuk { color: var(--teks-tajuk) !important; }
+        .dinamik-teks-biasa { color: var(--teks-biasa) !important; transition: all 0.3s ease; }
+        .dinamik-teks-sub { color: var(--teks-sub) !important; }
+        .dinamik-bg-input { background-color: var(--bg-input) !important; transition: all 0.3s ease; }
+        
+        /* 🎬 Animasi Khas: Fade In Up & Accordion Slide Effect */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animasi-faq { animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+        .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; }
+    </style>
+</head>
+<body class="h-screen w-screen overflow-hidden flex flex-col dinamik-bg-utama dinamik-teks-biasa antialiased">
+
+    <header class="w-full py-4 px-4 md:px-12 bg-white border-b flex items-center justify-between z-20 flex-shrink-0 shadow-xs dinamik-bg-kad dinamik-border">
+        <div class="flex items-center space-x-3">
+            <img src="../../images/logo.png" style="max-width: 28px;" class="w-full h-auto object-contain mx-auto md:max-w-[42px]">
+            <img src="../../images/logo-ncd/logo-ncd-default.png" style="max-width: 80px;" class="md:max-w-[130px]">
+            <div class="w-[1px] h-7 bg-gray-200 dinamik-border"></div>
+            <h2 class="text-xs md:text-sm font-extrabold uppercase tracking-wider text-[#101e33] leading-tight dinamik-teks-tajuk">
+                Sistem Akta 852<br>
+                <span class="text-gray-400 font-medium text-[9px] md:text-[10px] normal-case tracking-normal dinamik-teks-sub">Kawalan Produk Merokok Demi Kesihatan Awam 2024</span>
+            </h2>
+        </div>
+        
+        <div class="flex items-center space-x-2 md:space-x-4">
+            <nav class="flex items-center space-x-1 md:space-x-2">
+                <a href="index.html" class="px-3 py-1.5 rounded-xl text-[11px] md:text-xs font-semibold hover:bg-gray-100 transition-colors dinamik-teks-biasa">Utama</a>
+                <a href="produk.html" class="px-3 py-1.5 rounded-xl text-[11px] md:text-xs font-semibold hover:bg-gray-100 transition-colors dinamik-teks-biasa">Senarai Produk</a>
+                <a href="faq.html" class="px-3 py-1.5 rounded-xl text-[11px] md:text-xs font-bold bg-[#101e33] text-white shadow-xs">FAQ KKM</a>
+                <div class="w-[1px] h-4 bg-gray-200 mx-1 dinamik-border"></div>
+                <a href="../info-ncd.html" class="px-3 py-1.5 rounded-xl text-[11px] md:text-xs font-bold bg-red-600 text-white hover:bg-red-700 shadow-xs transition-colors">← Portal NCD</a>
+            </nav>
+
+            <select id="themeSelect" onchange="tukarTemaManual(this.value)" class="text-[10px] md:text-xs font-bold bg-gray-50 border border-gray-200 rounded-xl px-2 py-1.5 outline-none cursor-pointer shadow-xs dinamik-bg-input dinamik-border dinamik-teks-biasa">
+                <option value="default">Lalai</option>
+                <option value="dark">Mod Gelap</option>
+                <option value="winamp_orange">Dark Orange</option>
+                <option value="winamp_classic">Dark Green</option>
+                <option value="winamp_blue">Dark Blue</option>
+                <option value="cyberpunk">Cyberpunk</option>
+                <option value="dracula">Green Purple</option>
+            </select>
+        </div>
+    </header>
+
+    <div class="flex-1 w-full overflow-y-auto px-4 md:px-12 py-6 flex flex-col md:flex-row gap-6">
+        
+        <aside class="w-full md:w-72 flex-shrink-0 flex md:flex-col gap-1.5 overflow-x-auto md:overflow-x-visible pb-2 md:pb-0 border-b md:border-b-0 md:border-r pr-0 md:pr-4 dinamik-border">
+            <button onclick="saringKategori('semua')" id="btn-semua" class="w-full text-left px-3 py-2 rounded-xl text-xs font-bold bg-[#101e33] text-white shadow-xs flex-shrink-0 transition-colors">📂 Semua Topik (38)</button>
+            <button onclick="saringKategori('A')" id="btn-A" class="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold hover:bg-gray-100 transition-colors dinamik-teks-biasa flex-shrink-0">A. Bentuk Kawalan Akta</button>
+            <button onclick="saringKategori('B')" id="btn-B" class="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold hover:bg-gray-100 transition-colors dinamik-teks-biasa flex-shrink-0">B. Pendaftaran Produk</button>
+            <button onclick="saringKategori('C')" id="btn-C" class="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold hover:bg-gray-100 transition-colors dinamik-teks-biasa flex-shrink-0">C. Iklan, Promosi & Tajaan</button>
+            <button onclick="saringKategori('D')" id="btn-D" class="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold hover:bg-gray-100 transition-colors dinamik-teks-biasa flex-shrink-0">D. Kawalan Penjualan</button>
+            <button onclick="saringKategori('E')" id="btn-E" class="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold hover:bg-gray-100 transition-colors dinamik-teks-biasa flex-shrink-0">E. Pembungkusan & Label</button>
+            <button onclick="saringKategori('F')" id="btn-F" class="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold hover:bg-gray-100 transition-colors dinamik-teks-biasa flex-shrink-0">F. Larangan Merokok</button>
+            <button onclick="saringKategori('G')" id="btn-G" class="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold hover:bg-gray-100 transition-colors dinamik-teks-biasa flex-shrink-0">G. Tanda Amaran</button>
+            <button onclick="saringKategori('H')" id="btn-H" class="w-full text-left px-3 py-2 rounded-xl text-xs font-semibold hover:bg-gray-100 transition-colors dinamik-teks-biasa flex-shrink-0">H. Denda & Kompaun</button>
+        </aside>
+
+        <main class="flex-1 max-w-3xl space-y-3 pb-8" id="faqContainer">
+            </main>
+    </div>
+
+    <script>
+        const masterFaqData = [
+            // ==========================================
+            // KATEGORI A: BENTUK KAWALAN DI BAWAH AKTA (3 SOALAN) [cite: 8, 9, 13]
+            // ==========================================
+            {
+                id: 1, kategori: "A",
+                q: "Apakah bentuk kawalan di bawah Akta 852 ini? [cite: 9]",
+                a: "Terdapat dua (2) jenis bentuk kawalan di bawah Akta Kawalan Produk Merokok Demi Kesihatan Awam 2024 [Akta 852] iaitu:<br><b>a. Kawalan produk merokok</b> yang merangkumi:<br>&nbsp;&nbsp;&nbsp;&nbsp;i. Produk tembakau (rokok, cerut, tembakau lerai dan tembakau tanpa asap);<br>&nbsp;&nbsp;&nbsp;&nbsp;ii. Bahan merokok (rokok elektronik atau vape); dan<br>&nbsp;&nbsp;&nbsp;&nbsp;iii. Produk pengganti tembakau.<br><b>b. Kawalan penjualan, pembelian dan penggunaan</b> produk merokok oleh Orang Belum Dewasa (OBD) iaitu mana-mana orang berumur kurang daripada 18 tahun[cite: 9]."
+            },
+            {
+                id: 2, kategori: "A",
+                q: "Bagaimanakah tindakan penguatkuasaan yang dilakukan secara berfasa? [cite: 9]",
+                a: "<b>1. TINDAKAN PENGUATKUASAAN SERTA MERTA (1 Oktober 2024):</b><br>&nbsp;&nbsp;&nbsp;&nbsp;a. Peruntukan yang melibatkan penjualan produk merokok yang berbentuk permainan dan menarik perhatian golongan kanak-kanak dan remaja bagi mengekang keboleh dapatan produk tersebut[cite: 9];<br>&nbsp;&nbsp;&nbsp;&nbsp;b. Peruntukan yang melibatkan pengiklanan, promosi dan tajaan bagi semua jenis produk merokok[cite: 9]; dan<br>&nbsp;&nbsp;&nbsp;&nbsp;c. Tempat larangan penjualan produk merokok seperti institusi pendidikan, pasar jualan, secara dalam talian dan melalui mesin layan diri[cite: 9].<br><br><b>2. TINDAKAN PENGUATKUASAAN BERFASA (6 hingga 12 bulan):</b><br>&nbsp;&nbsp;&nbsp;&nbsp;a. Pendaftaran produk merokok yang akan dikuatkuasakan bermula <b>1 April 2025</b>[cite: 13];<br>&nbsp;&nbsp;&nbsp;&nbsp;b. Pembungkusan dan pelabelan yang akan dikuatkuasakan mengikut produk (product-by-product), selewat-lewatnya <b>1 Oktober 2025</b>[cite: 13]; dan<br>&nbsp;&nbsp;&nbsp;&nbsp;c. Kawalan jualan termasuk pameran di kaunter jualan yang akan dikuatkuasakan selewat-lewatnya <b>1 April 2025</b>[cite: 13].<br><br><b>3. TINDAKAN PENGUATKUASAAN BERTERUSAN:</b><br>&nbsp;&nbsp;&nbsp;&nbsp;a. Larangan merokok di kawasan atau tempat larangan merokok sedia ada sebagaimana di bawah Perintah Kawalan Produk Merokok Demi Kesihatan Awam (Pengisytiharan Kawasan atau Tempat Dilarang Merokok) 2024 KECUALI bangunan dobi dan tempat kerja yang ditangguh penguatkuasaan sehingga 1 Januari 2025[cite: 13]; dan<br>&nbsp;&nbsp;&nbsp;&nbsp;b. Larangan penjualan, pembelian dan penggunaan produk merokok oleh Orang Belum Dewasa (OBD) iaitu mana-mana orang berumur kurang daripada 18 tahun[cite: 13]."
+            },
+            {
+                id: 3, kategori: "A",
+                q: "Apakah saluran yang boleh digunakan oleh orang awam bagi membuat aduan terhadap perlanggaran Akta 852? [cite: 13]",
+                a: "Sebarang pertanyaan lanjut berkaitan pelaksanaan penguatkuasaan Akta 852 ini orang ramai boleh menghubungi talian <b>03-8892 4552</b> atau menghantar pesanan melalui aplikasi Whatsapp ke talian <b>010-860 8949</b> dari hari Isnin hingga Jumaat, pada jam 8:00 pagi hingga 5:00 petang bermula 30 September 2024[cite: 13]."
+            },
+
+            // ==========================================
+            // KATEGORI B: PENDAFTARAN PRODUK MEROKOK (9 SOALAN) [cite: 18, 21, 25]
+            // ==========================================
+            {
+                id: 4, kategori: "B",
+                q: "Siapakah yang perlu membuat permohonan pendaftaran produk merokok? [cite: 18]",
+                a: "Adalah menjadi tanggungjawab **pengimport dan pengilang** untuk mendaftarkan sebarang produk merokok yang ingin diedarkan di pasaran Malaysia[cite: 18]."
+            },
+            {
+                id: 5, kategori: "B",
+                q: "Bagaimana cara untuk memohon pendaftaran produk merokok? [cite: 18]",
+                a: "Pengimport dan pengilang boleh memohon borang pendaftaran bagi produk merokok dari Sektor Kawalan Produk Merokok, Alkohol dan Penyalahgunaan Substan melalui e-mel <b>fctcmalaysia@moh.gov.my</b>[cite: 18]. Selain itu, borang permohonan kelulusan pendaftaran produk merokok juga boleh dimuat turun melalui laman sesawang rasmi KKM[cite: 18]."
+            },
+            {
+                id: 6, kategori: "B",
+                q: "Apakah dokumen-dokumen yang perlu dihantar untuk memohon kelulusan pendaftaran produk merokok? [cite: 21]",
+                a: "Di bawah Peraturan 2, Peraturan-Peraturan Kawalan Produk Merokok Demi Kesihatan Awam (Pendaftaran Produk Tembakau, Bahan Merokok dan Produk Pengganti Tembakau) 2024, permohonan hendaklah dibuat dalam borang yang ditetapkan oleh Ketua Pengarah dan disertakan dengan:<br>a. Pembayaran fi sebanyak <b>RM 5,000</b> bagi setiap jenis produk merokok[cite: 21];<br>b. Laporan analisis makmal yang dijalankan oleh makmal yang diluluskan terhadap produk merokok[cite: 21];<br>c. Ringkasan laporan analisis makmal tersebut[cite: 21];<br>d. Cara gaya produk merokok itu; dan [cite: 21]<br>e. Apa-apa dokumen lain yang dikehendaki oleh Ketua Pengarah untuk mengesahkan identiti pemohon dan mengenal pasti tujuan pendaftaran[cite: 21]."
+            },
+            {
+                id: 7, kategori: "B",
+                q: "Berapakah lamakah tempoh masa bagi sesuatu permohonan pendaftaran produk merokok diluluskan oleh KKM? [cite: 21]",
+                a: "Tempoh kelulusan pendaftaran bagi produk merokok adalah selama <b>14 hari bekerja</b> bermula dari tempoh penerimaan dokumen pendaftaran yang lengkap daripada pengimport atau pengilang[cite: 21]."
+            },
+            {
+                id: 8, kategori: "B",
+                q: "Berapakah jumlah fi pendaftaran yang dikenakan? [cite: 21]",
+                a: "Fi pendaftaran sebanyak <b>RM 5,000 secara sekali sahaja (one-off)</b> dikenakan bagi setiap jenis/varian produk merokok yang ingin didaftarkan, selagi mana produk tersebut tidak berubah dari segi bau, perisa, saiz, bentuk, sebatian, bahan, proses pengilangan atau lokasi pengilang[cite: 21]."
+            },
+            {
+                id: 9, kategori: "B",
+                q: "Adakah produk merokok wajib mendapatkan sijil pengiktirafan SIRIM sebelum membuat permohonan pendaftaran produk merokok? Apakah tindakan jika produk merokok tidak mendapat sijil pengiktirafan? [cite: 21]",
+                a: "1. Setiap produk merokok yang ingin diimport atau dikilang di Malaysia perlulah mendapat kelulusan pendaftaran oleh Kementerian Kesihatan Malaysia (KKM) **terlebih dahulu**[cite: 21].<br>2. Sijil pengiktirafan SIRIM boleh dipohon **setelah** produk merokok tersebut mendapat kelulusan pendaftaran daripada KKM[cite: 21]."
+            },
+            {
+                id: 10, kategori: "B",
+                q: "Jika produk yang telah di pasaran dan pernah mendapat kelulusan Harga Jualan Runcit daripada KKM, adakah produk tersebut perlu mendapatkan kelulusan harga runcit semula? [cite: 25]",
+                a: "1. Bagi produk tembakau sedia ada (rokok, cerut, tembakau lerai dan tembakau tanpa asap) yang pernah mendapat kelulusan Harga Jualan Runcit (HJR) di bawah Peraturan 8A, Peraturan-Peraturan Kawalan Hasil Tembakau (PPKHT) 2004, Akta Makanan 1983 [Akta 281], produk tersebut boleh dijual dengan harga yang sama[cite: 25].<br>2. Walau bagaimanapun, produk tembakau tersebut **masih perlu didaftarkan dalam tempoh enam (6) bulan** dari tempoh kuatkuasa Akta 852 bagi mendapat kelulusan oleh KKM sebelum boleh diedarkan di pasaran[cite: 25]."
+            },
+            {
+                id: 11, kategori: "B",
+                q: "Siapakah pegawai atau sektor yang boleh dihubungi jika ada sebarang pertanyaan berkaitan pendaftaran produk merokok? [cite: 25]",
+                a: "Orang ramai atau pengimport/pengilang boleh menghubungi Sektor Kawalan Produk Merokok, Alkohol dan Penyalahgunaan Substan di talian <b>03-8892 4552</b> atau melalui e-mel rasmi <b>fctcmalaysia@moh.gov.my</b>[cite: 25]. Aduan serta pertanyaan lanjut juga dibuka melalui talian Whatsapp aduan 010-860 8949 (Isnin-Jumaat, 8.00 pagi - 5.00 petang)[cite: 25]."
+            },
+            {
+                id: 12, kategori: "B",
+                q: "Bilakah pendaftaran produk merokok akan dikuatkuasakan sepenuhnya? [cite: 25]",
+                a: "1. Bermula 1 Oktober 2024, semua produk merokok baharu yang ingin diimport atau dikilang di Malaysia perlulah mendapat kelulusan pendaftaran daripada KKM terlebih dahulu[cite: 25].<br>2. Walau bagaimanapun, tindakan penguatkuasaan penuh di bawah Peraturan-Peraturan Kawalan Produk Merokok Demi Kesihatan Awam (Pendaftaran) 2024 hanya akan dilaksanakan selepas tempoh fasa fasa tamat iaitu pada <b>1 April 2025</b>[cite: 25]."
+            },
+
+            // ==========================================
+            // KATEGORI C: LARANGAN PENGIKLANAN, PROMOSI DAN TAJAAN (5 SOALAN) [cite: 31, 32, 34]
+            // ==========================================
+            {
+                id: 13, kategori: "C",
+                q: "Bolehkah Syarikat VAPE menganjurkan sebarang bentuk Pameran atau Ekspo bagi memperkenalkan produk mereka? [cite: 32]",
+                a: "1. Di bawah Bahagian III, Akta Kawalan Produk Merokok Demi Kesihatan Awam 2024 [Akta 852] adalah berkaitan larangan pengiklanan, promosi dan tajaan bagi produk merokok yang melibatkan Seksyen 7, 8 dan 9 di mana tiada seorang pun boleh menerbitkan, mempromosi atau menaja apa-apa iklan yang berhubungan dengan apa-apa produk tembakau, bahan merokok atau produk pengganti tembakau tiruan[cite: 32].<br>2. Selain itu, Seksyen 10 Akta 852 pula melarang pameran terbuka melainkan jika mematuhi ketetapan syarat[cite: 32]. Oleh itu, penganjuran sebarang bentuk Pameran atau Ekspo bagi syarikat VAPE untuk memperkenalkan produk-produk mereka <b>ADALAH DILARANG</b> dan tidak dibenarkan[cite: 32]."
+            },
+            {
+                id: 14, kategori: "C",
+                q: "Adakah menjadi suatu kesalahan syarikat menaja mana-mana pasukan yang terlibat dengan aktiviti sukan/sukan permotoran/Persatuan? [cite: 32]",
+                a: "Di bawah Seksyen 9, Akta 852 tiada seorang pun boleh mempromosi atau menaja, atau mengambil bahagian dalam apa-apa perkiraan yang mempromosikan apa-apa produk merokok yang dimaksudkan atau berkemungkinan untuk menggalakkan mana-mana orang untuk merokok[cite: 32]."
+            },
+            {
+                id: 15, kategori: "C",
+                q: "Adakah dibenarkan mempromosikan produk vape bernikotin berdaftar/tidak berdaftar di Malaysia untuk indikasi berhenti merokok? [cite: 32]",
+                a: "Di bawah Seksyen 9, Akta 852, tiada seorang pun boleh mempromosi, menaja atau mengambil bahagian dalam aktiviti yang mempromosikan apa-apa produk merokok yang dipromosikan sebagai produk berhenti merokok[cite: 32]."
+            },
+            {
+                id: 16, kategori: "C",
+                q: "Apakah tindakan yang boleh dikenakan jika terdapat artis yang mempromosikan rokok elektronik menerusi media sosial atau papan iklan? [cite: 34]",
+                a: "1. Di bawah Seksyen 9, Akta 852 larangan pendedahan promosi terpakai secara menyeluruh[cite: 34].<br>2. Walau bagaimanapun, siasatan lanjut oleh pihak penguatkuasa adalah perlu bagi memastikan adanya niat (intent) dan unsur promosi yang jelas oleh artis yang berkenaan sebelum sebarang tindakan undang-undang diambil[cite: 34]."
+            },
+            {
+                id: 17, kategori: "C",
+                q: "Adakah OBD boleh dikenakan tindakan sekiranya mereka terlibat dalam aktiviti mempromosikan bahan merokok? Apakah denda yang terlibat? [cite: 34]",
+                a: "Di bawah Seksyen 9, Akta 852, sesiapa sahaja (termasuk individu) yang melanggar peruntukan larangan promosi melakukan suatu kesalahan dan boleh, apabila disabitkan:<br>&nbsp;&nbsp;&nbsp;&nbsp;<b>(i) Kesalahan pertama:</b> Didenda tidak melebihi <b>RM 20,000</b> atau dipenjarakan selama tempoh tidak melebihi satu tahun atau kedua-duanya [cite: 34]; dan<br>&nbsp;&nbsp;&nbsp;&nbsp;<b>(ii) Kesalahan kedua atau berikutnya:</b> Didenda tidak melebihi <b>RM 30,000</b> atau dipenjarakan selama tempoh tidak melebihi dua tahun atau kedua-duanya[cite: 34]."
+            },
+
+            // ==========================================
+            // KATEGORI D: KAWALAN PENJUALAN (6 SOALAN) [cite: 40, 41, 43, 46, 51]
+            // ==========================================
+            {
+                id: 18, kategori: "D",
+                q: "Bolehkah rokok elektronik atau VAPE dijual dengan menggunakan mesin layan diri? [cite: 41]",
+                a: "1. Di bawah seksyen 10(1), Akta 852, tiada seorang pun boleh menjual atau mempamerkan bagi penjualan apa-apa produk merokok melainkan jika mematuhi kehendak undang-undang[cite: 41].<br>2. Mengikut Peraturan 3, Peraturan-Peraturan Kawalan Produk Merokok Demi Kesihatan Awam (Kawalan Penjualan) 2024, apa-apa produk merokok **TIDAK BOLEH** dijual secara dalam talian atau melalui mesin layan diri[cite: 41].<br>3. Ini selari dengan sekatan lama di bawah Peraturan 10 PPKHT 2004[cite: 41]. Oleh itu, jualan vape melalui mesin layan diri adalah <b>TIDAK DIBENARKAN</b>[cite: 41]."
+            },
+            {
+                id: 19, kategori: "D",
+                q: "Adakah rokok elektronik atau VAPE dibenarkan penjualannya secara dalam talian atau 'online'? [cite: 41]",
+                a: "Di bawah Peraturan 3, Peraturan-Peraturan Kawalan Produk Merokok Demi Kesihatan Awam (Kawalan Penjualan) 2024, jualan dalam talian (e-commerce) bagi sebarang produk merokok/vape adalah <b>TIDAK DIBENARKAN</b> dan dilarang sama sekali[cite: 41]."
+            },
+            {
+                id: 20, kategori: "D",
+                q: "Bagaimanakah tindakan boleh diambil kepada mereka yang menjual bahan perisa terlarang dalam cecair rokok elektronik? [cite: 43]",
+                a: "1. Buat masa sekarang, tiada peruntukan khusus berkaitan larangan penggunaan sebarang variasi perisa tulen dalam cecair rokok elektronik di bawah Akta 852[cite: 43].<br>2. Walau bagaimanapun, penambahan sebarang dadah berbahaya (Akta Dadah Berbahaya 1952) dan racun (Akta Racun 1952) dalam cecair elektronik adalah dilarang keras[cite: 43].<br>3. Perkara ini dipantau secara klinikal oleh KKM melalui keperluan laporan analisis makmal sewaktu proses pendaftaran produk di bawah Peraturan Pendaftaran 2024[cite: 43]."
+            },
+            {
+                id: 21, kategori: "D",
+                q: "Apakah tindakan yang boleh diambil jika terdapat aktiviti penjualan rokok elektronik kepada Orang Belum Dewasa (OBD)? [cite: 43]",
+                a: "Di bawah Subseksyen 13(1), Akta 852, tiada seorang pun boleh menjual apa-apa produk merokok, atau mengadakan perkhidmatan merokok kepada OBD[cite: 43]. Pelanggaran undang-undang ini membawa sabitan:<br><b>a. Sekiranya Bukan Pertubuhan Perbadanan (Individu/Peniaga Kecil):</b><br>&nbsp;&nbsp;&nbsp;&nbsp;i. Kesalahan pertama: Denda tidak melebihi <b>RM 20,000</b> atau dipenjarakan tidak melebihi 1 tahun (atau kedua-duanya)[cite: 43];<br>&nbsp;&nbsp;&nbsp;&nbsp;ii. Kesalahan berikutnya: Denda tidak melebihi <b>RM 30,000</b> atau dipenjarakan tidak melebihi 2 tahun[cite: 43].<br><b>b. Sekiranya Pertubuhan Perbadanan (Syarikat/Sdn Bhd):</b><br>&nbsp;&nbsp;&nbsp;&nbsp;i. Kesalahan pertama: Denda tidak kurang RM 20,000 dan tidak melebihi <b>RM 100,000</b> atau dipenjarakan tidak melebihi 2 tahun[cite: 46, 49];<br>&nbsp;&nbsp;&nbsp;&nbsp;ii. Kesalahan berikutnya: Denda tidak kurang RM 50,000 dan tidak melebihi <b>RM 300,000</b> atau dipenjarakan tidak melebihi 3 tahun[cite: 46]."
+            },
+            {
+                id: 22, kategori: "D",
+                q: "Bolehkah Wallpaper produk rokok elektronik digunakan untuk dijadikan tinted pintu kaca lutsinar kedai? [cite: 46]",
+                a: "Tidak dibenarkan sekiranya mengandungi logo, jenama, atau elemen promosi terbuka[cite: 46]. Di bawah tatacara pameran produk merokok di kedai serbaneka, produk merokok **TIDAK BOLEH dilihat dengan jelas dari luar kedai**[cite: 63]. Pengusaha kedai wajib meletakkan produk di dalam kabinet tertutup atau menggunakan dinding pelindung legap[cite: 46, 63]."
+            },
+            {
+                id: 23, kategori: "D",
+                q: "Bilakah kawalan dan sekatan penjualan kaunter ini akan dikuatkuasakan secara menyeluruh? [cite: 46]",
+                a: "Tindakan penguatkuasaan kawalan jualan dilaksanakan seperti berikut:<br>a. <b>SERTA MERTA (1 Oktober 2024):</b> Bagi sekatan tempat larangan seperti institusi pendidikan, mesin layan diri, vape trak, pasar jualan, dan secara dalam talian[cite: 46, 81].<br>b. <b>BERFASA (1 April 2025):</b> Melalui fasa penguatkuasaan pendidikan selama enam (6) bulan bagi pelaksanaan kabinet tertutup di kedai serbaneka dan kawalan kedai khas[cite: 51, 61, 62]."
+            },
+
+            // ==========================================
+            // KATEGORI E: PEMBUNGKUSAN DAN PELABELAN (3 SOALAN) [cite: 72, 73, 76, 83, 97, 101]
+            // ==========================================
+            {
+                id: 24, kategori: "E",
+                q: "Bolehkah tindakan penguatkuasaan dilaksanakan bagi penjualan rokok elektronik atau vape berbentuk mainan? [cite: 76]",
+                a: "Boleh. Tindakan penguatkuasaan **SERTA MERTA** berkuatkuasa mulai <b>1 Oktober 2024</b> boleh dilaksanakan bagi menyita dan melarang jualan produk rokok elektronik atau vape (pod pakai buang) yang berbentuk mainan kanak-kanak bagi mengekang keboleh dapatan awal[cite: 9, 79, 85]."
+            },
+            {
+                id: 25, kategori: "E",
+                q: "Bilakah peraturan pembungkusan dan pelabelan standard amaran kesihatan bergambar baharu akan dikuatkuasakan? [cite: 83, 84]",
+                a: "Tindakan penguatkuasaan dijalankan secara <b>BERFASA (Product-by-product)</b>, di mana pengilang/pengimport diberikan tempoh maksimum selama satu (1) tahun untuk menghabiskan stok lama, dan peraturan pelabelan wajib dipatuhi sepenuhnya selewat-lewatnya pada <b>1 Oktober 2025</b>[cite: 13, 92, 97]."
+            },
+            {
+                id: 26, kategori: "E",
+                q: "Adakah produk vape yang mengandungi isipadu lebih daripada 3ml (disposable pod) masih dibenarkan untuk jualan di bawah syarat baharu? [cite: 101]",
+                a: "Penjualan produk pod pakai buang (disposable pod) yang melebihi isipadu 3ml masih dibenarkan berdasarkan kaedah peralihan produk (product-by-product) untuk tempoh **selewat-lewatnya sehingga 1 Oktober 2025 (atau 1 Oktober 2026 mengikut sekatan wartaan katrij tertentu)**[cite: 101]."
+            },
+
+            // ==========================================
+            // KATEGORI F: LARANGAN MEROKOK DI KAWASAN WARTA (3 SOALAN) [cite: 105, 106, 108]
+            // ==========================================
+            {
+                id: 27, kategori: "F",
+                q: "Bolehkah permohonan untuk mengadakan kawasan/zon merokok khas dibuat di premis komersial? Kepada siapa ia perlu diajukan? [cite: 106]",
+                a: "Di bawah Akta Kawalan Produk Merokok Demi Kesihatan Awam 2024 [Akta 852], peruntukan kuasa Menteri untuk meluluskan zon merokok khas di dalam bangunan premis dilarang **TELAH DIGUGURKAN**[cite: 106]. Ini bagi memastikan Malaysia memenuhi standard Artikel 8 WHO FCTC (Protection from exposure to tobacco smoke)[cite: 106]. Maka, permohonan kawasan merokok baru di dalam bangunan adalah **tidak dibenarkan**[cite: 106]."
+            },
+            {
+                id: 28, kategori: "F",
+                q: "Di manakah tempat-tempat awam yang diwartakan sebagai tempat dilarang merokok di bawah Akta 852? ",
+                a: "Berikut adalah senarai rasmi kawasan dilarang merokok:<br>" +
+                   "1. Kompleks membeli-belah; 2. Kawasan hospital/klinik; 3. Kawasan stesen minyak; 4. Bangunan stadium/pusat kecergasan; 5. Kawasan kompleks sukan; 6. Bangunan/tempat kegunaan keagamaan; 7. Kawasan perpustakaan; 8. Kafe internet; 9. Kawasan PLKN; 10. Kawasan premis Kerajaan; 11. Mana-mana kawasan perhimpunan awam/bangunan (kecuali rumah persendirian); 12. Kawasan institusi pendidikan/universiti; 13. Kawasan taman asuhan kanak-kanak; 14. Kaunter perkhidmatan awam; 15. Pusat hiburan/teater (kecuali kasino); 16. Lif atau tandas awam; 17. Tempat makan; 18. Kedai berhawa dingin; 19. Hentian pengangkutan awam; 20. Kawasan lapangan terbang (kecuali bilik merokok khas); 21. Kawasan R&R (kecuali tempat letak kereta terbuka); 22. Kawasan taman awam (kecuali parking terbuka); 23. Menara cerapan, tapak perkhemahan, titian kanopi (dan 5 meter dari laluan masuk/keluar titian) dalam taman negara/negeri; 24. Di dalam bas sekolah; 25. Di dalam kenderaan awam; 26. Bangunan Parlimen Malaysia .<br><i>*Catatan Tambahan: Bangunan dobi awam dan bangunan tempat kerja akan mula dikuatkuasakan secara rasmi pada <b>1 Januari 2025</b>.</i>"
+            },
+            {
+                id: 29, kategori: "F",
+                q: "Adakah rokok elektronik atau vape tertakluk di bawah undang-undang larangan merokok di kawasan warta di atas? [cite: 13, 108]",
+                a: "Ya. Takrifan 'merokok' di bawah Akta 852 meliputi perbuatan menyedut dan mengeluarkan asap tembakau, wap rokok elektronik (vape), serta sebarang produk merokok tiruan di seluruh 28 kawasan warta larangan[cite: 13, 101, 108]."
+            },
+
+            // ==========================================
+            // KATEGORI G: TANDA AMARAN LARANGAN MEROKOK (3 SOALAN) [cite: 114, 115]
+            // ==========================================
+            {
+                id: 30, kategori: "G",
+                q: "Apakah spesifikasi ukuran tanda amaran larangan merokok baharu yang wajib digunakan oleh pemilik premis? [cite: 115]",
+                a: "Semua tanda amaran larangan merokok baharu **mesti dilengkapi dengan Kod QR KKM** mengikut ukuran standard berikut[cite: 115]:<br>" +
+                   "• <b>Di dalam mana-mana bangunan / kedai makan:</b> Saiz plat 40 sm lebar x 50 sm panjang (Saiz elemen Kod QR: 10 sm x 10 sm)[cite: 115].<br>" +
+                   "• <b>Di dalam kenderaan awam besar (bas/tren):</b> Saiz plat 15 sm lebar x 18 sm panjang (Saiz elemen Kod QR: 4 sm x 4 sm)[cite: 115].<br>" +
+                   "• <b>Di dalam teksi, kereta sewa atau e-hailing:</b> Saiz plat 8 sm lebar x 10 sm panjang (Saiz elemen Kod QR: 2 sm x 2 sm)[cite: 115].<br>" +
+                   "• <b>Di laluan utama masuk/keluar kawasan warta terbuka:</b> Saiz plat 60 sm lebar x 90 sm panjang (Saiz elemen Kod QR: 15 sm x 15 sm)[cite: 115].<br>" +
+                   "<i>*Fasa amaran pendidikan diberikan selama 6 bulan sehingga <b>1 April 2025</b> untuk penukaran dari tanda lama kepada tanda amaran baharu berkod QR[cite: 115].</i>"
+            },
+            {
+                id: 31, kategori: "G",
+                q: "Dimanakah kedudukan yang paling sesuai untuk dilekatkan tanda larangan merokok mengikut ketetapan undang-undang? [cite: 115]",
+                a: "Mengikut Peraturan 2 Peraturan Tanda Amaran 2024, tuan punya atau penghuni premis warta bertanggungjawab mempamerkan tanda amaran larangan merokok pada **mana-mana bahagian yang mudah dilihat oleh orang ramai**, khususnya di kawasan tiang utama bangunan, pintu kaca utama, atau di laluan kaunter masuk utama premis/bangunan tersebut[cite: 115]."
+            },
+            {
+                id: 32, kategori: "G",
+                q: "Adakah boleh mempamerkan produk rokok atau kabinet rokok secara terbuka di stesen minyak? [cite: 51]",
+                a: "Tidak boleh. Seseorang peruncit tidak boleh mempamerkan, menyebabkan atau membenarkan dipamerkan apa-apa produk merokok kecuali di dalam premis berstatus **kedai khas** yang tertutup dan tidak kelihatan langsung dari luar, sebagaimana ditetapkan di bawah Peraturan 6(1) Kawalan Penjualan 2024[cite: 51]."
+            },
+
+            // ==========================================
+            // KATEGORI H: HUKUMAN DENDA DAN PENGKOMPAUNAN KESALAHAN (6 SOALAN) [cite: 119, 120, 124]
+            // ==========================================
+            {
+                id: 33, kategori: "H",
+                q: "Berapakah nilai denda maksima bagi individu yang melakukan kesalahan merokok di kawasan larangan merokok? [cite: 120]",
+                a: "Mengikut Seksyen 16(3) Akta 852, individu yang didapati merokok di kawasan atau tempat larangan merokok boleh dikenakan tindakan denda kategori **Ringan**, iaitu denda komposit tidak melebihi <b>RM 10,000</b> atau hukuman penjara tidak melebihi tempoh satu (1) tahun, atau kedua-duanya sekali[cite: 120]."
+            },
+            {
+                id: 34, kategori: "H",
+                q: "Apakah peruntukan denda dan hukuman sekiranya Orang Belum Dewasa (OBD) membeli atau merokok produk tembakau? ",
+                a: "• <b>Kesalahan Membeli (Seksyen 13(4)):</b> OBD yang didapati membeli sebarang produk merokok boleh dikenakan tindakan penalti denda sivil sehingga <b>RM 500</b> atau boleh dikenakan Perintah Khidmat Masyarakat[cite: 120].<br>" +
+                   "• <b>Kesalahan Merokok/Mengunyah (Seksyen 17(2)):</b> OBD yang didapati merokok, mengunyah hasil tembakau atau menghisap vape boleh dikenakan denda kategori **Ringan** (Nilai denda am sivil sehingga RM 5,000 / Perintah Khidmat Masyarakat)[cite: 120]."
+            },
+            {
+                id: 35, kategori: "H",
+                q: "Berapakah nilai denda bagi syarikat/perbadanan yang ingkar mendaftarkan produk merokok mereka (Seksyen 3(2))? [cite: 120]",
+                a: "Kesalahan pendaftaran produk merokok di bawah Seksyen 3(2) tertakluk di bawah penalti denda berat **Kategori Pertengahan/Berat**[cite: 120]:<br>" +
+                   "• <b>Kesalahan Pertama:</b> Syarikat boleh didenda dari <b>RM 20,000 sehingga RM 100,000</b> atau hukuman penjara pengarah sehingga dua (2) tahun[cite: 120].<br>" +
+                   "• <b>Kesalahan Berikutnya:</b> Syarikat boleh didenda dari <b>RM 50,000 sehingga RM 300,000</b> atau hukuman penjara pengarah sehingga tempoh tiga (3) tahun[cite: 120]."
+            },
+            {
+                id: 36, kategori: "H",
+                q: "Apakah tanggungjawab dan implikasi denda terhadap tuan punya bangunan atau pemilik kedai makan di bawah Seksyen 18? ",
+                a: "Tuan punya, penghuni, atau pengusaha premis makanan bertanggungjawab penuh memastikan tiada sesiapa pun merokok di dalam premis mereka[cite: 115, 124]. Kegagalan mematuhi Seksyen 18(2) membawa denda kategori **Ringan** (Nilai denda sivil tidak melebihi <b>RM 5,000 sehingga RM 10,000</b> atau komand penjara sehingga 1 tahun bagi individu pemilik premis)[cite: 120]."
+            },
+            {
+                id: 37, kategori: "H",
+                q: "Apakah senarai bentuk kesalahan di bawah Akta 852 yang boleh ditawarkan tindakan Pengkompaunan (Saman Kompaun)? [cite: 120]",
+                a: "Di bawah Jadual Pertama, Peraturan-Peraturan Kawalan Produk Merokok Demi Kesihatan Awam (Pengkompaunan Kesalahan) 2024, kesalahan utama yang **boleh dikompaun** terus di lapangan adalah[cite: 120]:<br>" +
+                   "<b>a. Subseksyen 13(3):</b> Kesalahan Orang Belum Dewasa (OBD) membeli produk merokok[cite: 120];<br>" +
+                   "<b>b. Subseksyen 16(2):</b> Kesalahan individu merokok di kawasan atau tempat dilarang merokok warta[cite: 120];<br>" +
+                   "<b>c. Subseksyen 17(1):</b> Kesalahan OBD merokok, mengunyah, atau menggunakan produk tembakau/vape[cite: 124]; dan<br>" +
+                   "<b>d. Subseksyen 18(1):</b> Kesalahan tanggungjawab kegagalan tuan punya premis atau penghuni mempamer tanda atau menghalang aktiviti merokok[cite: 124]."
+            },
+            {
+                id: 38, kategori: "H",
+                q: "Adakah hukuman bagi kesalahan pengiklanan produk merokok tiruan (Seksyen 8(2)) serupa dengan pengiklanan produk tulen? [cite: 120]",
+                a: "Ya. Kedua-dua kesalahan pengiklanan produk tulen (Seksyen 7(2)) mahupun produk merokok tiruan (Seksyen 8(2)) diletakkan di bawah payung denda **Kategori Pertengahan** yang sama[cite: 120]. Bagi individu, denda adalah tidak melebihi <b>RM 20,000 / penjara 1 tahun</b> untuk kesalahan pertama, dan meningkat sehingga <b>RM 30,000 / penjara 2 tahun</b> untuk kesalahan berikutnya[cite: 120]."
+            }
+        ];
+
+        // --- ENJIN GENERATOR & PENAPIS ACCORDION FAQ ---
+        function janaFaqAccordion(senaraiFaq) {
+            const container = document.getElementById('faqContainer');
+            container.innerHTML = ""; 
+
+            if (senaraiFaq.length === 0) {
+                container.innerHTML = `<div class="p-8 text-center text-xs text-gray-400 font-light">Tiada soalan lazim ditemui untuk kategori ini.</div>`;
+                return;
+            }
+
+            senaraiFaq.forEach((item, indeks) => {
+                const innerHtmlBlock = `
+                    <div class="animasi-faq border rounded-xl bg-white shadow-xs overflow-hidden dinamik-bg-kad dinamik-border" style="animation-delay: ${indeks * 0.03}s">
+                        <button onclick="toggleFaq(this)" class="w-full px-5 py-4 text-left flex justify-between items-center focus:outline-none select-none">
+                            <span class="text-xs md:text-sm font-bold text-[#101e33] pr-4 leading-snug dinamik-teks-tajuk">Q${item.id}: ${item.q}</span>
+                            <span class="text-[10px] text-gray-400 transition-transform duration-300 transform dinamik-teks-sub">▼</span>
+                        </button>
+                        <div class="faq-content bg-gray-50/40 border-t border-transparent transition-all duration-300">
+                            <p class="p-5 text-xs text-gray-600 leading-relaxed font-light dinamik-teks-biasa">${item.a}</p>
+                        </div>
+                    </div>
+                `;
+                container.insertAdjacentHTML('beforeend', innerHtmlBlock);
+            });
+        }
+
+        function saringKategori(kat) {
+            const dataDitapis = kat === 'semua' ? masterFaqData : masterFaqData.filter(item => item.kategori === kat);
+            janaFaqAccordion(dataDitapis);
+
+            const semuaButang = document.querySelectorAll('aside button');
+            semuaButang.forEach(btn => {
+                btn.className = "w-full text-left px-3 py-2 rounded-xl text-xs font-semibold hover:bg-gray-100 transition-colors dinamik-teks-biasa flex-shrink-0";
+            });
+
+            const butangAktif = document.getElementById(`btn-${kat}`);
+            if (butangAktif) {
+                butangAktif.className = "w-full text-left px-3 py-2 rounded-xl text-xs font-bold bg-[#101e33] text-white shadow-xs flex-shrink-0 transition-colors";
+            }
+        }
+
+        function toggleFaq(button) {
+            const content = button.nextElementSibling;
+            const arrow = button.querySelector('span:last-child');
+            if (content.style.maxHeight && content.style.maxHeight !== "0px") {
+                content.style.maxHeight = "0px";
+                arrow.style.transform = "rotate(0deg)";
+                content.style.borderColor = "transparent";
+            } else {
+                document.querySelectorAll('.faq-content').forEach(el => {
+                    el.style.maxHeight = "0px";
+                    el.previousElementSibling.querySelector('span:last-child').style.transform = "rotate(0deg)";
+                    el.style.borderColor = "transparent";
+                });
+                content.style.maxHeight = content.scrollHeight + "px";
+                arrow.style.transform = "rotate(180deg)";
+                content.style.borderColor = "var(--border-warna)";
+            }
+        }
+
+        // --- LOGIK SWAP TEMA GLOBAL PORTAL ---
+        function tukarTemaManual(tema) {
+            document.documentElement.setAttribute('data-theme', tema);
+            localStorage.setItem('pilihanTemaNCD_Global', tema);
+            const selectBox = document.getElementById('themeSelect');
+            if(selectBox) selectBox.value = tema;
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            tukarTemaManual(localStorage.getItem('pilihanTemaNCD_Global') || 'default');
+            saringKategori('semua');
+        });
+    </script>
+</body>
+</html>

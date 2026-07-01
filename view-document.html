@@ -35,44 +35,13 @@
             --teks-sub: #9CA3AF;
         }
         [data-theme="dark"] {
-            --bg-utama: #0B132B;
-            --bg-kad: #1C2541;
-            --border-warna: #3A506B;
-            --teks-tajuk: #FFFFFF;
-            --teks-biasa: #E2E8F0;
-            --teks-sub: #94A3B8;
-        }
-        [data-theme="blue"] {
-            --bg-utama: #EBF4FA;
-            --bg-kad: #FFFFFF;
-            --border-warna: #B9D9EB;
-            --teks-tajuk: #0F4C81;
-            --teks-biasa: #1C3D5A;
-            --teks-sub: #5B7083;
-        }
-        [data-theme="emerald"] {
-            --bg-utama: #F0F9F4;
-            --bg-kad: #FFFFFF;
-            --border-warna: #C2E7D9;
-            --teks-tajuk: #064E3B;
-            --teks-biasa: #113F31;
-            --teks-sub: #6B8E80;
-        }
-        [data-theme="bronze"] {
-            --bg-utama: #F9F6F0;
-            --bg-kad: #FFFFFF;
-            --border-warna: #EADBC8;
-            --teks-tajuk: #5C3D2E;
-            --teks-biasa: #3A2618;
-            --teks-sub: #A084DC;
-        }
-        [data-theme="amethyst"] {
-            --bg-utama: #F3F1FA;
-            --bg-kad: #FFFFFF;
-            --border-warna: #E1D9F2;
-            --teks-tajuk: #4A2E80;
-            --teks-biasa: #26164D;
-            --teks-sub: #8C7BB3;
+            --bg-utama: #0B132B;       /* Mod Gelap Korporat */
+            --bg-kad: #1C2541;         
+            --border-warna: #3A506B;   
+            --teks-tajuk: #FFFFFF;     /* Teks bertukar putih automatik untuk kontra */
+            --teks-biasa: #E2E8F0;     
+            --teks-sub: #94A3B8;       
+            --bg-input: #1C2541;
         }
         /* Cari kod [data-theme="emerald"] dll dalam fail play-image/video/package/album, dan tampal ini */
         [data-theme="winamp_orange"] {
@@ -86,6 +55,26 @@
         [data-theme="winamp_blue"] {
             --bg-utama: #0a0e17; --bg-kad: #121824; --border-warna: #00e5ff;
             --teks-tajuk: #00e5ff; --teks-biasa: #a1a8b8; --teks-sub: #3c485e;
+        }
+        /* 🧬 Mod Cyberpunk 2077 */
+        [data-theme="cyberpunk"] {
+            --bg-utama: #0f1013;       
+            --bg-kad: #1a1b20;         
+            --border-warna: #fcee0a;   /* Kuning Cyberpunk menyala */
+            --teks-tajuk: #fcee0a;     
+            --teks-biasa: #00f0ff;     /* Teks Biru Neon */
+            --teks-sub: #ff0055;       
+            --bg-input: #141519;
+        }
+        /* 🌌 Mod Dracula Premium */
+        [data-theme="dracula"] {
+            --bg-utama: #1e1f29;       /* Ungu Gelap Dracula */
+            --bg-kad: #282a36;         
+            --border-warna: #ff79c6;   /* Merah Jambu Dracula */
+            --teks-tajuk: #50fa7b;     /* Hijau Terang */
+            --teks-biasa: #f8f8f2;     
+            --teks-sub: #bd93f9;       
+            --bg-input: #21222c;
         }
 
         .dinamik-bg-utama { background-color: var(--bg-utama) !important; transition: all 0.3s ease; }

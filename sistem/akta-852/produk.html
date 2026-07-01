@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Klasifikasi Produk Akta 852 | Unit NCD JKN Perlis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        ::-webkit-scrollbar { display: none; }
+
+        /* ==========================================================================
+           MATRIX PERTAHANAN TEMA GLOBAL (SEPADAN 100% DENGAN INDEX PORTAL ANDA)
+           ========================================================================== */
+        :root {
+            --bg-utama: #FBFBFB; --bg-kad: #FFFFFF; --border-warna: #F3F4F6;
+            --teks-tajuk: #101e33; --teks-biasa: #1A1A1A; --teks-sub: #9CA3AF;
+            --bg-input: #FFFFFF;
+        }
+        [data-theme="dark"] {
+            --bg-utama: #0B132B; --bg-kad: #1C2541; --border-warna: #3A506B;
+            --teks-tajuk: #FFFFFF; --teks-biasa: #E2E8F0; --teks-sub: #94A3B8;
+            --bg-input: #1C2541;
+        }
+        [data-theme="winamp_orange"] {
+            --bg-utama: #1a1a1a; --bg-kad: #282828; --border-warna: #ff5722;
+            --teks-tajuk: #ff7043; --teks-biasa: #b0bec5; --teks-sub: #78909c;
+            --bg-input: #212121;
+        }
+        [data-theme="winamp_classic"] {
+            --bg-utama: #0f1115; --bg-kad: #171a21; --border-warna: #00e676;
+            --teks-tajuk: #00e676; --teks-biasa: #90a4ae; --teks-sub: #4f5b66;
+            --bg-input: #12141c;
+        }
+        [data-theme="winamp_blue"] {
+            --bg-utama: #0a0e17; --bg-kad: #121824; --border-warna: #00e5ff;
+            --teks-tajuk: #00e5ff; --teks-biasa: #a1a8b8; --teks-sub: #3c485e;
+            --bg-input: #0e131f;
+        }
+        [data-theme="cyberpunk"] {
+            --bg-utama: #0f1013; --bg-kad: #1a1b20; --border-warna: #fcee0a;
+            --teks-tajuk: #fcee0a; --teks-biasa: #00f0ff; --teks-sub: #ff0055;
+            --bg-input: #141519;
+        }
+        [data-theme="dracula"] {
+            --bg-utama: #1e1f29; --bg-kad: #282a36; --border-warna: #ff79c6;
+            --teks-tajuk: #50fa7b; --teks-biasa: #f8f8f2; --teks-sub: #bd93f9;
+            --bg-input: #21222c;
+        }
+
+        .dinamik-bg-utama { background-color: var(--bg-utama) !important; transition: all 0.3s ease; }
+        .dinamik-bg-kad { background-color: var(--bg-kad) !important; transition: all 0.3s ease; }
+        .dinamik-border { border-color: var(--border-warna) !important; transition: all 0.3s ease; }
+        .dinamik-teks-tajuk { color: var(--teks-tajuk) !important; }
+        .dinamik-teks-biasa { color: var(--teks-biasa) !important; transition: all 0.3s ease; }
+        .dinamik-teks-sub { color: var(--teks-sub) !important; }
+        .dinamik-bg-input { background-color: var(--bg-input) !important; transition: all 0.3s ease; }
+
+        /* 🎬 Animasi Khas: Fade In Up */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(12px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animasi-kad { animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
+    </style>
+</head>
+<body class="h-screen w-screen overflow-hidden flex flex-col dinamik-bg-utama dinamik-teks-biasa antialiased">
+
+    <header class="w-full py-4 px-4 md:px-12 bg-white border-b flex items-center justify-between z-20 flex-shrink-0 shadow-xs dinamik-bg-kad dinamik-border">
+        <div class="flex items-center space-x-3">
+            <img src="../../images/logo.png" style="max-width: 28px;" class="w-full h-auto object-contain mx-auto md:max-w-[42px]">
+            <img src="../../images/logo-ncd/logo-ncd-default.png" style="max-width: 80px;" class="md:max-w-[130px]">
+            <div class="w-[1px] h-7 bg-gray-200 dinamik-border"></div>
+            <h2 class="text-xs md:text-sm font-extrabold uppercase tracking-wider text-[#101e33] leading-tight dinamik-teks-tajuk">
+                Sistem Akta 852<br>
+                <span class="text-gray-400 font-medium text-[9px] md:text-[10px] normal-case tracking-normal dinamik-teks-sub">Kawalan Produk Merokok Demi Kesihatan Awam 2024</span>
+            </h2>
+        </div>
+        
+        <div class="flex items-center space-x-2 md:space-x-4">
+            <nav class="flex items-center space-x-1 md:space-x-2">
+                <a href="index.html" class="px-3 py-1.5 rounded-xl text-[11px] md:text-xs font-semibold hover:bg-gray-100 transition-colors dinamik-teks-biasa">Utama</a>
+                <a href="produk.html" class="px-3 py-1.5 rounded-xl text-[11px] md:text-xs font-bold bg-[#101e33] text-white shadow-xs">Senarai Produk</a>
+                <a href="faq.html" class="px-3 py-1.5 rounded-xl text-[11px] md:text-xs font-semibold hover:bg-gray-100 transition-colors dinamik-teks-biasa">FAQ KKM</a>
+                <div class="w-[1px] h-4 bg-gray-200 mx-1 dinamik-border"></div>
+                <a href="../info-ncd.html" class="px-3 py-1.5 rounded-xl text-[11px] md:text-xs font-bold bg-red-600 text-white hover:bg-red-700 shadow-xs transition-colors">← Portal NCD</a>
+            </nav>
+
+            <select id="themeSelect" onchange="tukarTemaManual(this.value)" class="text-[10px] md:text-xs font-bold bg-gray-50 border border-gray-200 rounded-xl px-2 py-1.5 outline-none cursor-pointer shadow-xs dinamik-bg-input dinamik-border dinamik-teks-biasa">
+                <option value="default">Lalai</option>
+                <option value="dark">Mod Gelap</option>
+                <option value="winamp_orange">Dark Orange</option>
+                <option value="winamp_classic">Dark Green</option>
+                <option value="winamp_blue">Dark Blue</option>
+                <option value="cyberpunk">Cyberpunk</option>
+                <option value="dracula">Green Purple</option>
+            </select>
+        </div>
+    </header>
+
+    <div class="flex-1 w-full overflow-y-auto px-4 md:px-12 py-6 space-y-6">
+        
+        <div class="border-b pb-4 dinamik-border">
+            <h1 class="text-lg md:text-2xl font-extrabold text-[#101e33] dinamik-teks-tajuk">Inventori Klasifikasi Produk Terkawal (Akta 852)</h1>
+            <p class="text-xs text-gray-400 font-light mt-0.5 dinamik-teks-sub">Daftar terperinci pecahan bahan merokok, hasil tembakau, dan peranti elektronik yang tertakluk di bawah penguatkuasaan undang-undang KKM.</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5">
+            
+            <div class="animasi-kad bg-white border rounded-xl overflow-hidden shadow-xs flex flex-col justify-between h-[28rem] dinamik-bg-kad dinamik-border" style="animation-delay: 0.05s">
+                <div class="w-full h-36 bg-gray-100 relative">
+                    <img src="https://images.unsplash.com/photo-1556942040-e9ba2ee8ff22?auto=format&fit=crop&w=400&q=80" alt="Cerut" class="w-full h-full object-cover">
+                </div>
+                <div class="p-4 flex-1 flex flex-col justify-between space-y-2">
+                    <div>
+                        <span class="text-[8px] font-bold text-red-600 bg-red-50 px-1.5 py-0.5 rounded uppercase tracking-wider">Hasil Tembakau</span>
+                        <h3 class="text-sm font-bold text-[#101e33] mt-1 leading-tight dinamik-teks-tajuk">Cerut (Cigars)</h3>
+                        <p class="text-[11px] text-gray-400 font-light mt-1.5 leading-relaxed dinamik-teks-biasa">Gulungan daun tembakau padat atau sebatian produk mengandungi hasil tembakau sepenuhnya yang direka khas untuk dihisap tanpa penapis kertas tradisional.</p>
+                    </div>
+                    <div class="bg-gray-50/70 p-2.5 rounded-lg border text-[10px] font-light dinamik-bg-utama dinamik-border">
+                        <b>Kawalan Label:</b> Paket sebatian kuboid / tin silinder wajib dilengkapi 6 jenis Amaran Kesihatan Bergambar.
+                    </div>
+                </div>
+            </div>
+
+            <div class="animasi-kad bg-white border rounded-xl overflow-hidden shadow-xs flex flex-col justify-between h-[28rem] dinamik-bg-kad dinamik-border" style="animation-delay: 0.10s">
+                <div class="w-full h-36 bg-gray-100 relative">
+                    <img src="https://images.unsplash.com/photo-1606166325683-e6deb697d301?auto=format&fit=crop&w=400&q=80" alt="Tembakau Lerai" class="w-full h-full object-cover">
+                </div>
+                <div class="p-4 flex-1 flex flex-col justify-between space-y-2">
+                    <div>
+                        <span class="text-[8px] font-bold text-red-600 bg-red-50 px-1.5 py-0.5 rounded uppercase tracking-wider">Hasil Tembakau</span>
+                        <h3 class="text-sm font-bold text-[#101e33] mt-1 leading-tight dinamik-teks-tajuk">Tembakau Lerai</h3>
+                        <p class="text-[11px] text-gray-400 font-light mt-1.5 leading-relaxed dinamik-teks-biasa">Helaian daun tembakau yang telah dipotong, diracik halus, atau diproses secara lerai untuk digunakan bagi gulungan rokok kendiri (roll-your-own).</p>
+                    </div>
+                    <div class="bg-gray-50/70 p-2.5 rounded-lg border text-[10px] font-light dinamik-bg-utama dinamik-border">
+                        <b>Kawalan Label:</b> Pembungkusan jenis kotak, tin, atau kantung kuboid tertakluk kepada kawalan pendaftaran dan cukai ketat.
+                    </div>
+                </div>
+            </div>
+
+            <div class="animasi-kad bg-white border rounded-xl overflow-hidden shadow-xs flex flex-col justify-between h-[28rem] dinamik-bg-kad dinamik-border" style="animation-delay: 0.15s">
+                <div class="w-full h-36 bg-gray-100 relative">
+                    <img src="https://images.unsplash.com/photo-1542838132-92c53300491e?auto=format&fit=crop&w=400&q=80" alt="Tembakau Tanpa Asap" class="w-full h-full object-cover">
+                </div>
+                <div class="p-4 flex-1 flex flex-col justify-between space-y-2">
+                    <div>
+                        <span class="text-[8px] font-bold text-red-600 bg-red-50 px-1.5 py-0.5 rounded uppercase tracking-wider">Hasil Tembakau</span>
+                        <h3 class="text-sm font-bold text-[#101e33] mt-1 leading-tight dinamik-teks-tajuk">Tembakau Tanpa Asap</h3>
+                        <p class="text-[11px] text-gray-400 font-light mt-1.5 leading-relaxed dinamik-teks-biasa">Hasil tembakau yang disediakan untuk digunakan secara kunyahan, sedutan hidung (snuff), atau tampalan gusi (snus) tanpa membabitkan proses pembakaran.</p>
+                    </div>
+                    <div class="bg-gray-50/70 p-2.5 rounded-lg border text-[10px] font-light dinamik-bg-utama dinamik-border">
+                        <b>Aturan Serta-Merta:</b> Dilarang keras dipamerkan atau dijual kepada Orang Belum Dewasa (OBD) di bawah umur 18 tahun.
+                    </div>
+                </div>
+            </div>
+
+            <div class="animasi-kad bg-white border rounded-xl overflow-hidden shadow-xs flex flex-col justify-between h-[28rem] dinamik-bg-kad dinamik-border" style="animation-delay: 0.20s">
+                <div class="w-full h-36 bg-gray-100 relative">
+                    <img src="https://images.unsplash.com/photo-1527137341206-a809b2b649bd?auto=format&fit=crop&w=400&q=80" alt="HTP" class="w-full h-full object-cover">
+                </div>
+                <div class="p-4 flex-1 flex flex-col justify-between space-y-2">
+                    <div>
+                        <span class="text-[8px] font-bold text-amber-600 bg-amber-50 px-1.5 py-0.5 rounded uppercase tracking-wider">Heated Tobacco (HTP)</span>
+                        <h3 class="text-sm font-bold text-[#101e33] mt-1 leading-tight dinamik-teks-tajuk">Produk & Alat Pemanas</h3>
+                        <p class="text-[11px] text-gray-400 font-light mt-1.5 leading-relaxed dinamik-teks-biasa">Sistem dwi-komponen yang merangkumi batang tembakau khas (Heets) dan gajet mekanikal pemanas elektrik untuk membebaskan nikotin tanpa menghasilkan abu.</p>
+                    </div>
+                    <div class="bg-gray-50/70 p-2.5 rounded-lg border text-[10px] font-light dinamik-bg-utama dinamik-border">
+                        <b>Spesifikasi Amaran:</b> Paket batang pemanas wajib mempamerkan sekurang-kurangnya 1 label Amaran Kesihatan Bergambar.
+                    </div>
+                </div>
+            </div>
+
+            <div class="animasi-kad bg-white border rounded-xl overflow-hidden shadow-xs flex flex-col justify-between h-[28rem] dinamik-bg-kad dinamik-border" style="animation-delay: 0.25s">
+                <div class="w-full h-36 bg-gray-100 relative">
+                    <img src="https://images.unsplash.com/photo-1573148164257-894f6f4fa695?auto=format&fit=crop&w=400&q=80" alt="Disposable Pod" class="w-full h-full object-cover">
+                </div>
+                <div class="p-4 flex-1 flex flex-col justify-between space-y-2">
+                    <div>
+                        <span class="text-[8px] font-bold text-purple-600 bg-purple-50 px-1.5 py-0.5 rounded uppercase tracking-wider">Bahan Merokok</span>
+                        <h3 class="text-sm font-bold text-[#101e33] mt-1 leading-tight dinamik-teks-tajuk">Pod Pakai Buang (Disposable)</h3>
+                        <p class="text-[11px] text-gray-400 font-light mt-1.5 leading-relaxed dinamik-teks-biasa">Peranti vape bersepadu (all-in-one) pra-isian cecair yang direka untuk dibuang sepenuhnya setelah kehabisan bateri atau cecair e-jus.</p>
+                    </div>
+                    <div class="bg-gray-50/70 p-2.5 rounded-lg border text-[10px] font-light dinamik-bg-utama dinamik-border">
+                        <b>Sekatan Isipadu:</b> Had maksimum katrij cecair ditetapkan sebanyak 3 ml sahaja (kuat kuasa penuh 1 Oktober 2026).
+                    </div>
+                </div>
+            </div>
+
+            <div class="animasi-kad bg-white border rounded-xl overflow-hidden shadow-xs flex flex-col justify-between h-[28rem] dinamik-bg-kad dinamik-border" style="animation-delay: 0.30s">
+                <div class="w-full h-36 bg-gray-100 relative">
+                    <img src="https://images.unsplash.com/photo-1551076805-e18690237571?auto=format&fit=crop&w=400&q=80" alt="Katrij Vape" class="w-full h-full object-cover">
+                </div>
+                <div class="p-4 flex-1 flex flex-col justify-between space-y-2">
+                    <div>
+                        <span class="text-[8px] font-bold text-purple-600 bg-purple-50 px-1.5 py-0.5 rounded uppercase tracking-wider">Bahan Merokok</span>
+                        <h3 class="text-sm font-bold text-[#101e33] mt-1 leading-tight dinamik-teks-tajuk">Katrij Vape (Pods/Cartridges)</h3>
+                        <p class="text-[11px] text-gray-400 font-light mt-1.5 leading-relaxed dinamik-teks-biasa">Kelengkapan kontainer lutsinar kecil yang mengandungi gegelung (coil) pemanas terbina dalam untuk menampung cecair nikotin bagi sistem vape tertutup (closed pod).</p>
+                    </div>
+                    <div class="bg-gray-50/70 p-2.5 rounded-lg border text-[10px] font-light dinamik-bg-utama dinamik-border">
+                        <b>Pembungkusan Blister:</b> Pengilang wajib mematuhi standard saiz isipadu 3 ml dan pembungkusan jenis pek blister selamat.
+                    </div>
+                </div>
+            </div>
+
+            <div class="animasi-kad bg-white border rounded-xl overflow-hidden shadow-xs flex flex-col justify-between h-[28rem] dinamik-bg-kad dinamik-border" style="animation-delay: 0.35s">
+                <div class="w-full h-36 bg-gray-100 relative">
+                    <img src="https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=400&q=80" alt="Cecair Vape" class="w-full h-full object-cover">
+                </div>
+                <div class="p-4 flex-1 flex flex-col justify-between space-y-2">
+                    <div>
+                        <span class="text-[8px] font-bold text-purple-600 bg-purple-50 px-1.5 py-0.5 rounded uppercase tracking-wider">Bahan Merokok</span>
+                        <h3 class="text-sm font-bold text-[#101e33] mt-1 leading-tight dinamik-teks-tajuk">Cecair Perisa (E-Liquid)</h3>
+                        <p class="text-[11px] text-gray-400 font-light mt-1.5 leading-relaxed dinamik-teks-biasa">Formulasi cecair campuran Propylene Glycol (PG), Vegetable Glycerin (VG), bahan perisa, dan nikotin (freebase atau salt-nic) yang diisi di dalam botol.</p>
+                    </div>
+                    <div class="bg-gray-50/70 p-2.5 rounded-lg border text-[10px] font-light dinamik-bg-utama dinamik-border">
+                        <b>Had Kepekatan:</b> Larangan botol melebihi isipadu 15 ml. Kepekatan nikotin dihadkan kepada maksima 20 mg/ml selepas 1 Oktober 2025.
+                    </div>
+                </div>
+            </div>
+
+            <div class="animasi-kad bg-white border rounded-xl overflow-hidden shadow-xs flex flex-col justify-between h-[28rem] dinamik-bg-kad dinamik-border" style="animation-delay: 0.40s">
+                <div class="w-full h-36 bg-gray-100 relative">
+                    <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=400&q=80" alt="Produk Tiruan" class="w-full h-full object-cover">
+                </div>
+                <div class="p-4 flex-1 flex flex-col justify-between space-y-2">
+                    <div>
+                        <span class="text-[8px] font-bold text-rose-600 bg-rose-50 px-1.5 py-0.5 rounded uppercase tracking-wider">Larangan Mutlak</span>
+                        <h3 class="text-sm font-bold text-[#101e33] mt-1 leading-tight dinamik-teks-tajuk">Iklan Menyerupai Produk</h3>
+                        <p class="text-[11px] text-gray-400 font-light mt-1.5 leading-relaxed dinamik-teks-biasa">Sebarang bentuk barangan, reka bentuk, atau iklan tiruan (seperti gula-gula berbentuk rokok, gajet kosmetik, atau mainan berupa pod) yang menyerupai produk merokok.</p>
+                    </div>
+                    <div class="bg-gray-50/70 p-2.5 rounded-lg border text-[10px] font-light text-red-700 bg-red-50/30 border-red-200">
+                        <b>Status Serta-Merta:</b> Seksyen 8(2) melarang keras penerbitan iklan produk tiruan. Pelanggaran membawa denda sehingga RM 20,000.
+                    </div>
+                </div>
+            </div>
+
+            <div class="animasi-kad bg-white border rounded-xl overflow-hidden shadow-xs flex flex-col justify-between h-[28rem] dinamik-bg-kad dinamik-border" style="animation-delay: 0.45s">
+                <div class="w-full h-36 bg-gray-100 relative">
+                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=400&q=80" alt="Vape Mod" class="w-full h-full object-cover">
+                </div>
+                <div class="p-4 flex-1 flex flex-col justify-between space-y-2">
+                    <div>
+                        <span class="text-[8px] font-bold text-sky-600 bg-sky-50 px-1.5 py-0.5 rounded uppercase tracking-wider">Komponen Mekanikal</span>
+                        <h3 class="text-sm font-bold text-[#101e33] mt-1 leading-tight dinamik-teks-tajuk">Mod (Vape Box Mods)</h3>
+                        <p class="text-[11px] text-gray-400 font-light mt-1.5 leading-relaxed dinamik-teks-biasa">Bahagian badan utama peranti rokok elektronik bersaiz besar yang menampung bateri, papan litar pintar (chipset), dan butang kawalan kuasa (wattage).</p>
+                    </div>
+                    <div class="bg-gray-50/70 p-2.5 rounded-lg border text-[10px] font-light dinamik-bg-utama dinamik-border">
+                        <b>Regulasi Iklan:</b> Walaupun dikelaskan sebagai perkakasan perkakas gajet, penjualan terbuka dan promosi jenama adalah dilarang sama sekali.
+                    </div>
+                </div>
+            </div>
+
+            <div class="animasi-kad bg-white border rounded-xl overflow-hidden shadow-xs flex flex-col justify-between h-[28rem] dinamik-bg-kad dinamik-border" style="animation-delay: 0.50s">
+                <div class="w-full h-36 bg-gray-100 relative">
+                    <img src="https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=400&q=80" alt="Refillable Pod" class="w-full h-full object-cover">
+                </div>
+                <div class="p-4 flex-1 flex flex-col justify-between space-y-2">
+                    <div>
+                        <span class="text-[8px] font-bold text-purple-600 bg-purple-50 px-1.5 py-0.5 rounded uppercase tracking-wider">Bahan Merokok</span>
+                        <h3 class="text-sm font-bold text-[#101e33] mt-1 leading-tight dinamik-teks-tajuk">Pod Isian Semula (Refillable)</h3>
+                        <p class="text-[11px] text-gray-400 font-light mt-1.5 leading-relaxed dinamik-teks-biasa">Sistem katrij terbuka (open pod system) kosong yang membenarkan pengguna mengisi semula cecair e-jus secara manual berulang kali sehingga jangka hayat coil tamat.</p>
+                    </div>
+                    <div class="bg-gray-50/70 p-2.5 rounded-lg border text-[10px] font-light dinamik-bg-utama dinamik-border">
+                        <b>Pendaftaran KKM:</b> Reka bentuk struktur fizikal dan tangki pod wajib didaftarkan di bawah kelulusan makmal berdaftar.
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function tukarTemaManual(tema) {
+            document.documentElement.setAttribute('data-theme', tema);
+            localStorage.setItem('pilihanTemaNCD_Global', tema);
+            const selectBox = document.getElementById('themeSelect');
+            if(selectBox) {
+                selectBox.value = tema;
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const temaDisimpan = localStorage.getItem('pilihanTemaNCD_Global') || 'default';
+            tukarTemaManual(temaDisimpan);
+        });
+    </script>
+</body>
+</html>
