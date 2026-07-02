@@ -4,410 +4,186 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Klasifikasi Produk Akta 852 | Unit NCD JKN Perlis</title>
+    <link rel="icon" type="image/png" href="../../favicon/favicon.ico">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        ::-webkit-scrollbar { display: none; }
-
-        /* ==========================================================================
-           MATRIX PERTAHANAN TEMA GLOBAL (SEPADAN 100% DENGAN INDEX PORTAL ANDA)
-           ========================================================================== */
-        :root {
-            --bg-utama: #FBFBFB; --bg-kad: #FFFFFF; --border-warna: #F3F4F6;
-            --teks-tajuk: #101e33; --teks-biasa: #1A1A1A; --teks-sub: #9CA3AF;
-            --bg-input: #FFFFFF;
-        }
-        [data-theme="dark"] {
-            --bg-utama: #0B132B; --bg-kad: #1C2541; --border-warna: #3A506B;
-            --teks-tajuk: #FFFFFF; --teks-biasa: #E2E8F0; --teks-sub: #94A3B8;
-            --bg-input: #1C2541;
-        }
-        [data-theme="winamp_orange"] {
-            --bg-utama: #1a1a1a; --bg-kad: #282828; --border-warna: #ff5722;
-            --teks-tajuk: #ff7043; --teks-biasa: #b0bec5; --teks-sub: #78909c;
-            --bg-input: #212121;
-        }
-        [data-theme="winamp_classic"] {
-            --bg-utama: #0f1115; --bg-kad: #171a21; --border-warna: #00e676;
-            --teks-tajuk: #00e676; --teks-biasa: #90a4ae; --teks-sub: #4f5b66;
-            --bg-input: #12141c;
-        }
-        [data-theme="winamp_blue"] {
-            --bg-utama: #0a0e17; --bg-kad: #121824; --border-warna: #00e5ff;
-            --teks-tajuk: #00e5ff; --teks-biasa: #a1a8b8; --teks-sub: #3c485e;
-            --bg-input: #0e131f;
-        }
-        [data-theme="cyberpunk"] {
-            --bg-utama: #0f1013; --bg-kad: #1a1b20; --border-warna: #fcee0a;
-            --teks-tajuk: #fcee0a; --teks-biasa: #00f0ff; --teks-sub: #ff0055;
-            --bg-input: #141519;
-        }
-        [data-theme="dracula"] {
-            --bg-utama: #1e1f29; --bg-kad: #282a36; --border-warna: #ff79c6;
-            --teks-tajuk: #50fa7b; --teks-biasa: #f8f8f2; --teks-sub: #bd93f9;
-            --bg-input: #21222c;
-        }
-
-        .dinamik-bg-utama { background-color: var(--bg-utama) !important; transition: all 0.3s ease; }
-        .dinamik-bg-kad { background-color: var(--bg-kad) !important; transition: all 0.3s ease; }
-        .dinamik-border { border-color: var(--border-warna) !important; transition: all 0.3s ease; }
-        .dinamik-teks-tajuk { color: var(--teks-tajuk) !important; }
-        .dinamik-teks-biasa { color: var(--teks-biasa) !important; transition: all 0.3s ease; }
-        .dinamik-teks-sub { color: var(--teks-sub) !important; }
-        .dinamik-bg-input { background-color: var(--bg-input) !important; transition: all 0.3s ease; }
-
-        /* 🎬 Animasi Khas: Fade In Up */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animasi-kad { animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) both; }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="h-screen w-screen overflow-hidden flex flex-col dinamik-bg-utama dinamik-teks-biasa antialiased">
 
-    <header class="w-full py-4 px-4 md:px-12 bg-white border-b flex items-center justify-between z-20 flex-shrink-0 shadow-xs dinamik-bg-kad dinamik-border">
-        <div class="flex items-center space-x-3">
-            <img src="../../images/logo.png" style="max-width: 28px;" class="w-full h-auto object-contain mx-auto md:max-w-[42px]">
-            <img src="../../images/logo-ncd/logo-ncd-default.png" style="max-width: 80px;" class="md:max-w-[130px]">
-            <div class="w-[1px] h-7 bg-gray-200 dinamik-border"></div>
-            <h2 class="text-xs md:text-sm font-extrabold uppercase tracking-wider text-[#101e33] leading-tight dinamik-teks-tajuk">
-                Sistem Akta 852<br>
-                <span class="text-gray-400 font-medium text-[9px] md:text-[10px] normal-case tracking-normal dinamik-teks-sub">Kawalan Produk Merokok Demi Kesihatan Awam 2024</span>
-            </h2>
-        </div>
-        
-        <div class="flex items-center space-x-2 md:space-x-4">
-            <nav class="flex items-center space-x-1 md:space-x-2">
-                <a href="index.html" class="px-3 py-1.5 rounded-xl text-[11px] md:text-xs font-semibold hover:bg-gray-100 transition-colors dinamik-teks-biasa">Utama</a>
-                <a href="produk.html" class="px-3 py-1.5 rounded-xl text-[11px] md:text-xs font-bold bg-[#101e33] text-white shadow-xs">Senarai Produk</a>
-                <a href="faq.html" class="px-3 py-1.5 rounded-xl text-[11px] md:text-xs font-semibold hover:bg-gray-100 transition-colors dinamik-teks-biasa">FAQ KKM</a>
-                <div class="w-[1px] h-4 bg-gray-200 mx-1 dinamik-border"></div>
-                <a href="../info-ncd.html" class="px-3 py-1.5 rounded-xl text-[11px] md:text-xs font-bold bg-red-600 text-white hover:bg-red-700 shadow-xs transition-colors">← Portal NCD</a>
-            </nav>
+    <header id="global-header" class="w-full py-3.5 px-4 md:px-12 backdrop-blur-xl bg-white/80 border-b flex items-center justify-between z-20 flex-shrink-0 shadow-xs dinamik-bg-kad/80 dinamik-border"></header>
 
-            <select id="themeSelect" onchange="tukarTemaManual(this.value)" class="text-[10px] md:text-xs font-bold bg-gray-50 border border-gray-200 rounded-xl px-2 py-1.5 outline-none cursor-pointer shadow-xs dinamik-bg-input dinamik-border dinamik-teks-biasa">
-                <option value="default">Lalai</option>
-                <option value="dark">Mod Gelap</option>
-                <option value="winamp_orange">Dark Orange</option>
-                <option value="winamp_classic">Dark Green</option>
-                <option value="winamp_blue">Dark Blue</option>
-                <option value="cyberpunk">Cyberpunk</option>
-                <option value="dracula">Green Purple</option>
-            </select>
-        </div>
-    </header>
-
-    <div class="flex-1 w-full overflow-y-auto px-4 md:px-12 py-6 flex flex-col justify-between space-y-6">
-        
+    <div class="flex-1 w-full overflow-y-auto px-4 md:px-12 py-6 space-y-4 flex flex-col justify-between">
         <div class="border-b pb-2 flex-shrink-0 dinamik-border">
             <h1 class="text-lg md:text-xl font-extrabold text-[#101e33] dinamik-teks-tajuk">Inventori Klasifikasi Produk Terkawal (Akta 852)</h1>
             <p class="text-[11px] text-gray-400 font-light dinamik-teks-sub">Klik pada mana-mana kad produk untuk memaparkan rincian peranti, siri imej, huraian serta syarat pematuhan standard KKM.</p>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 py-2 flex-1 items-center" id="gridProdukContainer">
-            </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-5 py-2 flex-1 items-center" id="gridProdukContainer"></div>
         
-        <div class="text-center text-[10px] text-gray-400 font-light pt-2 border-t flex-shrink-0 dinamik-border">
-            Hak Cipta Terpelihara © Unit NCD Jabatan Kesihatan Negeri Perlis
-        </div>
+        <div id="global-footer" class="text-center text-[10px] text-gray-400 font-light pt-2 border-t flex-shrink-0 dinamik-border"></div>
     </div>
 
-    <div id="productModal" class="fixed inset-0 bg-black/70 backdrop-blur-xs flex items-center justify-center z-50 opacity-0 pointer-events-none transition-opacity duration-300">
-        <div class="bg-white rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl relative mx-4 flex flex-col h-[38rem] dinamik-bg-kad transform scale-95 transition-transform duration-300" id="modalBox">
+    <div id="productModal" class="fixed inset-0 bg-black/40 backdrop-blur-xs flex items-end md:items-center justify-center z-50 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-white rounded-t-3xl md:rounded-2xl w-full max-w-2xl overflow-hidden shadow-2xl relative mx-0 md:mx-4 flex flex-col h-[85vh] md:h-[35rem] dinamik-bg-kad transform translate-y-full md:translate-y-0 md:scale-95 transition-transform duration-300" id="modalBox">
+            <div class="w-12 h-1 bg-gray-300 rounded-full mx-auto my-3 md:hidden flex-shrink-0"></div>
+            <button onclick="tutupPopupModal()" class="absolute top-4 right-4 w-7 h-7 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-500 flex items-center justify-center text-xs font-bold z-30 transition-colors dinamik-bg-input dinamik-teks-biasa">✕</button>
             
-            <button onclick="tutupPopupModal()" class="absolute top-3 right-3 w-8 h-8 rounded-full bg-black/50 hover:bg-black/80 text-white flex items-center justify-center text-sm font-bold z-30 transition-colors focus:outline-none">✕</button>
-            
-            <div class="w-full h-52 md:h-64 bg-gray-900 relative flex-shrink-0 group">
+            <div class="w-full h-48 md:h-56 bg-black relative flex-shrink-0 group">
                 <div id="modalSliderWrapper" class="w-full h-full flex transition-transform duration-300 ease-out"></div>
-                <button onclick="modalSlideKiri()" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/40 text-white text-xs font-bold flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/60">←</button>
-                <button onclick="modalSlideKanan()" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-black/40 text-white text-xs font-bold flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity hover:bg-black/60">→</button>
-                <div id="modalSliderDots" class="absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-1.5"></div>
+                <button onclick="modalSlideKiri()" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/20 text-white text-xs font-bold flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">←</button>
+                <button onclick="modalSlideKanan()" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/20 text-white text-xs font-bold flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">→</button>
+                <div id="modalSliderDots" class="absolute bottom-3 left-1/2 -translate-x-1/2 flex space-x-1.5 bg-black/20 px-2 py-1 rounded-full backdrop-blur-md"></div>
             </div>
 
             <div class="p-6 flex-1 overflow-y-auto flex flex-col justify-between space-y-4">
                 <div class="space-y-4">
                     <div class="flex items-center justify-between">
-                        <h2 id="modalTitle" class="text-base md:text-xl font-extrabold text-[#101e33] leading-tight dinamik-teks-tajuk">Nama Produk</h2>
-                        <span id="modalBadge" class="text-[9px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider">Kategori</span>
+                        <h2 id="modalTitle" class="text-base md:text-xl font-extrabold tracking-tight text-black dinamik-teks-tajuk">Nama Produk</h2>
+                        <span id="modalBadge" class="text-[9px] font-bold px-2.5 py-0.5 rounded-md uppercase tracking-wider">Kategori</span>
                     </div>
                     <div class="w-full h-[1px] bg-gray-100 dinamik-border"></div>
-                    
-                    <div>
-                        <p id="modalDesc" class="text-xs md:text-sm text-gray-500 font-light leading-relaxed dinamik-teks-biasa">Deskripsi penuh.</p>
-                    </div>
+                    <div><p id="modalDesc" class="text-xs md:text-sm text-gray-600 font-normal leading-relaxed dinamik-teks-biasa">Deskripsi penuh.</p></div>
 
-                    <div id="modalKeburukanSection" class="space-y-1.5">
-                        <h4 class="text-[11px] font-bold uppercase tracking-wider text-red-600 flex items-center gap-1">
-                            <span>⚠️</span> Keburukan kepada Kesihatan:
-                        </h4>
-                        <ul id="modalKeburukanList" class="list-disc list-inside text-xs text-gray-600 font-light space-y-1 pl-1 dinamik-teks-biasa"></ul>
+                    <div id="modalKeburukanSection" class="p-4 bg-red-50/50 rounded-2xl border border-red-100/50 space-y-1.5">
+                        <h4 class="text-xs font-bold text-red-600 flex items-center gap-1.5"><span class="w-2 h-2 rounded-full bg-red-600 inline-block"></span> Keburukan kepada Kesihatan:</h4>
+                        <ul id="modalKeburukanList" class="list-disc list-inside text-xs text-gray-600 font-normal space-y-1 pl-1 dinamik-teks-biasa"></ul>
                     </div>
                 </div>
-
-                <div id="modalInfoBox" class="p-3.5 rounded-xl border text-[10px] md:text-xs font-light leading-relaxed mt-4"></div>
+                <div id="modalInfoBox" class="p-4 rounded-2xl border text-xs font-normal leading-relaxed mt-4"></div>
             </div>
-
         </div>
     </div>
 
     <script>
         const inventori10Produk = [
             { 
-                id: 1, tag: "Hasil Tembakau", c: "text-red-600 bg-red-50/90 border border-red-200", t: "Cerut", 
-                shortDesc: "Gulungan daun tembakau asli bermutu tinggi tanpa penapis kertas.",
-                d: "Cerut ialah produk tembakau yang dibalut sepenuhnya atau sebahagian dengan daun tembakau semula jadi atau bahan yang mengandungi tembakau, dan dimaksudkan untuk disedut asapnya melalui pembakaran. Cerut biasanya lebih besar daripada rokok dan mengandungi kandungan nikotin yang tinggi.", 
-                keburukan: [
-                    "Mengandungi nikotin tinggi dan bahan kimia karsinogenik.",
-                    "Meningkatkan risiko kanser mulut, paru-paru, tekak, dan esofagus.",
-                    "Pendedahan kepada asap terpakai (secondhand smoke) adalah berbahaya."
-                ],
-                info: "<b>Pematuhan KKM:</b> Paket kadbod keras kuboid atau bungkusan tin silinder wajib dilengkapi 6 siri Amaran Kesihatan Bergambar KKM yang diluluskan.", 
-                imgs: ["images/cerut-01.png", "images/cerut-02.png", "images/cerut-03.png"] 
+                id: 1, tag: "Hasil Tembakau", c: "text-red-600 bg-red-50/90 border border-red-200", t: "Cerut", shortDesc: "Gulungan daun tembakau asli bermutu tinggi tanpa penapis kertas.", d: "Cerut ialah produk tembakau yang dibalut sepenuhnya atau sebahagian dengan daun tembakau semula jadi atau bahan yang mengandungi tembakau, dan dimaksudkan untuk disedut asapnya melalui pembakaran. Cerut biasanya lebih besar daripada rokok dan mengandungi kandungan nikotin yang tinggi.", keburukan: ["Mengandungi nikotin tinggi dan bahan kimia karsinogenik.", "Meningkatkan risiko kanser mulut, paru-paru, tekak, dan esofagus.", "Pendedahan kepada asap terpakai (secondhand smoke) adalah berbahaya."], info: "<b>Pematuhan KKM:</b> Paket kadbod keras kuboid atau bungkusan tin silinder wajib dilengkapi 6 siri Amaran Kesihatan Bergambar KKM yang diluluskan.", imgs: ["images/cerut-01.webp", "images/cerut-02.webp", "images/cerut-03.webp"] 
             },
             { 
-                id: 2, tag: "Hasil Tembakau", c: "text-red-600 bg-red-50/90 border border-red-200", t: "Tembakau Lerai", 
-                shortDesc: "Racikan helaian daun tembakau halus untuk gulungan rokok kendiri.",
-                d: "Tembakau lerai merujuk kepada daun tembakau yang telah dikeringkan dan diproses untuk digunakan secara manual oleh pengguna, biasanya dengan cara menggulungnya sendiri untuk dijadikan rokok atau digunakan dalam paip. Ia tidak dibungkus dalam bentuk rokok siap guna. ", 
-                keburukan: [
-                    "Masih mengandungi bahan beracun dan karsinogenik.",
-                    "Tidak ada pengurangan risiko berbanding rokok komersial.",
-                    "Risiko penyakit paru-paru dan kardiovaskular masih tinggi."
-                ],
-                info: "<b>Pematuhan KKM:</b> Reka bentuk bungkusan berbentuk kotak, tin atau kantung kuboid tertakluk sepenuhnya di bawah kawalan pendaftaran cukai.", 
-                imgs: ["images/tembakau-01.png", "images/tembakau-02.png","images/tembakau-03.png"] 
+                id: 2, tag: "Hasil Tembakau", c: "text-red-600 bg-red-50/90 border border-red-200", t: "Tembakau Lerai", shortDesc: "Racikan helaian daun tembakau halus untuk gulungan rokok kendiri.", d: "Tembakau lerai merujuk kepada daun tembakau yang telah dikeringkan dan diproses untuk digunakan secara manual oleh pengguna, biasanya dengan cara menggulungnya sendiri untuk dijadikan rokok atau digunakan dalam paip. Ia tidak dibungkus dalam bentuk rokok siap guna.", keburukan: ["Masih mengandungi bahan beracun dan karsinogenik.", "Tidak ada pengurangan risiko berbanding rokok komersial.", "Risiko penyakit paru-paru dan kardiovaskular masih tinggi."], info: "<b>Pematuhan KKM:</b> Reka bentuk bungkusan berbentuk kotak, tin atau kantung kuboid tertakluk sepenuhnya di bawah kawalan pendaftaran cukai.", imgs: ["images/tembakau-01.webp", "images/tembakau-02.webp","images/tembakau-03.webp"] 
             },
             { 
-                id: 3, tag: "Hasil Tembakau", c: "text-red-600 bg-red-50/90 border border-red-200", t: "Tembakau Tanpa Asap", 
-                shortDesc: "Produk tembakau hancur untuk kegunaan kunyahan atau tampalan gusi.",
-                d: "Tembakau tanpa asap, seperti snus, ialah produk tembakau yang digunakan secara oral dengan meletakkannya di antara gusi dan bibir tanpa pembakaran. Ia menyerap nikotin melalui membran mukosa dan tidak menghasilkan asap.", 
-                keburukan: [
-                    "Punca utama kanser pipi, gusi, dan lapisan dalam mulut (kanser oral).",
-                    "Kandungan nikotin diserap terus melalui selaput mulut, mencetuskan ketagihan melampau.",
-                    "Menyebabkan kerosakan akar gigi, karies teruk, dan nafas berbau kronik."
-                ],
-                info: "<b>Pematuhan KKM:</b> Larangan keras dan serta-merta terhadap sebarang bentuk paparan pameran, jualan, atau pemilikan oleh Orang Belum Dewasa (OBD).", 
-                imgs: ["images/tembakau-tanpa-asap-01.png", "images/tembakau-tanpa-asap-02.png", "images/tembakau-tanpa-asap-03.png"] 
+                id: 3, tag: "Hasil Tembakau", c: "text-red-600 bg-red-50/90 border border-red-200", t: "Tembakau Tanpa Asap", shortDesc: "Produk tembakau hancur untuk kegunaan kunyahan atau tampalan gusi.", d: "Tembakau tanpa asap, seperti snus, ialah produk tembakau yang digunakan secara oral dengan meletakkannya di antara gusi dan bibir tanpa pembakaran. Ia menyerap nikotin melalui membran mukosa dan tidak menghasilkan asap.", keburukan: ["Punca utama kanser pipi, gusi, dan lapisan dalam mulut (kanser oral).", "Kandungan nikotin diserap terus melalui selaput mulut, mencetuskan ketagihan melampau.", "Menyebabkan kerosakan akar gigi, karies teruk, dan nafas berbau kronik."], info: "<b>Pematuhan KKM:</b> Larangan keras dan serta-merta terhadap sebarang bentuk paparan pameran, jualan, atau pemilikan oleh Orang Belum Dewasa (OBD).", imgs: ["images/tembakau-tanpa-asap-01.webp", "images/tembakau-tanpa-asap-02.webp", "images/tembakau-tanpa-asap-03.webp"] 
             },
             { 
-                id: 4, tag: "Heated Tobacco", c: "text-amber-600 bg-amber-50/90 border border-amber-200", t: "Produk Dipanaskan dan Alat Pemanas (Heated Tobacco Products (HTPs))", 
-                shortDesc: "Sistem dwi-komponen pemanas batang tembakau (Heets) secara elektrik.",
-                d: "Sistem dwi-komponen yang menggunakan peranti gajet mekanikal elektrik untuk memanaskan batang tembakau khas (Heets) tanpa menghasilkan abu pembakaran.", 
-                keburukan: [
-                    "Tetap membebaskan aerosol mengandungi nikotin tulen yang merosakkan perkembangan otak remaja.",
-                    "Mengandungi sisa partikel logam berat halus hasil daripada pemanasan elemen elektronik.",
-                    "Mengekalkan risiko serangan strok dan mengecilkan saluran darah (vasokontriksi)."
-                ],
-                info: "<b>Pematuhan KKM:</b> Pendaftaran kelulusan KKM wajib beserta label Amaran Kesihatan Bergambar tunggal pada siri paket.", 
-                imgs: ["images/htps-01.png", "images/htps-02.png", "images/htps-03.png"] 
+                id: 4, tag: "Heated Tobacco", c: "text-amber-600 bg-amber-50/90 border border-amber-200", t: "Produk Dipanaskan dan Alat Pemanas (Heated Tobacco Products (HTPs))", shortDesc: "Sistem dwi-komponen pemanas batang tembakau (Heets) secara elektrik.", d: "Sistem dwi-komponen yang menggunakan peranti gajet mekanikal elektrik untuk memanaskan batang tembakau khas (Heets) tanpa menghasilkan abu pembakaran.", keburukan: ["Tetap membebaskan aerosol mengandungi nikotin tulen yang merosakkan perkembangan otak remaja.", "Mengandungi sisa partikel logam berat halus hasil daripada pemanasan elemen elektronik.", "Mengekalkan risiko serangan strok dan mengecilkan saluran darah (vasokontriksi)."], info: "<b>Pematuhan KKM:</b> Pendaftaran kelulusan KKM wajib beserta label Amaran Kesihatan Bergambar tunggal pada siri paket.", imgs: ["images/htps-01.webp", "images/htps-02.webp", "images/htps-03.webp"] 
             },
             { 
-                id: 5, tag: "Bahan Merokok", c: "text-purple-600 bg-purple-50/90 border border-purple-200", t: "Pod Pakai Buang", 
-                shortDesc: "Peranti vape bersepadu pra-isian cecair yang pakai buang (disposable).",
-                d: "Peranti rokok elektronik (vape) pakai buang (disposable pod) bersepadu yang telah siap terpasang bateri dan cecair di dalamnya.", 
-                keburukan: [
-                    "Nikotin garam (salt-nic) di dalamnya diserap sepantas 7 saat ke otak, mencetuskan ketagihan ekspres.",
-                    "Risiko tinggi kecederaan paru-paru akut (EVALI) akibat pendedahan kepada agen pekat cecair siber.",
-                    "Bahan kimia perisa (diacetyl) boleh merosakkan bronkiol kecil (paru-paru popia / Popcorn Lung)."
-                ],
-                info: "<b>Pematuhan KKM:</b> Kapasiti tampungan takungan cecair dihadkan tidak melebihi standard 3 ml sahaja (fasa tamat peralihan 1 Oktober 2026).", 
-                imgs: ["https://images.unsplash.com/photo-1573148164257-894f6f4fa695?auto=format&fit=crop&w=400&q=80"] 
+                id: 5, tag: "Bahan Merokok", c: "text-purple-600 bg-purple-50/90 border border-purple-200", t: "Pod Pakai Buang", shortDesc: "Peranti vape bersepadu pra-isian cecair yang pakai buang (disposable).", d: "Peranti rokok elektronik (vape) pakai buang (disposable pod) bersepadu yang telah siap terpasang bateri dan cecair di dalamnya.", keburukan: ["Nikotin garam (salt-nic) di dalamnya diserap sepantas 7 saat ke otak, mencetuskan ketagihan ekspres.", "Risiko tinggi kecederaan paru-paru akut (EVALI) akibat pendedahan kepada agen pekat cecair siber.", "Bahan kimia perisa (diacetyl) boleh merosakkan bronkiol kecil (paru-paru popia / Popcorn Lung)."], info: "<b>Pematuhan KKM:</b> Kapasiti tampungan takungan cecair dihadkan tidak melebihi standard 3 ml sahaja (fasa fasa tamat fasa peralihan 1 Oktober 2026).", imgs: ["images/pod-01.webp", "images/pod-02.webp", "images/pod-03.webp"] 
             },
             { 
-                id: 6, tag: "Bahan Merokok", c: "text-purple-600 bg-purple-50/90 border border-purple-200", t: "Katrij", 
-                shortDesc: "Kapsul takungan pod tertutup menampung gegelung coil & cecair vape.",
-                d: "Kontainer kapsul lutsinar kecil yang menampung komponen gegelung pemanas (coil) dan cecair perisa untuk kegunaan vape sistem tertutup.", 
-                keburukan: [
-                    "Pemanasan berulang pada struktur katrij plastik gred rendah berisiko membebaskan sisa mikroplastik.",
-                    "Pendedahan cecair nikotin secara langsung pada kulit jika berlaku kebocoran katrij (leaking).",
-                    "Merosakkan silia paru-paru, mengurangkan imuniti pertahanan badan daripada jangkitan kuman."
-                ],
-                info: "<b>Syarat Pembungkusan:</b> Pengilang wajib mematuhi standard saiz takungan isipadu maksimum 3 ml dengan pembungkusan plastik jenis blister selamat.", 
-                imgs: ["https://images.unsplash.com/photo-1551076805-e18690237571?auto=format&fit=crop&w=400&q=80"] 
+                id: 6, tag: "Bahan Merokok", c: "text-purple-600 bg-purple-50/90 border border-purple-200", t: "Katrij", shortDesc: "Kapsul takungan pod tertutup menampung gegelung coil & cecair vape.", d: "Kontainer kapsul lutsinar kecil yang menampung komponen gegelung pemanas (coil) dan cecair perisa untuk kegunaan vape sistem tertutup.", keburukan: ["Pemanasan berulang pada struktur katrij plastik gred rendah berisiko membebaskan sisa mikroplastik.", "Pendedahan cecair nikotin secara langsung pada kulit jika berlaku kebocoran katrij (leaking).", "Merosakkan silia paru-paru, mengurangkan imuniti pertahanan badan daripada jangkitan kuman."], info: "<b>Syarat Pembungkusan:</b> Pengilang wajib mematuhi standard saiz takungan isipadu maksimum 3 ml dengan pembungkusan plastik jenis blister selamat.", imgs: ["images/katrij-01.webp"] 
             },
             { 
-                id: 7, tag: "Bahan Merokok", c: "text-purple-600 bg-purple-50/90 border border-purple-200", t: "Cecair Perisa", 
-                shortDesc: "Formulasi campuran kimia PG/VG, esens perisa manis, dan nikotin.",
-                d: "Formulasi cecair campuran Propylene Glycol (PG), Vegetable Glycerin (VG), penambah rasa manis, dan esens nikotin tulen (freebase/salt-nic) di dalam botol isian jualan.", 
-                keburukan: [
-                    "Wap PG/VG yang dipanaskan menghasilkan formaldehida – sejenis bahan kimia karsinogen punca kanser.",
-                    "Bahan kimia pemanis tiruan merosakkan DNA sel paru-paru dan mencetuskan keradangan makro.",
-                    "Keracunan nikotin akut yang berbahaya jika tertelan secara tidak sengaja, terutama kanak-kanak."
-                ],
-                info: "<b>Had Kepekatan Nikotin KKM:</b> Saiz botol maksimum 15 ml. Kepekatan nikotin cecair dihadkan kepada maksimum 20 mg/ml bermula selepas fasa 1 Oktober 2025.", 
-                imgs: ["https://images.unsplash.com/photo-1526256262350-7da7584cf5eb?auto=format&fit=crop&w=400&q=80"] 
+                id: 7, tag: "Bahan Merokok", c: "text-purple-600 bg-purple-50/90 border border-purple-200", t: "Cecair Perisa", shortDesc: "Formulasi campuran kimia PG/VG, esens perisa manis, dan nikotin.", d: "Formulasi cecair campuran Propylene Glycol (PG), Vegetable Glycerin (VG), penambah rasa manis, dan esens nikotin tulen (freebase/salt-nic) di dalam botol isian jualan.", keburukan: ["Wap PG/VG yang dipanaskan menghasilkan formaldehida – sejenis bahan kimia karsinogen punca kanser.", "Bahan kimia pemanis tiruan merosakkan DNA sel paru-paru dan mencetuskan keradangan makro.", "Keracunan nikotin akut yang berbahaya jika tertelan secara tidak sengaja, terutama kanak-kanak."], info: "<b>Had Kepekatan Nikotin KKM:</b> Saiz botol maksimum 15 ml. Kepekatan nikotin cecair dihadkan kepada maksimum 20 mg/ml bermula selepas fasa 1 Oktober 2025.", imgs: ["images/perisa-01.webp", "images/perisa-02.webp", "images/perisa-03.webp"] 
             },
             { 
-                id: 8, tag: "Larangan Mutlak", c: "text-rose-600 bg-rose-50/90 border border-rose-200", t: "Iklan Tiruan", 
-                shortDesc: "Gula-gula, mainan, atau aksesori fesyen berupa bentuk vape/rokok.",
-                d: "Sebarang bentuk reka bentuk visual, promosi, atau barangan (seperti permainan gajet, gula-gula bentuk rokok/vape pod) yang menyerupai sebahagian bentuk produk merokok asli.", 
-                keburukan: [
-                    "Membiasakan reka bentuk produk merokok di dalam minda kanak-kanak (normalisasi ketagihan).",
-                    "Mengumpan golongan Orang Belum Dewasa (OBD) untuk mula mencuba produk merokok sebenar.",
-                    "Mengurangkan rasa gerun masyarakat terhadap bahaya impak sebenar ketagihan nikotin siber."
-                ],
-                info: "<b>Serta-Merta (Seksyen 8(2)):</b> KKM melarang keras sebarang jenis penerbitan iklan produk tiruan. Pelanggaran membawa denda sehingga RM 20,000.", 
-                imgs: ["https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=400&q=80"] 
+                id: 8, tag: "Larangan Mutlak", c: "text-rose-600 bg-rose-50/90 border border-rose-200", t: "Iklan Tiruan", shortDesc: "Gula-gula, mainan, atau aksesori fesyen berupa bentuk vape/rokok.", d: "Sebarang bentuk reka bentuk visual, promosi, atau barangan (seperti permainan gajet, gula-gula bentuk rokok/vape pod) yang menyerupai sebahagian bentuk produk merokok asli.", keburukan: ["Membiasakan reka bentuk produk merokok di dalam minda kanak-kanak (normalisasi ketagihan).", "Mengumpan golongan Orang Belum Dewasa (OBD) untuk mula mencuba produk merokok sebenar.", "Mengurangkan rasa gerun masyarakat terhadap bahaya impak sebenar ketagihan nikotin siber."], info: "<b>Serta-Merta (Seksyen 8(2)):</b> KKM melarang keras sebarang jenis penerbitan iklan produk tiruan. Pelanggaran membawa denda sehingga RM 20,000.", imgs: ["images/iklan-rokok-01.webp"] 
             },
             { 
-                id: 9, tag: "Komponen", c: "text-sky-600 bg-sky-50/90 border border-sky-200", t: "Mod (Box Mods)", 
-                shortDesc: "Gajet badan utama vape pembekal bateri, chipset, dan kawalan watt.",
-                d: "Kotak gajet badan utama peranti rokok elektronik bersaiz modular yang menampung bateri luaran, panel skrin litar pintar (chipset), dan butang kawalan watt.", 
-                keburukan: [
-                    "Penggunaan bateri litium-ion gred rendah berisiko tinggi mencetuskan letupan letusan mikro pada muka.",
-                    "Kuasa watt tinggi meningkatkan haba pembakaran, sekali gua membebaskan sisa logam berat toksik daripada coil.",
-                    "Menggalakkan tabiat menghisap vape secara berlebihan (cloud chasing) yang membebankan fungsi jantung."
-                ],
-                info: "<b>Pematuhan Kawalan:</b> Walaupun dikelaskan sebagai perkakasan mekanikal, sebarang aktiviti pengiklanan, paparan kaunter terbuka, atau promosi penajaan jenama adalah dilarang.", 
-                imgs: ["https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=400&q=80"] 
+                id: 9, tag: "Komponen", c: "text-sky-600 bg-sky-50/90 border border-sky-200", t: "Mod (Box Mods)", shortDesc: "Gajet badan utama vape pembekal bateri, chipset, dan kawalan watt.", d: "Kotak gajet badan utama peranti rokok elektronik bersaiz modular yang menampung bateri luaran, panel skrin litar pintar (chipset), dan butang kawalan watt.", keburukan: ["Penggunaan bateri litium-ion gred rendah berisiko tinggi mencetuskan letupan letusan mikro pada muka.", "Kuasa watt tinggi meningkatkan haba pembakaran, sekali gua membebaskan sisa logam berat toksik daripada coil.", "Menggalakkan tabiat menghisap vape secara berlebihan (cloud chasing) yang membebankan fungsi jantung."], info: "<b>Pematuhan Kawalan:</b> Walaupun dikelaskan sebagai perkakasan mekanikal, sebarang aktiviti pengiklanan, paparan kaunter terbuka, atau promosi penajaan jenama adalah dilarang.", imgs: ["images/mod-01.webp", "images/mod-02.webp", "images/mod-03.webp"] 
             },
             { 
-                id: 10, tag: "Bahan Merokok", c: "text-purple-600 bg-purple-50/90 border border-purple-200", t: "Pod Isian Semula", 
-                shortDesc: "Sistem katrij takungan terbuka kosong untuk isian e-juice secara manual.",
-                d: "Sistem katrij takungan terbuka kosong yang memberikan ruang kepada pengguna untuk mengisi cecair e-liquid secara berulang kali secara manual.", 
-                keburukan: [
-                    "Gegelung (coil) yang telah hangus atau berkerak (burnt coil) membebaskan sisa karbon toksik berbahaya.",
-                    "Risiko salah isi kandungan cecair terlarang atau campuran dadah sintetik buatan sendiri.",
-                    "Mengekalkan rantaian tabiat ketagihan merokok yang merosakkan keupayaan kognitif saraf otak."
-                ],
-                info: "<b>Pematuhan KKM:</b> Struktur fizikal gajet dan tangki wajib melalui saringan analisis makmal berdaftar serta didaftarkan bermula fasa 1 April 2025.", 
-                imgs: ["https://images.unsplash.com/photo-1586281380349-632531db7ed4?auto=format&fit=crop&w=400&q=80"] 
+                id: 10, tag: "Bahan Merokok", c: "text-purple-600 bg-purple-50/90 border border-purple-200", t: "Pod Isian Semula", shortDesc: "Sistem katrij takungan terbuka kosong untuk isian e-juice secara manual.", d: "Sistem katrij takungan terbuka kosong yang memberikan ruang kepada pengguna untuk mengisi cecair e-liquid secara berulang kali secara manual.", keburukan: ["Gegelung (coil) yang telah hangus atau berkerak (burnt coil) membebaskan sisa karbon toksik berbahaya.", "Risiko salah isi kandungan cecair terlarang atau campuran dadah sintetik buatan sendiri.", "Mengekalkan rantaian tabiat ketagihan merokok yang merosakkan keupayaan kognitif saraf otak."], info: "<b>Pematuhan KKM:</b> Struktur fizikal gajet dan tangki wajib melalui saringan analisis makmal berdaftar serta didaftarkan bermula fasa 1 April 2025.", imgs: ["images/pod-refill-01.webp", "images/pod-refill-02.webp"] 
             }
         ];
 
-        // --- 🎨 NEW DESIGN ENGINE: PORTRAIT BADGES DENGAN GRADIENT OVERLAY TEXT ---
+        async function muatKomponenGlobal() {
+            try {
+                const resH = await fetch('components/header.html');
+                document.getElementById('global-header').innerHTML = await resH.text();
+                const resF = await fetch('components/footer.html');
+                document.getElementById('global-footer').innerHTML = await resF.text();
+
+                const el = document.getElementById('nav-produk');
+                if(el) el.className = "px-3 py-1 rounded-lg text-[11px] md:text-xs font-bold bg-white text-black shadow-xs dinamik-bg-kad dinamik-teks-tajuk";
+                
+                tukarTemaManual(localStorage.getItem('pilihanTemaNCD_Global') || 'default');
+            } catch (e) { console.error(e); }
+        }
+
         function binaGridProduk() {
             const container = document.getElementById('gridProdukContainer');
-            if(!container) return;
-            container.innerHTML = "";
-
+            if(!container) return; container.innerHTML = "";
             inventori10Produk.forEach((prod, indeks) => {
                 const cardBlock = `
-                    <div onclick="bukaPopupModal(${prod.id})" class="animasi-kad group relative h-64 w-full rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100 dinamik-border" style="animation-delay: ${indeks * 0.02}s">
-                        
-                        <img src="${prod.imgs[0]}" alt="${prod.t}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                        
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/95 via-black/40 to-black/10 z-10"></div>
-                        
-                        <span class="absolute top-3 left-3 text-[7px] md:text-[8px] font-extrabold px-2 py-0.5 rounded-md uppercase tracking-wider z-20 shadow-sm ${prod.c}">
-                            ${prod.tag}
-                        </span>
-
-                        <div class="absolute bottom-0 left-0 w-full p-3.5 z-20 flex flex-col justify-end">
-                            <h3 class="text-xs md:text-sm font-extrabold text-white tracking-tight leading-tight group-hover:text-yellow-300 transition-colors">
-                                ${prod.t}
-                            </h3>
-                            <p class="text-[10px] text-gray-300 font-light leading-snug mt-1 line-clamp-2 opacity-85 group-hover:opacity-100 transition-opacity">
-                                ${prod.shortDesc}
-                            </p>
-                            <div class="flex items-center space-x-1 text-[9px] text-blue-400 font-bold mt-2 pt-1 border-t border-white/10 opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-1 group-hover:translate-y-0">
-                                <span>Ketik Info Penuh</span>
-                                <span>→</span>
+                    <div onclick="bukaPopupModal(${prod.id})" class="animasi-ios group relative h-72 w-full rounded-2xl overflow-hidden cursor-pointer bg-white border border-gray-100 dinamik-bg-kad dinamik-border" style="animation-delay: ${indeks * 0.02}s">
+                        <div class="h-36 w-full overflow-hidden bg-gray-50 relative flex-shrink-0">
+                            <img src="${prod.imgs[0]}" alt="${prod.t}" class="w-full h-full object-cover group-hover:scale-103 transition-transform duration-500">
+                            <span class="absolute bottom-2 left-2 text-[8px] font-bold px-2 py-0.5 rounded-md backdrop-blur-md bg-white/90 text-black shadow-xs ${prod.c}">${prod.tag}</span>
+                        </div>
+                        <div class="p-3 flex flex-col justify-between h-36">
+                            <div class="space-y-1">
+                                <h3 class="text-xs md:text-sm font-bold tracking-tight text-black line-clamp-1 dinamik-teks-tajuk">${prod.t}</h3>
+                                <p class="text-[10px] text-gray-400 font-normal line-clamp-2 dinamik-teks-sub">${prod.shortDesc}</p>
+                            </div>
+                            <div class="flex items-center justify-between pt-2 border-t border-gray-100 dinamik-border">
+                                <span class="text-[9px] text-gray-400 dinamik-teks-sub">Akta 852</span>
+                                <span class="text-[10px] font-extrabold bg-gray-100 text-blue-500 rounded-full px-3.5 py-1 uppercase tracking-wider group-hover:bg-blue-600 group-hover:text-white">Lihat</span>
                             </div>
                         </div>
-
-                    </div>
-                `;
+                    </div>`;
                 container.insertAdjacentHTML('beforeend', cardBlock);
             });
         }
 
-        // --- B. LOGIK POPUP MODAL SLIDER MENEGAK ---
-        let indeksSlaidModal = 0;
-        let gambarSlaidSemasa = [];
-
+        // --- POPUP SLIDER CORE ENGINE ---
+        let indeksSlaidModal = 0; let gambarSlaidSemasa = [];
         function bukaPopupModal(id) {
-            const prod = inventori10Produk.find(item => item.id === id);
-            if (!prod) return;
-
-            document.getElementById('modalBadge').className = `text-[8px] font-bold px-2.5 py-0.5 rounded-full uppercase tracking-wider ${prod.c}`;
+            const prod = inventori10Produk.find(item => item.id === id); if (!prod) return;
+            document.getElementById('modalBadge').className = `text-[8px] font-bold px-2.5 py-0.5 rounded-md uppercase tracking-wider ${prod.c}`;
             document.getElementById('modalBadge').innerText = prod.tag;
             document.getElementById('modalTitle').innerText = prod.t;
             document.getElementById('modalDesc').innerHTML = prod.d;
             
             const infoBox = document.getElementById('modalInfoBox');
-            infoBox.className = "p-3.5 rounded-xl border text-[10px] md:text-xs font-light leading-relaxed bg-blue-50/20 text-blue-800 border-blue-100/60 dinamik-border";
+            infoBox.className = "p-3.5 rounded-xl border text-[10px] md:text-xs font-normal bg-blue-50/20 text-blue-800 border-blue-100/60 dinamik-border";
             infoBox.innerHTML = prod.info;
 
-            const keburukanList = document.getElementById('modalKeburukanList');
-            keburukanList.innerHTML = "";
+            const keburukanList = document.getElementById('modalKeburukanList'); keburukanList.innerHTML = "";
             if (prod.keburukan && prod.keburukan.length > 0) {
                 document.getElementById('modalKeburukanSection').classList.remove('hidden');
-                prod.keburukan.forEach(item => {
-                    keburukanList.insertAdjacentHTML('beforeend', `<li>${item}</li>`);
-                });
-            } else {
-                document.getElementById('modalKeburukanSection').classList.add('hidden');
-            }
+                prod.keburukan.forEach(item => { keburukanList.insertAdjacentHTML('beforeend', `<li>${item}</li>`); });
+            } else { document.getElementById('modalKeburukanSection').classList.add('hidden'); }
 
-            gambarSlaidSemasa = prod.imgs.slice(0, 3);
-            indeksSlaidModal = 0;
-            binaGambarSliderModal();
-
-            const modal = document.getElementById('productModal');
-            const modalBox = document.getElementById('modalBox');
+            gambarSlaidSemasa = prod.imgs.slice(0, 3); indeksSlaidModal = 0; binaGambarSliderModal();
+            const modal = document.getElementById('productModal'); const modalBox = document.getElementById('modalBox');
             modal.classList.remove('opacity-0', 'pointer-events-none');
-            modalBox.classList.remove('scale-95');
-            modalBox.classList.add('scale-100');
+            modalBox.classList.remove('translate-y-full', 'md:scale-95'); modalBox.classList.add('translate-y-0', 'md:scale-100');
         }
 
         function tutupPopupModal() {
-            const modal = document.getElementById('productModal');
-            const modalBox = document.getElementById('modalBox');
+            const modal = document.getElementById('productModal'); const modalBox = document.getElementById('modalBox');
             modal.classList.add('opacity-0', 'pointer-events-none');
-            modalBox.classList.remove('scale-100');
-            modalBox.classList.add('scale-95');
+            modalBox.classList.remove('translate-y-0', 'md:scale-100'); modalBox.classList.add('translate-y-full', 'md:scale-95');
         }
 
         function binaGambarSliderModal() {
-            const wrapper = document.getElementById('modalSliderWrapper');
-            const dotsContainer = document.getElementById('modalSliderDots');
-            if(!wrapper || !dotsContainer) return;
-            
-            wrapper.innerHTML = "";
-            dotsContainer.innerHTML = "";
-            wrapper.style.width = `${gambarSlaidSemasa.length * 100}%`;
-
+            const wrapper = document.getElementById('modalSliderWrapper'); const dotsContainer = document.getElementById('modalSliderDots');
+            wrapper.innerHTML = ""; dotsContainer.innerHTML = ""; wrapper.style.width = `${gambarSlaidSemasa.length * 100}%`;
             gambarSlaidSemasa.forEach((imgSrc, idx) => {
-                const slideBlock = `<div class="h-full relative flex-shrink-0" style="width: ${100 / gambarSlaidSemasa.length}%"><img src="${imgSrc}" class="w-full h-full object-cover"></div>`;
-                wrapper.insertAdjacentHTML('beforeend', slideBlock);
-
-                const dotBlock = `<span onclick="pergiKeSlaidModal(${idx})" class="w-1.5 h-1.5 rounded-full cursor-pointer transition-all duration-200 ${idx === indeksSlaidModal ? 'bg-white scale-125' : 'bg-white/40'}"></span>`;
-                dotsContainer.insertAdjacentHTML('beforeend', dotBlock);
+                wrapper.insertAdjacentHTML('beforeend', `<div class="h-full relative flex-shrink-0" style="width: ${100 / gambarSlaidSemasa.length}%"><img src="${imgSrc}" class="w-full h-full object-cover"></div>`);
+                dotsContainer.insertAdjacentHTML('beforeend', `<span onclick="pergiKeSlaidModal(${idx})" class="w-1.5 h-1.5 rounded-full cursor-pointer transition-all ${idx === indeksSlaidModal ? 'bg-white scale-125' : 'bg-white/40'}"></span>`);
             });
-
             kemaskiniKedudukanSliderModal();
         }
 
         function kemaskiniKedudukanSliderModal() {
-            const wrapper = document.getElementById('modalSliderWrapper');
-            const dots = document.getElementById('modalSliderDots').children;
-            if(!wrapper || !dots.length) return;
-
             const alihX = indeksSlaidModal * (100 / gambarSlaidSemasa.length);
-            wrapper.style.transform = `translateX(-${alihX}%)`;
-
-            for (let i = 0; i < dots.length; i++) {
-                dots[i].className = i === indeksSlaidModal ? "w-1.5 h-1.5 rounded-full cursor-pointer transition-all duration-200 bg-white scale-125" : "w-1.5 h-1.5 rounded-full cursor-pointer transition-all duration-200 bg-white/40";
-            }
+            document.getElementById('modalSliderWrapper').style.transform = `translateX(-${alihX}%)`;
+            const dots = document.getElementById('modalSliderDots').children;
+            for (let i = 0; i < dots.length; i++) { dots[i].className = i === indeksSlaidModal ? "w-1.5 h-1.5 rounded-full cursor-pointer transition-all bg-white scale-125" : "w-1.5 h-1.5 rounded-full cursor-pointer transition-all bg-white/40"; }
         }
-
         function modalSlideKanan() { indeksSlaidModal = (indeksSlaidModal + 1) % gambarSlaidSemasa.length; kemaskiniKedudukanSliderModal(); }
         function modalSlideKiri() { indeksSlaidModal = (indeksSlaidModal - 1 + gambarSlaidSemasa.length) % gambarSlaidSemasa.length; kemaskiniKedudukanSliderModal(); }
         function pergiKeSlaidModal(idx) { indeksSlaidModal = idx; kemaskiniKedudukanSliderModal(); }
 
         window.addEventListener('click', (e) => { if (e.target === document.getElementById('productModal')) tutupPopupModal(); });
-
-        function tukarTemaManual(tema) {
-            document.documentElement.setAttribute('data-theme', tema);
-            localStorage.setItem('pilihanTemaNCD_Global', tema);
-            const selectBox = document.getElementById('themeSelect');
-            if(selectBox) selectBox.value = tema;
-        }
+        function tukarTemaManual(tema) { document.documentElement.setAttribute('data-theme', tema); localStorage.setItem('pilihanTemaNCD_Global', tema); const sb = document.getElementById('themeSelect'); if(sb) sb.value = tema; }
 
         window.addEventListener('DOMContentLoaded', () => {
-            tukarTemaManual(localStorage.getItem('pilihanTemaNCD_Global') || 'default');
+            muatKomponenGlobal();
             binaGridProduk();
         });
     </script>

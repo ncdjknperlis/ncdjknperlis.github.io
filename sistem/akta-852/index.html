@@ -3,250 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistem Maklumat Akta 852 | Unit NCD JKN Perlis</title>
+    <title>Sistem Akta 852 | Unit NCD JKN Perlis</title>
+    <link rel="icon" type="image/png" href="../../favicon/favicon.ico">
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        ::-webkit-scrollbar { display: none; }
-
-        /* ==========================================================================
-           MATRIX PERTAHANAN TEMA GLOBAL (SEPADAN 100% DENGAN INDEX PORTAL ANDA)
-           ========================================================================== */
-        :root {
-            --bg-utama: #FBFBFB; --bg-kad: #FFFFFF; --border-warna: #F3F4F6;
-            --teks-tajuk: #101e33; --teks-biasa: #1A1A1A; --teks-sub: #9CA3AF;
-            --bg-input: #FFFFFF;
-        }
-        [data-theme="dark"] {
-            --bg-utama: #0B132B; --bg-kad: #1C2541; --border-warna: #3A506B;
-            --teks-tajuk: #FFFFFF; --teks-biasa: #E2E8F0; --teks-sub: #94A3B8;
-            --bg-input: #1C2541;
-        }
-        [data-theme="winamp_orange"] {
-            --bg-utama: #1a1a1a; --bg-kad: #282828; --border-warna: #ff5722;
-            --teks-tajuk: #ff7043; --teks-biasa: #b0bec5; --teks-sub: #78909c;
-            --bg-input: #212121;
-        }
-        [data-theme="winamp_classic"] {
-            --bg-utama: #0f1115; --bg-kad: #171a21; --border-warna: #00e676;
-            --teks-tajuk: #00e676; --teks-biasa: #90a4ae; --teks-sub: #4f5b66;
-            --bg-input: #12141c;
-        }
-        [data-theme="winamp_blue"] {
-            --bg-utama: #0a0e17; --bg-kad: #121824; --border-warna: #00e5ff;
-            --teks-tajuk: #00e5ff; --teks-biasa: #a1a8b8; --teks-sub: #3c485e;
-            --bg-input: #0e131f;
-        }
-        [data-theme="cyberpunk"] {
-            --bg-utama: #0f1013; --bg-kad: #1a1b20; --border-warna: #fcee0a;
-            --teks-tajuk: #fcee0a; --teks-biasa: #00f0ff; --teks-sub: #ff0055;
-            --bg-input: #141519;
-        }
-        [data-theme="dracula"] {
-            --bg-utama: #1e1f29; --bg-kad: #282a36; --border-warna: #ff79c6;
-            --teks-tajuk: #50fa7b; --teks-biasa: #f8f8f2; --teks-sub: #bd93f9;
-            --bg-input: #21222c;
-        }
-
-        /* Utiliti pemetaan kelas dinamik */
-        .dinamik-bg-utama { background-color: var(--bg-utama) !important; transition: all 0.3s ease; }
-        .dinamik-bg-kad { background-color: var(--bg-kad) !important; transition: all 0.3s ease; }
-        .dinamik-border { border-color: var(--border-warna) !important; transition: all 0.3s ease; }
-        .dinamik-teks-tajuk { color: var(--teks-tajuk) !important; }
-        .dinamik-teks-biasa { color: var(--teks-biasa) !important; transition: all 0.3s ease; }
-        .dinamik-teks-sub { color: var(--teks-sub) !important; }
-        .dinamik-bg-input { background-color: var(--bg-input) !important; transition: all 0.3s ease; }
-
-        /* 🎬 Animasi Khas: Fade In Up */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(12px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .animasi-mula { animation: fadeInUp 0.45s cubic-bezier(0.16, 1, 0.3, 1) both; }
-        .delay-1 { animation-delay: 0.05s; }
-        .delay-2 { animation-delay: 0.12s; }
-        .delay-3 { animation-delay: 0.18s; }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body class="h-screen w-screen overflow-hidden flex flex-col dinamik-bg-utama dinamik-teks-biasa antialiased">
 
-    <header class="w-full py-4 px-4 md:px-12 bg-white border-b flex items-center justify-between z-20 flex-shrink-0 shadow-xs dinamik-bg-kad dinamik-border">
-        <div class="flex items-center space-x-3">
-            <img src="../../images/logo.png" style="max-width: 28px;" class="w-full h-auto object-contain mx-auto md:max-w-[42px]">
-            <img src="../../images/logo-ncd/logo-ncd-default.png" style="max-width: 80px;" class="md:max-w-[130px]">
-            <div class="w-[1px] h-7 bg-gray-200 dinamik-border"></div>
-            <h2 class="text-xs md:text-sm font-extrabold uppercase tracking-wider text-[#101e33] leading-tight dinamik-teks-tajuk">
-                Sistem Akta 852<br>
-                <span class="text-gray-400 font-medium text-[9px] md:text-[10px] normal-case tracking-normal dinamik-teks-sub">Kawalan Produk Merokok Demi Kesihatan Awam 2024</span>
-            </h2>
-        </div>
-        
-        <div class="flex items-center space-x-2 md:space-x-4">
-            <nav class="flex items-center space-x-1 md:space-x-2">
-                <a href="index.html" class="px-3 py-1.5 rounded-xl text-[11px] md:text-xs font-bold bg-[#101e33] text-white shadow-xs">Utama</a>
-                <a href="produk.html" class="px-3 py-1.5 rounded-xl text-[11px] md:text-xs font-semibold hover:bg-gray-100 transition-colors dinamik-teks-biasa">Senarai Produk</a>
-                <a href="faq.html" class="px-3 py-1.5 rounded-xl text-[11px] md:text-xs font-semibold hover:bg-gray-100 transition-colors dinamik-teks-biasa">FAQ KKM</a>
-                <div class="w-[1px] h-4 bg-gray-200 mx-1 dinamik-border"></div>
-                <a href="../info-ncd.html" class="px-3 py-1.5 rounded-xl text-[11px] md:text-xs font-bold bg-red-600 text-white hover:bg-red-700 shadow-xs transition-colors">← Portal NCD</a>
-            </nav>
+    <header id="global-header" class="w-full py-3.5 px-4 md:px-12 backdrop-blur-xl bg-white/80 border-b flex items-center justify-between z-20 flex-shrink-0 shadow-xs dinamik-bg-kad/80 dinamik-border"></header>
 
-            <select id="themeSelect" onchange="tukarTemaManual(this.value)" class="text-[10px] md:text-xs font-bold bg-gray-50 border border-gray-200 rounded-xl px-2 py-1.5 outline-none cursor-pointer shadow-xs dinamik-bg-input dinamik-border dinamik-teks-biasa">
-                <option value="default">Lalai</option>
-                <option value="dark">Mod Gelap</option>
-                <option value="winamp_orange">Dark Orange</option>
-                <option value="winamp_classic">Dark Green</option>
-                <option value="winamp_blue">Dark Blue</option>
-                <option value="cyberpunk">Cyberpunk</option>
-                <option value="dracula">Green Purple</option>
-            </select>
-        </div>
-    </header>
-
-    <div class="flex-1 w-full overflow-y-auto px-4 md:px-12 py-6 space-y-6">
+    <div class="flex-1 w-full overflow-y-auto px-4 md:px-12 py-6 space-y-6 flex flex-col justify-between">
         
-        <section class="animasi-mula relative w-full h-48 md:h-72 rounded-2xl overflow-hidden shadow-md group bg-gray-900">
-            <div id="sliderWrapper" class="w-full h-full flex transition-transform duration-500 ease-out">
-                <div class="w-full h-full flex-shrink-0 relative">
-                    <img src="https://images.unsplash.com/photo-1611095777245-a501f3f2182a?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover opacity-85">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6 text-white">
-                        <span class="text-[9px] font-bold bg-red-600 px-2 py-0.5 rounded uppercase w-max tracking-wider">Penguatkuasaan</span>
-                        <h2 class="text-sm md:text-xl font-extrabold mt-1">Siri Sekatan Jualan Produk Merokok di Kaunter Terbuka</h2>
-                        <p class="text-[10px] md:text-xs font-light opacity-90 mt-0.5">Akta 852 melarang sebarang paparan visual kotak rokok atau vape kepada pelanggan awam.</p>
-                    </div>
-                </div>
-                <div class="w-full h-full flex-shrink-0 relative">
-                    <img src="https://images.unsplash.com/photo-1516549655169-df83a0774514?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover opacity-85">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6 text-white">
-                        <span class="text-[9px] font-bold bg-emerald-600 px-2 py-0.5 rounded uppercase w-max tracking-wider">Edukasi Awam</span>
-                        <h2 class="text-sm md:text-xl font-extrabold mt-1">Zon Larangan Merokok Diperluas ke Institusi Pendidikan</h2>
-                        <p class="text-[10px] md:text-xs font-light opacity-90 mt-0.5">Melindungi generasi muda dan mewujudkan persekitaran udara bersih sifar asap tembakau.</p>
-                    </div>
-                </div>
-                <div class="w-full h-full flex-shrink-0 relative">
-                    <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?auto=format&fit=crop&w=1200&q=80" class="w-full h-full object-cover opacity-85">
-                    <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent flex flex-col justify-end p-6 text-white">
-                        <span class="text-[9px] font-bold bg-purple-600 px-2 py-0.5 rounded uppercase w-max tracking-wider">Saringan Klinikal</span>
-                        <h2 class="text-sm md:text-xl font-extrabold mt-1">Advokasi Bersepadu Unit NCD Jabatan Kesihatan Perlis</h2>
-                        <p class="text-[10px] md:text-xs font-light opacity-90 mt-0.5">Menyediakan akses dokumentasi dan taklimat pematuhan syarat perlesenan premis.</p>
-                    </div>
-                </div>
+        <div class="space-y-6">
+            <div class="border-b pb-2 flex-shrink-0 dinamik-border">
+                <h1 class="text-lg md:text-xl font-extrabold text-[#101e33] dinamik-teks-tajuk">Penerangan Penguatkuasaan Akta 852</h1>
+                <p class="text-[11px] text-gray-400 font-light dinamik-teks-sub">Sistem panduan kawalan produk merokok demi kesihatan awam berkuatkuasa 2024.</p>
             </div>
 
-            <button onclick="slideKiri()" class="absolute left-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/30 backdrop-blur-md text-white flex items-center justify-center text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white/50 select-none z-10">←</button>
-            <button onclick="slideKanan()" class="absolute right-3 top-1/2 -translate-y-1/2 w-8 h-8 rounded-full bg-white/30 backdrop-blur-md text-white flex items-center justify-center text-xs font-bold opacity-0 group-hover:opacity-100 transition-opacity hover:bg-white/50 select-none z-10">→</button>
-
-            <div class="absolute bottom-3 left-1/2 -translate-y-1/2 -translate-x-1/2 flex space-x-1.5 z-10" id="dotsContainer">
-                <span class="w-2 h-2 rounded-full bg-white cursor-pointer transition-all duration-300" onclick="pergiKeSlaid(0)"></span>
-                <span class="w-2 h-2 rounded-full bg-white/40 cursor-pointer transition-all duration-300" onclick="pergiKeSlaid(1)"></span>
-                <span class="w-2 h-2 rounded-full bg-white/40 cursor-pointer transition-all duration-300" onclick="pergiKeSlaid(2)"></span>
+            <div class="relative w-full max-w-4xl mx-auto h-64 md:h-80 rounded-2xl overflow-hidden bg-black shadow-lg flex-shrink-0 group animasi-ios">
+                <div id="heroSlider" class="w-full h-full flex transition-transform duration-700 ease-in-out">
+                    <div class="w-full h-full flex-shrink-0"><img src="images/poster-01.webp" class="w-full h-full object-cover"></div>
+                    <div class="w-full h-full flex-shrink-0"><img src="images/poster-02.webp" class="w-full h-full object-cover"></div>
+                    <div class="w-full h-full flex-shrink-0"><img src="images/poster-03.webp" class="w-full h-full object-cover"></div>
+                </div>
+                
+                <button onclick="slideKiri()" class="absolute left-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/30 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">←</button>
+                <button onclick="slideKanan()" class="absolute right-4 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/30 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-all">→</button>
+                
+                <div id="sliderDots" class="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2 bg-black/20 px-3 py-1.5 rounded-full backdrop-blur-md"></div>
             </div>
-        </section>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div class="animasi-mula delay-1 bg-white border rounded-2xl p-5 shadow-xs flex flex-col justify-between dinamik-bg-kad dinamik-border">
-                <div class="space-y-2">
-                    <div class="flex items-center space-x-2 text-red-600">
-                        <span class="text-lg">📖</span>
-                        <h2 class="text-sm font-extrabold uppercase tracking-wide dinamik-teks-tajuk">Definisi Akta</h2>
-                    </div>
-                    <p class="text-xs text-gray-600 leading-relaxed font-light dinamik-teks-biasa">
-                        Akta 852 ialah satu undang-undang khusus yang digubal bertujuan untuk mengawal selia pendaftaran, penjualan, pembungkusan, pelabelan, and larangan merokok di tempat awam. Akta ini menggantikan Peraturan-Peraturan Kawalan Hasil Tembakau (PPKHT) 2004 di bawah Akta Makanan 1983.
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-4xl mx-auto pt-2">
+                
+                <div class="bg-white border rounded-xl p-4 space-y-2 shadow-xs dinamik-bg-kad dinamik-border animasi-ios" style="animation-delay: 0.05s">
+                    <h3 class="text-xs md:text-sm font-bold text-[#101e33] flex items-center gap-1.5 dinamik-teks-tajuk">
+                        <span>⚖️</span> Mengenai Akta 852
+                    </h3>
+                    <p class="text-[11px] md:text-xs text-gray-500 font-light leading-relaxed dinamik-teks-biasa">
+                        Akta Kawalan Produk Merokok Demi Kesihatan Awam 2024 [Akta 852] digubal bagi mengawal selia produk tembakau, bahan merokok seperti vape, dan produk pengganti tembakau demi melindungi golongan Orang Belum Dewasa (OBD).
                     </p>
                 </div>
-                <div class="mt-4 p-3 bg-red-50/50 rounded-xl border border-red-100/50 flex items-start space-x-2">
-                    <span class="text-xs">🚨</span>
-                    <p class="text-[11px] text-red-800 font-medium leading-tight">Meliputi penguatkuasaan penuh terhadap penjualan rokok elektronik (vape) yang sebelum ini berada di luar skop kawalan bahan tembakau tradisional.</p>
-                </div>
-            </div>
 
-            <div class="animasi-mula delay-1 bg-white border rounded-2xl p-5 shadow-xs dinamik-bg-kad dinamik-border">
-                <div class="flex items-center space-x-2 text-emerald-600 mb-3">
-                    <span class="text-lg">🎯</span>
-                    <h2 class="text-sm font-extrabold uppercase tracking-wide dinamik-teks-tajuk">Objektif Utama</h2>
+                <div class="bg-white border rounded-xl p-4 space-y-2 shadow-xs dinamik-bg-kad dinamik-border animasi-ios" style="animation-delay: 0.10s">
+                    <h3 class="text-xs md:text-sm font-bold text-[#101e33] flex items-center gap-1.5 dinamik-teks-tajuk">
+                        <span>🗓️</span> Penguatkuasaan Berfasa
+                    </h3>
+                    <p class="text-[11px] md:text-xs text-gray-500 font-light leading-relaxed dinamik-teks-biasa">
+                        Pelaksanaan bermula dengan sekatan pengiklanan serta-merta pada 1 Oktober 2024. Seterusnya fasa pendaftaran produk berkuatkuasa 1 April 2025 dan standard pelabelan baharu selewat-lewatnya pada 1 Oktober 2025.
+                    </p>
                 </div>
-                <ul class="space-y-2.5 text-xs text-gray-600 font-light dinamik-teks-biasa">
-                    <li class="flex items-start space-x-2">
-                        <span class="text-emerald-500 mt-0.5">✔</span>
-                        <span><strong>Melindungi Orang Belum Dewasa (OBD):</strong> Menghalang golongan berumur bawah 18 tahun daripada membeli, memiliki, atau menggunakan sebarang produk merokok.</span>
-                    </li>
-                    <li class="flex items-start space-x-2">
-                        <span class="text-emerald-500 mt-0.5">✔</span>
-                        <span><strong>Kawalan Pengiklanan Tegas:</strong> Melarang sebarang bentuk promosi, penajaan, atau paparan produk merokok secara terbuka di premis jualan.</span>
-                    </li>
-                    <li class="flex items-start space-x-2">
-                        <span class="text-emerald-500 mt-0.5">✔</span>
-                        <span><strong>Siri Larangan Tempat Awam:</strong> Meluaskan zon larangan merokok demi melindungi golongan bukan perokok daripada bahaya asap rokok sekunder.</span>
-                    </li>
-                </ul>
+
+                <div class="bg-white border rounded-xl p-4 space-y-3 shadow-xs flex flex-col justify-between dinamik-bg-kad dinamik-border animasi-ios" style="animation-delay: 0.15s">
+                    <div class="space-y-1">
+                        <h3 class="text-xs md:text-sm font-bold text-[#101e33] flex items-center gap-1.5 dinamik-teks-tajuk">
+                            <span>📂</span> Dokumen Rujukan
+                        </h3>
+                        <p class="text-[11px] md:text-xs text-gray-500 font-light leading-relaxed dinamik-teks-biasa">
+                            Dapatkan salinan rasmi warta dokumen FAQ Pelaksanaan Penguatkuasaan Akta 852 terbitan Kementerian Kesihatan Malaysia (KKM).
+                        </p>
+                    </div>
+                    
+                    <a href="8.10.2024-FAQ PELAKSANAAN PENGUATKAASAAN AKTA 852-1.pdf" download class="w-full text-center py-2 bg-[#101e33] text-white rounded-lg text-[11px] font-bold hover:opacity-90 transition-opacity flex items-center justify-center gap-1.5 shadow-xs">
+                        <span>📥</span> Muat Turun PDF FAQ
+                    </a>
+                </div>
+
             </div>
         </div>
 
-        <section class="animasi-mula delay-2 bg-white border rounded-2xl p-5 shadow-xs dinamik-bg-kad dinamik-border">
-            <div class="flex items-center space-x-2 text-sky-600 mb-4">
-                <span class="text-lg">📥</span>
-                <h2 class="text-sm font-extrabold uppercase tracking-wide dinamik-teks-tajuk">Pusat Muat Turun Dokumen Rasmi</h2>
-            </div>
-            
-            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                <div class="p-3 border border-gray-100 rounded-xl bg-gray-50/50 flex flex-col justify-between h-28 dinamik-bg-utama dinamik-border">
-                    <div class="space-y-1">
-                        <h4 class="text-xs font-bold text-[#101e33] leading-tight line-clamp-2 dinamik-teks-tajuk">Warta Kerajaan Akta 852 (Penuh)</h4>
-                        <p class="text-[10px] text-gray-400 font-light">Format: PDF | Saiz: 2.4 MB</p>
-                    </div>
-                    <a href="https://www.moh.gov.my/index.php/pages/view/akta852" target="_blank" class="w-full text-center py-1.5 bg-[#101e33] text-white text-[11px] font-bold rounded-lg hover:bg-black transition-colors block shadow-xs">Muat Turun Fail</a>
-                </div>
-
-                <div class="p-3 border border-gray-100 rounded-xl bg-gray-50/50 flex flex-col justify-between h-28 dinamik-bg-utama dinamik-border">
-                    <div class="space-y-1">
-                        <h4 class="text-xs font-bold text-[#101e33] leading-tight line-clamp-2 dinamik-teks-tajuk">Garis Panduan Pendaftaran Produk Merokok</h4>
-                        <p class="text-[10px] text-gray-400 font-light">Format: PDF | Saiz: 1.8 MB</p>
-                    </div>
-                    <a href="#" class="w-full text-center py-1.5 bg-[#101e33] text-white text-[11px] font-bold rounded-lg hover:bg-black transition-colors block shadow-xs">Muat Turun Fail</a>
-                </div>
-
-                <div class="p-3 border border-gray-100 rounded-xl bg-gray-50/50 flex flex-col justify-between h-28 dinamik-bg-utama dinamik-border">
-                    <div class="space-y-1">
-                        <h4 class="text-xs font-bold text-[#101e33] leading-tight line-clamp-2 dinamik-teks-tajuk">Siri Kenyataan Akhbar Penguatkuasaan KKM</h4>
-                        <p class="text-[10px] text-gray-400 font-light">Format: PDF | Saiz: 950 KB</p>
-                    </div>
-                    <a href="#" class="w-full text-center py-1.5 bg-[#101e33] text-white text-[11px] font-bold rounded-lg hover:bg-black transition-colors block shadow-xs">Muat Turun Fail</a>
-                </div>
-            </div>
-        </section>
-
+        <div id="global-footer" class="text-center text-[10px] text-gray-400 font-light pt-4 border-t flex-shrink-0 dinamik-border"></div>
     </div>
 
     <script>
-        function tukarTemaManual(tema) {
-            document.documentElement.setAttribute('data-theme', tema);
-            localStorage.setItem('pilihanTemaNCD_Global', tema);
-            const selectBox = document.getElementById('themeSelect');
-            if(selectBox) selectBox.value = tema;
-        }
-
-        window.addEventListener('DOMContentLoaded', () => {
-            const temaDisimpan = localStorage.getItem('pilihanTemaNCD_Global') || 'default';
-            tukarTemaManual(temaDisimpan);
-        });
-
-        let indeksSlaidSemasa = 0;
+        let slaidSemasa = 0;
         const totalSlaid = 3;
-        const sliderWrapper = document.getElementById('sliderWrapper');
-        const dotsContainer = document.getElementById('dotsContainer').children;
 
-        function kemaskiniKedudukanSlider() {
-            sliderWrapper.style.transform = `translateX(-${indeksSlaidSemasa * 100}%)`;
-            for (let i = 0; i < dotsContainer.length; i++) {
-                dotsContainer[i].className = i === indeksSlaidSemasa ? "w-2 h-2 rounded-full bg-white cursor-pointer transition-all duration-300" : "w-2 h-2 rounded-full bg-white/40 cursor-pointer transition-all duration-300";
+        // Memuatkan komponen luaran secara asinkronus (Async Web Fetch API)
+        async function muatKomponenGlobal() {
+            try {
+                const resH = await fetch('components/header.html');
+                document.getElementById('global-header').innerHTML = await resH.text();
+                const resF = await fetch('components/footer.html');
+                document.getElementById('global-footer').innerHTML = await resF.text();
+
+                // Aktifkan sorotan navigasi (Active Tab Menu Highlight)
+                const el = document.getElementById('nav-index');
+                if(el) el.className = "px-3 py-1 rounded-lg text-[11px] md:text-xs font-bold bg-white text-black shadow-xs dinamik-bg-kad dinamik-teks-tajuk";
+                
+                // Pulihkan semula status tema terakhir disimpan
+                tukarTemaManual(localStorage.getItem('pilihanTemaNCD_Global') || 'default');
+            } catch (e) { 
+                console.error("Ralat memuatkan fail komponen:", e); 
             }
         }
 
-        function slideKanan() { indeksSlaidSemasa = (indeksSlaidSemasa + 1) % totalSlaid; kemaskiniKedudukanSlider(); }
-        function slideKiri() { indeksSlaidSemasa = (indeksSlaidSemasa - 1 + totalSlaid) % totalSlaid; kemaskiniKedudukanSlider(); }
-        function pergiKeSlaid(indeks) { indeksSlaidSemasa = indeks; kemaskiniKedudukanSlider(); }
+        function binaDots() {
+            const container = document.getElementById('sliderDots');
+            if(!container) return;
+            container.innerHTML = "";
+            for(let i=0; i<totalSlaid; i++) {
+                container.insertAdjacentHTML('beforeend', `<span onclick="pergiKeSlaid(${i})" class="w-2 h-2 rounded-full cursor-pointer transition-all ${i===slaidSemasa?'bg-white scale-125':'bg-white/40'}"></span>`);
+            }
+        }
 
-        setInterval(slideKanan, 5000);
+        function kemaskiniSlider() {
+            document.getElementById('heroSlider').style.transform = `translateX(-${slaidSemasa * 100}%)`;
+            binaDots();
+        }
+        function slideKanan() { slaidSemasa = (slaidSemasa + 1) % totalSlaid; kemaskiniSlider(); }
+        function slideKiri() { slaidSemasa = (slaidSemasa - 1 + totalSlaid) % totalSlaid; kemaskiniSlider(); }
+        function pergiKeSlaid(idx) { slaidSemasa = idx; kemaskiniSlider(); }
+
+        function tukarTemaManual(tema) {
+            document.documentElement.setAttribute('data-theme', tema);
+            localStorage.setItem('pilihanTemaNCD_Global', tema);
+            const sb = document.getElementById('themeSelect');
+            if(sb) sb.value = tema;
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            muatKomponenGlobal();
+            binaDots();
+            setInterval(slideKanan, 5000); // Kitaran auto-play 5 saat
+        });
     </script>
 </body>
 </html>

@@ -1,0 +1,56 @@
+/* ==========================================================================
+   MATRIX PERTAHANAN TEMA GLOBAL (BERPUSAT)
+   ========================================================================== */
+:root {
+    --bg-utama: #F2F2F7; --bg-kad: #FFFFFF; --border-warna: #E5E5EA;
+    --teks-tajuk: #101e33; --teks-biasa: #1C1C1E; --teks-sub: #8E8E93;
+    --bg-input: #E5E5EA;
+}
+[data-theme="dark"] {
+    --bg-utama: #000000; --bg-kad: #1C1C1E; --border-warna: #2C2C2E;
+    --teks-tajuk: #FFFFFF; --teks-biasa: #F2F2F7; --teks-sub: #8E8E93;
+    --bg-input: #2C2C2E;
+}
+[data-theme="winamp_orange"] {
+    --bg-utama: #1a1a1a; --bg-kad: #282828; --border-warna: #ff5722;
+    --teks-tajuk: #ff7043; --teks-biasa: #b0bec5; --teks-sub: #78909c;
+    --bg-input: #212121;
+}
+[data-theme="winamp_classic"] {
+    --bg-utama: #0f1115; --bg-kad: #171a21; --border-warna: #00e676;
+    --teks-tajuk: #00e676; --teks-biasa: #90a4ae; --teks-sub: #4f5b66;
+    --bg-input: #12141c;
+}
+[data-theme="winamp_blue"] {
+    --bg-utama: #0a0e17; --bg-kad: #121824; --border-warna: #00e5ff;
+    --teks-tajuk: #00e5ff; --teks-biasa: #a1a8b8; --teks-sub: #3c485e;
+    --bg-input: #0e131f;
+}
+[data-theme="cyberpunk"] {
+    --bg-utama: #0f1013; --bg-kad: #1a1b20; --border-warna: #fcee0a;
+    --teks-tajuk: #fcee0a; --teks-biasa: #00f0ff; --teks-sub: #ff0055;
+    --bg-input: #141519;
+}
+[data-theme="dracula"] {
+    --bg-utama: #1e1f29; --bg-kad: #282a36; --border-warna: #ff79c6;
+    --teks-tajuk: #50fa7b; --teks-biasa: #f8f8f2; --teks-sub: #bd93f9;
+    --bg-input: #21222c;
+}
+
+body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
+::-webkit-scrollbar { display: none; }
+
+.dinamik-bg-utama { background-color: var(--bg-utama) !important; transition: all 0.3s ease; }
+.dinamik-bg-kad { background-color: var(--bg-kad) !important; transition: all 0.3s ease; }
+.dinamik-border { border-color: var(--border-warna) !important; transition: all 0.3s ease; }
+.dinamik-teks-tajuk { color: var(--teks-tajuk) !important; }
+.dinamik-teks-biasa { color: var(--teks-biasa) !important; transition: all 0.3s ease; }
+.dinamik-teks-sub { color: var(--teks-sub) !important; }
+.dinamik-bg-input { background-color: var(--bg-input) !important; transition: all 0.3s ease; }
+
+/* 🎬 Smooth Spring Animations */
+@keyframes iosSpring {
+    from { opacity: 0; transform: scale(0.97) translateY(8px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+.animasi-ios { animation: iosSpring 0.4s cubic-bezier(0.25, 1, 0.5, 1) both; }
