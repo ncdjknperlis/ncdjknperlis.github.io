@@ -173,6 +173,7 @@
                             <option value="video">🎬 Video Promosi</option>
                             <option value="document">📄 Dokumen / Risalah</option>
                             <option value="latihan">📚 Modul Latihan</option>
+                            <option value="flipbook">📖 E-Flipbook Interaktif</option>
                         </select>
                         <span class="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-[8px] dinamik-teks-sub">▼</span>
                     </div>
@@ -242,15 +243,12 @@
             TerapkanTemaWarnaPadaKadDinamik();
         }
 
-        // KOD KEMASKINI: MEMBETULKAN MATRIX ROUTING & PENERAPAN WARNA TEMA JAMINAN 100% BERFUNGSI
         function TerapkanTemaWarnaPadaKadDinamik() {
             setTimeout(() => {
-                // Mengesan tag div kontainer utama kad mengikut struktur binaan asal info-ncd.js semula
                 const kadDinamik = document.querySelectorAll('#resourceGrid > div');
                 const targetArray = window.resourcesData || [];
 
                 kadDinamik.forEach(kad => {
-                    // 1. Suntik semula kelas warna tema yang tersangkut sebelum ini
                     kad.classList.add('dinamik-bg-kad', 'dinamik-border');
                     const tajukKad = kad.querySelector('h3, h4');
                     if (tajukKad) tajukKad.classList.add('dinamik-teks-tajuk');
@@ -258,7 +256,6 @@
                     const subTeks = kad.querySelector('p');
                     if (subTeks) {
                         subTeks.classList.add('dinamik-teks-biasa');
-                        // Paksa semula penetapan CSS line-clamp-2 secara dinamik melalui engine browser
                         subTeks.style.display = "-webkit-box";
                         subTeks.style.webkitLineClamp = "2";
                         subTeks.style.webkitBoxOrient = "vertical";
@@ -268,7 +265,6 @@
                     const metaSpan = kad.querySelector('div.pt-1 > span');
                     if (metaSpan) metaSpan.classList.add('dinamik-teks-sub');
 
-                    // 2. SMART SYSTEM ROUTER: Ekstrak link dari tag <a> lutsinar di dalam kad secara selamat
                     const pautanTag = kad.querySelector('a');
                     const badgeElement = kad.querySelector('span[class*="absolute"]');
                     
@@ -276,12 +272,30 @@
                         const badgeText = badgeElement.innerText.trim().toUpperCase();
                         const teksTajukSemasa = tajukKad.innerText.trim().toLowerCase();
                         
-                        // Buat semakan padanan indeks fail data
-                        const indeksJumpa = targetArray.findIndex(item => (item.title || '').trim().toLowerCase() === teksTajukSemasa);
+                        // 🛠️ UPGRADE LOGIK: Mencari indeks padanan tajuk dengan pembersihan ruang kosong ekstra (.replace)
+                        let indeksJumpa = targetArray.findIndex(item => {
+                            const tajukObjek = (item.title || item.tajuk || '').trim().toLowerCase().replace(/\s+/g, ' ');
+                            const tajukFizikalKad = teksTajukSemasa.replace(/\s+/g, ' ');
+                            return tajukObjek === tajukFizikalKad;
+                        });
                         
+                        // 🛡️ PELAN BACKFALL: Jika perbandingan tajuk gagal, cari padanan berdasarkan persamaan jenis kategori
+                        if (indeksJumpa === -1) {
+                            if (badgeText.includes('FLIPBOOK')) {
+                                indeksJumpa = targetArray.findIndex(item => item.category === 'flipbook');
+                            }
+                        }
+                        
+                        // Jaminan keselamatan: Hanya proses jika indeks sah dan ditemui
                         if (indeksJumpa !== -1) {
-                            // Suntik hala tuju url mengikut jenis media secara mutlak tanpa ralat
-                            if (badgeText.includes('ALBUM') || badgeText.includes('SIRI')) {
+                            const itemData = targetArray[indeksJumpa];
+                            
+                            // ⚡ HALA TUJU ROUTER PINTAR (ANTARA MUKA MUTLAK)
+                            if (badgeText.includes('FLIPBOOK') || itemData.category === 'flipbook') {
+                                // Menggunakan indeks susunan array sebenar (Cth: ?id=24) sebagai ID
+                                pautanTag.setAttribute('href', `view-flipbook.html?id=${indeksJumpa}`);
+                            }
+                            else if (badgeText.includes('ALBUM') || badgeText.includes('SIRI')) {
                                 pautanTag.setAttribute('href', `play-album.html?id=${indeksJumpa}`);
                             }
                             else if (badgeText.includes('VIDEO') || badgeText.includes('KAPSUL')) {
@@ -291,13 +305,12 @@
                                 pautanTag.setAttribute('href', `play-image.html?id=${indeksJumpa}`);
                             } 
                             else {
-                                // 📄 Modul Latihan, Dokumen CPG, dan Risalah PDF dihantar ke view-document.html (DIJAMIN DIKLIK)
                                 pautanTag.setAttribute('href', `view-document.html?id=${indeksJumpa}`);
                             }
                         }
                     }
                 });
-            }, 80); 
+            }, 100); // Masa tunda mikro ditingkatkan sedikit ke 100ms untuk kestabilan enjin info-ncd.js
         }
 
         const observer = new MutationObserver(() => {

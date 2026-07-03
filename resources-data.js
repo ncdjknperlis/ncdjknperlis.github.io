@@ -535,6 +535,24 @@ const resourcesData = [
             }
         ]
     },
+    // =========================================================================
+    // TEMPLAT KATEGORI 4: 📖 E-FLIPBOOK INTERAKTIF (100% AKUR ATRIBUT ASAL)
+    // (Bahan di bawah kumpulan ini akan dibuka di fail: view-flipbook.html)
+    // =========================================================================
+    {
+        title: "Manual Rujukan Digital Akta 852",
+        category: "flipbook",
+        program: "umum",
+        desc: "Semak warta manual selak 3D interaktif mengenai bentuk kawalan, larangan iklan, dan spesifikasi tanda amaran baharu.",
+        imageUrl: "https://drive.google.com/thumbnail?sz=w600&id=11EVcswBudLHre0cStC8MLgqtteGKJC3B", // Gambar hiasan luar
+        
+        // ⚡ SIMPAN NAMA FAIL LOKAL ANDA DI SINI (100% BEBAS RALAT CORS & DESUP LAJU!)
+        imgUrl: "8.10.2024-FAQ PELAKSANAAN PENGUATKAASAAN AKTA 852-1.pdf",
+        
+        badgeText: "E-Flipbook",
+        badgeColorClass: "text-blue-600 bg-blue-50 border border-blue-100",
+        infoText: "Format: PDF Flipbook"
+    }
 ];
 
 // Memastikan objek data berjaya dieksport ke memori global pelayar web

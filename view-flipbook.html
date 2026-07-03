@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papar E-Flipbook PDF | Unit NCD JKN Perlis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.min.js"></script>
+
+    <style>
+        /* 📖 CORE 3D FLIPBOOK STYLING ENGINE */
+        .stage-buku { perspective: 2000px; }
+        .buku-kontainer { position: relative; transform-style: preserve-3d; transition: transform 0.5s ease; }
+        .helaian-muka { position: absolute; top: 0; left: 0; width: 100%; height: 100%; transform-origin: left center; transform-style: preserve-3d; transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1); z-index: 10; }
+        .sisi-depan, .sisi-belakang { position: absolute; width: 100%; height: 100%; backface-visibility: hidden; box-shadow: inset 3px 0 20px rgba(0,0,0,0.15); background-color: white; }
+        .sisi-belakang { transform: rotateY(180deg); }
+        .helaian-muka.selak-kiri { transform: rotateY(-180deg); }
+        canvas { width: 100%; height: 100%; object-fit: contain; }
+    </style>
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        ::-webkit-scrollbar { display: none; }
+
+        /* Custom Scrollbar Minimalis untuk Panel Maklumat */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+            display: block;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.02);
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+        }
+
+        /* ==========================================================================
+           ENJIN VARIABLES TEMA: SYNC DENGAN PORTAL UTAMA
+           ========================================================================== */
+        :root {
+            --bg-utama: #FBFBFB;
+            --bg-kad: #FFFFFF;
+            --border-warna: #F3F4F6;
+            --teks-tajuk: #101e33;
+            --teks-biasa: #1A1A1A;
+            --teks-sub: #9CA3AF;
+        }
+        [data-theme="dark"] {
+            --bg-utama: #0B132B;       /* Mod Gelap Korporat */
+            --bg-kad: #1C2541;         
+            --border-warna: #3A506B;   
+            --teks-tajuk: #FFFFFF;     /* Teks bertukar putih automatik untuk kontra */
+            --teks-biasa: #E2E8F0;     
+            --teks-sub: #94A3B8;       
+            --bg-input: #1C2541;
+        }
+        /* Cari kod [data-theme="emerald"] dll dalam fail play-image/video/package/album, dan tampal ini */
+        [data-theme="winamp_orange"] {
+            --bg-utama: #1a1a1a; --bg-kad: #282828; --border-warna: #ff5722;
+            --teks-tajuk: #ff7043; --teks-biasa: #b0bec5; --teks-sub: #78909c;
+        }
+        [data-theme="winamp_classic"] {
+            --bg-utama: #0f1115; --bg-kad: #171a21; --border-warna: #00e676;
+            --teks-tajuk: #00e676; --teks-biasa: #90a4ae; --teks-sub: #4f5b66;
+        }
+        [data-theme="winamp_blue"] {
+            --bg-utama: #0a0e17; --bg-kad: #121824; --border-warna: #00e5ff;
+            --teks-tajuk: #00e5ff; --teks-biasa: #a1a8b8; --teks-sub: #3c485e;
+        }
+        /* 🧬 Mod Cyberpunk 2077 */
+        [data-theme="cyberpunk"] {
+            --bg-utama: #0f1013;       
+            --bg-kad: #1a1b20;         
+            --border-warna: #fcee0a;   /* Kuning Cyberpunk menyala */
+            --teks-tajuk: #fcee0a;     
+            --teks-biasa: #00f0ff;     /* Teks Biru Neon */
+            --teks-sub: #ff0055;       
+            --bg-input: #141519;
+        }
+        /* 🌌 Mod Dracula Premium */
+        [data-theme="dracula"] {
+            --bg-utama: #1e1f29;       /* Ungu Gelap Dracula */
+            --bg-kad: #282a36;         
+            --border-warna: #ff79c6;   /* Merah Jambu Dracula */
+            --teks-tajuk: #50fa7b;     /* Hijau Terang */
+            --teks-biasa: #f8f8f2;     
+            --teks-sub: #bd93f9;       
+            --bg-input: #21222c;
+        }
+
+        .dinamik-bg-utama { background-color: var(--bg-utama) !important; transition: all 0.3s ease; }
+        .dinamik-bg-kad { background-color: var(--bg-kad) !important; transition: all 0.3s ease; }
+        .dinamik-border { border-color: var(--border-warna) !important; transition: all 0.3s ease; }
+        .dinamik-teks-tajuk { color: var(--teks-tajuk) !important; }
+        .dinamik-teks-biasa { color: var(--teks-biasa) !important; transition: all 0.3s ease; }
+        .dinamik-teks-sub { color: var(--teks-sub) !important; }
+    </style>
+</head>
+<body class="h-screen w-screen overflow-hidden flex flex-col dinamik-bg-utama dinamik-teks-biasa antialiased">
+
+    <header class="w-full py-2 md:py-3 px-4 md:px-12 bg-white border-b border-gray-100 flex flex-row items-center justify-between gap-2 z-20 flex-shrink-0 shadow-xs dinamik-bg-kad dinamik-border">
+        <div class="flex items-center space-x-2 md:space-x-3">
+            <img src="images/logo.png" style="max-width: 28px;" class="w-full h-auto object-contain mx-auto md:max-w-[42px]">
+            <img src="images/logo-ncd/logo-ncd-default.png" style="max-width: 80px;" class="md:max-w-[130px]">
+            <div class="w-[1px] h-4 md:h-6 bg-gray-200"></div>
+            <h2 class="text-[7.5px] md:text-[11px] font-bold tracking-[0.08em] md:tracking-[0.15em] uppercase text-[#101e33] leading-tight dinamik-teks-tajuk">
+                Kawalan Penyakit Tidak Berjangkit (NCD)<br>
+                <span class="text-gray-400 font-medium text-[6.5px] md:text-[8px] dinamik-teks-sub">Jabatan Kesihatan Negeri Perlis</span>
+            </h2>
+        </div>
+        
+        <div class="flex items-center space-x-2 md:space-x-5">
+            <div class="tracking-widest text-right hidden sm:block">
+                <h1 class="text-lg md:text-2xl font-light tracking-tighter text-gray-400">Pusat Akses <span class="font-bold text-[#101e33] dinamik-teks-tajuk">Digital</span></h1>
+            </div>
+            
+            <div class="w-[1px] h-5 bg-gray-200 hidden sm:block"></div>
+
+            <div class="relative inline-block text-left z-30">
+                <select id="themeSelect" onchange="tukarTemaSistem(this.value)" class="dinamik-bg-utama dinamik-teks-tajuk border dinamik-border text-[11px] font-bold py-1.5 px-2.5 rounded-xl focus:outline-none cursor-pointer shadow-xs transition-all">
+                    <option value="default">Lalai</option>
+                    <option value="dark">Mod Gelap</option>
+                    <option value="winamp_orange">Dark Orange</option>
+                    <option value="winamp_classic">Dark Green</option>
+                    <option value="winamp_blue">Dark Blue</option>
+                    <option value="cyberpunk">Cyberpunk</option>
+                    <option value="dracula">Green Purple</option>
+                </select>
+            </div>
+            
+            <div class="flex items-center">
+                <a href="info-ncd.html" class="flex items-center justify-center space-x-1.5 px-3 py-1.5 rounded-xl bg-[#101e33] text-white text-[11px] font-bold transition-all duration-300 shadow-sm hover:bg-[#1d3557] hover:scale-105 active:scale-95" title="Kembali ke Senarai">
+                    <span>←</span> <span>Kembali</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex-1 w-full overflow-y-auto px-4 md:px-12 py-6 space-y-4 flex flex-col justify-center items-center">
+        
+        <div class="text-center pb-1 flex-shrink-0">
+            <span class="text-[10px] font-bold uppercase tracking-widest text-blue-500">Enjin Penukar PDF ke Flipbook Live</span>
+            <h1 id="bukuTajukUtama" class="text-lg md:text-xl font-extrabold text-[#101e33] mt-0.5 dinamik-teks-tajuk">Manual Rujukan Digital Akta 852</h1>
+        </div>
+
+        <div id="loadingIndicator" class="text-xs text-amber-600 font-medium animate-pulse">
+            ⏳ Membaca fail PDF & menjana helaian AnyFlip... Sila tunggu...
+        </div>
+
+        <div class="stage-buku flex justify-center items-center flex-1 w-full max-w-4xl h-[28rem] md:h-[32rem]">
+            <div id="bookCanvas" class="buku-kontainer w-72 h-[26rem] md:w-84 md:h-[31rem] bg-transparent"></div>
+        </div>
+
+        <div class="flex items-center space-x-4 bg-white border px-4 py-2 rounded-2xl shadow-xs dinamik-bg-kad dinamik-border flex-shrink-0">
+            <button onclick="selakKeKiri()" class="w-8 h-8 rounded-lg bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-xs font-bold transition-colors dinamik-bg-input dinamik-teks-biasa">◀</button>
+            <span class="text-xs font-bold min-w-[6rem] text-center text-gray-500 dinamik-teks-sub" id="pageIndicator">Helaian: 0 / 0</span>
+            <button onclick="selakKeKanan()" class="w-8 h-8 rounded-lg bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-xs font-bold transition-colors dinamik-bg-input dinamik-teks-biasa">▶</button>
+        </div>
+
+        <div id="global-footer" class="text-center text-[10px] text-gray-400 font-light pt-2 border-t flex-shrink-0 w-full dinamik-border"></div>
+    </div>
+
+    <script src="resources-data.js"></script>
+
+    <script>
+        pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.4.120/pdf.worker.min.js';
+
+        let indexHelaianSemasa = 1;
+        let jumlahHelaianMaksimum = 1;
+
+        async function muatHalamanFlipbook() {
+            try {
+                const resH = await fetch('components/header.html');
+                document.getElementById('global-header').innerHTML = await resH.text();
+                const resF = await fetch('components/footer.html');
+                document.getElementById('global-footer').innerHTML = await resF.text();
+                
+                tukarTemaManual(localStorage.getItem('pilihanTemaNCD_Global') || 'default');
+
+                const urlParams = new URLSearchParams(window.location.search);
+                const targetId = urlParams.get('id');
+
+                // Kini arrayMaster dijamin wujud kerana resources-data.js sudah dipanggil di atas
+                const arrayMaster = window.resourcesData || [];
+                let datasetBuku = null;
+
+                if (targetId !== null && arrayMaster[targetId]) {
+                    datasetBuku = arrayMaster[targetId];
+                } else {
+                    datasetBuku = arrayMaster.find(item => item.category === 'flipbook');
+                }
+
+                // Ketetapan fallback path lalai sekiranya gagal membaca
+                let failPdfPath = "8.10.2024-FAQ PELAKSANAAN PENGUATKAASAAN AKTA 852-1.pdf"; 
+                
+                if (datasetBuku) {
+                    document.getElementById('bukuTajukUtama').innerText = datasetBuku.title;
+                    if (datasetBuku.imgUrl) {
+                        failPdfPath = datasetBuku.imgUrl; 
+                    }
+                }
+
+                setTimeout(() => {
+                    muatDanTukarPdf(failPdfPath);
+                }, 150);
+
+            } catch (e) { 
+                console.error("Ralat kritikal sistem pemuat flipbook:", e); 
+                document.getElementById('loadingIndicator').innerText = "❌ Gagal memuatkan sistem rujukan media.";
+            }
+        }
+
+        function muatDanTukarPdf(pdfUrl) {
+            pdfjsLib.getDocument(pdfUrl).promise.then(async function(pdf) {
+                const totalPages = pdf.numPages;
+                jumlahHelaianMaksimum = Math.ceil(totalPages / 2);
+                
+                const canvas = document.getElementById('bookCanvas');
+                canvas.innerHTML = "";
+
+                for (let i = 0; i < jumlahHelaianMaksimum; i++) {
+                    const pageNumDepan = (i * 2) + 1;
+                    const pageNumBelakang = (i * 2) + 2;
+
+                    const idHelaian = `page-${i + 1}`;
+                    const blockHelaian = `
+                        <div class="helaian-muka shadow-xl rounded-r-xl overflow-hidden" id="${idHelaian}" style="z-index: ${10 + (jumlahHelaianMaksimum - i)}">
+                            <div class="sisi-depan rounded-r-xl flex items-center justify-center p-1" id="canvas-depan-${pageNumDepan}"></div>
+                            <div class="sisi-belakang rounded-l-xl flex items-center justify-center p-1" id="canvas-belakang-${pageNumBelakang}"></div>
+                        </div>`;
+                    canvas.insertAdjacentHTML('beforeend', blockHelaian);
+
+                    await renderHalamanPdfKeSisi(pdf, pageNumDepan, `canvas-depan-${pageNumDepan}`);
+                    
+                    if (pageNumBelakang <= totalPages) {
+                        await renderHalamanPdfKeSisi(pdf, pageNumBelakang, `canvas-belakang-${pageNumBelakang}`);
+                    } else {
+                        document.getElementById(`canvas-belakang-${pageNumBelakang}`).className = "sisi-belakang bg-gray-50 rounded-l-xl border-r";
+                    }
+                }
+
+                document.getElementById('loadingIndicator').classList.add('hidden');
+                kemaskiniVisualBuku();
+
+            }).catch(error => {
+                console.error("Gagal membaca atau memproses fail PDF:", error);
+                document.getElementById('loadingIndicator').innerText = "❌ Gagal memuatkan fail PDF. Pastikan fail berada di dalam folder utama.";
+            });
+        }
+
+        function renderHalamanPdfKeSisi(pdfDoc, pageNum, containerId) {
+            return pdfDoc.getPage(pageNum).then(function(page) {
+                const viewport = page.getViewport({ scale: 1.5 });
+                const canvasElement = document.createElement('canvas');
+                const context = canvasElement.getContext('2d');
+                
+                canvasElement.height = viewport.height;
+                canvasElement.width = viewport.width;
+
+                const renderContext = {
+                    canvasContext: context,
+                    viewport: viewport
+                };
+
+                return page.render(renderContext).promise.then(function() {
+                    const targetContainer = document.getElementById(containerId);
+                    if(targetContainer) {
+                        targetContainer.appendChild(canvasElement);
+                    }
+                });
+            });
+        }
+
+        function kemaskiniVisualBuku() {
+            document.getElementById('pageIndicator').innerText = `Helaian: ${indexHelaianSemasa} / ${jumlahHelaianMaksimum}`;
+            const book = document.getElementById('bookCanvas');
+            
+            if (indexHelaianSemasa > 1 && indexHelaianSemasa < jumlahHelaianMaksimum) {
+                book.style.transform = "translateX(25%)";
+            } else if (indexHelaianSemasa === jumlahHelaianMaksimum) {
+                book.style.transform = "translateX(50%)";
+            } else {
+                book.style.transform = "translateX(0px)";
+            }
+        }
+
+        function selakKeKanan() {
+            if (indexHelaianSemasa < jumlahHelaianMaksimum) {
+                const helaian = document.getElementById(`page-${indexHelaianSemasa}`);
+                if (helaian) {
+                    helaian.classList.add('selak-kiri');
+                    helaian.style.zIndex = indexHelaianSemasa;
+                }
+                indexHelaianSemasa++;
+                kemaskiniVisualBuku();
+            }
+        }
+
+        function selakKeKiri() {
+            if (indexHelaianSemasa > 1) {
+                indexHelaianSemasa--;
+                const helaian = document.getElementById(`page-${indexHelaianSemasa}`);
+                if (helaian) {
+                    helaian.classList.remove('selak-kiri');
+                    helaian.style.zIndex = 10 + (jumlahHelaianMaksimum - indexHelaianSemasa);
+                }
+                kemaskiniVisualBuku();
+            }
+        }
+
+        function tukarTemaManual(tema) {
+            document.documentElement.setAttribute('data-theme', tema);
+            localStorage.setItem('pilihanTemaNCD_Global', tema);
+            const sb = document.getElementById('themeSelect');
+            if(sb) sb.value = tema;
+        }
+
+        window.addEventListener('DOMContentLoaded', muatHalamanFlipbook);
+    </script>
+</body>
+</html>
