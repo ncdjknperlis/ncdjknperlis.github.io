@@ -535,6 +535,84 @@ const resourcesData = [
             }
         ]
     },
+    {
+        title: "Siri Infografik Hari Kanser Sedunia 2026",
+        category: "package",  // Mengekalkan kategori package supaya dikesan oleh enjin JS
+        program: "kanser",  // Ditapis di bawah program Diabetes
+        desc: "Koleksi infografik berkaitan Sambutan Hari Kanser Sedunia 2026, definisi, dan statistik terkini.",
+        imageUrl: "https://drive.google.com/thumbnail?sz=w600&id=1Aq0rglIXkCYL3C-6dGYvN2uDxWfb_dfi",
+        badgeText: "Album Infografik", // Label tersuai untuk membezakannya dengan pakej video/fail biasa
+        badgeColorClass: "text-purple-600 bg-purple-50", 
+        infoText: "4 Siri Infografik",
+        materials: [
+            {
+                name: "Infografik 1: Hari Kanser Sedunia 2026",
+                type: "🎨 Poster",
+                url: "https://drive.google.com/file/d/1Aq0rglIXkCYL3C-6dGYvN2uDxWfb_dfi/preview",
+                thumb: "https://drive.google.com/thumbnail?sz=w100&id=1Aq0rglIXkCYL3C-6dGYvN2uDxWfb_dfi"
+            },
+            {
+                name: "Infografik 2: Kanser Utama di Malaysia",
+                type: "🎨 Poster",
+                url: "https://drive.google.com/file/d/1BrCNGm2nks-v_ExrG7uJcpg4dMWOvO9O/preview",
+                thumb: "https://drive.google.com/thumbnail?sz=w100&id=1BrCNGm2nks-v_ExrG7uJcpg4dMWOvO9O"
+            },
+            {
+                name: "Infografik 3: Statistik Laporan Kes Kanser di Malaysia",
+                type: "🎨 Poster",
+                url: "https://drive.google.com/file/d/1s7-Krs8cBubJZjRb97ZxdofLdn0LuK-9/preview",
+                thumb: "https://drive.google.com/thumbnail?sz=w100&id=1s7-Krs8cBubJZjRb97ZxdofLdn0LuK-9"
+            },
+            {
+                name: "Infografik 4: Hubungkait Obesiti dengan Kanser",
+                type: "🎨 Poster",
+                url: "https://drive.google.com/file/d/1PQAkxoI36-AGiMtf3DEClh0wWxwm7TkS/preview",
+                thumb: "https://drive.google.com/thumbnail?sz=w100&id=1PQAkxoI36-AGiMtf3DEClh0wWxwm7TkS"
+            }
+        ]
+    },
+    {
+        title: "Siri Infografik Kanser Kolorektal",
+        category: "package",  // Mengekalkan kategori package supaya dikesan oleh enjin JS
+        program: "kanser",  // Ditapis di bawah program Diabetes
+        desc: "Koleksi infografik berkaitan kanser kolorektal.",
+        imageUrl: "https://drive.google.com/thumbnail?sz=w600&id=1iCv1sPK1pN7Hz_EQb3_DTz7oxYv7w4_B",
+        badgeText: "Album Infografik", // Label tersuai untuk membezakannya dengan pakej video/fail biasa
+        badgeColorClass: "text-purple-600 bg-purple-50", 
+        infoText: "5 Siri Infografik",
+        materials: [
+            {
+                name: "Infografik 1: Apa Itu Kanser Kolorektal",
+                type: "🎨 Poster",
+                url: "https://drive.google.com/file/d/1iCv1sPK1pN7Hz_EQb3_DTz7oxYv7w4_B/preview",
+                thumb: "https://drive.google.com/thumbnail?sz=w100&id=1iCv1sPK1pN7Hz_EQb3_DTz7oxYv7w4_B"
+            },
+            {
+                name: "Infografik 2: Siapakah Golongan Berisiko Kanser Kolorektal",
+                type: "🎨 Poster",
+                url: "https://drive.google.com/file/d/1cA3qn6eqxPSTPIou19eGpoZ3__qNnXxs/preview",
+                thumb: "https://drive.google.com/thumbnail?sz=w100&id=1cA3qn6eqxPSTPIou19eGpoZ3__qNnXxs"
+            },
+            {
+                name: "Infografik 3: Apakah itu Ujian iFOBT?",
+                type: "🎨 Poster",
+                url: "https://drive.google.com/file/d/1-eL4mO3FF5Lg3ZuYz6MehtLMTBcq3pY3/preview",
+                thumb: "https://drive.google.com/thumbnail?sz=w100&id=1-eL4mO3FF5Lg3ZuYz6MehtLMTBcq3pY3"
+            },
+            {
+                name: "Infografik 4: Gejala Kanser Kolorektal",
+                type: "🎨 Poster",
+                url: "https://drive.google.com/file/d/1E-MPowJ3Z2hDBgjP01cq7uEmXrHzRGFG/preview",
+                thumb: "https://drive.google.com/thumbnail?sz=w100&id=1E-MPowJ3Z2hDBgjP01cq7uEmXrHzRGFG"
+            },
+            {
+                name: "Infografik 5: Apakah Faktor Risiko Kanser Kolorektal?",
+                type: "🎨 Poster",
+                url: "https://drive.google.com/file/d/1liDy_d8QIMjvsBSZPaiF0a6og7tm3Fk5/preview",
+                thumb: "https://drive.google.com/thumbnail?sz=w100&id=1liDy_d8QIMjvsBSZPaiF0a6og7tm3Fk5"
+            }
+        ]
+    },
     // =========================================================================
     // TEMPLAT KATEGORI 4: 📖 E-FLIPBOOK INTERAKTIF (100% AKUR ATRIBUT ASAL)
     // (Bahan di bawah kumpulan ini akan dibuka di fail: view-flipbook.html)
