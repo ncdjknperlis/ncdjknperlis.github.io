@@ -630,7 +630,54 @@ const resourcesData = [
         badgeText: "E-Flipbook",
         badgeColorClass: "text-blue-600 bg-blue-50 border border-blue-100",
         infoText: "Format: PDF Flipbook"
-    }
+    },
+    // =========================================================================
+    // 📂 KOMPILASI / HIMPUNAN FAIL DOKUMEN PDF (GOOGLE DRIVE)
+    // =========================================================================
+    {
+        title: "Koleksi Slaid dan Bahan Rujukan Bengkel CPG T2DM 2026",
+        category: "package",  // 💡 KUNCI UTAMA: Mesti guna 'package' atau 'pakej'
+        program: "umum",     // Pilihan program: umum / mental / diabetes / hpt / hpl / akta852
+        desc: "Himpunan slaid fasilitator dan bahan rujukan bagi Bengkel Pemantapan Panduan Amalan Klinikal (CPG) Pengurusan Diabetis Mellitus Jenis 2 (T2DM) Jabatan Kesihatan Negeri Perlis, yang telah diadakan pada 1 Ogos 2026, di Auditorium Dr Syed Mahmood, JKN Perlis.",
+        imageUrl: "https://drive.google.com/thumbnail?sz=w600&id=1UvtVyRRqg423LlIs6EZKP0VJeNUdsGvP", // Gambar hiasan pada kad grid luar
+        badgeText: "Album Dokumen",  // Teks kecil pada lencana kad
+        badgeColorClass: "text-purple-600 bg-purple-50", // Tema warna ungu khas album/pakej
+        infoText: "4 Fail PDF", // Jumlah fail di dalam kompilasi ini
+        
+        // 📚 SENARAI HIMPUNAN FAIL PDF GOOGLE DRIVE ANDA:
+        materials: [
+            {
+                name: "Diabetes Course Session 1: Screening & Diagnosis of T2DM",
+                type: "📄 PDF Drive",
+                url: "https://drive.google.com/file/d/1fEsZpd5yQmuXxy_xFSADb10bHIyHx1uT/preview", // ➔ Pautan preview Google Drive[cite: 1]
+                thumb: "https://drive.google.com/thumbnail?sz=w100&id=1fEsZpd5yQmuXxy_xFSADb10bHIyHx1uT" // Gambar kecil / thumbnail PDF[cite: 1]
+            },
+            {
+                name: "Diabetes Course Session 2: Diabetes Management: Risk Stratification & Target Setting",
+                type: "📄 PDF Drive",
+                url: "https://drive.google.com/file/d/1uvlAkfF05mXw6q_u58iJXJiSYqE9XD4-/preview", // ➔ Pautan preview Google Drive[cite: 1
+                thumb: "https://drive.google.com/thumbnail?sz=w100&id=1uvlAkfF05mXw6q_u58iJXJiSYqE9XD4-" // Gambar kecil / thumbnail PDF[cite: 1]
+            },
+            {
+                name: "Diabetes Course Session 3: Treatment Algorithm & Follow Up for T2DM",
+                type: "📄 PDF Drive",
+                url: "https://drive.google.com/file/d/1UvtVyRRqg423LlIs6EZKP0VJeNUdsGvP/preview", // ➔ Pautan preview Google Drive[cite: 1]
+                thumb: "https://drive.google.com/thumbnail?sz=w100&id=1UvtVyRRqg423LlIs6EZKP0VJeNUdsGvP" // Gambar kecil / thumbnail PDF[cite: 1]
+            },
+            {
+                name: "Mindful Eating Diary: ACT (Acceptance & Commitment Theraphy)",
+                type: "📄 PDF Drive",
+                url: "https://drive.google.com/file/d/11D6_7sraT7__64tWas747x25gAGMzgTt/preview", // ➔ Pautan preview Google Drive[cite: 1]
+                thumb: "https://drive.google.com/thumbnail?sz=w100&id=11D6_7sraT7__64tWas747x25gAGMzgTt" // Gambar kecil / thumbnail PDF[cite: 1]
+            },
+            {
+                name: "Lembaran Kerja Pesakit Diabetes: Mengurus Emosi, Kawal Diabetes; Pendekatan CBT & ACT",
+                type: "📄 PDF Drive",
+                url: "https://drive.google.com/file/d/1YJOMhZrdc0z_P_prrA1oTqi8KMW4-i8H/preview", // ➔ Pautan preview Google Drive[cite: 1]https://drive.google.com/file/d/1YJOMhZrdc0z_P_prrA1oTqi8KMW4-i8H/view?usp=sharing
+                thumb: "https://drive.google.com/thumbnail?sz=w100&id=1YJOMhZrdc0z_P_prrA1oTqi8KMW4-i8H" // Gambar kecil / thumbnail PDF[cite: 1]
+            }
+        ]
+    },
 ];
 
 // Memastikan objek data berjaya dieksport ke memori global pelayar web
