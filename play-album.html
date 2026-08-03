@@ -31,7 +31,6 @@
             --teks-sub: #94A3B8;       
             --bg-input: #1C2541;
         }
-        /* Cari kod [data-theme="emerald"] dll dalam fail play-image/video/package/album, dan tampal ini */
         [data-theme="winamp_orange"] {
             --bg-utama: #1a1a1a; --bg-kad: #282828; --border-warna: #ff5722;
             --teks-tajuk: #ff7043; --teks-biasa: #b0bec5; --teks-sub: #78909c;
@@ -44,22 +43,20 @@
             --bg-utama: #0a0e17; --bg-kad: #121824; --border-warna: #00e5ff;
             --teks-tajuk: #00e5ff; --teks-biasa: #a1a8b8; --teks-sub: #3c485e;
         }
-        /* 🧬 Mod Cyberpunk 2077 */
         [data-theme="cyberpunk"] {
             --bg-utama: #0f1013;       
             --bg-kad: #1a1b20;         
-            --border-warna: #fcee0a;   /* Kuning Cyberpunk menyala */
+            --border-warna: #fcee0a;   
             --teks-tajuk: #fcee0a;     
-            --teks-biasa: #00f0ff;     /* Teks Biru Neon */
+            --teks-biasa: #00f0ff;     
             --teks-sub: #ff0055;       
             --bg-input: #141519;
         }
-        /* 🌌 Mod Dracula Premium */
         [data-theme="dracula"] {
-            --bg-utama: #1e1f29;       /* Ungu Gelap Dracula */
+            --bg-utama: #1e1f29;       
             --bg-kad: #282a36;         
-            --border-warna: #ff79c6;   /* Merah Jambu Dracula */
-            --teks-tajuk: #50fa7b;     /* Hijau Terang */
+            --border-warna: #ff79c6;   
+            --teks-tajuk: #50fa7b;     
             --teks-biasa: #f8f8f2;     
             --teks-sub: #bd93f9;       
             --bg-input: #21222c;
@@ -75,6 +72,7 @@
 </head>
 <body class="h-screen w-screen overflow-hidden flex flex-col dinamik-bg-utama antialiased">
 
+    <!-- GLOBAL HEADER -->
     <header class="w-full py-2 md:py-3 px-4 md:px-12 bg-white border-b border-gray-100 flex flex-row items-center justify-between gap-2 z-20 flex-shrink-0 shadow-xs dinamik-bg-kad dinamik-border">
         <div class="flex items-center space-x-2 md:space-x-3">
             <img src="images/logo.png" style="max-width: 28px;" class="w-full h-auto object-contain mx-auto md:max-w-[42px]">
@@ -103,46 +101,70 @@
         </div>
     </header>
 
+    <!-- MAIN WRAPPER -->
     <div class="flex-1 w-full flex flex-col md:flex-row overflow-hidden">
-        <div class="w-full md:w-[360px] lg:w-[400px] border-b md:border-b-0 md:border-r border-gray-100 p-5 flex flex-col flex-shrink-0 justify-between overflow-y-auto custom-scrollbar bg-white dinamik-bg-kad dinamik-border">
-            <div class="space-y-4">
-                <span id="albumBadgeText" class="inline-block text-[10px] font-extrabold tracking-wider uppercase px-2.5 py-1 rounded-md bg-purple-50 text-purple-600">SIRI ALBUM</span>
-                <h1 id="albumTitle" class="text-base md:text-lg font-black tracking-tight leading-tight text-[#101e33] dinamik-teks-tajuk">Memuatkan Album...</h1>
+        
+        <!-- SIDEBAR / COLLAPSIBLE CONTAINER FOR MOBILE -->
+        <div class="w-full md:w-[360px] lg:w-[400px] border-b md:border-b-0 md:border-r border-gray-100 p-3 md:p-5 flex flex-col flex-shrink-0 justify-between overflow-y-auto custom-scrollbar bg-white dinamik-bg-kad dinamik-border transition-all duration-300">
+            
+            <div class="space-y-2 md:space-y-3">
                 
-                <div class="p-3 bg-gray-50 rounded-xl border border-gray-100 flex flex-col space-y-0.5 dinamik-bg-utama dinamik-border">
-                    <p class="text-[9px] uppercase tracking-widest text-gray-400 font-bold dinamik-teks-sub">Infografik Semasa:</p>
-                    <h4 id="currentSlideTitle" class="text-xs font-bold text-gray-700 dinamik-teks-biasa">Memuatkan sub-tajuk...</h4>
+                <!-- BAR LENCANA & BUTANG TOGGLE KHAS MOBILE -->
+                <div class="flex items-center justify-between">
+                    <span id="albumBadgeText" class="inline-block text-[10px] font-extrabold tracking-wider uppercase px-2.5 py-0.5 md:py-1 rounded-md bg-purple-50 text-purple-600">SIRI ALBUM</span>
+                    
+                    <!-- BUTANG LIPAT/SOROK (Khas Mobile Screen) -->
+                    <button onclick="toggleInfoAlbumMobile()" id="btnToggleInfo" class="md:hidden text-[10px] font-bold text-blue-600 hover:text-blue-800 bg-blue-50 px-2.5 py-1 rounded-lg flex items-center gap-1 border border-blue-100 transition-all">
+                        <span id="toggleText">Papar Sinopsis</span>
+                        <span id="toggleIcon" class="transition-transform duration-300 rotate-180">▲</span>
+                    </button>
                 </div>
 
-                <div class="w-12 h-[2px] bg-gray-200 dinamik-border"></div>
-                <div class="space-y-1.5">
-                    <h3 class="text-[10px] font-bold tracking-widest text-gray-400 uppercase dinamik-teks-sub">Sinopsis Penuh Album</h3>
-                    <p id="albumDesc" class="text-xs md:text-[13px] leading-relaxed text-gray-600 dinamik-teks-biasa font-light">Sedang mengambil maklumat fail daripada pangkalan data.</p>
+                <!-- 📌 TAJUK UTAMA: KEKAL KELUAR DI ATAS (TIDAK COLLAPSE) -->
+                <h1 id="albumTitle" class="text-xs md:text-lg font-black tracking-tight leading-tight text-[#101e33] dinamik-teks-tajuk">Memuatkan Album...</h1>
+
+                <!-- 🔒 BLOK SINOPSIS & INFOGRAFIK SEMASA: BOLEH DILIPAT (COLLAPSIBLE DEFAULT AT MOBILE) -->
+                <div id="collapsibleInfoBox" class="space-y-2 transition-all duration-300 overflow-hidden max-h-0 opacity-0 md:max-h-[1000px] md:opacity-100">
+                    
+                    <div class="p-2 md:p-3 bg-gray-50 rounded-xl border border-gray-100 flex flex-col space-y-0.5 dinamik-bg-utama dinamik-border">
+                        <p class="text-[9px] uppercase tracking-widest text-gray-400 font-bold dinamik-teks-sub">Infografik Semasa:</p>
+                        <h4 id="currentSlideTitle" class="text-xs font-bold text-gray-700 dinamik-teks-biasa">Memuatkan sub-tajuk...</h4>
+                    </div>
+
+                    <div class="w-12 h-[2px] bg-gray-200 dinamik-border hidden md:block"></div>
+                    
+                    <div class="space-y-1">
+                        <h3 class="text-[10px] font-bold tracking-widest text-gray-400 uppercase dinamik-teks-sub">Sinopsis Penuh Album</h3>
+                        <p id="albumDesc" class="text-xs md:text-[13px] leading-relaxed text-gray-600 dinamik-teks-biasa font-light">Sedang mengambil maklumat fail daripada pangkalan data.</p>
+                    </div>
                 </div>
             </div>
             
-            <div class="mt-6 pt-4 border-t border-gray-100 flex flex-col gap-3 dinamik-border">
+            <!-- PANEL KAWALAN BUTANG TERDAHULU / SETERUSNYA -->
+            <div class="mt-3 md:mt-6 pt-3 md:pt-4 border-t border-gray-100 flex flex-col gap-2 md:gap-3 dinamik-border">
                 <div class="grid grid-cols-2 gap-2">
-                    <button onclick="changeSlide(-1)" class="py-2 bg-[#101e33] text-white rounded-xl font-bold text-xs hover:bg-[#1d3557] transition-all active:scale-95 shadow-sm">◀ Terdahulu</button>
-                    <button onclick="changeSlide(1)" class="py-2 bg-[#101e33] text-white rounded-xl font-bold text-xs hover:bg-[#1d3557] transition-all active:scale-95 shadow-sm">Seterusnya ▶</button>
+                    <button onclick="changeSlide(-1)" class="py-1.5 md:py-2 bg-[#101e33] text-white rounded-xl font-bold text-xs hover:bg-[#1d3557] transition-all active:scale-95 shadow-sm">◀ Terdahulu</button>
+                    <button onclick="changeSlide(1)" class="py-1.5 md:py-2 bg-[#101e33] text-white rounded-xl font-bold text-xs hover:bg-[#1d3557] transition-all active:scale-95 shadow-sm">Seterusnya ▶</button>
                 </div>
-                <button onclick="bukaModalKongsi()" class="w-full flex items-center justify-center space-x-2 py-2 rounded-xl border border-gray-200 bg-gray-50/50 hover:bg-gray-100 text-xs font-bold dinamik-border dinamik-bg-utama dinamik-teks-tajuk">
+                <button onclick="bukaModalKongsi()" class="w-full flex items-center justify-center space-x-2 py-1.5 md:py-2 rounded-xl border border-gray-200 bg-gray-50/50 hover:bg-gray-100 text-xs font-bold dinamik-border dinamik-bg-utama dinamik-teks-tajuk">
                     <span>🔗</span> <span>Kongsi Bahan & Dapatkan QR</span>
                 </button>
             </div>
         </div>
 
+        <!-- MAIN VIEWER COLUMN (IFRAME & STRIP THUMBNAILS) -->
         <div class="flex-1 bg-zinc-900 p-2 md:p-3 flex flex-col justify-between overflow-hidden">
             <div class="flex-1 w-full bg-black rounded-xl overflow-hidden shadow-2xl flex items-center justify-center relative">
                 <iframe id="sliderIframe" src="" class="w-full h-full rounded-xl border-0 bg-gray-50" allow="autoplay" referrerpolicy="no-referrer"></iframe>
                 <span id="pageBadge" class="absolute bottom-4 right-4 bg-black/60 backdrop-blur-xs text-white text-[10px] font-bold px-2.5 py-1 rounded-md tracking-wider z-10">Siri: 0 / 0</span>
             </div>
             
-            <div id="thumbStripContainer" class="h-16 mt-2 flex flex-row items-center space-x-2 overflow-x-auto no-scrollbar py-1 scroll-smooth">
-                </div>
+            <div id="thumbStripContainer" class="h-14 md:h-16 mt-2 flex flex-row items-center space-x-2 overflow-x-auto no-scrollbar py-1 scroll-smooth">
+            </div>
         </div>
     </div>
 
+    <!-- MODAL QR & KONGSI -->
     <div id="modalKongsi" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 opacity-0 pointer-events-none transition-all duration-300 backdrop-blur-sm">
         <div class="w-full max-w-sm bg-white rounded-3xl p-6 shadow-2xl scale-95 transition-all flex flex-col items-center text-center border border-gray-100 dinamik-bg-kad dinamik-border relative">
             <button onclick="tutupModalKongsi()" class="absolute top-4 right-4 w-7 h-7 flex items-center justify-center rounded-full bg-gray-100 text-gray-500 font-bold text-xs dinamik-bg-utama dinamik-teks-tajuk">✕</button>
@@ -159,11 +181,50 @@
         </div>
     </div>
 
+    <!-- SCRIPT ENJIN -->
     <script src="resources-data.js"></script>
     <script>
         let currentShareUrl = "";
         let albumItems = [];
         let currentSlideIndex = 0;
+        let infoTerbukaMobile = false; // Set Lalai Terlipat di Mobile
+
+        // 📱 FUNGSI TOGGLE COLLAPSIBLE INFO KHAS UNTUK MOBILE
+        function toggleInfoAlbumMobile() {
+            const infoBox = document.getElementById('collapsibleInfoBox');
+            const toggleText = document.getElementById('toggleText');
+            const toggleIcon = document.getElementById('toggleIcon');
+
+            if (infoTerbukaMobile) {
+                // SOROKKAN SINOPSIS
+                infoBox.style.maxHeight = '0px';
+                infoBox.style.opacity = '0';
+                
+                toggleText.innerText = "Papar Sinopsis";
+                toggleIcon.style.transform = "rotate(180deg)";
+                infoTerbukaMobile = false;
+            } else {
+                // PAPARKAN SINOPSIS
+                infoBox.style.maxHeight = '1000px';
+                infoBox.style.opacity = '1';
+                
+                toggleText.innerText = "Sorok Sinopsis";
+                toggleIcon.style.transform = "rotate(0deg)";
+                infoTerbukaMobile = true;
+            }
+        }
+
+        // SEMAK DAN PASTI KAN DILIPAT SECARA DEFAULT BILA BUKA DI MOBILE
+        function semakSkrinMobile() {
+            if (window.innerWidth < 768) {
+                const infoBox = document.getElementById('collapsibleInfoBox');
+                if (infoBox) {
+                    infoBox.style.maxHeight = '0px';
+                    infoBox.style.opacity = '0';
+                }
+                infoTerbukaMobile = false;
+            }
+        }
 
         function cleanDriveUrl(url) {
             if (!url || !url.includes("drive.google.com")) return url;
@@ -194,7 +255,6 @@
             }
         }
 
-        // ENJIN STRIP PEMBAIKI THUMBNAIL: Mengubah link thumbnail Google Drive ke CDN lh3 secara automatik
         function binaThumbnails() {
             const thumbContainer = document.getElementById("thumbStripContainer");
             thumbContainer.innerHTML = "";
@@ -203,12 +263,11 @@
             albumItems.forEach((item, index) => {
                 const btn = document.createElement("button");
                 btn.id = `thumb-btn-${index}`;
-                btn.className = `w-14 h-14 rounded-lg overflow-hidden border-2 flex-shrink-0 transition-all focus:outline-none bg-gray-800 p-0.5 transform active:scale-95 border-transparent`;
+                btn.className = `w-12 h-12 md:w-14 md:h-14 rounded-lg overflow-hidden border-2 flex-shrink-0 transition-all focus:outline-none bg-gray-800 p-0.5 transform active:scale-95 border-transparent`;
                 btn.onclick = () => loadSlide(index);
                 
                 let rawThumbUrl = item.thumb || item.imageUrl || item.url || '';
                 
-                // PINTAR: Ekstrak ID Drive dan ubah suai ke server imej lh3 Google (Lolos Sekaran Browser)
                 if (rawThumbUrl.includes("drive.google.com") || rawThumbUrl.includes("thumbnail")) {
                     const matchId = rawThumbUrl.match(/\/d\/([a-zA-Z0-9_-]+)/) || rawThumbUrl.match(/id=([a-zA-Z0-9_-]+)/);
                     if (matchId && matchId[1]) {
@@ -218,7 +277,6 @@
                 
                 btn.innerHTML = `<img src="${rawThumbUrl}" referrerpolicy="no-referrer" class="w-full h-full object-cover rounded-md pointer-events-none">`;
                 
-                // Mesej keselamatan jika link rosak
                 const imgElement = btn.querySelector('img');
                 imgElement.onerror = function() {
                     this.src = "images/logo.png";
@@ -235,7 +293,6 @@
             if (index >= albumItems.length) index = 0;
             if (index < 0) index = albumItems.length - 1;
             
-            // Urus penukaran border aktif
             const oldActive = document.getElementById(`thumb-btn-${currentSlideIndex}`);
             if (oldActive) {
                 oldActive.className = oldActive.className.replace("border-purple-600 scale-105 shadow-sm", "border-transparent");
@@ -285,6 +342,7 @@
 
         window.addEventListener('DOMContentLoaded', () => {
             muatData();
+            semakSkrinMobile();
             tukarTemaSistem(localStorage.getItem('pilihanTemaNCD_Global') || 'default');
         });
     </script>

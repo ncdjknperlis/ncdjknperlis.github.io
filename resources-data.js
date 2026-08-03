@@ -642,7 +642,7 @@ const resourcesData = [
         imageUrl: "https://drive.google.com/thumbnail?sz=w600&id=1UvtVyRRqg423LlIs6EZKP0VJeNUdsGvP", // Gambar hiasan pada kad grid luar
         badgeText: "Album Dokumen",  // Teks kecil pada lencana kad
         badgeColorClass: "text-purple-600 bg-purple-50", // Tema warna ungu khas album/pakej
-        infoText: "4 Fail PDF", // Jumlah fail di dalam kompilasi ini
+        infoText: "5 Fail PDF", // Jumlah fail di dalam kompilasi ini
         
         // 📚 SENARAI HIMPUNAN FAIL PDF GOOGLE DRIVE ANDA:
         materials: [
