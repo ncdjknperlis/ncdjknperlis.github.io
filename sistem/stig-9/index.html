@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soal Selidik Profil Stigma Komuniti (STIG-9)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="../../favicon/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen flex items-center justify-center p-3 sm:p-6 antialiased text-slate-800">
+
+    <div class="w-full max-w-xl bg-white rounded-3xl p-5 sm:p-8 shadow-xl border border-slate-100 flex flex-col justify-between min-h-[560px] relative overflow-hidden">
+        
+        <!-- 🖼️ BANNER FULL CARD (EDGE-TO-EDGE TANPA PADDING & TANPA BORDER) -->
+        <div class="-mx-5 -mt-5 sm:-mx-8 sm:-mt-8 mb-5 overflow-hidden bg-slate-100 border-b border-slate-100 flex items-center justify-center min-h-[120px]">
+            <img src="banner-stig9.png" alt="Banner Program" class="w-full h-auto object-cover max-h-52" onerror="this.onerror=null; this.src='https://placehold.co/600x200/059669/ffffff?text=BANNER+PROGRAM+STIG-9';">
+        </div>
+
+        <!-- 🌐 TOGGLE 5 BAHASA (BM, EN, 中文, தமிழ், ไทย) -->
+        <div id="langToggleBox" class="flex flex-wrap items-center justify-between gap-2 mb-4 pb-3 border-b border-slate-100">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400">🌐 Pilih Bahasa / Language:</span>
+            <div class="flex gap-1">
+                <button type="button" onclick="tukarBahasa('ms')" id="btn-ms" class="btn-lang px-2.5 py-1 text-[11px] font-bold rounded-lg bg-emerald-600 text-white transition-all">BM</button>
+                <button type="button" onclick="tukarBahasa('en')" id="btn-en" class="btn-lang px-2.5 py-1 text-[11px] font-bold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">EN</button>
+                <button type="button" onclick="tukarBahasa('zh')" id="btn-zh" class="btn-lang px-2.5 py-1 text-[11px] font-bold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">中文</button>
+                <button type="button" onclick="tukarBahasa('ta')" id="btn-ta" class="btn-lang px-2.5 py-1 text-[11px] font-bold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">தமிழ்</button>
+                <button type="button" onclick="tukarBahasa('th')" id="btn-th" class="btn-lang px-2.5 py-1 text-[11px] font-bold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all">ไทย</button>
+            </div>
+        </div>
+
+        <!-- HEADER & PROGRESS BAR -->
+        <div id="headerWrapper" class="space-y-3 mb-2">
+            <div class="flex items-center justify-between">
+                <span class="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-100">
+                    STIG-9 Komuniti
+                </span>
+                <span id="stepIndicator" class="text-xs font-bold text-slate-400">
+                    Bahagian 1 dari 10
+                </span>
+            </div>
+
+            <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                <div id="progressBar" class="bg-emerald-500 h-full w-[10%] transition-all duration-300"></div>
+            </div>
+        </div>
+
+        <!-- FORM UTAMA -->
+        <form id="borangSaringan" onsubmit="hantarBorang(event)" class="my-auto py-2">
+            
+            <!-- SECTION 0: DEMOGRAFI -->
+            <div class="form-section space-y-4">
+                <div class="border-l-4 border-emerald-500 pl-3">
+                    <h2 id="txt-demo-title" class="text-base sm:text-lg font-black text-slate-900">Bahagian A: Demografi</h2>
+                    <p id="txt-demo-sub" class="text-xs text-slate-400 font-medium">Sila isi maklumat latar belakang anda sebelum memulakan soalan.</p>
+                </div>
+
+                <div class="space-y-3">
+                    <div>
+                        <label id="lbl-nama" class="text-xs font-bold text-slate-700">Nama Penuh <span class="text-red-500">*</span></label>
+                        <input type="text" id="inputNama" name="Nama" required placeholder="Masukkan nama penuh anda" 
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs sm:text-sm font-medium focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all">
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label id="lbl-umur" class="text-xs font-bold text-slate-700">Julat Umur <span class="text-red-500">*</span></label>
+                            <select id="selectUmur" name="JulatUmur" required class="w-full px-3 py-3 rounded-xl border border-slate-200 text-xs font-medium focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all">
+                                <option value="" id="opt-u-select">-- Pilih --</option>
+                                <option value="Bawah 18" id="opt-u1">Bawah 18 tahun</option>
+                                <option value="18 - 29">18 - 29 tahun</option>
+                                <option value="30 - 39">30 - 39 tahun</option>
+                                <option value="40 - 49">40 - 49 tahun</option>
+                                <option value="50 - 59">50 - 59 tahun</option>
+                                <option value="60 ke atas" id="opt-u6">60 tahun ke atas</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label id="lbl-jantina" class="text-xs font-bold text-slate-700">Jantina <span class="text-red-500">*</span></label>
+                            <select id="selectJantina" name="Jantina" required class="w-full px-3 py-3 rounded-xl border border-slate-200 text-xs font-medium focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all">
+                                <option value="" id="opt-j-select">-- Pilih --</option>
+                                <option value="Lelaki" id="opt-j1">Lelaki</option>
+                                <option value="Perempuan" id="opt-j2">Perempuan</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label id="lbl-bangsa" class="text-xs font-bold text-slate-700">Bangsa <span class="text-red-500">*</span></label>
+                            <select id="selectBangsa" name="Bangsa" required class="w-full px-3 py-3 rounded-xl border border-slate-200 text-xs font-medium focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all">
+                                <option value="" id="opt-b-select">-- Pilih --</option>
+                                <option value="Melayu" id="opt-b1">Melayu</option>
+                                <option value="Cina" id="opt-b2">Cina</option>
+                                <option value="India" id="opt-b3">India</option>
+                                <option value="Siam" id="opt-b4">Siam</option>
+                                <option value="Lain-lain" id="opt-b5">Lain-lain</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label id="lbl-agama" class="text-xs font-bold text-slate-700">Agama <span class="text-red-500">*</span></label>
+                            <select id="selectAgama" name="Agama" required class="w-full px-3 py-3 rounded-xl border border-slate-200 text-xs font-medium focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all">
+                                <option value="" id="opt-a-select">-- Pilih --</option>
+                                <option value="Islam" id="opt-a1">Islam</option>
+                                <option value="Buddha" id="opt-a2">Buddha</option>
+                                <option value="Hindu" id="opt-a3">Hindu</option>
+                                <option value="Kristian" id="opt-a4">Kristian</option>
+                                <option value="Lain-lain" id="opt-a5">Lain-lain</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label id="lbl-mukim" class="text-xs font-bold text-slate-700">Mukim <span class="text-red-500">*</span></label>
+                        <select id="selectMukim" name="Mukim" required class="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs font-medium focus:outline-none focus:border-emerald-500 focus:ring-2 focus:ring-emerald-500/20 transition-all">
+                            <option value="" id="opt-m-select">-- Pilih Mukim di Perlis --</option>
+                            <option value="Abi">Abi</option>
+                            <option value="Arau">Arau</option>
+                            <option value="Besaeri">Besaeri</option>
+                            <option value="Chuping">Chuping</option>
+                            <option value="Jutra">Jutra</option>
+                            <option value="Kangar">Kangar</option>
+                            <option value="Kayang">Kayang</option>
+                            <option value="Kecor">Kecor</option>
+                            <option value="Kurong Anai">Kurong Anai</option>
+                            <option value="Kurong Batang">Kurong Batang</option>
+                            <option value="Kuala Perlis">Kuala Perlis</option>
+                            <option value="Oran">Oran</option>
+                            <option value="Padang Siding">Padang Siding</option>
+                            <option value="Paya">Paya</option>
+                            <option value="Pedani">Pedani</option>
+                            <option value="Pengkalan Asam">Pengkalan Asam</option>
+                            <option value="Raja">Raja</option>
+                            <option value="Sena">Sena</option>
+                            <option value="Seriab">Seriab</option>
+                            <option value="Sungai Adam">Sungai Adam</option>
+                            <option value="Titi Tinggi">Titi Tinggi</option>
+                            <option value="Utan Aji">Utan Aji</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SOALAN S1 -->
+            <div class="form-section hidden space-y-4">
+                <span class="txt-q-num text-xs font-bold text-emerald-600 uppercase tracking-widest">Soalan 1 / 9</span>
+                <h2 id="txt-s1" class="text-sm sm:text-base font-bold text-slate-800 leading-relaxed">
+                    "Saya rasa kebanyakan orang berasa tidak senang apabila seseorang yang pernah dirawat kerana masalah kesihatan mental berpindah ke kawasan kejiranan."
+                </h2>
+                <div class="space-y-2 pt-2">
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S1" value="Tidak Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l1">Tidak Setuju</span>
+                    </label>
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S1" value="Agak Tidak Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l2">Agak Tidak Setuju</span>
+                    </label>
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S1" value="Agak Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l3">Agak Setuju</span>
+                    </label>
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S1" value="Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l4">Setuju</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- SOALAN S2 -->
+            <div class="form-section hidden space-y-4">
+                <span class="txt-q-num text-xs font-bold text-emerald-600 uppercase tracking-widest">Soalan 2 / 9</span>
+                <h2 id="txt-s2" class="text-sm sm:text-base font-bold text-slate-800 leading-relaxed">
+                    "Saya rasa kebanyakan orang tidak akan menjalin hubungan dengan seseorang yang pernah dirawat kerana masalah kesihatan mental."
+                </h2>
+                <div class="space-y-2 pt-2">
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S2" value="Tidak Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l1">Tidak Setuju</span>
+                    </label>
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S2" value="Agak Tidak Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l2">Agak Tidak Setuju</span>
+                    </label>
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S2" value="Agak Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l3">Agak Setuju</span>
+                    </label>
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S2" value="Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l4">Setuju</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- SOALAN S3 -->
+            <div class="form-section hidden space-y-4">
+                <span class="txt-q-num text-xs font-bold text-emerald-600 uppercase tracking-widest">Soalan 3 / 9</span>
+                <h2 id="txt-s3" class="text-sm sm:text-base font-bold text-slate-800 leading-relaxed">
+                    "Saya rasa kebanyakan orang tidak akan melayan permohonan pekerjaan daripada seseorang yang pernah dirawat kerana masalah kesihatan mental."
+                </h2>
+                <div class="space-y-2 pt-2">
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S3" value="Tidak Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l1">Tidak Setuju</span>
+                    </label>
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S3" value="Agak Tidak Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l2">Agak Tidak Setuju</span>
+                    </label>
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S3" value="Agak Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l3">Agak Setuju</span>
+                    </label>
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S3" value="Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l4">Setuju</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- SOALAN S4 -->
+            <div class="form-section hidden space-y-4">
+                <span class="txt-q-num text-xs font-bold text-emerald-600 uppercase tracking-widest">Soalan 4 / 9</span>
+                <h2 id="txt-s4" class="text-sm sm:text-base font-bold text-slate-800 leading-relaxed">
+                    "Saya rasa kebanyakan orang teragak-agak untuk meninggalkan anak mereka dengan seseorang yang telah dirawat kerana masalah kesihatan mental."
+                </h2>
+                <div class="space-y-2 pt-2">
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S4" value="Tidak Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l1">Tidak Setuju</span>
+                    </label>
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S4" value="Agak Tidak Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l2">Agak Tidak Setuju</span>
+                    </label>
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S4" value="Agak Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l3">Agak Setuju</span>
+                    </label>
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S4" value="Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l4">Setuju</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- SOALAN S5 -->
+            <div class="form-section hidden space-y-4">
+                <span class="txt-q-num text-xs font-bold text-emerald-600 uppercase tracking-widest">Soalan 5 / 9</span>
+                <h2 id="txt-s5" class="text-sm sm:text-base font-bold text-slate-800 leading-relaxed">
+                    "Saya rasa kebanyakan orang menganggap masalah kesihatan mental sebagai tanda kelemahan diri."
+                </h2>
+                <div class="space-y-2 pt-2">
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S5" value="Tidak Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l1">Tidak Setuju</span>
+                    </label>
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S5" value="Agak Tidak Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l2">Agak Tidak Setuju</span>
+                    </label>
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S5" value="Agak Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l3">Agak Setuju</span>
+                    </label>
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S5" value="Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l4">Setuju</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- SOALAN S6 -->
+            <div class="form-section hidden space-y-4">
+                <span class="txt-q-num text-xs font-bold text-emerald-600 uppercase tracking-widest">Soalan 6 / 9</span>
+                <h2 id="txt-s6" class="text-sm sm:text-base font-bold text-slate-800 leading-relaxed">
+                    "Saya rasa kebanyakan orang bersangka buruk terhadap seseorang yang mempunyai masalah kesihatan mental."
+                </h2>
+                <div class="space-y-2 pt-2">
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S6" value="Tidak Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l1">Tidak Setuju</span>
+                    </label>
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S6" value="Agak Tidak Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l2">Agak Tidak Setuju</span>
+                    </label>
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S6" value="Agak Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l3">Agak Setuju</span>
+                    </label>
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S6" value="Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l4">Setuju</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- SOALAN S7 -->
+            <div class="form-section hidden space-y-4">
+                <span class="txt-q-num text-xs font-bold text-emerald-600 uppercase tracking-widest">Soalan 7 / 9</span>
+                <h2 id="txt-s7" class="text-sm sm:text-base font-bold text-slate-800 leading-relaxed">
+                    "Saya rasa kebanyakan orang teragak-agak untuk berurusan dengan seseorang yang pernah dirawat kerana masalah kesihatan mental."
+                </h2>
+                <div class="space-y-2 pt-2">
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S7" value="Tidak Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l1">Tidak Setuju</span>
+                    </label>
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S7" value="Agak Tidak Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l2">Agak Tidak Setuju</span>
+                    </label>
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S7" value="Agak Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l3">Agak Setuju</span>
+                    </label>
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S7" value="Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l4">Setuju</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- SOALAN S8 -->
+            <div class="form-section hidden space-y-4">
+                <span class="txt-q-num text-xs font-bold text-emerald-600 uppercase tracking-widest">Soalan 8 / 9</span>
+                <h2 id="txt-s8" class="text-sm sm:text-base font-bold text-slate-800 leading-relaxed">
+                    "Saya rasa kebanyakan orang menganggap individu yang pernah dirawat kerana masalah kesihatan mental sebagai seseorang yang berbahaya."
+                </h2>
+                <div class="space-y-2 pt-2">
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S8" value="Tidak Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l1">Tidak Setuju</span>
+                    </label>
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S8" value="Agak Tidak Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l2">Agak Tidak Setuju</span>
+                    </label>
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S8" value="Agak Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l3">Agak Setuju</span>
+                    </label>
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S8" value="Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l4">Setuju</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- SOALAN S9 -->
+            <div class="form-section hidden space-y-4">
+                <span class="txt-q-num text-xs font-bold text-emerald-600 uppercase tracking-widest">Soalan 9 / 9</span>
+                <h2 id="txt-s9" class="text-sm sm:text-base font-bold text-slate-800 leading-relaxed">
+                    "Saya rasa kebanyakan orang memandang kurang serius pendapat seseorang yang pernah dirawat kerana masalah kesihatan mental."
+                </h2>
+                <div class="space-y-2 pt-2">
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S9" value="Tidak Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l1">Tidak Setuju</span>
+                    </label>
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S9" value="Agak Tidak Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l2">Agak Tidak Setuju</span>
+                    </label>
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S9" value="Agak Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l3">Agak Setuju</span>
+                    </label>
+                    <label class="pilihan-card flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-emerald-500 transition-all">
+                        <input type="radio" name="S9" value="Setuju" class="accent-emerald-600 mr-3"> <span class="opt-l4">Setuju</span>
+                    </label>
+                </div>
+            </div>
+
+        </form>
+
+        <!-- 🎉 SKRIN UCAPAN TERIMA KASIH -->
+        <div id="skrinTerimaKasih" class="hidden my-auto text-center space-y-5 py-6">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto text-3xl shadow-inner">
+                🎉
+            </div>
+            <div class="space-y-2">
+                <h2 id="txt-thanks-title" class="text-xl sm:text-2xl font-black text-slate-900">Terima Kasih!</h2>
+                <p id="txt-thanks-desc" class="text-xs sm:text-sm text-slate-500 font-medium max-w-sm mx-auto leading-relaxed">
+                    Terima kasih atas masa anda menjawab soal selidik ini. Kerjasama anda amat dihargai dalam membantu menjayakan Kempen Hentikan Stigma Kesihatan Mental.
+                </p>
+            </div>
+            <div class="pt-4">
+                <button type="button" onclick="buatSemulaUjian()" class="px-6 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-md shadow-emerald-600/20 active:scale-95 transition-all inline-flex items-center gap-2">
+                    <span>🔄</span> <span id="txt-btn-reset">Buat Semula Ujian</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- PANEL NAVIGASI BUTANG -->
+        <div id="navWrapper" class="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+            <button type="button" id="btnKembali" onclick="kembaliStep()" class="hidden px-5 py-3 rounded-xl bg-slate-100 text-slate-600 font-bold text-xs hover:bg-slate-200 transition-all">
+                ← Kembali
+            </button>
+            <div class="flex-1"></div>
+            <button type="button" id="btnSeterusnya" onclick="seterusnyaStep()" class="px-6 py-3 rounded-xl bg-emerald-600 text-white font-bold text-xs shadow-md shadow-emerald-600/20 hover:bg-emerald-700 active:scale-95 transition-all">
+                Seterusnya →
+            </button>
+            <button type="button" id="btnHantar" onclick="submitFormManual()" class="hidden px-6 py-3 rounded-xl bg-emerald-600 text-white font-bold text-xs shadow-md shadow-emerald-600/20 hover:bg-emerald-700 active:scale-95 transition-all">
+                Hantar Maklumat ✅
+            </button>
+        </div>
+
+        <div id="statusMesej" class="hidden text-center p-3 rounded-xl text-xs font-bold mt-2"></div>
+
+    </div>
+
+    <!-- ENJIN JAVASCRIPT: NAVIGASI & DICTIONARY TERJEMAHAN 5 BAHASA -->
+    <script>
+        const URL_GOOGLE_APPS_SCRIPT = "https://script.google.com/macros/s/AKfycbyAvUuTdZIw8tLgHR-DJw_gzYG08qrEovr3uPLdjO1VqE0rXL1-EKOb-Z6pPGUpmtE5/exec";
+
+        let currentSection = 0;
+        const sections = document.querySelectorAll('.form-section');
+        const totalSections = sections.length;
+        let bahSemasa = 'ms';
+
+        // DICTIONARY TERJEMAHAN 5 BAHASA
+        const terjemahan = {
+            ms: {
+                stepPrefix: "Bahagian",
+                qPrefix: "Soalan",
+                demoTitle: "Bahagian A: Demografi",
+                demoSub: "Sila isi maklumat latar belakang anda sebelum memulakan soalan.",
+                lblNama: "Nama Penuh",
+                lblUmur: "Julat Umur",
+                lblJantina: "Jantina",
+                lblBangsa: "Bangsa",
+                lblAgama: "Agama",
+                lblMukim: "Mukim",
+                optSelect: "-- Pilih --",
+                optMukimSelect: "-- Pilih Mukim di Perlis --",
+                optU1: "Bawah 18 tahun", optU6: "60 tahun ke atas",
+                optJ1: "Lelaki", optJ2: "Perempuan",
+                optB1: "Melayu", optB2: "Cina", optB3: "India", optB4: "Siam", optB5: "Lain-lain",
+                optA1: "Islam", optA2: "Buddha", optA3: "Hindu", optA4: "Kristian", optA5: "Lain-lain",
+                l1: "Tidak Setuju", l2: "Agak Tidak Setuju", l3: "Agak Setuju", l4: "Setuju",
+                btnBack: "← Kembali", btnNext: "Seterusnya →", btnSubmit: "Hantar Maklumat ✅",
+                thanksTitle: "Terima Kasih!",
+                thanksDesc: "Terima kasih atas masa anda menjawab soal selidik ini. Kerjasama anda amat dihargai dalam membantu menjayakan Kempen Hentikan Stigma Kesihatan Mental.",
+                btnReset: "Buat Semula Ujian",
+                s1: "Saya rasa kebanyakan orang berasa tidak senang apabila seseorang yang pernah dirawat kerana masalah kesihatan mental berpindah ke kawasan kejiranan.",
+                s2: "Saya rasa kebanyakan orang tidak akan menjalin hubungan dengan seseorang yang pernah dirawat kerana masalah kesihatan mental.",
+                s3: "Saya rasa kebanyakan orang tidak akan melayan permohonan pekerjaan daripada seseorang yang pernah dirawat kerana masalah kesihatan mental.",
+                s4: "Saya rasa kebanyakan orang teragak-agak untuk meninggalkan anak mereka dengan seseorang yang telah dirawat kerana masalah kesihatan mental.",
+                s5: "Saya rasa kebanyakan orang menganggap masalah kesihatan mental sebagai tanda kelemahan diri.",
+                s6: "Saya rasa kebanyakan orang bersangka buruk terhadap seseorang yang mempunyai masalah kesihatan mental.",
+                s7: "Saya rasa kebanyakan orang teragak-agak untuk berurusan dengan seseorang yang pernah dirawat kerana masalah kesihatan mental.",
+                s8: "Saya rasa kebanyakan orang menganggap individu yang pernah dirawat kerana masalah kesihatan mental sebagai seseorang yang berbahaya.",
+                s9: "Saya rasa kebanyakan orang memandang kurang serius pendapat seseorang yang pernah dirawat kerana masalah kesihatan mental."
+            },
+            en: {
+                stepPrefix: "Section",
+                qPrefix: "Question",
+                demoTitle: "Part A: Demographics",
+                demoSub: "Please fill in your background information before starting.",
+                lblNama: "Full Name",
+                lblUmur: "Age Group",
+                lblJantina: "Gender",
+                lblBangsa: "Race / Ethnicity",
+                lblAgama: "Religion",
+                lblMukim: "Sub-district (Mukim)",
+                optSelect: "-- Select --",
+                optMukimSelect: "-- Select Mukim in Perlis --",
+                optU1: "Under 18 years old", optU6: "60 years old & above",
+                optJ1: "Male", optJ2: "Female",
+                optB1: "Malay", optB2: "Chinese", optB3: "Indian", optB4: "Siamese", optB5: "Others",
+                optA1: "Islam", optA2: "Buddhism", optA3: "Hinduism", optA4: "Christianity", optA5: "Others",
+                l1: "Disagree", l2: "Somewhat Disagree", l3: "Somewhat Agree", l4: "Agree",
+                btnBack: "← Back", btnNext: "Next →", btnSubmit: "Submit Form ✅",
+                thanksTitle: "Thank You!",
+                thanksDesc: "Thank you for taking the time to complete this survey. Your cooperation is greatly appreciated in supporting the Stop Mental Health Stigma Campaign.",
+                btnReset: "Retake Survey",
+                s1: "I think most people feel uneasy when someone who has been treated for a mental illness moves into the neighbourhood.",
+                s2: "I think most people do not enter into a relationship with someone who has been treated for a mental illness.",
+                s3: "I think most people do not even take a look at an application from someone who has been treated for a mental illness.",
+                s4: "I think most people hesitate to entrust their child with someone who has been treated for a mental illness.",
+                s5: "I think most people consider mental illness to be a sign of personal weakness.",
+                s6: "I think most people think badly of someone who has been treated for a mental illness.",
+                s7: "I think most people hesitate to do business with someone who has been treated for a mental illness.",
+                s8: "I think most people consider someone who has been treated for a mental illness to be dangerous.",
+                s9: "I think most people take the opinion of someone who has been treated for a mental illness less seriously."
+            },
+            zh: {
+                stepPrefix: "部分",
+                qPrefix: "问题",
+                demoTitle: "A部分: 人口统计信息",
+                demoSub: "请在开始解答前填写您的基本个人信息。",
+                lblNama: "姓名",
+                lblUmur: "年龄组",
+                lblJantina: "性别",
+                lblBangsa: "种族",
+                lblAgama: "宗教",
+                lblMukim: "区 (Mukim)",
+                optSelect: "-- 请选择 --",
+                optMukimSelect: "-- 请选择玻璃市区份 --",
+                optU1: "18岁以下", optU6: "60岁及以上",
+                optJ1: "男", optJ2: "女",
+                optB1: "马来人", optB2: "华人", optB3: "印度人", optB4: "暹罗人", optB5: "其他",
+                optA1: "伊斯兰教", optA2: "佛教", optA3: "印度教", optA4: "基督教", optA5: "其他",
+                l1: "不同意", l2: "较不同意", l3: "较同意", l4: "同意",
+                btnBack: "← 返回", btnNext: "下一步 →", btnSubmit: "提交表格 ✅",
+                thanksTitle: "非常感谢！",
+                thanksDesc: "感谢您抽出宝贵时间完成此问卷。感谢您为消除精神健康偏见活动所作出的贡献。",
+                btnReset: "重新填写",
+                s1: "我认为大多数人当曾接受精神疾病治疗的人搬入社区时会感到不适。",
+                s2: "我认为大多数人不会与曾接受精神疾病治疗的人建立亲密关系。",
+                s3: "我认为大多数人不会考虑曾接受精神疾病治疗者的求职申请。",
+                s4: "我认为大多数人会犹豫是否将孩子托付给曾接受精神疾病治疗的人。",
+                s5: "我认为大多数人将精神疾病视为个人软弱的表现。",
+                s6: "我认为大多数人对曾接受精神疾病治疗的人存有偏见。",
+                s7: "我认为大多数人会犹豫是否与曾接受精神疾病治疗的人进行商业往来。",
+                s8: "我认为大多数人认为曾接受精神疾病治疗的人是危险的。",
+                s9: "我认为大多数人不会认真对待曾接受精神疾病治疗者的意见。"
+            },
+            ta: {
+                stepPrefix: "பிரிவு",
+                qPrefix: "கேள்வி",
+                demoTitle: "பகுதி A: சுயவிவரம்",
+                demoSub: "கேள்விகளைத் தொடங்குவதற்கு முன் உங்கள் சுயவிவரத்தை நிரப்பவும்.",
+                lblNama: "முழு பெயர்",
+                lblUmur: "வயதுக் குழு",
+                lblJantina: "பாலினம்",
+                lblBangsa: "இனம்",
+                lblAgama: "மதம்",
+                lblMukim: "மாவட்டம் (முக்கிம்)",
+                optSelect: "-- தேர்வு செய்யவும --",
+                optMukimSelect: "-- பெர்லிஸ் முக்கிமைத் தேர்வு செய்யவும் --",
+                optU1: "18 வயதுக்கு உட்பட்டவர்", optU6: "60 வயது மற்றும் அதற்கு மேற்பட்டவர்",
+                optJ1: "ஆண்", optJ2: "பெண்",
+                optB1: "மலாய்", optB2: "சீனர்", optB3: "இந்தியர்", optB4: "சியாமீஸ்", optB5: "இதர இனம்",
+                optA1: "இஸ்லாம்", optA2: "பௌத்தம்", optA3: "இந்து", optA4: "கிறிஸ்தவம்", optA5: "இதர மதம்",
+                l1: "உடன்பாடில்லை", l2: "சற்றே உடன்பாடில்லை", l3: "சற்றே உடன்பாடு", l4: "உடன்பாடு",
+                btnBack: "← பின்னே", btnNext: "அடுத்து →", btnSubmit: "சமர்ப்பி ✅",
+                thanksTitle: "மிக்க நன்றி!",
+                thanksDesc: "இந்த ஆய்வை நிறைவு செய்தமைக்கு நன்றி. மனநல மனப்பான்மை விழிப்புணர்வு இயக்கத்திற்கு உங்கள் பங்களிப்பு மிகவும் மதிப்புமிக்கது.",
+                btnReset: "மீண்டும் தொடங்கு",
+                s1: "மனநல சிகிச்சை பெற்ற ஒருவர் அக்கம் பக்கத்தில் குடியேறினால் பெரும்பாலான மக்கள் அசௌகரியமாக உணர்கிறார்கள் என நினைக்கிறேன்.",
+                s2: "மனநல சிகிச்சை பெற்ற ஒருவருடன் பெரும்பாலான மக்கள் தொடர்பு வைத்துக்கொள்ள மாட்டார்கள் என நினைக்கிறேன்.",
+                s3: "மனநல சிகிச்சை பெற்ற ஒருவரின் வேலை விண்ணப்பத்தை பெரும்பாலான மக்கள் பரிசீலிக்க மாட்டார்கள் என நினைக்கிறேன்.",
+                s4: "மனநல சிகிச்சை பெற்ற ஒருவரிடம் தங்கள் குழந்தையை ஒப்படைக்க பெரும்பாலான மக்கள் தயங்குவார்கள் என நினைக்கிறேன்.",
+                s5: "மனநலப் பிரச்சனையை பலவீனத்தின் அடையாளமாக பெரும்பாலான மக்கள் கருதுகிறார்கள் என நினைக்கிறேன்.",
+                s6: "மனநல சிகிச்சை பெற்ற ஒருவரைப் பற்றி பெரும்பாலான மக்கள் தவறாக நினைக்கிறார்கள் என நினைக்கிறேன்.",
+                s7: "மனநல சிகிச்சை பெற்ற ஒருவருடன் தொழில் தொடர்ப கொள்ள பெரும்பாலான மக்கள் தயங்குவார்கள் என நினைக்கிறேன்.",
+                s8: "மனநல சிகிச்சை பெற்ற ஒருவரை பெரும்பாலான மக்கள் ஆபத்தானவராகக் கருதுகிறார்கள் என நினைக்கிறேன்.",
+                s9: "மனநல சிகிச்சை பெற்ற ஒருவரின் கருத்தை பெரும்பாலான மக்கள் தீவிரமாகக் கருத மாட்டார்கள் என நினைக்கிறேன்."
+            },
+            th: {
+                stepPrefix: "ส่วนที่",
+                qPrefix: "คำถาม",
+                demoTitle: "ส่วน A: ข้อมูลประชากร",
+                demoSub: "กรุณากรอกข้อมูลส่วนตัวของท่านก่อนเริ่มทำแบบสอบถาม",
+                lblNama: "ชื่อ-นามสกุล",
+                lblUmur: "ช่วงอายุ",
+                lblJantina: "เพศ",
+                lblBangsa: "เชื้อชาติ",
+                lblAgama: "ศาสนา",
+                lblMukim: "มูกิม (ตำบลในเปอร์ลิส)",
+                optSelect: "-- กรุณาเลือก --",
+                optMukimSelect: "-- เลือกมูกิมในเปอร์ลิส --",
+                optU1: "ต่ำกว่า 18 ปี", optU6: "60 ปีขึ้นไป",
+                optJ1: "ชาย", optJ2: "หญิง",
+                optB1: "มลายู", optB2: "จีน", optB3: "อินเดีย", optB4: "สยาม (ไทย)", optB5: "อื่นๆ",
+                optA1: "อิสลาม", optA2: "พุทธ", optA3: "ฮินดู", optA4: "คริสต์", optA5: "อื่นๆ",
+                l1: "ไม่เห็นด้วย", l2: "ค่อนข้างไม่เห็นด้วย", l3: "ค่อนข้างเห็นด้วย", l4: "เห็นด้วย",
+                btnBack: "← ย้อนกลับ", btnNext: "ถัดไป →", btnSubmit: "ส่งแบบฟอร์ม ✅",
+                thanksTitle: "ขอขอบพระคุณ!",
+                thanksDesc: "ขอขอบคุณที่สละเวลาตอบแบบสอบถามนี้ ความร่วมมือของท่านมีคุณค่ายิ่งในการสนับสนุนแคมเปญยุติการตีตราสุขภาพจิต",
+                btnReset: "ทำแบบสอบถามอีกครั้ง",
+                s1: "ฉันคิดว่าคนส่วนใหญ่รู้สึกไม่สบายใจเมื่อผู้ที่เคยได้รับการรักษาสุขภาพจิตย้ายเข้ามาอยู่ในละแวกบ้าน",
+                s2: "ฉันคิดว่าคนส่วนใหญ่จะไม่สร้างความสัมพันธ์กับผู้ที่เคยได้รับการรักษาสุขภาพจิต",
+                s3: "ฉันคิดว่าคนส่วนใหญ่จะไม่พิจารณาใบสมัครงานของผู้ที่เคยได้รับการรักษาสุขภาพจิต",
+                s4: "ฉันคิดว่าคนส่วนใหญ่ลังเลที่จะฝากลูกไว้กับผู้ที่เคยได้รับการรักษาสุขภาพจิต",
+                s5: "ฉันคิดว่าคนส่วนใหญ่มองว่าปัญหาสุขภาพจิตเป็นสัญญาณของความอ่อนแอส่วนบุคคล",
+                s6: "ฉันคิดว่าคนส่วนใหญ่มองผู้ที่มีปัญหาสุขภาพจิตในแง่ร้าย",
+                s7: "ฉันคิดว่าคนส่วนใหญ่ลังเลที่จะทำธุรกิจกับผู้ที่เคยได้รับการรักษาสุขภาพจิต",
+                s8: "ฉันคิดว่าคนส่วนใหญ่มองว่าผู้ที่เคยได้รับการรักษาสุขภาพจิตเป็นบุคคลที่อันตราย",
+                s9: "ฉันคิดว่าคนส่วนใหญ่ให้ความสำคัญกับความคิดเห็นของผู้ที่เคยได้รับการรักษาสุขภาพจิตน้อยลง"
+            }
+        };
+
+        function tukarBahasa(lang) {
+            bahSemasa = lang;
+            const t = terjemahan[lang];
+
+            document.querySelectorAll('.btn-lang').forEach(btn => {
+                btn.className = "btn-lang px-2.5 py-1 text-[11px] font-bold rounded-lg bg-slate-100 text-slate-600 hover:bg-slate-200 transition-all";
+            });
+            document.getElementById('btn-' + lang).className = "btn-lang px-2.5 py-1 text-[11px] font-bold rounded-lg bg-emerald-600 text-white transition-all";
+
+            document.getElementById('txt-demo-title').innerText = t.demoTitle;
+            document.getElementById('txt-demo-sub').innerText = t.demoSub;
+            document.getElementById('lbl-nama').innerHTML = `${t.lblNama} <span class="text-red-500">*</span>`;
+            document.getElementById('lbl-umur').innerHTML = `${t.lblUmur} <span class="text-red-500">*</span>`;
+            document.getElementById('lbl-jantina').innerHTML = `${t.lblJantina} <span class="text-red-500">*</span>`;
+            document.getElementById('lbl-bangsa').innerHTML = `${t.lblBangsa} <span class="text-red-500">*</span>`;
+            document.getElementById('lbl-agama').innerHTML = `${t.lblAgama} <span class="text-red-500">*</span>`;
+            document.getElementById('lbl-mukim').innerHTML = `${t.lblMukim} <span class="text-red-500">*</span>`;
+
+            document.getElementById('opt-u-select').innerText = t.optSelect;
+            document.getElementById('opt-j-select').innerText = t.optSelect;
+            document.getElementById('opt-b-select').innerText = t.optSelect;
+            document.getElementById('opt-a-select').innerText = t.optSelect;
+            document.getElementById('opt-m-select').innerText = t.optMukimSelect;
+
+            document.getElementById('opt-u1').innerText = t.optU1;
+            document.getElementById('opt-u6').innerText = t.optU6;
+            document.getElementById('opt-j1').innerText = t.optJ1;
+            document.getElementById('opt-j2').innerText = t.optJ2;
+
+            document.getElementById('opt-b1').innerText = t.optB1;
+            document.getElementById('opt-b2').innerText = t.optB2;
+            document.getElementById('opt-b3').innerText = t.optB3;
+            document.getElementById('opt-b4').innerText = t.optB4;
+            document.getElementById('opt-b5').innerText = t.optB5;
+
+            document.getElementById('opt-a1').innerText = t.optA1;
+            document.getElementById('opt-a2').innerText = t.optA2;
+            document.getElementById('opt-a3').innerText = t.optA3;
+            document.getElementById('opt-a4').innerText = t.optA4;
+            document.getElementById('opt-a5').innerText = t.optA5;
+
+            document.querySelectorAll('.opt-l1').forEach(el => el.innerText = t.l1);
+            document.querySelectorAll('.opt-l2').forEach(el => el.innerText = t.l2);
+            document.querySelectorAll('.opt-l3').forEach(el => el.innerText = t.l3);
+            document.querySelectorAll('.opt-l4').forEach(el => el.innerText = t.l4);
+
+            for(let i=1; i<=9; i++) {
+                document.getElementById('txt-s' + i).innerText = `"${t['s' + i]}"`;
+            }
+
+            document.getElementById('btnKembali').innerText = t.btnBack;
+            document.getElementById('btnSeterusnya').innerText = t.btnNext;
+            document.getElementById('btnHantar').innerText = t.btnSubmit;
+            document.getElementById('txt-thanks-title').innerText = t.thanksTitle;
+            document.getElementById('txt-thanks-desc').innerText = t.thanksDesc;
+            document.getElementById('txt-btn-reset').innerText = t.btnReset;
+
+            updateUI();
+        }
+
+        function updateUI() {
+            sections.forEach((sec, idx) => {
+                if (idx === currentSection) {
+                    sec.classList.remove('hidden');
+                } else {
+                    sec.classList.add('hidden');
+                }
+            });
+
+            const t = terjemahan[bahSemasa];
+            const percentage = ((currentSection + 1) / totalSections) * 100;
+            document.getElementById('progressBar').style.width = percentage + '%';
+            document.getElementById('stepIndicator').innerText = `${t.stepPrefix} ${currentSection + 1} / ${totalSections}`;
+
+            document.querySelectorAll('.txt-q-num').forEach((el, idx) => {
+                el.innerText = `${t.qPrefix} ${idx + 1} / 9`;
+            });
+
+            const btnKembali = document.getElementById('btnKembali');
+            const btnSeterusnya = document.getElementById('btnSeterusnya');
+            const btnHantar = document.getElementById('btnHantar');
+
+            if (currentSection === 0) {
+                btnKembali.classList.add('hidden');
+            } else {
+                btnKembali.classList.remove('hidden');
+            }
+
+            if (currentSection === totalSections - 1) {
+                btnSeterusnya.classList.add('hidden');
+                btnHantar.classList.remove('hidden');
+            } else {
+                btnSeterusnya.classList.remove('hidden');
+                btnHantar.classList.add('hidden');
+            }
+        }
+
+        function validatorSemasa() {
+            if (currentSection === 0) {
+                const nama = document.getElementById('inputNama').value.trim();
+                const umur = document.getElementById('selectUmur').value;
+                const jantina = document.getElementById('selectJantina').value;
+                const bangsa = document.getElementById('selectBangsa').value;
+                const agama = document.getElementById('selectAgama').value;
+                const mukim = document.getElementById('selectMukim').value;
+
+                if (!nama || !umur || !jantina || !bangsa || !agama || !mukim) {
+                    alert("Sila lengkapkan SEMUA maklumat demografi sebelum meneruskan. / Please complete all demographics.");
+                    return false;
+                }
+            } else {
+                const radioName = "S" + currentSection;
+                const checkedRadio = document.querySelector(`input[name="${radioName}"]:checked`);
+                if (!checkedRadio) {
+                    alert("Sila pilih satu jawapan sebelum meneruskan. / Please select an answer.");
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        function seterusnyaStep() {
+            if (!validatorSemasa()) return;
+            if (currentSection < totalSections - 1) {
+                currentSection++;
+                updateUI();
+            }
+        }
+
+        function kembaliStep() {
+            if (currentSection > 0) {
+                currentSection--;
+                updateUI();
+            }
+        }
+
+        function submitFormManual() {
+            if (!validatorSemasa()) return;
+            document.getElementById('borangSaringan').requestSubmit();
+        }
+
+        async function hantarBorang(e) {
+            e.preventDefault();
+
+            const btn = document.getElementById('btnHantar');
+            const mesej = document.getElementById('statusMesej');
+            const form = document.getElementById('borangSaringan');
+
+            btn.disabled = true;
+            btn.innerHTML = `<span class="animate-spin">⏳</span> ...`;
+            mesej.classList.add('hidden');
+
+            const formData = new FormData(form);
+            const dataObj = {};
+            formData.forEach((value, key) => {
+                dataObj[key] = value;
+            });
+
+            try {
+                const response = await fetch(URL_GOOGLE_APPS_SCRIPT, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dataObj)
+                });
+
+                form.classList.add('hidden');
+                document.getElementById('headerWrapper').classList.add('hidden');
+                document.getElementById('langToggleBox').classList.add('hidden');
+                document.getElementById('navWrapper').classList.add('hidden');
+                document.getElementById('skrinTerimaKasih').classList.remove('hidden');
+
+            } catch (ralat) {
+                console.error(ralat);
+                mesej.className = "text-center p-3 rounded-xl text-xs font-bold bg-rose-50 text-rose-700 border border-rose-200 block";
+                mesej.innerText = "❌ Gagal menghantar maklumat. Sila cuba lagi.";
+                btn.disabled = false;
+                btn.innerText = terjemahan[bahSemasa].btnSubmit;
+            }
+        }
+
+        function buatSemulaUjian() {
+            document.getElementById('borangSaringan').reset();
+            document.getElementById('borangSaringan').classList.remove('hidden');
+            document.getElementById('headerWrapper').classList.remove('hidden');
+            document.getElementById('langToggleBox').classList.remove('hidden');
+            document.getElementById('navWrapper').classList.remove('hidden');
+            document.getElementById('skrinTerimaKasih').classList.add('hidden');
+            
+            currentSection = 0;
+            tukarBahasa('ms');
+        }
+
+        updateUI();
+    </script>
+</body>
+</html>
