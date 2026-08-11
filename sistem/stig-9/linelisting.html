@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengurusan Linelisting STIG-9 | JKN Perlis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../../favicon/favicon.ico">
+    <!-- DataTables CSS & JS Plugin -->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.dataTables.min.css">
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        .dataTables_wrapper .dataTables_filter input {
+            border-radius: 0.75rem; padding: 0.4rem 0.8rem; border: 1px solid #E2E8F0; outline: none; margin-left: 0.5rem;
+        }
+        .dt-button {
+            border-radius: 0.75rem !important; background: #059669 !important; color: white !important;
+            border: none !important; font-weight: 700 !important; font-size: 0.75rem !important; padding: 0.5rem 1rem !important;
+        }
+        .dt-button:hover { background: #047857 !important; }
+        .sidebar-transition { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-800 antialiased overflow-x-hidden flex flex-col">
+
+    <!-- 🔒 SKRIN LOG MASUK (OVERLAY KESELAMATAN WITH BACK TO DASHBOARD BUTTON) -->
+    <div id="loginScreen" class="fixed inset-0 z-50 bg-slate-900 flex items-center justify-center p-4">
+        <div class="bg-white w-full max-w-md rounded-3xl p-6 sm:p-8 shadow-2xl space-y-6 border border-slate-100">
+            <div class="text-center space-y-2">
+                <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center mx-auto text-2xl font-black">
+                    🔐
+                </div>
+                <h2 class="text-xl font-black text-slate-900">Akses Pengurusan Linelisting</h2>
+                <p class="text-xs text-slate-400">Sila masukkan Akaun Pentadbir yang berdaftar dalam Google Sheet.</p>
+            </div>
+
+            <form onsubmit="prosesLogin(event)" class="space-y-4 text-xs font-semibold">
+                <div>
+                    <label class="text-slate-700 block mb-1">Nama Pengguna (Username)</label>
+                    <input type="text" id="loginUsername" required placeholder="Contoh: admin" class="w-full p-3 rounded-xl border border-slate-200 focus:outline-none focus:border-emerald-500 font-medium">
+                </div>
+                <div>
+                    <label class="text-slate-700 block mb-1">Kata Laluan (Password)</label>
+                    <input type="password" id="loginPassword" required placeholder="••••••••" class="w-full p-3 rounded-xl border border-slate-200 focus:outline-none focus:border-emerald-500 font-medium">
+                </div>
+
+                <div id="loginError" class="hidden text-rose-600 text-[11px] font-bold text-center bg-rose-50 p-2.5 rounded-xl border border-rose-200"></div>
+
+                <div class="space-y-2 pt-2">
+                    <button type="submit" id="btnLogin" class="w-full py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs rounded-xl shadow-lg shadow-emerald-600/20 active:scale-95 transition-all">
+                        Log Masuk Sistem
+                    </button>
+                    
+                    <!-- ↩️ BUTANG KEMBALI KE DASHBOARD DITAMBAH DI SINI -->
+                    <a href="laporan.html" class="w-full py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-1.5">
+                        ← Kembali ke Dashboard Pelaporan
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 🌐 TOP BAR NAVBAR UTAMA -->
+    <header class="w-full bg-white border-b border-slate-100 px-4 py-3 flex items-center justify-between z-30 sticky top-0 shadow-xs">
+        <div class="flex items-center gap-3">
+            <button onclick="toggleSidebar()" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-lg transition-all flex items-center justify-center">
+                <span id="iconSidebar">☰</span>
+            </button>
+            <div class="flex items-center gap-2.5">
+                <img id="appLogo" src="../../images/logo.png" alt="Logo" class="h-8 sm:h-9 w-auto object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x100/059669/ffffff?text=LOGO';">
+                <img id="appLogo" src="../../images/logo-ncd/logo-ncd-default.png" alt="Logo" class="h-8 sm:h-9 w-auto object-contain" onerror="this.onerror=null; this.src='https://placehold.co/100x100/059669/ffffff?text=LOGO';">
+                <div class="flex flex-col">
+                    <div class="flex items-center gap-1.5">
+                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                        <h2 class="text-xs sm:text-sm font-black text-slate-900 tracking-tight uppercase leading-none">
+                            Pengurusan Linelisting STIG-9
+                        </h2>
+                    </div>
+                    <span class="text-[10px] text-slate-400 font-semibold hidden sm:inline">Jabatan Kesihatan Negeri Perlis</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+            <a href="laporan.html" class="px-3.5 py-2 bg-slate-100 hover:bg-slate-200 text-slate-700 font-extrabold text-xs rounded-xl transition-all">
+                📊 Dashboard
+            </a>
+            <button onclick="bukaModalTambah()" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs rounded-xl shadow-md shadow-emerald-600/20 active:scale-95 transition-all flex items-center gap-1.5">
+                <span>➕</span> <span class="hidden sm:inline">Tambah Rekod</span>
+            </button>
+            <button onclick="logKeluar()" class="px-3.5 py-2 bg-rose-50 hover:bg-rose-100 text-rose-600 font-extrabold text-xs rounded-xl border border-rose-200 transition-all">
+                🚪 Log Keluar
+            </button>
+        </div>
+    </header>
+
+    <!-- WRAPPER UTAMA (FULL WIDTH WITH SIDEBAR FILTERS) -->
+    <div class="flex-1 w-full flex relative overflow-hidden">
+
+        <!-- 🔍 SIDEBAR FILTERS -->
+        <aside id="sidebarFilter" class="sidebar-transition w-80 bg-white border-r border-slate-100 p-5 flex flex-col justify-between flex-shrink-0 z-20 absolute lg:relative inset-y-0 left-0 -translate-x-full lg:translate-x-0 shadow-xl lg:shadow-none h-[calc(100vh-57px)] overflow-y-auto">
+            <div class="space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <div class="flex items-center gap-2">
+                        <span class="text-base">🔍</span>
+                        <h3 class="text-xs font-black uppercase tracking-wider text-slate-800">Panel Penapis Jadual</h3>
+                    </div>
+                    <button onclick="toggleSidebar()" class="lg:hidden text-slate-400 hover:text-slate-600 font-bold text-sm">✕</button>
+                </div>
+
+                <div class="space-y-4 text-xs">
+                    <div class="space-y-2 bg-slate-50 p-3 rounded-2xl border border-slate-100">
+                        <span class="font-bold text-slate-700 block uppercase text-[10px] tracking-wider">Julat Tarikh</span>
+                        <div>
+                            <label class="text-[10px] font-semibold text-slate-500 block mb-1">Tarikh Mula</label>
+                            <input type="date" id="filterStartDate" onchange="tapisJadualSecaraLangsung()" class="w-full p-2 rounded-xl border border-slate-200 font-medium text-xs bg-white">
+                        </div>
+                        <div>
+                            <label class="text-[10px] font-semibold text-slate-500 block mb-1">Tarikh Akhir</label>
+                            <input type="date" id="filterEndDate" onchange="tapisJadualSecaraLangsung()" class="w-full p-2 rounded-xl border border-slate-200 font-medium text-xs bg-white">
+                        </div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div>
+                            <label class="font-bold text-slate-700 block mb-1">Bangsa</label>
+                            <select id="filterBangsa" onchange="tapisJadualSecaraLangsung()" class="w-full p-2.5 rounded-xl border border-slate-200 font-medium text-xs bg-white">
+                                <option value="">Semua Bangsa</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700 block mb-1">Agama</label>
+                            <select id="filterAgama" onchange="tapisJadualSecaraLangsung()" class="w-full p-2.5 rounded-xl border border-slate-200 font-medium text-xs bg-white">
+                                <option value="">Semua Agama</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700 block mb-1">Mukim</label>
+                            <select id="filterMukim" onchange="tapisJadualSecaraLangsung()" class="w-full p-2.5 rounded-xl border border-slate-200 font-medium text-xs bg-white">
+                                <option value="">Semua Mukim</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700 block mb-1">Julat Umur</label>
+                            <select id="filterUmur" onchange="tapisJadualSecaraLangsung()" class="w-full p-2.5 rounded-xl border border-slate-200 font-medium text-xs bg-white">
+                                <option value="">Semua Umur</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-slate-100">
+                <button onclick="resetPenapisJadual()" class="w-full py-2.5 bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold text-xs rounded-xl border border-rose-200 transition-all">
+                    ✕ Reset Penapis
+                </button>
+            </div>
+        </aside>
+
+        <!-- 📊 MAIN FULL WIDTH TABLE AREA -->
+        <main class="flex-1 p-4 sm:p-6 space-y-4 overflow-y-auto h-[calc(100vh-57px)] w-full">
+            
+            <div class="bg-white rounded-3xl p-5 border border-slate-100 shadow-sm overflow-x-auto">
+                <table id="tabelLinelisting" class="w-full text-xs text-left text-slate-600 border-collapse">
+                    <thead class="bg-slate-50 text-slate-700 font-extrabold uppercase text-[10px] tracking-wider border-b border-slate-100">
+                        <tr>
+                            <th class="p-3">Masa</th>
+                            <th class="p-3">Nama</th>
+                            <th class="p-3">Umur</th>
+                            <th class="p-3">Jantina</th>
+                            <th class="p-3">Bangsa</th>
+                            <th class="p-3">Mukim</th>
+                            <th class="p-3">S1</th><th class="p-3">S2</th><th class="p-3">S3</th>
+                            <th class="p-3">S4</th><th class="p-3">S5</th><th class="p-3">S6</th>
+                            <th class="p-3">S7</th><th class="p-3">S8</th><th class="p-3">S9</th>
+                            <th class="p-3 text-center">Tindakan (CRUD)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tbodyLinelisting"></tbody>
+                </table>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- 📝 MODAL TAMBAH / SUNTING REKOD -->
+    <div id="modalFormLinelisting" class="fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
+        <div class="bg-white w-full max-w-2xl max-h-[90vh] rounded-3xl shadow-2xl border border-slate-100 flex flex-col overflow-hidden relative">
+            <div class="p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50">
+                <h3 id="modalFormTitle" class="text-sm font-black text-slate-900">Tambah Rekod Linelisting</h3>
+                <button onclick="tutupModalForm()" class="text-slate-400 hover:text-slate-600 font-bold text-sm">✕</button>
+            </div>
+
+            <form id="formCrudLinelisting" onsubmit="hantarCrudForm(event)" class="p-5 overflow-y-auto space-y-4 text-xs">
+                <input type="hidden" id="crudRowIndex" name="_rowIndex">
+                <input type="hidden" id="crudAction" name="action" value="create">
+
+                <div class="space-y-3">
+                    <span class="font-bold text-emerald-600 uppercase text-[10px]">Demografi</span>
+                    <div>
+                        <label class="font-bold text-slate-700">Nama Penuh</label>
+                        <input type="text" id="crudNama" name="Nama" required class="w-full p-2.5 rounded-xl border border-slate-200 mt-1 font-medium">
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div>
+                            <label class="font-bold text-slate-700">Julat Umur</label>
+                            <select id="crudUmur" name="Julat Umur" required class="w-full p-2.5 rounded-xl border border-slate-200 mt-1 font-medium">
+                                <option value="Bawah 18">Bawah 18 tahun</option>
+                                <option value="18 - 29">18 - 29 tahun</option>
+                                <option value="30 - 39">30 - 39 tahun</option>
+                                <option value="40 - 49">40 - 49 tahun</option>
+                                <option value="50 - 59">50 - 59 tahun</option>
+                                <option value="60 ke atas">60 tahun ke atas</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700">Jantina</label>
+                            <select id="crudJantina" name="Jantina" required class="w-full p-2.5 rounded-xl border border-slate-200 mt-1 font-medium">
+                                <option value="Lelaki">Lelaki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-3 gap-3">
+                        <div>
+                            <label class="font-bold text-slate-700">Bangsa</label>
+                            <input type="text" id="crudBangsa" name="Bangsa" required class="w-full p-2.5 rounded-xl border border-slate-200 mt-1 font-medium">
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700">Agama</label>
+                            <input type="text" id="crudAgama" name="Agama" required class="w-full p-2.5 rounded-xl border border-slate-200 mt-1 font-medium">
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700">Mukim</label>
+                            <input type="text" id="crudMukim" name="Mukim" required class="w-full p-2.5 rounded-xl border border-slate-200 mt-1 font-medium">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="space-y-3 pt-3 border-t border-slate-100">
+                    <span class="font-bold text-emerald-600 uppercase text-[10px]">Jawapan STIG-9 (S1 - S9)</span>
+                    <div class="grid grid-cols-3 gap-2">
+                        <div>
+                            <label class="font-bold text-slate-700 block">S1</label>
+                            <select id="crudS1" name="S1" class="w-full p-2 rounded-xl border border-slate-200 mt-1 font-medium">
+                                <option value="Tidak Setuju">Tidak Setuju</option>
+                                <option value="Agak Tidak Setuju">Agak Tidak Setuju</option>
+                                <option value="Agak Setuju">Agak Setuju</option>
+                                <option value="Setuju">Setuju</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700 block">S2</label>
+                            <select id="crudS2" name="S2" class="w-full p-2 rounded-xl border border-slate-200 mt-1 font-medium">
+                                <option value="Tidak Setuju">Tidak Setuju</option>
+                                <option value="Agak Tidak Setuju">Agak Tidak Setuju</option>
+                                <option value="Agak Setuju">Agak Setuju</option>
+                                <option value="Setuju">Setuju</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700 block">S3</label>
+                            <select id="crudS3" name="S3" class="w-full p-2 rounded-xl border border-slate-200 mt-1 font-medium">
+                                <option value="Tidak Setuju">Tidak Setuju</option>
+                                <option value="Agak Tidak Setuju">Agak Tidak Setuju</option>
+                                <option value="Agak Setuju">Agak Setuju</option>
+                                <option value="Setuju">Setuju</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700 block">S4</label>
+                            <select id="crudS4" name="S4" class="w-full p-2 rounded-xl border border-slate-200 mt-1 font-medium">
+                                <option value="Tidak Setuju">Tidak Setuju</option>
+                                <option value="Agak Tidak Setuju">Agak Tidak Setuju</option>
+                                <option value="Agak Setuju">Agak Setuju</option>
+                                <option value="Setuju">Setuju</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700 block">S5</label>
+                            <select id="crudS5" name="S5" class="w-full p-2 rounded-xl border border-slate-200 mt-1 font-medium">
+                                <option value="Tidak Setuju">Tidak Setuju</option>
+                                <option value="Agak Tidak Setuju">Agak Tidak Setuju</option>
+                                <option value="Agak Setuju">Agak Setuju</option>
+                                <option value="Setuju">Setuju</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700 block">S6</label>
+                            <select id="crudS6" name="S6" class="w-full p-2 rounded-xl border border-slate-200 mt-1 font-medium">
+                                <option value="Tidak Setuju">Tidak Setuju</option>
+                                <option value="Agak Tidak Setuju">Agak Tidak Setuju</option>
+                                <option value="Agak Setuju">Agak Setuju</option>
+                                <option value="Setuju">Setuju</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700 block">S7</label>
+                            <select id="crudS7" name="S7" class="w-full p-2 rounded-xl border border-slate-200 mt-1 font-medium">
+                                <option value="Tidak Setuju">Tidak Setuju</option>
+                                <option value="Agak Tidak Setuju">Agak Tidak Setuju</option>
+                                <option value="Agak Setuju">Agak Setuju</option>
+                                <option value="Setuju">Setuju</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700 block">S8</label>
+                            <select id="crudS8" name="S8" class="w-full p-2 rounded-xl border border-slate-200 mt-1 font-medium">
+                                <option value="Tidak Setuju">Tidak Setuju</option>
+                                <option value="Agak Tidak Setuju">Agak Tidak Setuju</option>
+                                <option value="Agak Setuju">Agak Setuju</option>
+                                <option value="Setuju">Setuju</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="font-bold text-slate-700 block">S9</label>
+                            <select id="crudS9" name="S9" class="w-full p-2 rounded-xl border border-slate-200 mt-1 font-medium">
+                                <option value="Tidak Setuju">Tidak Setuju</option>
+                                <option value="Agak Tidak Setuju">Agak Tidak Setuju</option>
+                                <option value="Agak Setuju">Agak Setuju</option>
+                                <option value="Setuju">Setuju</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="pt-3 border-t border-slate-100 flex justify-end gap-2">
+                    <button type="button" onclick="tutupModalForm()" class="px-4 py-2 bg-slate-100 text-slate-600 font-bold rounded-xl">Batal</button>
+                    <button type="submit" id="btnSimpanCrud" class="px-5 py-2 bg-emerald-600 text-white font-bold rounded-xl shadow-md">Simpan Rekod</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT ENGINE (LOGIN, SHA-256, DATATABLES & CRUD) -->
+    <script>
+        // 🛠️ MESTI UBAH: Tampal URL Web App Apps Script anda di bawah!
+        const URL_APPS_SCRIPT_WEBAPP = "https://script.google.com/macros/s/AKfycbw1iffiZt5GPSejbcsQaMPA1ueLxG1ay5-j3pDXQFp1NtIT5swTqy3vz4IcxX4la5YRTg/exec";
+
+        let rawMasterTable = [];
+        let dtInstance = null;
+        let sidebarOpen = false;
+
+        // FUNGSI LOG MASUK & SHA-256
+        async function sha256(message) {
+            const msgBuffer = new TextEncoder().encode(message);
+            const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+        }
+
+        async function prosesLogin(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnLogin');
+            const errBox = document.getElementById('loginError');
+            const uInput = document.getElementById('loginUsername').value.trim();
+            const pInput = document.getElementById('loginPassword').value.trim();
+
+            btn.disabled = true;
+            btn.innerText = "Mengesahkan...";
+            errBox.classList.add('hidden');
+
+            try {
+                const passHash = await sha256(pInput);
+                const response = await fetch(`${URL_APPS_SCRIPT_WEBAPP}?action=login&username=${encodeURIComponent(uInput)}&passwordHash=${encodeURIComponent(passHash)}`);
+                const result = await response.json();
+
+                if (result.status === "success") {
+                    sessionStorage.setItem("stig9_user", result.username);
+                    sessionStorage.setItem("stig9_token", result.token);
+                    document.getElementById('loginScreen').classList.add('hidden');
+                    muatMuatJadual();
+                } else {
+                    errBox.innerText = result.message || "Akses Ditolak!";
+                    errBox.classList.remove('hidden');
+                }
+            } catch (err) {
+                console.error(err);
+                errBox.innerText = "Ralat sambungan pelayan.";
+                errBox.classList.remove('hidden');
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Log Masuk Sistem";
+            }
+        }
+
+        function semakSesiLogin() {
+            const token = sessionStorage.getItem("stig9_token");
+            if (token) {
+                document.getElementById('loginScreen').classList.add('hidden');
+                muatMuatJadual();
+            }
+        }
+
+        function logKeluar() {
+            sessionStorage.clear();
+            location.reload();
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebarFilter');
+            const icon = document.getElementById('iconSidebar');
+
+            if (sidebarOpen) {
+                sidebar.classList.add('-translate-x-full');
+                sidebar.classList.remove('translate-x-0');
+                icon.innerText = "☰";
+                sidebarOpen = false;
+            } else {
+                sidebar.classList.remove('-translate-x-full');
+                sidebar.classList.add('translate-x-0');
+                icon.innerText = "✕";
+                sidebarOpen = true;
+            }
+        }
+
+        async function muatMuatJadual() {
+            try {
+                const response = await fetch(URL_APPS_SCRIPT_WEBAPP + "?action=read");
+                rawMasterTable = await response.json();
+                binaDropdownFilterSidebar();
+                tapisJadualSecaraLangsung();
+            } catch (err) {
+                console.error(err);
+                alert("Gagal memuatkan data dari Google Sheet.");
+            }
+        }
+
+        function binaDropdownFilterSidebar() {
+            const setBangsa = new Set(), setAgama = new Set(), setMukim = new Set(), setUmur = new Set();
+            rawMasterTable.forEach(r => {
+                if (r['Bangsa']) setBangsa.add(r['Bangsa'].trim());
+                if (r['Agama']) setAgama.add(r['Agama'].trim());
+                if (r['Mukim']) setMukim.add(r['Mukim'].trim());
+                if (r['Julat Umur']) setUmur.add(r['Julat Umur'].trim());
+            });
+
+            isiDropdown('filterBangsa', Array.from(setBangsa), "Semua Bangsa");
+            isiDropdown('filterAgama', Array.from(setAgama), "Semua Agama");
+            isiDropdown('filterMukim', Array.from(setMukim), "Semua Mukim");
+            isiDropdown('filterUmur', Array.from(setUmur), "Semua Umur");
+        }
+
+        function isiDropdown(elemId, senarai, labelDefault) {
+            const el = document.getElementById(elemId);
+            const valSemasa = el.value;
+            el.innerHTML = `<option value="">${labelDefault}</option>`;
+            senarai.sort().forEach(item => {
+                const opt = document.createElement('option');
+                opt.value = item;
+                opt.innerText = item;
+                el.appendChild(opt);
+            });
+            el.value = valSemasa;
+        }
+
+        function tapisJadualSecaraLangsung() {
+            const startDateVal = document.getElementById('filterStartDate').value;
+            const endDateVal = document.getElementById('filterEndDate').value;
+            const fBangsa = document.getElementById('filterBangsa').value;
+            const fAgama = document.getElementById('filterAgama').value;
+            const fMukim = document.getElementById('filterMukim').value;
+            const fUmur = document.getElementById('filterUmur').value;
+
+            const startDate = startDateVal ? new Date(startDateVal + "T00:00:00") : null;
+            const endDate = endDateVal ? new Date(endDateVal + "T23:59:59") : null;
+
+            const dataFiltered = rawMasterTable.filter(row => {
+                let lolos = true;
+
+                if (row['Timestamp']) {
+                    let rowDate = null;
+                    const tsRaw = String(row['Timestamp']).trim();
+                    if (tsRaw.includes('-')) {
+                        rowDate = new Date(tsRaw.replace(' ', 'T'));
+                    } else if (tsRaw.includes('/')) {
+                        const parts = tsRaw.split(' ')[0].split('/');
+                        if (parts.length === 3) {
+                            rowDate = new Date(`${parts[2]}-${parts[1].padStart(2, '0')}-${parts[0].padStart(2, '0')}T00:00:00`);
+                        }
+                    }
+
+                    if (rowDate && !isNaN(rowDate.getTime())) {
+                        if (startDate && rowDate < startDate) lolos = false;
+                        if (endDate && rowDate > endDate) lolos = false;
+                    }
+                }
+
+                if (fBangsa && row['Bangsa'] !== fBangsa) lolos = false;
+                if (fAgama && row['Agama'] !== fAgama) lolos = false;
+                if (fMukim && row['Mukim'] !== fMukim) lolos = false;
+                if (fUmur && row['Julat Umur'] !== fUmur) lolos = false;
+
+                return lolos;
+            });
+
+            binaDataTables(dataFiltered);
+        }
+
+        function resetPenapisJadual() {
+            document.getElementById('filterStartDate').value = "";
+            document.getElementById('filterEndDate').value = "";
+            document.getElementById('filterBangsa').value = "";
+            document.getElementById('filterAgama').value = "";
+            document.getElementById('filterMukim').value = "";
+            document.getElementById('filterUmur').value = "";
+            tapisJadualSecaraLangsung();
+        }
+
+        function binaDataTables(data) {
+            if (dtInstance) {
+                dtInstance.destroy();
+            }
+
+            const tbody = document.getElementById('tbodyLinelisting');
+            tbody.innerHTML = "";
+
+            data.forEach((r) => {
+                const tr = document.createElement('tr');
+                tr.className = "border-b border-slate-100 hover:bg-slate-50";
+
+                tr.innerHTML = `
+                    <td class="p-3 font-mono text-[10px]">${r.Timestamp || '-'}</td>
+                    <td class="p-3 font-bold text-slate-800">${r.Nama || '-'}</td>
+                    <td class="p-3">${r['Julat Umur'] || '-'}</td>
+                    <td class="p-3">${r.Jantina || '-'}</td>
+                    <td class="p-3">${r.Bangsa || '-'}</td>
+                    <td class="p-3">${r.Mukim || '-'}</td>
+                    <td class="p-3">${r.S1 || '-'}</td><td class="p-3">${r.S2 || '-'}</td><td class="p-3">${r.S3 || '-'}</td>
+                    <td class="p-3">${r.S4 || '-'}</td><td class="p-3">${r.S5 || '-'}</td><td class="p-3">${r.S6 || '-'}</td>
+                    <td class="p-3">${r.S7 || '-'}</td><td class="p-3">${r.S8 || '-'}</td><td class="p-3">${r.S9 || '-'}</td>
+                    <td class="p-3 text-center space-x-1">
+                        <button onclick="bukaModalEdit(${r._rowIndex})" class="px-2 py-1 bg-amber-50 text-amber-600 hover:bg-amber-100 font-bold rounded-lg border border-amber-200">Sunting</button>
+                        <button onclick="padamRekod(${r._rowIndex}, '${r.Nama}')" class="px-2 py-1 bg-rose-50 text-rose-600 hover:bg-rose-100 font-bold rounded-lg border border-rose-200">Padam</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            dtInstance = $('#tabelLinelisting').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    { extend: 'excelHtml5', title: 'LINELISTING_STIG9_PERLIS' },
+                    { extend: 'csvHtml5', title: 'LINELISTING_STIG9_PERLIS' },
+                    { extend: 'pdfHtml5', title: 'LINELISTING_STIG9_PERLIS' },
+                    'print'
+                ],
+                pageLength: 15,
+                language: { search: "🔍 Cari Rekod:", paginate: { next: "→", previous: "←" } }
+            });
+        }
+
+        function bukaModalTambah() {
+            document.getElementById('formCrudLinelisting').reset();
+            document.getElementById('crudAction').value = "create";
+            document.getElementById('modalFormTitle').innerText = "Tambah Rekod Linelisting Baharu";
+            document.getElementById('modalFormLinelisting').classList.remove('opacity-0', 'pointer-events-none');
+        }
+
+        function bukaModalEdit(rowIndex) {
+            const rekod = rawMasterTable.find(r => r._rowIndex == rowIndex);
+            if (!rekod) return;
+
+            document.getElementById('crudRowIndex').value = rowIndex;
+            document.getElementById('crudAction').value = "update";
+            document.getElementById('modalFormTitle').innerText = "Sunting Rekod Linelisting (Baris #" + rowIndex + ")";
+
+            document.getElementById('crudNama').value = rekod.Nama || "";
+            document.getElementById('crudUmur').value = rekod['Julat Umur'] || "18 - 29";
+            document.getElementById('crudJantina').value = rekod.Jantina || "Lelaki";
+            document.getElementById('crudBangsa').value = rekod.Bangsa || "";
+            document.getElementById('crudAgama').value = rekod.Agama || "";
+            document.getElementById('crudMukim').value = rekod.Mukim || "";
+
+            for(let i=1; i<=9; i++) {
+                document.getElementById('crudS' + i).value = rekod['S' + i] || "Tidak Setuju";
+            }
+
+            document.getElementById('modalFormLinelisting').classList.remove('opacity-0', 'pointer-events-none');
+        }
+
+        function tutupModalForm() {
+            document.getElementById('modalFormLinelisting').classList.add('opacity-0', 'pointer-events-none');
+        }
+
+        async function hantarCrudForm(e) {
+            e.preventDefault();
+            const btn = document.getElementById('btnSimpanCrud');
+            btn.disabled = true;
+            btn.innerText = "Sedang Menyimpan...";
+
+            const form = document.getElementById('formCrudLinelisting');
+            const formData = new FormData(form);
+            const dataObj = {};
+            formData.forEach((val, key) => dataObj[key] = val);
+
+            try {
+                await fetch(URL_APPS_SCRIPT_WEBAPP, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dataObj)
+                });
+
+                alert("Tindakan berjaya disimpan ke Google Sheet!");
+                tutupModalForm();
+                setTimeout(muatMuatJadual, 1500);
+
+            } catch (err) {
+                console.error(err);
+                alert("Gagal menyimpan rekod.");
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Simpan Rekod";
+            }
+        }
+
+        async function padamRekod(rowIndex, nama) {
+            if (!confirm(`Adakah anda pasti ingin memadam rekod "${nama}" (Baris #${rowIndex})?`)) return;
+
+            try {
+                await fetch(URL_APPS_SCRIPT_WEBAPP, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ action: "delete", _rowIndex: rowIndex })
+                });
+
+                alert("Rekod berjaya dipadam!");
+                setTimeout(muatMuatJadual, 1500);
+            } catch (err) {
+                console.error(err);
+                alert("Gagal memadam rekod.");
+            }
+        }
+
+        window.addEventListener('DOMContentLoaded', semakSesiLogin);
+    </script>
+</body>
+</html>
