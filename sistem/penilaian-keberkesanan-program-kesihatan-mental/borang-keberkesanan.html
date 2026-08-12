@@ -3,123 +3,142 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Borang Penilaian Keberkesanan Program | KKM</title>
+    <title>Borang Penilaian Keberkesanan Program | JKN Perlis</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="icon" type="image/png" href="../../favicon/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: '#6EBF32',
+                        'brand-dark': '#5aa825',
+                        'brand-light': '#f0f9e8'
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         body { font-family: 'Plus Jakarta Sans', sans-serif; }
-        .step-panel { display: none; }
-        .step-panel.active { display: block; animation: fadeIn 0.3s ease-in-out; }
+        .form-section { display: none; }
+        .form-section.active { display: block; animation: fadeIn 0.25s cubic-bezier(0.4, 0, 0.2, 1); }
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(6px); }
             to { opacity: 1; transform: translateY(0); }
         }
+        input[type="radio"] { accent-color: #6EBF32; }
     </style>
 </head>
-<body class="bg-slate-50 min-h-screen text-slate-800 antialiased p-4 sm:p-8 flex flex-col justify-between">
+<body class="bg-slate-50 min-h-screen flex items-center justify-center p-3 sm:p-6 antialiased text-slate-800">
 
-    <div class="max-w-2xl mx-auto w-full space-y-6 my-auto">
+    <!-- 🛑 IFRAME TERSEMBUNYI UNTUK PENGHANTARAN ANGIN PANTAS -->
+    <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { pamerSkrinKejayaan(); }"></iframe>
+
+    <div class="w-full max-w-xl bg-white rounded-3xl p-5 sm:p-8 shadow-xl border border-slate-100 flex flex-col justify-between min-h-[560px] relative overflow-hidden my-auto">
         
-        <!-- HEADER BORANG & PROGRESS BAR -->
-        <div class="bg-white rounded-3xl p-6 shadow-sm border border-slate-100 space-y-4">
+        <!-- 🖼️ BANNER FULL CARD -->
+        <div id="bannerContainer" class="-mx-5 -mt-5 sm:-mx-8 sm:-mt-8 mb-5 overflow-hidden bg-slate-100 border-b border-slate-100 flex items-center justify-center min-h-[120px]">
+            <img src="images/banner-keberkesanan.png" alt="Banner Program" class="w-full h-auto object-cover max-h-52" onerror="this.onerror=null; this.src='https://placehold.co/600x200/6EBF32/ffffff?text=BANNER+PENILAIAN+KEBERKESANAN';">
+        </div>
+
+        <!-- HEADER & PROGRESS BAR -->
+        <div id="headerWrapper" class="space-y-3 mb-2">
             <div class="flex items-center justify-between">
-                <div class="flex items-center gap-2">
-                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-                    <span class="text-xs font-extrabold uppercase tracking-widest text-emerald-600">Lampiran B · KKM</span>
-                </div>
-                <span id="stepCounterText" class="text-xs font-bold text-slate-400 bg-slate-100 px-3 py-1 rounded-full">Langkah 1 daripada 5</span>
+                <span class="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-[#5aa825] bg-brand-light px-3 py-1 rounded-full border border-[#6EBF32]/20">
+                    Penilaian Keberkesanan
+                </span>
+                <span id="stepIndicator" class="text-xs font-bold text-slate-400">
+                    Langkah 1 dari 5
+                </span>
             </div>
 
-            <!-- INDIKATOR JALUR KEMAJUAN (PROGRESS BAR) -->
             <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                <div id="progressBar" class="bg-emerald-500 h-full w-1/5 transition-all duration-300"></div>
-            </div>
-
-            <div>
-                <h1 class="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
-                    Borang Penilaian Keberkesanan Program
-                </h1>
-                <p class="text-xs text-slate-400 font-medium">Kempen Hentikan Stigma: Kesihatan Mental Milik Semua</p>
+                <div id="progressBar" class="bg-[#6EBF32] h-full w-[20%] transition-all duration-300"></div>
             </div>
         </div>
 
-        <!-- BORANG UTAMA (MULTI-STEP WIZARD) -->
-        <form id="formKeberkesanan" onsubmit="hantarBorang(event)" class="space-y-6">
+        <!-- FORM UTAMA (HALAKAN KE IFRAME TERSEMBUNYI) -->
+        <form id="borangKeberkesanan" action="https://script.google.com/macros/s/AKfycbxAigmNcZhc35EIB4O03qEnVmiUs_8dDaRI-REharyEA839FD9w-BsDplVa7eJqDuoPzA/exec" method="POST" target="hidden_iframe" onsubmit="submitted=true;" class="my-auto py-2">
+            
+            <input type="hidden" name="action" value="submitKeberkesanan">
 
-            <!-- 📍 SKRIN 1: MAKLUMAT PROGRAM -->
-            <div class="step-panel active bg-emerald-950 text-white rounded-3xl p-6 shadow-md space-y-4" id="step1">
-                <div class="border-b border-emerald-800/80 pb-3 flex items-center justify-between">
+            <!-- SECTION 1: MAKLUMAT PROGRAM (AUTOFILL) -->
+            <div class="form-section active space-y-4">
+                <div class="border-l-4 border-[#6EBF32] pl-3 flex items-center justify-between">
                     <div>
-                        <span class="text-[10px] font-extrabold text-emerald-400 uppercase tracking-widest">Langkah 1 / 5</span>
-                        <h2 class="text-sm font-extrabold text-white">Maklumat Acara / Program Semasa</h2>
+                        <h2 class="text-base sm:text-lg font-black text-slate-900">Maklumat Acara Semasa</h2>
+                        <p class="text-xs text-slate-400 font-medium">Maklumat program dikesan secara automatik berdasarkan tarikh aktiviti.</p>
                     </div>
-                    <span id="badgeAutoFill" class="text-[9px] font-bold bg-emerald-800 text-emerald-200 px-2.5 py-1 rounded-full border border-emerald-700">🔍 Otomatik Dikesan</span>
+                    <span id="badgeAutoFill" class="text-[9px] font-bold bg-brand-light text-[#5aa825] px-2.5 py-1 rounded-full border border-[#6EBF32]/30 flex-shrink-0">🔍 Dikesan</span>
                 </div>
 
-                <div class="space-y-3 text-xs">
+                <div class="space-y-3">
                     <div>
-                        <label class="font-bold text-emerald-200 block mb-1">Tajuk Program <span class="text-rose-400">*</span></label>
-                        <input type="text" id="progTajuk" name="tajukProgram" required readonly class="w-full p-3 rounded-2xl bg-emerald-900/80 border border-emerald-700/60 font-semibold text-white focus:outline-none">
+                        <label class="text-xs font-bold text-slate-700 block mb-1">Tajuk Program <span class="text-red-500">*</span></label>
+                        <input type="text" id="progTajuk" name="tajukProgram" required readonly class="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold bg-slate-50 text-slate-800 focus:outline-none">
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="grid grid-cols-2 gap-3">
                         <div>
-                            <label class="font-bold text-emerald-200 block mb-1">Tarikh Program <span class="text-rose-400">*</span></label>
-                            <input type="date" id="progTarikh" name="tarikhProgram" required readonly class="w-full p-3 rounded-2xl bg-emerald-900/80 border border-emerald-700/60 font-semibold text-white focus:outline-none">
+                            <label class="text-xs font-bold text-slate-700 block mb-1">Tarikh Program <span class="text-red-500">*</span></label>
+                            <input type="date" id="progTarikh" name="tarikhProgram" required readonly class="w-full px-3 py-3 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 text-slate-800 focus:outline-none">
                         </div>
                         <div>
-                            <label class="font-bold text-emerald-200 block mb-1">Tempat Program / Lokasi <span class="text-rose-400">*</span></label>
-                            <input type="text" id="progTempat" name="tempatProgram" required readonly class="w-full p-3 rounded-2xl bg-emerald-900/80 border border-emerald-700/60 font-semibold text-white focus:outline-none">
+                            <label class="text-xs font-bold text-slate-700 block mb-1">Tempat / Lokasi <span class="text-red-500">*</span></label>
+                            <input type="text" id="progTempat" name="tempatProgram" required readonly class="w-full px-3 py-3 rounded-xl border border-slate-200 text-xs font-semibold bg-slate-50 text-slate-800 focus:outline-none">
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- 👤 SKRIN 2: PROFIL DEMOGRAFI -->
-            <div class="step-panel bg-white rounded-3xl p-6 shadow-sm border border-slate-100 space-y-4" id="step2">
-                <div class="border-b border-slate-100 pb-3">
-                    <span class="text-[10px] font-extrabold text-emerald-600 uppercase tracking-widest">Langkah 2 / 5</span>
-                    <h2 class="text-sm font-extrabold text-slate-900">Bahagian 1: Profil Demografi / Demographic</h2>
+            <!-- SECTION 2: DEMOGRAFI -->
+            <div class="form-section space-y-4">
+                <div class="border-l-4 border-[#6EBF32] pl-3">
+                    <h2 class="text-base sm:text-lg font-black text-slate-900">Bahagian 1: Demografi</h2>
+                    <p class="text-xs text-slate-400 font-medium">Sila isi maklumat latar belakang anda sebelum memulakan soalan penilaian.</p>
                 </div>
 
-                <div class="space-y-4 text-xs">
+                <div class="space-y-3">
                     <div>
-                        <label class="font-bold text-slate-700 block mb-1">Nama Penuh / Full Name <span class="text-rose-500">*</span></label>
-                        <input type="text" id="inputNama" name="nama" required placeholder="Contoh: Ahmad bin Abdullah" class="w-full p-3 rounded-2xl border border-slate-200 font-medium focus:outline-none focus:border-emerald-500">
+                        <label class="text-xs font-bold text-slate-700 block mb-1">Nama Penuh <span class="text-red-500">*</span></label>
+                        <input type="text" id="inputNama" name="nama" required placeholder="Masukkan nama penuh anda" 
+                            class="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs sm:text-sm font-medium focus:outline-none focus:border-[#6EBF32] focus:ring-2 focus:ring-[#6EBF32]/20 transition-all">
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="grid grid-cols-2 gap-3">
                         <div>
-                            <label class="font-bold text-slate-700 block mb-1">Jantina / Gender <span class="text-rose-500">*</span></label>
-                            <select id="inputJantina" name="jantina" required class="w-full p-3 rounded-2xl border border-slate-200 font-medium focus:outline-none focus:border-emerald-500 bg-white">
+                            <label class="text-xs font-bold text-slate-700 block mb-1">Jantina <span class="text-red-500">*</span></label>
+                            <select id="selectJantina" name="jantina" required class="w-full px-3 py-3 rounded-xl border border-slate-200 text-xs font-medium focus:outline-none focus:border-[#6EBF32] focus:ring-2 focus:ring-[#6EBF32]/20 transition-all bg-white">
                                 <option value="">-- Pilih --</option>
-                                <option value="Lelaki">Lelaki (Male)</option>
-                                <option value="Perempuan">Perempuan (Female)</option>
+                                <option value="Lelaki">Lelaki</option>
+                                <option value="Perempuan">Perempuan</option>
                             </select>
                         </div>
                         <div>
-                            <label class="font-bold text-slate-700 block mb-1">Umur (Tahun) / Age <span class="text-rose-500">*</span></label>
-                            <input type="number" id="inputUmur" name="umur" required placeholder="Contoh: 28" min="5" max="100" class="w-full p-3 rounded-2xl border border-slate-200 font-medium focus:outline-none focus:border-emerald-500">
+                            <label class="text-xs font-bold text-slate-700 block mb-1">Umur (Tahun) <span class="text-red-500">*</span></label>
+                            <input type="number" id="inputUmur" name="umur" required placeholder="Contoh: 28" min="5" max="100" class="w-full px-3 py-3 rounded-xl border border-slate-200 text-xs font-medium focus:outline-none focus:border-[#6EBF32] focus:ring-2 focus:ring-[#6EBF32]/20 transition-all">
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div class="grid grid-cols-2 gap-3">
                         <div>
-                            <label class="font-bold text-slate-700 block mb-1">Bangsa / Race <span class="text-rose-500">*</span></label>
-                            <select id="inputBangsa" name="bangsa" required class="w-full p-3 rounded-2xl border border-slate-200 font-medium focus:outline-none focus:border-emerald-500 bg-white">
-                                <option value="">-- Pilih Bangsa --</option>
+                            <label class="text-xs font-bold text-slate-700 block mb-1">Bangsa <span class="text-red-500">*</span></label>
+                            <select id="selectBangsa" name="bangsa" required class="w-full px-3 py-3 rounded-xl border border-slate-200 text-xs font-medium focus:outline-none focus:border-[#6EBF32] focus:ring-2 focus:ring-[#6EBF32]/20 transition-all bg-white">
+                                <option value="">-- Pilih --</option>
                                 <option value="Melayu">Melayu</option>
                                 <option value="Cina">Cina</option>
                                 <option value="India">India</option>
                                 <option value="Siam">Siam</option>
-                                <option value="Bumiputera Sabah/Sarawak">Bumiputera Sabah/Sarawak</option>
+                                <option value="Bumiputera Sabah/Sarawak">Sabah/Sarawak</option>
                                 <option value="Lain-lain">Lain-lain</option>
                             </select>
                         </div>
                         <div>
-                            <label class="font-bold text-slate-700 block mb-1">Agama / Religion <span class="text-rose-500">*</span></label>
-                            <select id="inputAgama" name="agama" required class="w-full p-3 rounded-2xl border border-slate-200 font-medium focus:outline-none focus:border-emerald-500 bg-white">
-                                <option value="">-- Pilih Agama --</option>
+                            <label class="text-xs font-bold text-slate-700 block mb-1">Agama <span class="text-red-500">*</span></label>
+                            <select id="selectAgama" name="agama" required class="w-full px-3 py-3 rounded-xl border border-slate-200 text-xs font-medium focus:outline-none focus:border-[#6EBF32] focus:ring-2 focus:ring-[#6EBF32]/20 transition-all bg-white">
+                                <option value="">-- Pilih --</option>
                                 <option value="Islam">Islam</option>
                                 <option value="Buddha">Buddha</option>
                                 <option value="Hindu">Hindu</option>
@@ -130,178 +149,204 @@
                     </div>
 
                     <div>
-                        <label class="font-bold text-slate-700 block mb-1">Status Pekerjaan / Employment Status <span class="text-rose-500">*</span></label>
-                        <select id="inputPekerjaan" name="pekerjaan" required class="w-full p-3 rounded-2xl border border-slate-200 font-medium focus:outline-none focus:border-emerald-500 bg-white">
-                            <option value="">-- Sila Pilih Status Pekerjaan --</option>
-                            <option value="Kerajaan">Kerajaan (Government)</option>
-                            <option value="Separa Kerajaan">Separa Kerajaan (Semi-Government)</option>
-                            <option value="Swasta">Swasta (Private Sector)</option>
-                            <option value="Bekerja Sendiri">Bekerja Sendiri (Self Employed)</option>
-                            <option value="Pelajar">Pelajar (Student)</option>
-                            <option value="Tidak Bekerja">Tidak Bekerja (Unemployed)</option>
-                            <option value="Bersara">Bersara (Retired)</option>
+                        <label class="text-xs font-bold text-slate-700 block mb-1">Status Pekerjaan <span class="text-red-500">*</span></label>
+                        <select id="selectPekerjaan" name="pekerjaan" required class="w-full px-4 py-3 rounded-xl border border-slate-200 text-xs font-medium focus:outline-none focus:border-[#6EBF32] focus:ring-2 focus:ring-[#6EBF32]/20 transition-all bg-white">
+                            <option value="">-- Pilih Status Pekerjaan --</option>
+                            <option value="Kerajaan">Kerajaan</option>
+                            <option value="Separa Kerajaan">Separa Kerajaan</option>
+                            <option value="Swasta">Swasta</option>
+                            <option value="Bekerja Sendiri">Bekerja Sendiri</option>
+                            <option value="Pelajar">Pelajar</option>
+                            <option value="Tidak Bekerja">Tidak Bekerja</option>
+                            <option value="Bersara">Bersara</option>
                         </select>
                     </div>
                 </div>
             </div>
 
-            <!-- 🌿 SKRIN 3: AMALAN PENJAGAAN KENDIRI -->
-            <div class="step-panel bg-white rounded-3xl p-6 shadow-sm border border-slate-100 space-y-4" id="step3">
-                <div class="border-b border-slate-100 pb-3">
-                    <span class="text-[10px] font-extrabold text-emerald-600 uppercase tracking-widest">Langkah 3 / 5</span>
-                    <h2 class="text-sm font-extrabold text-slate-900">Bahagian 2: Amalan Penjagaan Kendiri / Self Care</h2>
-                </div>
-
-                <div class="text-xs space-y-3">
-                    <p class="font-medium text-slate-600 leading-relaxed">
-                        Adakah anda pernah mengamalkan mana-mana aktiviti penjagaan kendiri untuk mengurangkan stres? (Contoh: Bersyukur, bernafas dengan teratur, beriadah, berkongsi masalah dengan seseorang, dll) <span class="text-rose-500">*</span>
-                    </p>
-
-                    <div class="space-y-2">
-                        <label class="flex items-start gap-2.5 p-3.5 rounded-2xl border border-slate-200 cursor-pointer hover:border-emerald-500 transition-all">
-                            <input type="radio" name="penjagaanKendiri" value="Ya, mengamalkan" required class="mt-0.5 accent-emerald-600">
-                            <div>
-                                <span class="font-bold block text-slate-800">Ya, saya mengamalkannya.</span>
-                                <span class="text-[11px] text-slate-400">Yes, I practice them.</span>
-                            </div>
-                        </label>
-                        <label class="flex items-start gap-2.5 p-3.5 rounded-2xl border border-slate-200 cursor-pointer hover:border-emerald-500 transition-all">
-                            <input type="radio" name="penjagaanKendiri" value="Niat selepas program" required class="mt-0.5 accent-emerald-600">
-                            <div>
-                                <span class="font-bold block text-slate-800">Tidak, tetapi berniat mengamalkannya selepas program ini.</span>
-                                <span class="text-[11px] text-slate-400">No, but I intend to practice them after this program.</span>
-                            </div>
-                        </label>
-                        <label class="flex items-start gap-2.5 p-3.5 rounded-2xl border border-slate-200 cursor-pointer hover:border-emerald-500 transition-all">
-                            <input type="radio" name="penjagaanKendiri" value="Tidak pernah" required class="mt-0.5 accent-emerald-600">
-                            <div>
-                                <span class="font-bold block text-slate-800">Tidak, saya tidak pernah mengamalkannya.</span>
-                                <span class="text-[11px] text-slate-400">No, I have never practiced them.</span>
-                            </div>
-                        </label>
-                    </div>
+            <!-- SECTION 3: AMALAN PENJAGAAN KENDIRI -->
+            <div class="form-section space-y-4">
+                <span class="text-xs font-bold text-[#5aa825] uppercase tracking-widest">Bahagian 2 dari 4</span>
+                <h2 class="text-sm sm:text-base font-bold text-slate-800 leading-relaxed">
+                    "Adakah anda pernah mengamalkan mana-mana aktiviti penjagaan kendiri untuk mengurangkan stres? (Contoh: Bersyukur, bernafas dengan teratur, beriadah, berkongsi masalah dengan seseorang, dll)"
+                </h2>
+                <div class="space-y-2 pt-2">
+                    <label class="flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-[#6EBF32] transition-all">
+                        <input type="radio" name="penjagaanKendiri" value="Ya, mengamalkan" required class="mr-3"> 
+                        <div>
+                            <span class="block">Ya, saya mengamalkannya.</span>
+                            <span class="text-[10px] text-slate-400 font-normal block">Yes, I practice them.</span>
+                        </div>
+                    </label>
+                    <label class="flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-[#6EBF32] transition-all">
+                        <input type="radio" name="penjagaanKendiri" value="Niat selepas program" required class="mr-3"> 
+                        <div>
+                            <span class="block">Tidak, tetapi berniat mengamalkannya selepas program ini.</span>
+                            <span class="text-[10px] text-slate-400 font-normal block">No, but I intend to practice them after this program.</span>
+                        </div>
+                    </label>
+                    <label class="flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-[#6EBF32] transition-all">
+                        <input type="radio" name="penjagaanKendiri" value="Tidak pernah" required class="mr-3"> 
+                        <div>
+                            <span class="block">Tidak, saya tidak pernah mengamalkannya.</span>
+                            <span class="text-[10px] text-slate-400 font-normal block">No, I have never practiced them.</span>
+                        </div>
+                    </label>
                 </div>
             </div>
 
-            <!-- 🎯 SKRIN 4: PEDEDAHAN LOGO HENTIKAN STIGMA -->
-            <div class="step-panel bg-white rounded-3xl p-6 shadow-sm border border-slate-100 space-y-4" id="step4">
-                <div class="border-b border-slate-100 pb-3">
-                    <span class="text-[10px] font-extrabold text-emerald-600 uppercase tracking-widest">Langkah 4 / 5</span>
-                    <h2 class="text-sm font-extrabold text-slate-900">Bahagian 3: Pendedahan Logo "Hentikan Stigma"</h2>
+            <!-- SECTION 4: PEDEDAHAN LOGO HENTIKAN STIGMA -->
+            <div class="form-section space-y-4">
+                <span class="text-xs font-bold text-[#5aa825] uppercase tracking-widest">Bahagian 3 dari 4</span>
+                
+                <div class="p-4 bg-white rounded-2xl border border-slate-100 text-center flex items-center justify-center min-h-[130px] shadow-2xs">
+                    <img src="logo-hentikan-stigma.png" alt="Logo Hentikan Stigma" class="max-h-36 sm:max-h-40 w-auto object-contain mx-auto" onerror="this.onerror=null; this.src='https://placehold.co/400x160/6EBF32/ffffff?text=LOGO+HENTIKAN+STIGMA';">
                 </div>
 
-                <div class="text-xs space-y-4">
-                    <div class="p-4 bg-emerald-50 rounded-2xl border border-emerald-100 flex flex-col items-center text-center space-y-1">
-                        <span class="text-xs font-black text-emerald-800 tracking-wider uppercase">HENTIKAN STIGMA</span>
-                        <span class="text-[10px] font-bold text-emerald-600">Kesihatan Mental Milik Semua</span>
-                    </div>
-
-                    <p class="font-medium text-slate-600 leading-relaxed">
-                        Adakah anda pernah melihat logo "Hentikan Stigma, Kesihatan Mental Milik Semua" seperti di atas sebelum ini? <span class="text-rose-500">*</span>
-                    </p>
-
-                    <div class="grid grid-cols-2 gap-3">
-                        <label class="flex items-center gap-2 p-3.5 rounded-2xl border border-slate-200 cursor-pointer hover:border-emerald-500 transition-all">
-                            <input type="radio" name="pendedahanLogo" value="Pernah melihat" required class="accent-emerald-600">
-                            <span class="font-semibold">Ya, Pernah (Yes)</span>
-                        </label>
-                        <label class="flex items-center gap-2 p-3.5 rounded-2xl border border-slate-200 cursor-pointer hover:border-emerald-500 transition-all">
-                            <input type="radio" name="pendedahanLogo" value="Tidak pernah" required class="accent-emerald-600">
-                            <span class="font-semibold">Tidak (No)</span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ⭐ SKRIN 5: PERSEPSI & KEPUASAN PROGRAM -->
-            <div class="step-panel bg-white rounded-3xl p-6 shadow-sm border border-slate-100 space-y-4" id="step5">
-                <div class="border-b border-slate-100 pb-3">
-                    <span class="text-[10px] font-extrabold text-emerald-600 uppercase tracking-widest">Langkah 5 / 5</span>
-                    <h2 class="text-sm font-extrabold text-slate-900">Bahagian 4: Persepsi & Kepuasan Program</h2>
-                    <p class="text-[11px] text-slate-400 font-medium mt-0.5">Nilai mengikut skala: 1=Sangat Lemah ➔ 5=Sangat Cemerlang</p>
-                </div>
-
-                <div class="space-y-4 text-xs">
-                    <!-- SOALAN K1 -->
-                    <div class="space-y-1.5">
-                        <label class="font-bold text-slate-800 block">1. Menarik Perhatian (Engaging) <span class="text-rose-500">*</span></label>
-                        <p class="text-slate-500 text-[11px]">Adakah pameran, aktiviti & penyampaian maklumat menarik minat anda?</p>
-                        <div class="grid grid-cols-5 gap-2 pt-1">
-                            <label class="p-2 rounded-xl border border-slate-200 text-center cursor-pointer hover:border-emerald-500"><input type="radio" name="k1_menarik" value="1" required class="block mx-auto mb-0.5 accent-emerald-600">1</label>
-                            <label class="p-2 rounded-xl border border-slate-200 text-center cursor-pointer hover:border-emerald-500"><input type="radio" name="k1_menarik" value="2" required class="block mx-auto mb-0.5 accent-emerald-600">2</label>
-                            <label class="p-2 rounded-xl border border-slate-200 text-center cursor-pointer hover:border-emerald-500"><input type="radio" name="k1_menarik" value="3" required class="block mx-auto mb-0.5 accent-emerald-600">3</label>
-                            <label class="p-2 rounded-xl border border-slate-200 text-center cursor-pointer hover:border-emerald-500"><input type="radio" name="k1_menarik" value="4" required class="block mx-auto mb-0.5 accent-emerald-600">4</label>
-                            <label class="p-2 rounded-xl border border-slate-200 text-center cursor-pointer hover:border-emerald-500"><input type="radio" name="k1_menarik" value="5" required class="block mx-auto mb-0.5 accent-emerald-600">5</label>
+                <h2 class="text-sm sm:text-base font-bold text-slate-800 leading-relaxed">
+                    "Adakah anda pernah melihat logo 'Hentikan Stigma, Kesihatan Mental Milik Semua' seperti yang dipaparkan di atas?"
+                </h2>
+                <div class="grid grid-cols-2 gap-3 pt-2">
+                    <label class="flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-[#6EBF32] transition-all">
+                        <input type="radio" name="pendedahanLogo" value="Pernah melihat" required class="mr-3"> 
+                        <div>
+                            <span class="block">Ya, Pernah</span>
+                            <span class="text-[10px] text-slate-400 font-normal block">Yes, I have seen it.</span>
                         </div>
-                    </div>
-
-                    <!-- SOALAN K2 -->
-                    <div class="space-y-1.5 pt-2 border-t border-slate-100">
-                        <label class="font-bold text-slate-800 block">2. Mudah Difahami (Easy to Understand) <span class="text-rose-500">*</span></label>
-                        <p class="text-slate-500 text-[11px]">Adakah mesej disampaikan dengan mudah difahami?</p>
-                        <div class="grid grid-cols-5 gap-2 pt-1">
-                            <label class="p-2 rounded-xl border border-slate-200 text-center cursor-pointer hover:border-emerald-500"><input type="radio" name="k2_faham" value="1" required class="block mx-auto mb-0.5 accent-emerald-600">1</label>
-                            <label class="p-2 rounded-xl border border-slate-200 text-center cursor-pointer hover:border-emerald-500"><input type="radio" name="k2_faham" value="2" required class="block mx-auto mb-0.5 accent-emerald-600">2</label>
-                            <label class="p-2 rounded-xl border border-slate-200 text-center cursor-pointer hover:border-emerald-500"><input type="radio" name="k2_faham" value="3" required class="block mx-auto mb-0.5 accent-emerald-600">3</label>
-                            <label class="p-2 rounded-xl border border-slate-200 text-center cursor-pointer hover:border-emerald-500"><input type="radio" name="k2_faham" value="4" required class="block mx-auto mb-0.5 accent-emerald-600">4</label>
-                            <label class="p-2 rounded-xl border border-slate-200 text-center cursor-pointer hover:border-emerald-500"><input type="radio" name="k2_faham" value="5" required class="block mx-auto mb-0.5 accent-emerald-600">5</label>
+                    </label>
+                    <label class="flex items-center p-3.5 bg-slate-50 rounded-xl border border-slate-200 text-xs sm:text-sm font-semibold cursor-pointer hover:border-[#6EBF32] transition-all">
+                        <input type="radio" name="pendedahanLogo" value="Tidak pernah" required class="mr-3"> 
+                        <div>
+                            <span class="block">Tidak</span>
+                            <span class="text-[10px] text-slate-400 font-normal block">No</span>
                         </div>
-                    </div>
-
-                    <!-- SOALAN K3 -->
-                    <div class="space-y-1.5 pt-2 border-t border-slate-100">
-                        <label class="font-bold text-slate-800 block">3. Relevan (Relevant) <span class="text-rose-500">*</span></label>
-                        <p class="text-slate-500 text-[11px]">Adakah topik & aktiviti ini relevan dengan keperluan anda & masyarakat?</p>
-                        <div class="grid grid-cols-5 gap-2 pt-1">
-                            <label class="p-2 rounded-xl border border-slate-200 text-center cursor-pointer hover:border-emerald-500"><input type="radio" name="k3_relevan" value="1" required class="block mx-auto mb-0.5 accent-emerald-600">1</label>
-                            <label class="p-2 rounded-xl border border-slate-200 text-center cursor-pointer hover:border-emerald-500"><input type="radio" name="k3_relevan" value="2" required class="block mx-auto mb-0.5 accent-emerald-600">2</label>
-                            <label class="p-2 rounded-xl border border-slate-200 text-center cursor-pointer hover:border-emerald-500"><input type="radio" name="k3_relevan" value="3" required class="block mx-auto mb-0.5 accent-emerald-600">3</label>
-                            <label class="p-2 rounded-xl border border-slate-200 text-center cursor-pointer hover:border-emerald-500"><input type="radio" name="k3_relevan" value="4" required class="block mx-auto mb-0.5 accent-emerald-600">4</label>
-                            <label class="p-2 rounded-xl border border-slate-200 text-center cursor-pointer hover:border-emerald-500"><input type="radio" name="k3_relevan" value="5" required class="block mx-auto mb-0.5 accent-emerald-600">5</label>
-                        </div>
-                    </div>
-
-                    <!-- SOALAN K4 -->
-                    <div class="space-y-1.5 pt-2 border-t border-slate-100">
-                        <label class="font-bold text-slate-800 block">4. Mendorong Perubahan (Behavioral Change) <span class="text-rose-500">*</span></label>
-                        <p class="text-slate-500 text-[11px]">Adakah kempen ini mendorong anda mengamalkan penjagaan kesihatan mental yang baik?</p>
-                        <div class="grid grid-cols-5 gap-2 pt-1">
-                            <label class="p-2 rounded-xl border border-slate-200 text-center cursor-pointer hover:border-emerald-500"><input type="radio" name="k4_perubahan" value="1" required class="block mx-auto mb-0.5 accent-emerald-600">1</label>
-                            <label class="p-2 rounded-xl border border-slate-200 text-center cursor-pointer hover:border-emerald-500"><input type="radio" name="k4_perubahan" value="2" required class="block mx-auto mb-0.5 accent-emerald-600">2</label>
-                            <label class="p-2 rounded-xl border border-slate-200 text-center cursor-pointer hover:border-emerald-500"><input type="radio" name="k4_perubahan" value="3" required class="block mx-auto mb-0.5 accent-emerald-600">3</label>
-                            <label class="p-2 rounded-xl border border-slate-200 text-center cursor-pointer hover:border-emerald-500"><input type="radio" name="k4_perubahan" value="4" required class="block mx-auto mb-0.5 accent-emerald-600">4</label>
-                            <label class="p-2 rounded-xl border border-slate-200 text-center cursor-pointer hover:border-emerald-500"><input type="radio" name="k4_perubahan" value="5" required class="block mx-auto mb-0.5 accent-emerald-600">5</label>
-                        </div>
-                    </div>
+                    </label>
                 </div>
             </div>
 
-            <!-- BUTANG NAVIGASI (KEMBALI / SETERUSNYA / HANTAR) -->
-            <div class="flex items-center justify-between gap-3 pt-2">
-                <button type="button" id="btnPrev" onclick="tukarStep(-1)" class="hidden px-5 py-3 bg-slate-200 hover:bg-slate-300 text-slate-700 font-bold text-xs rounded-2xl transition-all">
-                    ← Kembali
-                </button>
-                <button type="button" id="btnNext" onclick="tukarStep(1)" class="ml-auto px-6 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs rounded-2xl shadow-lg shadow-emerald-600/20 transition-all active:scale-95">
-                    Seterusnya →
-                </button>
-                <button type="submit" id="btnHantar" class="hidden ml-auto px-6 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs rounded-2xl shadow-lg shadow-emerald-600/20 transition-all active:scale-95">
-                    Hantar Penilaian
-                </button>
+            <!-- SECTION 5: PERSEPSI & KEPUASAN PROGRAM -->
+            <div class="form-section space-y-3">
+                <div class="flex items-center justify-between">
+                    <span class="text-xs font-bold text-[#5aa825] uppercase tracking-widest">Bahagian 4 dari 4</span>
+                    <span class="text-[10px] text-slate-400 font-medium">1=Sangat Lemah ➔ 5=Sangat Cemerlang</span>
+                </div>
+
+                <div class="space-y-2 text-xs">
+                    <!-- SOALAN 1 -->
+                    <div class="space-y-1">
+                        <label class="font-bold text-slate-800 block text-xs">
+                            1. Menarik Perhatian (Engaging) <span class="text-red-500">*</span>
+                        </label>
+                        <p class="text-slate-500 text-[11px] leading-tight">
+                            Adakah pameran, aktiviti & penyampaian maklumat menarik minat anda?
+                        </p>
+                        <div class="grid grid-cols-5 gap-1.5 pt-1">
+                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center font-bold cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k1_menarik" value="1" required class="block mx-auto mb-0.5">1</label>
+                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center font-bold cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k1_menarik" value="2" required class="block mx-auto mb-0.5">2</label>
+                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center font-bold cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k1_menarik" value="3" required class="block mx-auto mb-0.5">3</label>
+                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center font-bold cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k1_menarik" value="4" required class="block mx-auto mb-0.5">4</label>
+                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center font-bold cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k1_menarik" value="5" required class="block mx-auto mb-0.5">5</label>
+                        </div>
+                    </div>
+
+                    <!-- SOALAN 2 -->
+                    <div class="space-y-1 pt-1.5 border-t border-slate-100">
+                        <label class="font-bold text-slate-800 block text-xs">
+                            2. Mudah Difahami (Easy to Understand) <span class="text-red-500">*</span>
+                        </label>
+                        <p class="text-slate-500 text-[11px] leading-tight">
+                            Adakah mesej disampaikan dengan mudah difahami?
+                        </p>
+                        <div class="grid grid-cols-5 gap-1.5 pt-1">
+                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center font-bold cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k2_faham" value="1" required class="block mx-auto mb-0.5">1</label>
+                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center font-bold cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k2_faham" value="2" required class="block mx-auto mb-0.5">2</label>
+                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center font-bold cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k2_faham" value="3" required class="block mx-auto mb-0.5">3</label>
+                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center font-bold cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k2_faham" value="4" required class="block mx-auto mb-0.5">4</label>
+                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center font-bold cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k2_faham" value="5" required class="block mx-auto mb-0.5">5</label>
+                        </div>
+                    </div>
+
+                    <!-- SOALAN 3 -->
+                    <div class="space-y-1 pt-1.5 border-t border-slate-100">
+                        <label class="font-bold text-slate-800 block text-xs">
+                            3. Relevan (Relevant) <span class="text-red-500">*</span>
+                        </label>
+                        <p class="text-slate-500 text-[11px] leading-tight">
+                            Adakah topik dan pengisian aktiviti ini relevan dengan keperluan diri anda dan masyarakat?
+                        </p>
+                        <div class="grid grid-cols-5 gap-1.5 pt-1">
+                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center font-bold cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k3_relevan" value="1" required class="block mx-auto mb-0.5">1</label>
+                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center font-bold cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k3_relevan" value="2" required class="block mx-auto mb-0.5">2</label>
+                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center font-bold cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k3_relevan" value="3" required class="block mx-auto mb-0.5">3</label>
+                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k3_relevan" value="4" required class="block mx-auto mb-0.5">4</label>
+                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k3_relevan" value="5" required class="block mx-auto mb-0.5">5</label>
+                        </div>
+                    </div>
+
+                    <!-- SOALAN 4 -->
+                    <div class="space-y-1 pt-1.5 border-t border-slate-100">
+                        <label class="font-bold text-slate-800 block text-xs">
+                            4. Mendorong Perubahan (Behavioral Change) <span class="text-red-500">*</span>
+                        </label>
+                        <p class="text-slate-500 text-[11px] leading-tight">
+                            Adakah penganjuran kempen ini mendorong anda untuk mengamalkan penjagaan kesihatan mental yang baik?
+                        </p>
+                        <div class="grid grid-cols-5 gap-1.5 pt-1">
+                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center font-bold cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k4_perubahan" value="1" required class="block mx-auto mb-0.5">1</label>
+                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center font-bold cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k4_perubahan" value="2" required class="block mx-auto mb-0.5">2</label>
+                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center font-bold cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k4_perubahan" value="3" required class="block mx-auto mb-0.5">3</label>
+                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k4_perubahan" value="4" required class="block mx-auto mb-0.5">4</label>
+                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k4_perubahan" value="5" required class="block mx-auto mb-0.5">5</label>
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </form>
 
-        <p class="text-[10px] text-slate-400 text-center font-medium">
-            Hak Cipta © 2026 Kementerian Kesihatan Malaysia (NCEMH & JKN Perlis)
-        </p>
+        <!-- 🎉 SKRIN UCAPAN TERIMA KASIH -->
+        <div id="skrinTerimaKasih" class="hidden my-auto text-center space-y-5 py-6">
+            <div class="w-16 h-16 bg-brand-light text-[#5aa825] rounded-full flex items-center justify-center mx-auto text-3xl shadow-inner">
+                ✨
+            </div>
+            <div class="space-y-2">
+                <h2 class="text-xl sm:text-2xl font-black text-slate-900">Syabas & Terima Kasih!</h2>
+                <p class="text-xs sm:text-sm text-slate-600 font-medium max-w-sm mx-auto leading-relaxed">
+                    Kementerian Kesihatan Malaysia (KKM) merakamkan setinggi-tinggi penghargaan atas kesudian anda mengisinya. Maklum balas anda adalah perintis utama komuniti bebas stigma.
+                </p>
+            </div>
+            <div class="p-3 bg-slate-50 rounded-2xl border border-slate-100 text-[11px] text-slate-500 font-medium max-w-md mx-auto">
+                💡 Sokong orang di sekeliling anda. Kesihatan mental adalah milik kita bersama.
+            </div>
+            <div class="pt-2">
+                <button type="button" onclick="buatSemulaUjian()" class="px-6 py-3.5 bg-slate-900 hover:bg-slate-950 text-white font-bold text-xs rounded-xl shadow-md active:scale-95 transition-all inline-flex items-center gap-2">
+                    <span>🔄</span> <span>Jawab Semula (Isi Borang Baharu)</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- PANEL NAVIGASI BUTANG -->
+        <div id="navWrapper" class="pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+            <button type="button" id="btnKembali" onclick="kembaliStep()" class="hidden px-5 py-3 rounded-xl bg-slate-100 text-slate-600 font-bold text-xs hover:bg-slate-200 transition-all">
+                ← Kembali
+            </button>
+            <div class="flex-1"></div>
+            <button type="button" id="btnSeterusnya" onclick="seterusnyaStep()" class="px-6 py-3 rounded-xl bg-[#6EBF32] text-white font-bold text-xs shadow-md shadow-emerald-600/20 hover:bg-[#5aa825] active:scale-95 transition-all">
+                Seterusnya →
+            </button>
+            <button type="button" id="btnHantar" onclick="submitFormManual()" class="hidden px-6 py-3 rounded-xl bg-[#6EBF32] text-white font-bold text-xs shadow-md shadow-emerald-600/20 hover:bg-[#5aa825] active:scale-95 transition-all">
+                Hantar Penilaian ✅
+            </button>
+        </div>
+
     </div>
 
-    <!-- JAVASCRIPT & ENJIN WIZARD MULTI-STEP -->
+    <!-- JAVASCRIPT: NAVIGASI & INSTANT IFRAME SUBMISSION ENGINE -->
     <script>
-        const URL_WEB_APP = "https://script.google.com/macros/s/AKfycbzKJpgnATpJXC1JpapMv9zytlXamhtH1ryJd5ybjri-NTLCFX0zYUnaZxAvw5nIqdTz4Q/exec";
-
-        let currentStep = 1;
-        const totalSteps = 5;
+        let currentSection = 0;
+        const sections = document.querySelectorAll('.form-section');
+        const totalSections = sections.length;
+        var submitted = false;
 
         const senaraiProgramEvent = [
             {
@@ -318,61 +363,93 @@
             }
         ];
 
-        function tukarStep(direction) {
-            if (direction === 1 && !semakValidasiStepSemasa()) {
-                alert("Sila lengkapkan semua medan wajib (*) pada bahagian ini sebelum meneruskan.");
-                return;
+        function updateUI() {
+            sections.forEach((sec, idx) => {
+                if (idx === currentSection) {
+                    sec.classList.add('active');
+                } else {
+                    sec.classList.remove('active');
+                }
+            });
+
+            const percentage = ((currentSection + 1) / totalSections) * 100;
+            document.getElementById('progressBar').style.width = percentage + '%';
+            document.getElementById('stepIndicator').innerText = `Langkah ${currentSection + 1} dari ${totalSections}`;
+
+            const btnKembali = document.getElementById('btnKembali');
+            const btnSeterusnya = document.getElementById('btnSeterusnya');
+            const btnHantar = document.getElementById('btnHantar');
+
+            if (currentSection === 0) {
+                btnKembali.classList.add('hidden');
+            } else {
+                btnKembali.classList.remove('hidden');
             }
 
-            document.getElementById(`step${currentStep}`).classList.remove('active');
-            currentStep += direction;
-
-            if (currentStep < 1) currentStep = 1;
-            if (currentStep > totalSteps) currentStep = totalSteps;
-
-            document.getElementById(`step${currentStep}`).classList.add('active');
-            kemaskiniUIWizard();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            if (currentSection === totalSections - 1) {
+                btnSeterusnya.classList.add('hidden');
+                btnHantar.classList.remove('hidden');
+            } else {
+                btnSeterusnya.classList.remove('hidden');
+                btnHantar.classList.add('hidden');
+            }
         }
 
-        function semakValidasiStepSemasa() {
-            const stepEl = document.getElementById(`step${currentStep}`);
-            const requiredInputs = stepEl.querySelectorAll('input[required], select[required]');
+        function validatorSemasa() {
+            const secEl = sections[currentSection];
+            const requiredInputs = secEl.querySelectorAll('input[required], select[required]');
 
             for (let input of requiredInputs) {
                 if (input.type === 'radio') {
-                    const radioGroup = stepEl.querySelectorAll(`input[name="${input.name}"]`);
+                    const radioGroup = secEl.querySelectorAll(`input[name="${input.name}"]`);
                     let isChecked = false;
                     radioGroup.forEach(r => { if (r.checked) isChecked = true; });
-                    if (!isChecked) return false;
+                    if (!isChecked) {
+                        alert("Sila pilih jawapan bagi soalan wajib sebelum meneruskan.");
+                        return false;
+                    }
                 } else if (!input.value || input.value.trim() === "") {
+                    alert("Sila lengkapkan semua maklumat wajib sebelum meneruskan.");
                     return false;
                 }
             }
             return true;
         }
 
-        function kemaskiniUIWizard() {
-            document.getElementById('stepCounterText').innerText = `Langkah ${currentStep} daripada ${totalSteps}`;
-            document.getElementById('progressBar').style.width = `${(currentStep / totalSteps) * 100}%`;
-
-            const btnPrev = document.getElementById('btnPrev');
-            const btnNext = document.getElementById('btnNext');
-            const btnHantar = document.getElementById('btnHantar');
-
-            if (currentStep === 1) {
-                btnPrev.classList.add('hidden');
-            } else {
-                btnPrev.classList.remove('hidden');
+        function seterusnyaStep() {
+            if (!validatorSemasa()) return;
+            if (currentSection < totalSections - 1) {
+                currentSection++;
+                updateUI();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
+        }
 
-            if (currentStep === totalSteps) {
-                btnNext.classList.add('hidden');
-                btnHantar.classList.remove('hidden');
-            } else {
-                btnNext.classList.remove('hidden');
-                btnHantar.classList.add('hidden');
+        function kembaliStep() {
+            if (currentSection > 0) {
+                currentSection--;
+                updateUI();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
             }
+        }
+
+        function submitFormManual() {
+            if (!validatorSemasa()) return;
+            
+            const btn = document.getElementById('btnHantar');
+            btn.disabled = true;
+            btn.innerText = "⚡ Menghantar...";
+            
+            submitted = true;
+            document.getElementById('borangKeberkesanan').submit();
+        }
+
+        function pamerSkrinKejayaan() {
+            document.getElementById('borangKeberkesanan').classList.add('hidden');
+            document.getElementById('headerWrapper').classList.add('hidden');
+            document.getElementById('navWrapper').classList.add('hidden');
+            document.getElementById('skrinTerimaKasih').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function jalankanAutoFillProgram() {
@@ -388,7 +465,7 @@
                 elTajuk.value = progAktif.tajuk;
                 elTarikh.value = todayStr;
                 elTempat.value = progAktif.tempat;
-                badge.innerText = "🎯 Acara Aktif Dikesan";
+                badge.innerText = "🎯 Dikesan";
             } else {
                 elTajuk.value = "Kempen Hentikan Stigma Kesihatan Mental";
                 elTarikh.value = todayStr;
@@ -397,48 +474,26 @@
             }
         }
 
-        async function hantarBorang(e) {
-            e.preventDefault();
-            if (!semakValidasiStepSemasa()) {
-                alert("Sila lengkapkan semua medan wajib.");
-                return;
-            }
-
+        function buatSemulaUjian() {
+            submitted = false;
             const btn = document.getElementById('btnHantar');
-            btn.disabled = true;
-            btn.innerText = "Sedang Dihantar...";
+            btn.disabled = false;
+            btn.innerText = "Hantar Penilaian ✅";
 
-            const formData = new FormData(document.getElementById('formKeberkesanan'));
-            const dataObj = { action: "submitKeberkesanan" };
-            formData.forEach((val, key) => dataObj[key] = val);
-
-            try {
-                await fetch(URL_WEB_APP, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(dataObj)
-                });
-
-                alert("Terima kasih! Penilaian anda telah berjaya direkodkan.");
-                document.getElementById('formKeberkesanan').reset();
-                currentStep = 1;
-                document.querySelectorAll('.step-panel').forEach(p => p.classList.remove('active'));
-                document.getElementById('step1').classList.add('active');
-                kemaskiniUIWizard();
-                jalankanAutoFillProgram();
-            } catch (err) {
-                console.error(err);
-                alert("Gagal menghantar penilaian. Sila cuba lagi.");
-            } finally {
-                btn.disabled = false;
-                btn.innerText = "Hantar Penilaian";
-            }
+            document.getElementById('borangKeberkesanan').reset();
+            document.getElementById('borangKeberkesanan').classList.remove('hidden');
+            document.getElementById('headerWrapper').classList.remove('hidden');
+            document.getElementById('navWrapper').classList.remove('hidden');
+            document.getElementById('skrinTerimaKasih').classList.add('hidden');
+            
+            currentSection = 0;
+            jalankanAutoFillProgram();
+            updateUI();
         }
 
         window.addEventListener('DOMContentLoaded', () => {
             jalankanAutoFillProgram();
-            kemaskiniUIWizard();
+            updateUI();
         });
     </script>
 </body>
