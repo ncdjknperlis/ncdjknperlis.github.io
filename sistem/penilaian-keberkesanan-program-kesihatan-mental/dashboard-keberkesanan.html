@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Keberkesanan Program | KKM</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.2/papaparse.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+        canvas { cursor: pointer; }
+        .sidebar-transition { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+    </style>
+</head>
+<body class="bg-slate-50 min-h-screen text-slate-800 antialiased overflow-x-hidden flex flex-col">
+
+    <!-- TOP NAVBAR -->
+    <header class="w-full bg-white border-b border-slate-100 px-4 py-3 flex items-center justify-between z-30 sticky top-0 shadow-xs">
+        <div class="flex items-center gap-3">
+            <button onclick="toggleSidebar()" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-lg transition-all">
+                <span id="iconSidebar">☰</span>
+            </button>
+            <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                <h2 class="text-xs sm:text-sm font-black text-slate-900 tracking-tight uppercase">
+                    Analisis Keberkesanan Kempen (Lampiran B)
+                </h2>
+            </div>
+        </div>
+
+        <div class="flex items-center gap-2">
+            <button onclick="resetSemuaPenapis()" id="btnResetHeader" class="hidden px-3 py-1.5 bg-rose-50 text-rose-600 font-bold text-xs rounded-xl border border-rose-200">
+                ✕ Reset Penapis
+            </button>
+            <button onclick="muatMuatDataLive()" class="px-3.5 py-2 bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold text-xs rounded-xl shadow-md flex items-center gap-1.5">
+                <span>🔄</span> <span class="hidden sm:inline">Kemas Kini</span>
+            </button>
+        </div>
+    </header>
+
+    <div class="flex-1 w-full flex relative overflow-hidden">
+
+        <!-- SIDEBAR FILTERS -->
+        <aside id="sidebarFilter" class="sidebar-transition w-80 bg-white border-r border-slate-100 p-5 flex flex-col justify-between flex-shrink-0 z-20 absolute lg:relative inset-y-0 left-0 -translate-x-full lg:translate-x-0 shadow-xl lg:shadow-none h-[calc(100vh-57px)] overflow-y-auto">
+            <div class="space-y-6">
+                <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <span class="text-xs font-black uppercase tracking-wider text-slate-800">🔍 Penapis Laporan</span>
+                    <button onclick="toggleSidebar()" class="lg:hidden text-slate-400 font-bold text-sm">✕</button>
+                </div>
+
+                <div class="space-y-4 text-xs">
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">Status Pekerjaan</label>
+                        <select id="filterPekerjaan" onchange="setPenapisDropdown('pekerjaan', this.value)" class="w-full p-2.5 rounded-xl border border-slate-200 font-medium bg-white">
+                            <option value="">Semua Pekerjaan</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1">Jantina</label>
+                        <select id="filterJantina" onchange="setPenapisDropdown('jantina', this.value)" class="w-full p-2.5 rounded-xl border border-slate-200 font-medium bg-white">
+                            <option value="">Semua Jantina</option>
+                            <option value="Lelaki">Lelaki</option>
+                            <option value="Perempuan">Perempuan</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <button onclick="resetSemuaPenapis()" class="w-full py-2.5 bg-rose-50 text-rose-600 font-bold text-xs rounded-xl border border-rose-200">
+                ✕ Reset Penapis
+            </button>
+        </aside>
+
+        <!-- MAIN CONTENT AREA -->
+        <main class="flex-1 p-4 sm:p-6 space-y-6 overflow-y-auto h-[calc(100vh-57px)] w-full">
+
+            <!-- KPI STATS -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+                <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-100 shadow-sm space-y-1">
+                    <span class="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-slate-400">Jumlah Responden</span>
+                    <h3 id="statTotal" class="text-2xl sm:text-3xl font-black text-slate-900">0</h3>
+                    <p class="text-[10px] text-emerald-600 font-semibold">Tinjauan Kepuasan Pengunjung</p>
+                </div>
+                <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-100 shadow-sm space-y-1">
+                    <span class="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-slate-400">Purata Kepuasan</span>
+                    <h3 id="statKepuasan" class="text-base sm:text-xl font-extrabold text-slate-900 truncate">0.0 / 5.0</h3>
+                    <p class="text-[10px] text-slate-400 font-medium">Skor Keseluruhan</p>
+                </div>
+                <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-100 shadow-sm space-y-1">
+                    <span class="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-slate-400">Kadar Pendedahan Logo</span>
+                    <h3 id="statLogo" class="text-base sm:text-xl font-extrabold text-emerald-600 truncate">0%</h3>
+                    <p class="text-[10px] text-slate-400 font-medium">Pernah Melihat Logo Kempen</p>
+                </div>
+                <div class="bg-white rounded-2xl p-4 sm:p-5 border border-slate-100 shadow-sm space-y-1">
+                    <span class="text-[9px] sm:text-[10px] font-bold uppercase tracking-wider text-slate-400">Amalan Kendiri Positive</span>
+                    <h3 id="statKendiri" class="text-base sm:text-xl font-extrabold text-slate-900 truncate">0%</h3>
+                    <p class="text-[10px] text-slate-400 font-medium">Mengamalkan / Berniat</p>
+                </div>
+            </div>
+
+            <!-- CARTA ANALISIS DEMOGRAFI & PENJAGAAN KENDIRI -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="bg-white rounded-3xl p-5 border border-slate-100 shadow-sm space-y-2">
+                    <h3 class="text-xs font-extrabold uppercase text-slate-700 border-l-3 border-emerald-500 pl-2">Status Pekerjaan</h3>
+                    <div class="h-48 relative"><canvas id="chartPekerjaan"></canvas></div>
+                </div>
+                <div class="bg-white rounded-3xl p-5 border border-slate-100 shadow-sm space-y-2">
+                    <h3 class="text-xs font-extrabold uppercase text-slate-700 border-l-3 border-emerald-500 pl-2">Amalan Penjagaan Kendiri</h3>
+                    <div class="h-48 relative"><canvas id="chartKendiri"></canvas></div>
+                </div>
+                <div class="bg-white rounded-3xl p-5 border border-slate-100 shadow-sm space-y-2">
+                    <h3 class="text-xs font-extrabold uppercase text-slate-700 border-l-3 border-emerald-500 pl-2">Pendedahan Logo Kempen</h3>
+                    <div class="h-48 relative"><canvas id="chartLogo"></canvas></div>
+                </div>
+            </div>
+
+            <!-- CARTA PERSEPSI & KEPUASAN PROGRAM (4 INDIKATOR) -->
+            <div class="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm space-y-4">
+                <div>
+                    <h3 class="text-base font-extrabold text-slate-900 border-l-3 border-emerald-500 pl-3">
+                        Purata Skor Persepsi & Kepuasan Program (Skala 1 - 5)
+                    </h3>
+                    <p class="text-xs text-slate-400 font-medium pl-3 mt-1">
+                        Skor purata bagi 4 indikator utama: Menarik Perhatian, Mudah Difahami, Relevan, dan Mendorong Perubahan.
+                    </p>
+                </div>
+                <div class="h-64 relative"><canvas id="chartKepuasan"></canvas></div>
+            </div>
+
+        </main>
+    </div>
+
+    <!-- JAVASCRIPT ENGINE -->
+    <script>
+        const URL_GOOGLE_SHEET_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTyq98LKWKSirH0fuaSzOMqHBXW4_i3DMfHBIi6hBeiiuGfA7Bwf9hoT-XW73I1-fOI4n1w-OptUpiv/pub?gid=0&single=true&output=csv";
+
+        let rawMasterData = [];
+        let activeFilters = { pekerjaan: null, jantina: null };
+        let sidebarOpen = false;
+        let charts = {};
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebarFilter');
+            if (sidebarOpen) {
+                sidebar.classList.add('-translate-x-full');
+                sidebarOpen = false;
+            } else {
+                sidebar.classList.remove('-translate-x-full');
+                sidebarOpen = true;
+            }
+        }
+
+        async function muatMuatDataLive() {
+            try {
+                Papa.parse(URL_GOOGLE_SHEET_CSV, {
+                    download: true,
+                    header: true,
+                    complete: function(results) {
+                        rawMasterData = results.data.filter(row => row.jantina && row.jantina.trim() !== "");
+                        binaDropdownFilter();
+                        kemaskiniDashboard();
+                    }
+                });
+            } catch (e) { console.error(e); }
+        }
+
+        function binaDropdownFilter() {
+            const setPekerjaan = new Set();
+            rawMasterData.forEach(r => { if (r.pekerjaan) setPekerjaan.add(r.pekerjaan.trim()); });
+            
+            const el = document.getElementById('filterPekerjaan');
+            el.innerHTML = '<option value="">Semua Pekerjaan</option>';
+            Array.from(setPekerjaan).sort().forEach(item => {
+                const opt = document.createElement('option');
+                opt.value = item; opt.innerText = item;
+                el.appendChild(opt);
+            });
+        }
+
+        function dapatkanDataTersaring() {
+            return rawMasterData.filter(row => {
+                let lolos = true;
+                if (activeFilters.pekerjaan && row.pekerjaan !== activeFilters.pekerjaan) lolos = false;
+                if (activeFilters.jantina && row.jantina !== activeFilters.jantina) lolos = false;
+                return lolos;
+            });
+        }
+
+        function setPenapisDropdown(kunci, nilai) {
+            activeFilters[kunci] = nilai !== "" ? nilai : null;
+            kemaskiniDashboard();
+        }
+
+        function resetSemuaPenapis() {
+            activeFilters = { pekerjaan: null, jantina: null };
+            document.getElementById('filterPekerjaan').value = "";
+            document.getElementById('filterJantina').value = "";
+            kemaskiniDashboard();
+        }
+
+        function kemaskiniDashboard() {
+            const data = dapatkanDataTersaring();
+            const total = data.length;
+
+            document.getElementById('statTotal').innerText = total;
+
+            // Kira KPI
+            let countLogoYa = 0;
+            let countKendiriPositif = 0;
+            let sumK1 = 0, sumK2 = 0, sumK3 = 0, sumK4 = 0;
+
+            const countPekerjaan = {}, countKendiri = {}, countLogo = {};
+
+            data.forEach(r => {
+                if (r.pekerjaan) countPekerjaan[r.pekerjaan] = (countPekerjaan[r.pekerjaan] || 0) + 1;
+                if (r.penjagaanKendiri) countKendiri[r.penjagaanKendiri] = (countKendiri[r.penjagaanKendiri] || 0) + 1;
+                if (r.pendedahanLogo) countLogo[r.pendedahanLogo] = (countLogo[r.pendedahanLogo] || 0) + 1;
+
+                if (r.pendedahanLogo === 'Pernah melihat') countLogoYa++;
+                if (r.penjagaanKendiri !== 'Tidak pernah') countKendiriPositif++;
+
+                sumK1 += parseFloat(r.k1_menarik || 0);
+                sumK2 += parseFloat(r.k2_faham || 0);
+                sumK3 += parseFloat(r.k3_relevan || 0);
+                sumK4 += parseFloat(r.k4_perubahan || 0);
+            });
+
+            const avgK1 = total > 0 ? (sumK1 / total).toFixed(2) : 0;
+            const avgK2 = total > 0 ? (sumK2 / total).toFixed(2) : 0;
+            const avgK3 = total > 0 ? (sumK3 / total).toFixed(2) : 0;
+            const avgK4 = total > 0 ? (sumK4 / total).toFixed(2) : 0;
+            const avgAll = total > 0 ? ((parseFloat(avgK1) + parseFloat(avgK2) + parseFloat(avgK3) + parseFloat(avgK4)) / 4).toFixed(2) : "0.0";
+
+            document.getElementById('statKepuasan').innerText = `${avgAll} / 5.0`;
+            document.getElementById('statLogo').innerText = total > 0 ? `${((countLogoYa / total) * 100).toFixed(1)}%` : "0%";
+            document.getElementById('statKendiri').innerText = total > 0 ? `${((countKendiriPositif / total) * 100).toFixed(1)}%` : "0%";
+
+            // Render Charts
+            binaChartPie('chartPekerjaan', Object.keys(countPekerjaan), Object.values(countPekerjaan));
+            binaChartDoughnut('chartKendiri', Object.keys(countKendiri), Object.values(countKendiri));
+            binaChartPie('chartLogo', Object.keys(countLogo), Object.values(countLogo));
+            binaChartBarKepuasan('chartKepuasan', [avgK1, avgK2, avgK3, avgK4]);
+        }
+
+        function binaChartPie(id, labels, dataVals) {
+            if (charts[id]) charts[id].destroy();
+            const ctx = document.getElementById(id).getContext('2d');
+            charts[id] = new Chart(ctx, {
+                type: 'pie',
+                data: { labels, datasets: [{ data: dataVals, backgroundColor: ['#10B981', '#3B82F6', '#F59E0B', '#EF4444', '#8B5CF6', '#EC4899'] }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+            });
+        }
+
+        function binaChartDoughnut(id, labels, dataVals) {
+            if (charts[id]) charts[id].destroy();
+            const ctx = document.getElementById(id).getContext('2d');
+            charts[id] = new Chart(ctx, {
+                type: 'doughnut',
+                data: { labels, datasets: [{ data: dataVals, backgroundColor: ['#10B981', '#F59E0B', '#EF4444'] }] },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
+            });
+        }
+
+        function binaChartBarKepuasan(id, scores) {
+            if (charts[id]) charts[id].destroy();
+            const ctx = document.getElementById(id).getContext('2d');
+            charts[id] = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['1. Menarik Perhatian', '2. Mudah Difahami', '3. Relevan', '4. Mendorong Perubahan'],
+                    datasets: [{
+                        label: 'Purata Skor (1-5)',
+                        data: scores,
+                        backgroundColor: '#10B981',
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    scales: { y: { beginAtZero: true, max: 5 } },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', muatMuatDataLive);
+    </script>
+</body>
+</html>

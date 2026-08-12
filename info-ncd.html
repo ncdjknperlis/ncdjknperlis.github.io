@@ -10,10 +10,8 @@
     <style>
         body { font-family: 'Inter', sans-serif; }
         
-        /* Hide scrollbar untuk elemen global desktop tetapi kekalkan fungsi skrol */
         ::-webkit-scrollbar { display: none; }
 
-        /* Gaya skrol halus dan minimalis untuk bahagian grid bahan */
         .custom-scrollbar::-webkit-scrollbar {
             width: 4px;
             display: block;
@@ -26,29 +24,27 @@
             border-radius: 10px;
         }
 
-        /* ==========================================================================
-           ENJIN VARIABLES TEMA: CROSS-PAGE RETENTION (SERAGAM DENGAN INDEX)
-           ========================================================================== */
+        .sidebar-transition { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+
         :root {
             --bg-utama: #FBFBFB;
             --bg-kad: #FFFFFF;
-            --border-warna: #F3F4F6;   /* gray-100 */
-            --teks-tajuk: #101e33;     /* Biru gelap asal */
-            --teks-biasa: #1A1A1A;     
-            --teks-sub: #9CA3AF;       /* gray-400 */
+            --border-warna: #F3F4F6;
+            --teks-tajuk: #101e33;
+            --teks-biasa: #1A1A1A;
+            --teks-sub: #9CA3AF;
             --bg-input: #FFFFFF;
         }
 
         [data-theme="dark"] {
-            --bg-utama: #0B132B;       /* Mod Gelap Korporat */
-            --bg-kad: #1C2541;         
-            --border-warna: #3A506B;   
-            --teks-tajuk: #FFFFFF;     /* Teks bertukar putih automatik untuk kontra */
-            --teks-biasa: #E2E8F0;     
-            --teks-sub: #94A3B8;       
+            --bg-utama: #0B132B;
+            --bg-kad: #1C2541;
+            --border-warna: #3A506B;
+            --teks-tajuk: #FFFFFF;
+            --teks-biasa: #E2E8F0;
+            --teks-sub: #94A3B8;
             --bg-input: #1C2541;
         }
-        /* Cari kod [data-theme="emerald"] dll dalam fail play-image/video/package/album, dan tampal ini */
         [data-theme="winamp_orange"] {
             --bg-utama: #1a1a1a; --bg-kad: #282828; --border-warna: #ff5722;
             --teks-tajuk: #ff7043; --teks-biasa: #b0bec5; --teks-sub: #78909c;
@@ -61,28 +57,25 @@
             --bg-utama: #0a0e17; --bg-kad: #121824; --border-warna: #00e5ff;
             --teks-tajuk: #00e5ff; --teks-biasa: #a1a8b8; --teks-sub: #3c485e;
         }
-        /* 🧬 Mod Cyberpunk 2077 */
         [data-theme="cyberpunk"] {
-            --bg-utama: #0f1013;       
-            --bg-kad: #1a1b20;         
-            --border-warna: #fcee0a;   /* Kuning Cyberpunk menyala */
-            --teks-tajuk: #fcee0a;     
-            --teks-biasa: #00f0ff;     /* Teks Biru Neon */
-            --teks-sub: #ff0055;       
+            --bg-utama: #0f1013;
+            --bg-kad: #1a1b20;
+            --border-warna: #fcee0a;
+            --teks-tajuk: #fcee0a;
+            --teks-biasa: #00f0ff;
+            --teks-sub: #ff0055;
             --bg-input: #141519;
         }
-        /* 🌌 Mod Dracula Premium */
         [data-theme="dracula"] {
-            --bg-utama: #1e1f29;       /* Ungu Gelap Dracula */
-            --bg-kad: #282a36;         
-            --border-warna: #ff79c6;   /* Merah Jambu Dracula */
-            --teks-tajuk: #50fa7b;     /* Hijau Terang */
-            --teks-biasa: #f8f8f2;     
-            --teks-sub: #bd93f9;       
+            --bg-utama: #1e1f29;
+            --bg-kad: #282a36;
+            --border-warna: #ff79c6;
+            --teks-tajuk: #50fa7b;
+            --teks-biasa: #f8f8f2;
+            --teks-sub: #bd93f9;
             --bg-input: #21222c;
         }
 
-        /* Kelas Pengikat Warna Mengatasi Hardcoded Tailwind */
         .dinamik-bg-utama { background-color: var(--bg-utama) !important; transition: all 0.3s ease; }
         .dinamik-bg-kad { background-color: var(--bg-kad) !important; transition: all 0.3s ease; }
         .dinamik-border { border-color: var(--border-warna) !important; transition: all 0.3s ease; }
@@ -94,10 +87,15 @@
 </head>
 <body class="h-screen w-screen overflow-x-hidden md:overflow-hidden flex flex-col dinamik-bg-utama dinamik-teks-biasa antialiased">
 
-    <header class="w-full py-2 md:py-3 px-4 md:px-12 bg-white border-b border-gray-100 flex flex-row items-center justify-between gap-2 z-20 flex-shrink-0 shadow-xs dinamik-bg-kad dinamik-border">
+    <!-- 🌐 HEADER PORTAL -->
+    <header class="w-full py-2 md:py-3 px-4 md:px-6 bg-white border-b border-gray-100 flex flex-row items-center justify-between gap-2 z-30 sticky top-0 shadow-xs flex-shrink-0 dinamik-bg-kad dinamik-border">
         <div class="flex items-center space-x-2 md:space-x-3">
-            <img src="images/logo.png" style="max-width: 28px;" class="w-full h-auto object-contain mx-auto md:max-w-[42px]">
-            <img src="images/logo-ncd/logo-ncd-default.png" style="max-width: 80px;" class="md:max-w-[130px]">
+            <!-- Butang Toggle Sidebar (Burger Menu) -->
+            <button onclick="toggleSidebar()" class="p-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold text-base transition-all flex items-center justify-center dinamik-bg-input dinamik-teks-tajuk">
+                <span id="iconSidebar">☰</span>
+            </button>
+            <img src="images/logo.png" style="max-width: 28px;" class="w-full h-auto object-contain mx-auto md:max-w-[42px]" onerror="this.onerror=null; this.src='https://placehold.co/100x100/059669/ffffff?text=LOGO';">
+            <img src="images/logo-ncd/logo-ncd-default.png" style="max-width: 80px;" class="md:max-w-[130px]" onerror="this.onerror=null; this.src='https://placehold.co/200x80/059669/ffffff?text=NCD+PERLIS';">
             <div class="w-[1px] h-4 md:h-6 bg-gray-200"></div>
             <h2 class="text-[7.5px] md:text-[11px] font-bold tracking-[0.08em] md:tracking-[0.15em] uppercase text-[#101e33] leading-tight dinamik-teks-tajuk">
                 Kawalan Penyakit Tidak Berjangkit (NCD)<br>
@@ -105,12 +103,12 @@
             </h2>
         </div>
         
-        <div class="flex items-center space-x-2 md:space-x-5">
-            <div class="tracking-widest text-right hidden sm:block">
-                <h1 class="text-lg md:text-2xl font-light tracking-tighter text-gray-400">Pusat Akses <span class="font-bold text-[#101e33] dinamik-teks-tajuk">Digital</span></h1>
+        <div class="flex items-center space-x-2 md:space-x-4">
+            <div class="tracking-widest text-right hidden lg:block">
+                <h1 class="text-base md:text-xl font-light tracking-tighter text-gray-400">Pusat Akses <span class="font-bold text-[#101e33] dinamik-teks-tajuk">Digital</span></h1>
             </div>
             
-            <div class="w-[1px] h-5 bg-gray-200 hidden sm:block"></div>
+            <div class="w-[1px] h-5 bg-gray-200 hidden lg:block"></div>
 
             <div class="relative inline-block text-left z-30">
                 <select id="themeSelect" onchange="tukarTemaSistem(this.value)" class="dinamik-bg-utama dinamik-teks-tajuk border dinamik-border text-[11px] font-bold py-1.5 px-2.5 rounded-xl focus:outline-none cursor-pointer shadow-xs transition-all">
@@ -124,65 +122,77 @@
                 </select>
             </div>
             
-            <div class="flex items-center">
-                <a href="index.html" class="flex items-center justify-center space-x-1.5 px-3 py-1.5 rounded-xl bg-[#101e33] text-white text-[11px] font-bold transition-all duration-300 shadow-sm hover:bg-[#1d3557] hover:scale-105 active:scale-95" title="Kembali ke Hub Utama">
-                    <span>←</span> <span>Hub Utama</span>
-                </a>
-            </div>
+            <a href="index.html" class="flex items-center justify-center space-x-1.5 px-3 py-1.5 rounded-xl bg-[#101e33] text-white text-[11px] font-bold transition-all duration-300 shadow-sm hover:bg-[#1d3557] hover:scale-105 active:scale-95" title="Kembali ke Hub Utama">
+                <span>←</span> <span class="hidden sm:inline">Hub Utama</span>
+            </a>
         </div>
     </header>
 
-    <div class="flex-1 w-full overflow-y-auto custom-scrollbar flex flex-col">
+    <!-- WRAPPER UTAMA: SIDEBAR FILTERS + MAIN CONTENT AREA -->
+    <div class="flex-1 w-full flex relative overflow-hidden">
 
-        <section class="w-full bg-[#101e33] py-6 md:py-8 px-4 md:px-12 relative overflow-hidden flex-shrink-0 shadow-md">
-            <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
-            <div class="w-full relative z-10 flex flex-col justify-center min-h-[90px] md:min-h-[110px]">
-                <span class="text-[10px] font-extrabold tracking-widest text-emerald-400 uppercase bg-emerald-500/10 px-2.5 py-1 rounded-full w-max mb-2 backdrop-blur-sm">Hub Sumber Digital</span>
-                <h1 class="text-xl md:text-3xl font-extrabold text-white tracking-tight leading-none">Bahan Pendidikan Kesihatan</h1>
-                <p class="text-[11px] md:text-xs text-gray-300 font-light mt-2 max-w-2xl leading-relaxed opacity-90">
-                    Akses pantas koleksi infografik, poster advokasi, video kapsul kesedaran, risalah krisis, dan modul rasmi Unit Kawalan Penyakit Tidak Berjangkit (NCD) Jabatan Kesihatan Negeri Perlis.
-                </p>
-            </div>
-        </section>
-
-        <main class="w-full px-4 md:px-12 py-6 flex-shrink-0">
+        <!-- 🔍 SIDEBAR COLLAPSIBLE (PANEL KIRI FILTERS) -->
+        <aside id="sidebarFilter" class="sidebar-transition w-72 md:w-80 bg-white border-r border-gray-100 p-5 flex flex-col justify-between flex-shrink-0 z-20 absolute lg:relative inset-y-0 left-0 -translate-x-full lg:translate-x-0 shadow-xl lg:shadow-none h-[calc(100vh-57px)] overflow-y-auto dinamik-bg-kad dinamik-border">
             
-            <div class="pb-4 border-b border-gray-100 flex flex-col lg:flex-row items-center justify-between gap-3 w-full dinamik-border">
-                
-                <div class="relative w-full lg:flex-1">
-                    <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs">🔍</span>
-                    <input 
-                        type="text" 
-                        id="searchInput" 
-                        onkeyup="handleSearch()" 
-                        placeholder="Cari bahan..." 
-                        class="w-full pl-8 pr-3 py-1.5 bg-white border border-gray-200 rounded-lg text-xs font-medium focus:outline-none focus:border-[#101e33] shadow-sm transition-all dinamik-bg-input dinamik-border dinamik-teks-biasa"
-                    >
+            <div class="space-y-5">
+                <!-- Header Sidebar -->
+                <div class="flex items-center justify-between border-b border-gray-100 pb-3 dinamik-border">
+                    <div class="flex items-center gap-2">
+                        <span class="text-base">🔍</span>
+                        <h3 class="text-xs font-black uppercase tracking-wider text-slate-800 dinamik-teks-tajuk">Penapis Bahan Digital</h3>
+                    </div>
+                    <button onclick="toggleSidebar()" class="lg:hidden text-slate-400 hover:text-slate-600 font-bold text-sm dinamik-teks-sub">✕</button>
                 </div>
 
-                <div class="flex flex-col sm:flex-row items-center justify-between lg:justify-end gap-2 flex-shrink-0 w-full lg:w-auto">
-                    
-                    <div class="relative w-full sm:w-auto">
+                <!-- INDICATOR JUMLAH BAHAN -->
+                <div class="bg-slate-50 p-3 rounded-2xl border border-gray-100 text-center space-y-0.5 dinamik-bg-utama dinamik-border">
+                    <span class="text-[10px] font-bold uppercase tracking-wider text-gray-400 block dinamik-teks-sub">Status Hasil carian</span>
+                    <span id="materialCount" class="text-xs font-extrabold text-[#101e33] dinamik-teks-tajuk">
+                        Menampilkan: 0 bahan
+                    </span>
+                </div>
+
+                <!-- BORANG PENAPIS SIDEBAR -->
+                <div class="space-y-4 text-xs">
+                    <!-- Kotak Carian Teks -->
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1.5 uppercase text-[10px] tracking-wider dinamik-teks-sub">Carian Kata Kunci</label>
+                        <div class="relative">
+                            <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs">🔍</span>
+                            <input 
+                                type="text" 
+                                id="searchInput" 
+                                onkeyup="handleSearch()" 
+                                placeholder="Cari bahan..." 
+                                class="w-full pl-8 pr-3 py-2 bg-white border border-gray-200 rounded-xl text-xs font-medium focus:outline-none focus:border-[#101e33] shadow-xs transition-all dinamik-bg-input dinamik-border dinamik-teks-biasa"
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Dropdown Kategori -->
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1.5 uppercase text-[10px] tracking-wider dinamik-teks-sub">Kategori Bahan</label>
                         <select 
                             id="categorySelect" 
                             onchange="handleCategoryChange()" 
-                            class="w-full sm:w-auto pl-2.5 pr-7 py-1.5 text-xs bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#101e33] shadow-sm font-bold text-gray-600 appearance-none cursor-pointer dinamik-bg-kad dinamik-border dinamik-teks-biasa"
+                            class="w-full p-2.5 text-xs bg-white border border-gray-200 rounded-xl focus:outline-none focus:border-[#101e33] shadow-xs font-bold text-gray-600 cursor-pointer dinamik-bg-input dinamik-border dinamik-teks-biasa"
                         >
                             <option value="all">📁 Semua Kategori</option>
                             <option value="image_info">🎨 Imej / Infografik</option>
                             <option value="video">🎬 Video Promosi</option>
-                            <option value="document">📄 Dokumen / Risalah</option>
+                            <option value="document">📄 Dokumen / CPG / Risalah</option>
                             <option value="latihan">📚 Modul Latihan</option>
                             <option value="flipbook">📖 E-Flipbook Interaktif</option>
                         </select>
-                        <span class="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-[8px] dinamik-teks-sub">▼</span>
                     </div>
 
-                    <div class="relative w-full sm:w-auto">
+                    <!-- Dropdown Program Penyakit -->
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1.5 uppercase text-[10px] tracking-wider dinamik-teks-sub">Program / Portfolio</label>
                         <select 
                             id="programSelect" 
                             onchange="handleProgramChange()" 
-                            class="w-full sm:w-auto pl-2.5 pr-7 py-1.5 text-xs bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#101e33] shadow-sm font-bold text-gray-600 appearance-none cursor-pointer dinamik-bg-kad dinamik-border dinamik-teks-biasa"
+                            class="w-full p-2.5 text-xs bg-white border border-gray-200 rounded-xl focus:outline-none focus:border-[#101e33] shadow-xs font-bold text-gray-600 cursor-pointer dinamik-bg-input dinamik-border dinamik-teks-biasa"
                         >
                             <option value="all">📁 Semua Program</option>
                             <option value="umum">📁 Umum</option>
@@ -190,50 +200,105 @@
                             <option value="diabetes">🍬 Diabetes (Kencing Manis)</option>
                             <option value="hpt">🩸 Hipertensi (Darah Tinggi)</option>
                             <option value="hpl">🍗 Hyperlipidemia (Kolesterol)</option>
-                            <option value="kanser">Kanser</option>
+                            <option value="kanser">🎗️ Kanser</option>
                         </select>
-                        <span class="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-[8px] dinamik-teks-sub">▼</span>
                     </div>
 
-                    <div class="relative w-full sm:w-auto">
+                    <!-- Dropdown Susunan -->
+                    <div>
+                        <label class="font-bold text-slate-700 block mb-1.5 uppercase text-[10px] tracking-wider dinamik-teks-sub">Susunan Tajuk</label>
                         <select 
                             id="sortSelect" 
                             onchange="handleSortChange()" 
-                            class="w-full sm:w-auto pl-2.5 pr-7 py-1.5 text-xs bg-white border border-gray-200 rounded-lg focus:outline-none focus:border-[#101e33] shadow-sm font-bold text-gray-600 appearance-none cursor-pointer dinamik-bg-kad dinamik-border dinamik-teks-biasa"
+                            class="w-full p-2.5 text-xs bg-white border border-gray-200 rounded-xl focus:outline-none focus:border-[#101e33] shadow-xs font-bold text-gray-600 cursor-pointer dinamik-bg-input dinamik-border dinamik-teks-biasa"
                         >
                             <option value="default">↕ Susunan Asal</option>
                             <option value="az">🔤 Tajuk: A ke Z</option>
                             <option value="za">🔤 Tajuk: Z ke A</option>
                         </select>
-                        <span class="absolute right-2.5 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none text-[8px] dinamik-teks-sub">▼</span>
                     </div>
-
-                    <span id="materialCount" class="text-[11px] font-bold text-gray-400 bg-gray-50 border border-gray-100 px-2.5 py-1.5 rounded-lg shadow-sm whitespace-nowrap w-full sm:w-auto text-center sm:text-left dinamik-bg-kad dinamik-border dinamik-teks-sub">
-                        Menampilkan: 0 bahan
-                    </span>
-
                 </div>
             </div>
 
-            <div id="resourceGrid" class="mt-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-6 gap-4">
+            <!-- Footer Sidebar -->
+            <div class="pt-4 border-t border-gray-100 space-y-2 flex-shrink-0 dinamik-border">
+                <button onclick="resetSemuaPenapisSidebar()" class="w-full py-2.5 bg-rose-50 hover:bg-rose-100 text-rose-600 font-bold text-xs rounded-xl border border-rose-200 transition-all flex items-center justify-center gap-1.5">
+                    <span>✕</span> <span>Reset Penapis</span>
+                </button>
+                <p class="text-[10px] text-gray-400 text-center font-medium dinamik-teks-sub">Unit NCD · JKN Perlis</p>
+            </div>
+
+        </aside>
+
+        <!-- 📊 KANDUNGAN UTAMA (FULL WIDTH MAIN CONTENT) -->
+        <div class="flex-1 w-full overflow-y-auto custom-scrollbar flex flex-col h-[calc(100vh-57px)]">
+
+            <!-- BANNER HERO HUB SUMBER DIGITAL -->
+            <section class="w-full bg-[#101e33] py-6 md:py-8 px-4 md:px-8 relative overflow-hidden flex-shrink-0 shadow-md">
+                <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#fff_1px,transparent_1px)] [background-size:16px_16px]"></div>
+                <div class="w-full relative z-10 flex flex-col justify-center min-h-[90px] md:min-h-[100px]">
+                    <span class="text-[10px] font-extrabold tracking-widest text-emerald-400 uppercase bg-emerald-500/10 px-2.5 py-1 rounded-full w-max mb-2 backdrop-blur-sm">Hub Sumber Digital</span>
+                    <h1 class="text-xl md:text-2xl font-extrabold text-white tracking-tight leading-none">Bahan Pendidikan Kesihatan NCD</h1>
+                    <p class="text-[11px] md:text-xs text-gray-300 font-light mt-2 max-w-3xl leading-relaxed opacity-90">
+                        Akses pantas koleksi infografik, poster advokasi, video kapsul kesedaran, risalah krisis, modul rasmi, dan panduan kesihatan Unit Kawalan Penyakit Tidak Berjangkit (NCD) Jabatan Kesihatan Negeri Perlis.
+                    </p>
                 </div>
+            </section>
 
-            <div id="paginationContainer" class="flex items-center justify-center space-x-2 mt-10 mb-6 py-4 w-full">
-                </div>
+            <!-- GRID BAHAN MULTIMEDIA -->
+            <main class="w-full px-4 md:px-8 py-6 flex-1">
+                <div id="resourceGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4"></div>
+                <div id="paginationContainer" class="flex items-center justify-center space-x-2 mt-10 mb-6 py-4 w-full"></div>
+            </main>
 
-        </main>
+            <!-- FOOTER -->
+            <footer class="w-full bg-white py-4 px-8 text-center border-t border-gray-100 mt-auto shadow-inner flex-shrink-0 dinamik-bg-kad dinamik-border">
+                <p class="text-[10px] text-gray-400 font-semibold tracking-wider uppercase dinamik-teks-sub">
+                    Hak Cipta © 2026 Unit Kawalan Penyakit Tidak Berjangkit (NCD), Jabatan Kesihatan Negeri Perlis
+                </p>
+            </footer>
 
-        <footer class="w-full bg-white py-4 px-12 text-center border-t border-gray-100 mt-auto shadow-inner dinamik-bg-kad dinamik-border">
-            <p class="text-[10px] text-gray-400 font-semibold tracking-wider uppercase dinamik-teks-sub">
-                Hak Cipta © 2026 Unit Kawalan Penyakit Tidak Berjangkit (NCD), Jabatan Kesihatan Negeri Perlis
-            </p>
-        </footer>
-
+        </div>
     </div>
 
     <script src="resources-data.js"></script>
     <script src="info-ncd.js"></script>
     <script>
+        let sidebarOpen = false;
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebarFilter');
+            const icon = document.getElementById('iconSidebar');
+
+            if (sidebarOpen) {
+                sidebar.classList.add('-translate-x-full');
+                sidebar.classList.remove('translate-x-0');
+                icon.innerText = "☰";
+                sidebarOpen = false;
+            } else {
+                sidebar.classList.remove('-translate-x-full');
+                sidebar.classList.add('translate-x-0');
+                icon.innerText = "✕";
+                sidebarOpen = true;
+            }
+        }
+
+        function resetSemuaPenapisSidebar() {
+            document.getElementById('searchInput').value = "";
+            document.getElementById('categorySelect').value = "all";
+            document.getElementById('programSelect').value = "all";
+            document.getElementById('sortSelect').value = "default";
+            
+            if (typeof currentCategory !== 'undefined') currentCategory = 'all';
+            if (typeof currentProgram !== 'undefined') currentProgram = 'all';
+            if (typeof sortMethod !== 'undefined') sortMethod = 'default';
+            if (typeof currentPage !== 'undefined') currentPage = 1;
+            
+            if (typeof applyFilterAndRender === 'function') {
+                applyFilterAndRender();
+            }
+        }
+
         function tukarTemaSistem(tema) {
             document.documentElement.setAttribute('data-theme', tema);
             localStorage.setItem('pilihanTemaNCD_Global', tema);
@@ -273,36 +338,31 @@
                         const badgeText = badgeElement.innerText.trim().toUpperCase();
                         const teksTajukSemasa = tajukKad.innerText.trim().toLowerCase();
                         
-                        // 🛠️ UPGRADE LOGIK: Mencari indeks padanan tajuk dengan pembersihan ruang kosong ekstra (.replace)
                         let indeksJumpa = targetArray.findIndex(item => {
                             const tajukObjek = (item.title || item.tajuk || '').trim().toLowerCase().replace(/\s+/g, ' ');
                             const tajukFizikalKad = teksTajukSemasa.replace(/\s+/g, ' ');
                             return tajukObjek === tajukFizikalKad;
                         });
                         
-                        // 🛡️ PELAN BACKFALL: Jika perbandingan tajuk gagal, cari padanan berdasarkan persamaan jenis kategori
                         if (indeksJumpa === -1) {
                             if (badgeText.includes('FLIPBOOK')) {
                                 indeksJumpa = targetArray.findIndex(item => item.category === 'flipbook');
                             }
                         }
                         
-                        // Jaminan keselamatan: Hanya proses jika indeks sah dan ditemui
                         if (indeksJumpa !== -1) {
                             const itemData = targetArray[indeksJumpa];
                             
-                            // ⚡ HALA TUJU ROUTER PINTAR (ANTARA MUKA MUTLAK)
                             if (badgeText.includes('FLIPBOOK') || itemData.category === 'flipbook') {
-                                // Menggunakan indeks susunan array sebenar (Cth: ?id=24) sebagai ID
                                 pautanTag.setAttribute('href', `view-flipbook.html?id=${indeksJumpa}`);
                             }
-                            else if (badgeText.includes('ALBUM') || badgeText.includes('SIRI')) {
+                            else if (badgeText.includes('ALBUM') || badgeText.includes('SIRI') || itemData.category === 'package') {
                                 pautanTag.setAttribute('href', `play-album.html?id=${indeksJumpa}`);
                             }
-                            else if (badgeText.includes('VIDEO') || badgeText.includes('KAPSUL')) {
+                            else if (badgeText.includes('VIDEO') || badgeText.includes('KAPSUL') || itemData.category === 'video') {
                                 pautanTag.setAttribute('href', `play-video.html?id=${indeksJumpa}`);
                             } 
-                            else if (badgeText.includes('INFOGRAFIK') || badgeText.includes('PANDUAN') || badgeText.includes('IMEJ') || badgeText.includes('POSTER') || badgeText.includes('LOGO')) {
+                            else if (badgeText.includes('INFOGRAFIK') || badgeText.includes('PANDUAN') || badgeText.includes('IMEJ') || badgeText.includes('POSTER') || badgeText.includes('LOGO') || itemData.category === 'infografik') {
                                 pautanTag.setAttribute('href', `play-image.html?id=${indeksJumpa}`);
                             } 
                             else {
@@ -311,7 +371,7 @@
                         }
                     }
                 });
-            }, 100); // Masa tunda mikro ditingkatkan sedikit ke 100ms untuk kestabilan enjin info-ncd.js
+            }, 100);
         }
 
         const observer = new MutationObserver(() => {

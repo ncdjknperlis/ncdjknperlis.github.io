@@ -637,7 +637,7 @@ const resourcesData = [
     {
         title: "Koleksi Slaid dan Bahan Rujukan Bengkel CPG T2DM 2026",
         category: "package",  // 💡 KUNCI UTAMA: Mesti guna 'package' atau 'pakej'
-        program: "umum",     // Pilihan program: umum / mental / diabetes / hpt / hpl / akta852
+        program: "diabetes",     // Pilihan program: umum / mental / diabetes / hpt / hpl / akta852
         desc: "Himpunan slaid fasilitator dan bahan rujukan bagi Bengkel Pemantapan Panduan Amalan Klinikal (CPG) Pengurusan Diabetis Mellitus Jenis 2 (T2DM) Jabatan Kesihatan Negeri Perlis, yang telah diadakan pada 1 Ogos 2026, di Auditorium Dr Syed Mahmood, JKN Perlis.",
         imageUrl: "https://drive.google.com/thumbnail?sz=w600&id=1UvtVyRRqg423LlIs6EZKP0VJeNUdsGvP", // Gambar hiasan pada kad grid luar
         badgeText: "Album Dokumen",  // Teks kecil pada lencana kad
@@ -675,6 +675,42 @@ const resourcesData = [
                 type: "📄 PDF Drive",
                 url: "https://drive.google.com/file/d/1YJOMhZrdc0z_P_prrA1oTqi8KMW4-i8H/preview", // ➔ Pautan preview Google Drive[cite: 1]https://drive.google.com/file/d/1YJOMhZrdc0z_P_prrA1oTqi8KMW4-i8H/view?usp=sharing
                 thumb: "https://drive.google.com/thumbnail?sz=w100&id=1YJOMhZrdc0z_P_prrA1oTqi8KMW4-i8H" // Gambar kecil / thumbnail PDF[cite: 1]
+            },
+            {
+                name: "ESRF",
+                type: "📄 PDF Drive",
+                url: "https://drive.google.com/file/d/1gIkAQ3xJtVtvfYRK_zD3i8xAlcJ1rfC8/preview", // ➔ Pautan preview Google Drive[cite: 1]https://drive.google.com/file/d/1gIkAQ3xJtVtvfYRK_zD3i8xAlcJ1rfC8/view?usp=drive_link
+                thumb: "https://drive.google.com/thumbnail?sz=w100&id=1gIkAQ3xJtVtvfYRK_zD3i8xAlcJ1rfC8" // Gambar kecil / thumbnail PDF[cite: 1]
+            },
+            {
+                name: "Common Drug Groups Used in The Management of T2DM",
+                type: "📄 PDF Drive",
+                url: "https://drive.google.com/file/d/1Bj1kXHrkiUOusxoTh253TEr4LINZmP0X/preview", // ➔ Pautan preview Google Drive[cite: 1]
+                thumb: "https://drive.google.com/thumbnail?sz=w100&id=1Bj1kXHrkiUOusxoTh253TEr4LINZmP0X" // Gambar kecil / thumbnail PDF[cite: 1]
+            },
+            {
+                name: "Intensification and Deintensification of Insulin",
+                type: "📄 PDF Drive",
+                url: "https://drive.google.com/file/d/1d5wQo55cFBpM8-cNT0DNja8jtX5H25_b/preview", //
+                thumb: "https://drive.google.com/thumbnail?sz=w100&id=1d5wQo55cFBpM8-cNT0DNja8jtX5H25_b" // Gambar kecil / thumbnail PDF[cite: 1]
+            },
+            {
+                name: "DKD Clinical Blueprint 2024",
+                type: "📄 PDF Drive",
+                url: "https://drive.google.com/file/d/1PTzCA7PpmLq3F-iQUVGTqXW2diCT-j_X/preview", //
+                thumb: "https://drive.google.com/thumbnail?sz=w100&id=1PTzCA7PpmLq3F-iQUVGTqXW2diCT-j_X" // Gambar kecil / thumbnail PDF[cite: 1]
+            },
+            {
+                name: "Practical Guide to Insulin Therapy in T2DM 2nd Edition 2024",
+                type: "📄 PDF Drive",
+                url: "https://drive.google.com/file/d/1pXdCKSVj5pzQKw8Uvi3u-hggfHGBcYHr/preview", //
+                thumb: "https://drive.google.com/thumbnail?sz=w100&id=1pXdCKSVj5pzQKw8Uvi3u-hggfHGBcYHr" // Gambar kecil / thumbnail PDF[cite: 1]
+            },
+            {
+                name: "OGDL",
+                type: "📄 PDF Drive",
+                url: "https://drive.google.com/file/d/1VUtSZfoMOB-seOeRBBu2bJ7FgcPKUf6T/preview", //
+                thumb: "https://drive.google.com/thumbnail?sz=w100&id=1VUtSZfoMOB-seOeRBBu2bJ7FgcPKUf6T" // Gambar kecil / thumbnail PDF[cite: 1]
             }
         ]
     },
