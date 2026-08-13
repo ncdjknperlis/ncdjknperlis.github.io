@@ -33,14 +33,14 @@
 </head>
 <body class="bg-slate-50 min-h-screen flex items-center justify-center p-3 sm:p-6 antialiased text-slate-800">
 
-    <!-- 🛑 IFRAME TERSEMBUNYI UNTUK PENGHANTARAN ANGIN PANTAS -->
+    <!-- 🛑 IFRAME TERSEMBUNYI UNTUK PENGHANTARAN INSTANT -->
     <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) { pamerSkrinKejayaan(); }"></iframe>
 
     <div class="w-full max-w-xl bg-white rounded-3xl p-5 sm:p-8 shadow-xl border border-slate-100 flex flex-col justify-between min-h-[560px] relative overflow-hidden my-auto">
         
-        <!-- 🖼️ BANNER FULL CARD -->
+        <!-- 🖼️ BANNER FULL CARD (Baris 23: Masukkan gambar banner di sini) -->
         <div id="bannerContainer" class="-mx-5 -mt-5 sm:-mx-8 sm:-mt-8 mb-5 overflow-hidden bg-slate-100 border-b border-slate-100 flex items-center justify-center min-h-[120px]">
-            <img src="images/banner-keberkesanan.png" alt="Banner Program" class="w-full h-auto object-cover max-h-52" onerror="this.onerror=null; this.src='https://placehold.co/600x200/6EBF32/ffffff?text=BANNER+PENILAIAN+KEBERKESANAN';">
+            <img src="banner-kpkm.png" alt="Banner Program" class="w-full h-auto object-cover max-h-52" onerror="this.onerror=null; this.src='https://placehold.co/600x200/6EBF32/ffffff?text=BANNER+PENILAIAN+KEBERKESANAN';">
         </div>
 
         <!-- HEADER & PROGRESS BAR -->
@@ -50,22 +50,56 @@
                     Penilaian Keberkesanan
                 </span>
                 <span id="stepIndicator" class="text-xs font-bold text-slate-400">
-                    Langkah 1 dari 5
+                    Pengenalan
                 </span>
             </div>
 
             <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
-                <div id="progressBar" class="bg-[#6EBF32] h-full w-[20%] transition-all duration-300"></div>
+                <div id="progressBar" class="bg-[#6EBF32] h-full w-[0%] transition-all duration-300"></div>
             </div>
         </div>
 
-        <!-- FORM UTAMA (HALAKAN KE IFRAME TERSEMBUNYI) -->
-        <form id="borangKeberkesanan" action="https://script.google.com/macros/s/AKfycbxAigmNcZhc35EIB4O03qEnVmiUs_8dDaRI-REharyEA839FD9w-BsDplVa7eJqDuoPzA/exec" method="POST" target="hidden_iframe" onsubmit="submitted=true;" class="my-auto py-2">
+        <!-- FORM UTAMA -->
+        <form id="borangKeberkesanan" action="https://script.google.com/macros/s/AKfycbxAigmNcZhc35EIB4O03qEnVmiUs_8dDaRI-REharyEA839FD9w-BsDplVa7eJqDuoPzA/exec" method="POST" target="hidden_iframe" class="my-auto py-2">
             
             <input type="hidden" name="action" value="submitKeberkesanan">
 
-            <!-- SECTION 1: MAKLUMAT PROGRAM (AUTOFILL) -->
+            <!-- 🌟 SECTION 0: SKRIN PENGENALAN & DISCLAIMER -->
             <div class="form-section active space-y-4">
+                <div class="border-l-4 border-[#6EBF32] pl-3 space-y-1">
+                    <h2 class="text-base sm:text-lg font-black text-slate-900">Pengenalan Penilaian Keberkesanan</h2>
+                    <p class="text-xs text-slate-500 font-medium">Kempen Hentikan Stigma: Kesihatan Mental Milik Semua</p>
+                </div>
+
+                <div class="text-xs text-slate-600 leading-relaxed space-y-3">
+                    <p>
+                        Selamat datang ke <strong>Borang Penilaian Keberkesanan Program</strong>. Borang ini disediakan bagi menilai maklum balas serta impak penganjuran aktiviti kesedaran kesihatan mental di peringkat komuniti.
+                    </p>
+
+                    <div class="p-3.5 bg-slate-50 rounded-2xl border border-slate-100 space-y-2">
+                        <span class="font-bold text-slate-800 block text-[11px] uppercase tracking-wider">🎯 Objektif Utama Penilaian:</span>
+                        <ul class="list-disc list-inside space-y-1 text-slate-600 text-[11px]">
+                            <li>Menilai tahap pemahaman dan pendedahan komuniti terhadap Kempen Hentikan Stigma.</li>
+                            <li>Mengenal pasti amalan penjagaan kendiri (*self-care*) dalam kalangan peserta.</li>
+                            <li>Mengukur tahap kepuasan keseluruhan terhadap penganjuran dan pengisian program.</li>
+                        </ul>
+                    </div>
+
+                    <!-- 🔒 PENAFIAN KERAHSIAAN (CONFIDENTIALITY DISCLAIMER) -->
+                    <div class="p-3.5 bg-emerald-50/60 rounded-2xl border border-[#6EBF32]/30 space-y-1">
+                        <div class="flex items-center gap-1.5 text-[#5aa825] font-extrabold text-[11px]">
+                            <span>🔒</span>
+                            <span>Penafian Kerahsiaan & Privasi Data</span>
+                        </div>
+                        <p class="text-[10.5px] text-slate-600 leading-normal">
+                            Segala maklumat yang diberikan di dalam borang ini adalah <strong>SULIT dan RAHSIA</strong>. Data yang dikumpul hanya akan digunakan untuk tujuan analisis, pelaporan, dan penambahbaikan mutu perkhidmatan KKM pada masa hadapan sahaja.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SECTION 1: MAKLUMAT PROGRAM (AUTOFILL) -->
+            <div class="form-section space-y-4">
                 <div class="border-l-4 border-[#6EBF32] pl-3 flex items-center justify-between">
                     <div>
                         <h2 class="text-base sm:text-lg font-black text-slate-900">Maklumat Acara Semasa</h2>
@@ -278,8 +312,8 @@
                             <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center font-bold cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k3_relevan" value="1" required class="block mx-auto mb-0.5">1</label>
                             <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center font-bold cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k3_relevan" value="2" required class="block mx-auto mb-0.5">2</label>
                             <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center font-bold cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k3_relevan" value="3" required class="block mx-auto mb-0.5">3</label>
-                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k3_relevan" value="4" required class="block mx-auto mb-0.5">4</label>
-                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k3_relevan" value="5" required class="block mx-auto mb-0.5">5</label>
+                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center font-bold cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k3_relevan" value="4" required class="block mx-auto mb-0.5">4</label>
+                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center font-bold cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k3_relevan" value="5" required class="block mx-auto mb-0.5">5</label>
                         </div>
                     </div>
 
@@ -295,8 +329,8 @@
                             <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center font-bold cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k4_perubahan" value="1" required class="block mx-auto mb-0.5">1</label>
                             <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center font-bold cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k4_perubahan" value="2" required class="block mx-auto mb-0.5">2</label>
                             <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center font-bold cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k4_perubahan" value="3" required class="block mx-auto mb-0.5">3</label>
-                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k4_perubahan" value="4" required class="block mx-auto mb-0.5">4</label>
-                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k4_perubahan" value="5" required class="block mx-auto mb-0.5">5</label>
+                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center font-bold cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k4_perubahan" value="4" required class="block mx-auto mb-0.5">4</label>
+                            <label class="p-2 rounded-xl bg-slate-50 border border-slate-200 text-center font-bold cursor-pointer hover:border-[#6EBF32]"><input type="radio" name="k4_perubahan" value="5" required class="block mx-auto mb-0.5">5</label>
                         </div>
                     </div>
                 </div>
@@ -332,7 +366,7 @@
             </button>
             <div class="flex-1"></div>
             <button type="button" id="btnSeterusnya" onclick="seterusnyaStep()" class="px-6 py-3 rounded-xl bg-[#6EBF32] text-white font-bold text-xs shadow-md shadow-emerald-600/20 hover:bg-[#5aa825] active:scale-95 transition-all">
-                Seterusnya →
+                Mula Penilaian →
             </button>
             <button type="button" id="btnHantar" onclick="submitFormManual()" class="hidden px-6 py-3 rounded-xl bg-[#6EBF32] text-white font-bold text-xs shadow-md shadow-emerald-600/20 hover:bg-[#5aa825] active:scale-95 transition-all">
                 Hantar Penilaian ✅
@@ -341,7 +375,7 @@
 
     </div>
 
-    <!-- JAVASCRIPT: NAVIGASI & INSTANT IFRAME SUBMISSION ENGINE -->
+    <!-- JAVASCRIPT: NAVIGASI & INSTANT SUBMISSION ENGINE -->
     <script>
         let currentSection = 0;
         const sections = document.querySelectorAll('.form-section');
@@ -372,30 +406,43 @@
                 }
             });
 
-            const percentage = ((currentSection + 1) / totalSections) * 100;
-            document.getElementById('progressBar').style.width = percentage + '%';
-            document.getElementById('stepIndicator').innerText = `Langkah ${currentSection + 1} dari ${totalSections}`;
-
             const btnKembali = document.getElementById('btnKembali');
             const btnSeterusnya = document.getElementById('btnSeterusnya');
             const btnHantar = document.getElementById('btnHantar');
 
             if (currentSection === 0) {
+                // Skrin Pengenalan
+                document.getElementById('stepIndicator').innerText = "Pengenalan";
+                document.getElementById('progressBar').style.width = "0%";
                 btnKembali.classList.add('hidden');
-            } else {
-                btnKembali.classList.remove('hidden');
-            }
-
-            if (currentSection === totalSections - 1) {
-                btnSeterusnya.classList.add('hidden');
-                btnHantar.classList.remove('hidden');
-            } else {
                 btnSeterusnya.classList.remove('hidden');
+                btnSeterusnya.innerText = "Mula Penilaian →";
                 btnHantar.classList.add('hidden');
+            } else {
+                // Skrin Soalan 1 hingga 5
+                const questionStepIndex = currentSection;
+                const totalQuestionSteps = totalSections - 1;
+                const percentage = (questionStepIndex / totalQuestionSteps) * 100;
+                
+                document.getElementById('progressBar').style.width = percentage + '%';
+                document.getElementById('stepIndicator').innerText = `Langkah ${questionStepIndex} dari ${totalQuestionSteps}`;
+
+                btnKembali.classList.remove('hidden');
+                btnSeterusnya.innerText = "Seterusnya →";
+
+                if (currentSection === totalSections - 1) {
+                    btnSeterusnya.classList.add('hidden');
+                    btnHantar.classList.remove('hidden');
+                } else {
+                    btnSeterusnya.classList.remove('hidden');
+                    btnHantar.classList.add('hidden');
+                }
             }
         }
 
         function validatorSemasa() {
+            if (currentSection === 0) return true; // Skrin pengenalan tiada input
+
             const secEl = sections[currentSection];
             const requiredInputs = secEl.querySelectorAll('input[required], select[required]');
 
