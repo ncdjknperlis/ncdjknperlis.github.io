@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papan Pemuka Superadmin LHI | JKN Perlis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Chart.js untuk Carta Statistik -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ncd: { blue: '#2A4B9B', blueDark: '#1d3570', green: '#38B44A', greenDark: '#298c38', lightBg: '#F8FAFC' }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #F8FAFC; }
+        .tab-active { background-color: #2A4B9B; color: #ffffff; }
+    </style>
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col">
+
+    <!-- 🔗 PAUTAN CSV GOOGLE SHEET -->
+    <script>
+        const GOOGLE_CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbD9fYiY4LCaJJ1FCK0PG2IAjEBeNaZ-qvQTx3DpjuEkJrZOufMpcw-2ncsaFmen9oghuYcuA29cjk/pub?output=csv";
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyP1wvbH7RHAgThEk8WN5vWpsdisEaQatFBv0eLKa1fxiIxgUymAqbSuevInpzYwn8-/exec";
+    </script>
+
+    <!-- TOP NAVBAR -->
+    <header class="bg-white border-b border-slate-200 sticky top-0 z-40 shadow-2xs">
+        <div class="max-w-7xl mx-auto px-4 sm:px-8 h-16 sm:h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <img src="images/logo.png" alt="Logo KKM" class="h-9 sm:h-10 w-auto object-contain" onerror="this.onerror=null; this.src='https://placehold.co/80x80/2A4B9B/ffffff?text=KKM';">
+                <img src="images/logo-lhi.png" alt="Logo LHI" class="h-9 sm:h-10 w-auto object-contain" onerror="this.onerror=null; this.src='https://placehold.co/80x80/38B44A/ffffff?text=LHI';">
+                <div class="h-6 w-[1px] bg-slate-300"></div>
+                <div>
+                    <h1 class="text-xs font-black text-slate-900 uppercase tracking-tight">Portal Superadmin LHI</h1>
+                    <span class="text-[10px] text-slate-500 font-bold block">Jabatan Kesihatan Negeri Perlis</span>
+                </div>
+            </div>
+
+            <!-- PROFIL ADMIN -->
+            <div class="flex items-center gap-3">
+                <span class="text-xs font-extrabold bg-ncd-blue/10 text-ncd-blue px-3 py-1 rounded-full border border-ncd-blue/20">
+                    👑 Superadmin Access
+                </span>
+                <button onclick="muatDataLive()" class="bg-slate-100 hover:bg-slate-200 p-2 rounded-xl text-xs font-bold text-slate-700 flex items-center gap-1 border border-slate-200">
+                    🔄 Refresh Data
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- NAVIGATION TABS -->
+    <div class="bg-white border-b border-slate-200 px-4 sm:px-8">
+        <div class="max-w-7xl mx-auto flex gap-2 text-xs font-extrabold pt-2">
+            <button onclick="tukarTab('analytics')" id="btnTabAnalytics" class="tab-btn tab-active px-5 py-3 rounded-t-xl transition-all">
+                📊 Analytics & Dashboard
+            </button>
+            <button onclick="tukarTab('crud')" id="btnTabCrud" class="tab-btn text-slate-600 hover:bg-slate-100 px-5 py-3 rounded-t-xl transition-all">
+                📁 Pengurusan Data (CRUD)
+            </button>
+            <button onclick="tukarTab('users')" id="btnTabUsers" class="tab-btn text-slate-600 hover:bg-slate-100 px-5 py-3 rounded-t-xl transition-all">
+                👥 Pengurusan Pengguna (Users)
+            </button>
+        </div>
+    </div>
+
+    <!-- MAIN CONTENT CONTAINER -->
+    <main class="max-w-7xl w-full mx-auto p-4 sm:p-8 space-y-6 flex-1">
+
+        <!-- ======================================================== -->
+        <!-- 📊 TAB 1: ANALYTICS & DASHBOARD                          -->
+        <!-- ======================================================== -->
+        <div id="tabAnalytics" class="space-y-6">
+            
+            <!-- KPI CARDS -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs space-y-1">
+                    <span class="text-xs font-bold text-slate-500 uppercase">Jumlah Disaring</span>
+                    <h2 class="text-3xl font-black text-slate-900" id="kpiTotal">0</h2>
+                    <span class="text-[10px] text-ncd-blue font-bold">Rekod Saringan Keseluruhan</span>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs space-y-1">
+                    <span class="text-xs font-bold text-slate-500 uppercase">Kes Berisiko (Layak LHI)</span>
+                    <h2 class="text-3xl font-black text-amber-600" id="kpiBerisiko">0</h2>
+                    <span class="text-[10px] text-amber-700 font-bold" id="kpiPeratusBerisiko">0% daripada jumlah</span>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs space-y-1">
+                    <span class="text-xs font-bold text-slate-500 uppercase">Rujukan Ke KK</span>
+                    <h2 class="text-3xl font-black text-ncd-green" id="kpiRujukan">0</h2>
+                    <span class="text-[10px] text-ncd-greenDark font-bold">Persetujuan Hadir KK</span>
+                </div>
+
+                <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-xs space-y-1">
+                    <span class="text-xs font-bold text-slate-500 uppercase">Klien Sihat</span>
+                    <h2 class="text-3xl font-black text-sky-600" id="kpiSihat">0</h2>
+                    <span class="text-[10px] text-sky-700 font-bold">Tiada Faktor Risiko</span>
+                </div>
+            </div>
+
+            <!-- CARTA STATISTIK -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- CARTA 1: SEKTOR PEKERJAAN -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-xs space-y-3">
+                    <h3 class="text-xs font-extrabold uppercase text-slate-700 border-b pb-2">Taburan Mengikut Sektor Pekerjaan</h3>
+                    <div class="h-64">
+                        <canvas id="chartPekerjaan"></canvas>
+                    </div>
+                </div>
+
+                <!-- CARTA 2: FAKTOR RISIKO UTAMA -->
+                <div class="bg-white p-6 rounded-3xl border border-slate-200/80 shadow-xs space-y-3">
+                    <h3 class="text-xs font-extrabold uppercase text-slate-700 border-b pb-2">Analisis 13 Faktor Risiko Dikesan (Part A)</h3>
+                    <div class="h-64">
+                        <canvas id="chartRisiko"></canvas>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- 📁 TAB 2: PENGURUSAN DATA FULL (CRUD, FILTER, SEARCH)      -->
+        <!-- ======================================================== -->
+        <div id="tabCrud" class="hidden space-y-4">
+            
+            <!-- PANEL TAPISAN & CARIAN -->
+            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-xs space-y-3">
+                <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b pb-3">
+                    <h3 class="text-xs font-extrabold uppercase text-ncd-blue">Penapis & Carian Data Terperinci</h3>
+                    <div class="flex gap-2">
+                        <button onclick="eksportCSV()" class="py-2 px-3.5 bg-ncd-green hover:bg-ncd-greenDark text-white text-xs font-bold rounded-xl shadow-xs">
+                            📥 Eksport CSV
+                        </button>
+                        <button onclick="bukaModalTambah()" class="py-2 px-3.5 bg-ncd-blue hover:bg-ncd-blueDark text-white text-xs font-bold rounded-xl shadow-xs">
+                            ➕ Tambah Rekod Manual
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-4 gap-3 text-xs">
+                    <div>
+                        <label class="font-bold text-slate-600 block mb-1">Carian Pantas (IC / Nama / Tel)</label>
+                        <input type="text" id="carianInput" onkeyup="tapisData()" placeholder="Taip nama / IC..." class="w-full p-2.5 rounded-xl border focus:ring-2 focus:ring-ncd-blue/20 outline-none">
+                    </div>
+                    <div>
+                        <label class="font-bold text-slate-600 block mb-1">Sektor Pekerjaan</label>
+                        <select id="filterPekerjaan" onchange="tapisData()" class="w-full p-2.5 rounded-xl border bg-white focus:ring-2 focus:ring-ncd-blue/20 outline-none">
+                            <option value="SEMUA">-- Semua Sektor --</option>
+                            <option value="Sektor Kerajaan (Persekutuan)">Kerajaan (Persekutuan)</option>
+                            <option value="Sektor Kerajaan (Negeri)">Kerajaan (Negeri)</option>
+                            <option value="Sektor Swasta">Sektor Swasta</option>
+                            <option value="Sektor GLC">Sektor GLC</option>
+                            <option value="Bekerja Sendiri / Peniaga">Bekerja Sendiri</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="font-bold text-slate-600 block mb-1">Status Keputusan</label>
+                        <select id="filterStatus" onchange="tapisData()" class="w-full p-2.5 rounded-xl border bg-white focus:ring-2 focus:ring-ncd-blue/20 outline-none">
+                            <option value="SEMUA">-- Semua Status --</option>
+                            <option value="RUJUKAN KE KK">RUJUKAN KE KK</option>
+                            <option value="KLIEN SIHAT">KLIEN SIHAT</option>
+                            <option value="NASIHAT">NASIHAT (MENOLAK)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="font-bold text-slate-600 block mb-1">Jenis Saringan</label>
+                        <select id="filterJenis" onchange="tapisData()" class="w-full p-2.5 rounded-xl border bg-white focus:ring-2 focus:ring-ncd-blue/20 outline-none">
+                            <option value="SEMUA">-- Semua Jenis --</option>
+                            <option value="Tempat Kerja">Tempat Kerja</option>
+                            <option value="Outreach">Outreach / Komuniti</option>
+                            <option value="Fasiliti Kesihatan">Fasiliti Kesihatan</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <!-- JADUAL DATA FULL (DATATABLE) -->
+            <div class="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-xs">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead class="bg-slate-100 text-slate-700 uppercase font-extrabold border-b border-slate-200">
+                            <tr>
+                                <th class="p-3">Tarikh / IC</th>
+                                <th class="p-3">Nama Penuh</th>
+                                <th class="p-3">Sektor Pekerjaan</th>
+                                <th class="p-3">Lokasi Saringan</th>
+                                <th class="p-3 text-center">Jml Risiko</th>
+                                <th class="p-3">Status Keputusan</th>
+                                <th class="p-3 text-center">Tindakan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="jadualBody" class="divide-y divide-slate-100 font-medium text-slate-700">
+                            <!-- Data Injected via JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ======================================================== -->
+        <!-- 👥 TAB 3: PENGURUSAN PENGGUNA (USERS MANAGEMENT)           -->
+        <!-- ======================================================== -->
+        <div id="tabUsers" class="hidden space-y-4">
+            <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-xs space-y-4">
+                <div class="flex items-center justify-between border-b pb-3">
+                    <div>
+                        <h3 class="text-xs font-black uppercase text-ncd-blue">Pengurusan Akaun & Peranan Pengguna</h3>
+                        <p class="text-[11px] text-slate-500">Kawal selia senarai petugas saringan dan pentadbir sistem JKN Perlis.</p>
+                    </div>
+                    <button onclick="tambahUserModal()" class="py-2 px-3.5 bg-ncd-blue text-white text-xs font-bold rounded-xl shadow-xs">
+                        ➕ Tambah Pengguna Baharu
+                    </button>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-xs border-collapse">
+                        <thead class="bg-slate-100 text-slate-700 uppercase font-extrabold border-b">
+                            <tr>
+                                <th class="p-3">ID / Nama</th>
+                                <th class="p-3">E-mel</th>
+                                <th class="p-3">Peranan (Role)</th>
+                                <th class="p-3">Lokasi Tugas</th>
+                                <th class="p-3 text-center">Status</th>
+                                <th class="p-3 text-center">Tindakan</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-100">
+                            <tr>
+                                <td class="p-3 font-bold">USR-001 · Dr. Azman (NCD)</td>
+                                <td class="p-3">azman@moh.gov.my</td>
+                                <td class="p-3"><span class="bg-purple-100 text-purple-800 px-2 py-0.5 rounded text-[10px] font-bold">SUPERADMIN</span></td>
+                                <td class="p-3">JKN Perlis (Pusat)</td>
+                                <td class="p-3 text-center"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-[10px] font-bold">AKTIF</span></td>
+                                <td class="p-3 text-center">
+                                    <button class="text-blue-600 font-bold hover:underline">Edit</button>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="p-3 font-bold">USR-002 · Nurse Salmah</td>
+                                <td class="p-3">salmah@moh.gov.my</td>
+                                <td class="p-3"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-[10px] font-bold">ADMIN KK</span></td>
+                                <td class="p-3">KK Kangar</td>
+                                <td class="p-3 text-center"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-[10px] font-bold">AKTIF</span></td>
+                                <td class="p-3 text-center">
+                                    <button class="text-blue-600 font-bold hover:underline">Edit</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- MODAL TAMBAH REKOD MANUAL -->
+    <div id="modalTambah" class="hidden fixed inset-0 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4 z-50">
+        <div class="bg-white rounded-3xl max-w-md w-full p-6 space-y-4 shadow-2xl border">
+            <h3 class="text-sm font-black text-ncd-blue uppercase border-b pb-2">Tambah Rekod Saringan Manual</h3>
+            <div class="space-y-3 text-xs">
+                <div>
+                    <label class="font-bold">Nama Penuh</label>
+                    <input type="text" id="mNama" class="w-full p-2 border rounded-lg mt-1">
+                </div>
+                <div>
+                    <label class="font-bold">No. IC</label>
+                    <input type="text" id="mIC" class="w-full p-2 border rounded-lg mt-1">
+                </div>
+                <div>
+                    <label class="font-bold">No. Tel</label>
+                    <input type="text" id="mTel" class="w-full p-2 border rounded-lg mt-1">
+                </div>
+            </div>
+            <div class="flex justify-end gap-2 pt-2 border-t">
+                <button onclick="tutupModalTambah()" class="py-2 px-4 bg-slate-200 text-xs font-bold rounded-xl">Batal</button>
+                <button onclick="simpanManual()" class="py-2 px-4 bg-ncd-blue text-white text-xs font-bold rounded-xl">Simpan Data</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ⚙️ JAVASCRIPT ENGINE & PAPARAN CARTA -->
+    <script>
+        let globalData = [];
+        let chartPekerjaanObj = null;
+        let chartRisikoObj = null;
+
+        // TUKAR TAB
+        function tukarTab(tabName) {
+            document.getElementById('tabAnalytics').classList.add('hidden');
+            document.getElementById('tabCrud').classList.add('hidden');
+            document.getElementById('tabUsers').classList.add('hidden');
+
+            document.querySelectorAll('.tab-btn').forEach(b => b.className = "tab-btn text-slate-600 hover:bg-slate-100 px-5 py-3 rounded-t-xl transition-all");
+
+            if(tabName === 'analytics') {
+                document.getElementById('tabAnalytics').classList.remove('hidden');
+                document.getElementById('btnTabAnalytics').className = "tab-btn tab-active px-5 py-3 rounded-t-xl transition-all";
+            } else if(tabName === 'crud') {
+                document.getElementById('tabCrud').classList.remove('hidden');
+                document.getElementById('btnTabCrud').className = "tab-btn tab-active px-5 py-3 rounded-t-xl transition-all";
+            } else {
+                document.getElementById('tabUsers').classList.remove('hidden');
+                document.getElementById('btnTabUsers').className = "tab-btn tab-active px-5 py-3 rounded-t-xl transition-all";
+            }
+        }
+
+        // MUAT DATA CSV TERUS DARI GOOGLE SHEET
+        function muatDataLive() {
+            fetch(GOOGLE_CSV_URL)
+                .then(response => response.text())
+                .then(csvText => {
+                    prosesCSVData(csvText);
+                })
+                .catch(err => console.error("Ralat muat CSV:", err));
+        }
+
+        // PROSES CSV KE ARRAY OBJECT
+        function prosesCSVData(csvText) {
+            const lines = csvText.split('\n');
+            globalData = [];
+
+            for(let i = 1; i < lines.length; i++) {
+                if(!lines[i].trim()) continue;
+                const cols = lines[i].split(',');
+                
+                // Prapemprosesan Data Kolom
+                globalData.push({
+                    timestamp: cols[0] ? cols[0].replace(/"/g, '') : '',
+                    nama: cols[1] ? cols[1].replace(/"/g, '') : 'Tiada Nama',
+                    noIC: cols[2] ? cols[2].replace(/"/g, '').replace(/'/g, '') : '',
+                    noTel: cols[3] ? cols[3].replace(/"/g, '').replace(/'/g, '') : '',
+                    pekerjaan: cols[4] ? cols[4].replace(/"/g, '') : 'Lain-lain',
+                    bangsa: cols[5] ? cols[5].replace(/"/g, '') : '',
+                    jenisSaringan: cols[6] ? cols[6].replace(/"/g, '') : '',
+                    tempatSaringan: cols[7] ? cols[7].replace(/"/g, '') : '',
+                    jumlahRisiko: cols[8] ? parseInt(cols[8].replace(/"/g, '')) || 0 : 0,
+                    statusKlien: cols[9] ? cols[9].replace(/"/g, '') : '',
+                    keputusanAkhir: cols[12] ? cols[12].replace(/"/g, '') : ''
+                });
+            }
+
+            kemaskiniKPIAndCarta();
+            paparJadual(globalData);
+        }
+
+        // KEMAS KINI KPI & CARTA
+        function kemaskiniKPIAndCarta() {
+            const total = globalData.length;
+            const berisiko = globalData.filter(d => d.jumlahRisiko >= 1).length;
+            const rujukan = globalData.filter(d => d.keputusanAkhir.includes('RUJUKAN')).length;
+            const sihat = total - berisiko;
+
+            document.getElementById('kpiTotal').innerText = total;
+            document.getElementById('kpiBerisiko').innerText = berisiko;
+            document.getElementById('kpiRujukan').innerText = rujukan;
+            document.getElementById('kpiSihat').innerText = sihat;
+            document.getElementById('kpiPeratusBerisiko').innerText = total > 0 ? ((berisiko/total)*100).toFixed(1) + "% daripada jumlah" : "0%";
+
+            // HASILKAN CARTA PEKERJAAN
+            const pekerjaanCount = {};
+            globalData.forEach(d => {
+                pekerjaanCount[d.pekerjaan] = (pekerjaanCount[d.pekerjaan] || 0) + 1;
+            });
+
+            if(chartPekerjaanObj) chartPekerjaanObj.destroy();
+            const ctx1 = document.getElementById('chartPekerjaan').getContext('2d');
+            chartPekerjaanObj = new Chart(ctx1, {
+                type: 'bar',
+                data: {
+                    labels: Object.keys(pekerjaanCount),
+                    datasets: [{
+                        label: 'Bilangan Disaring',
+                        data: Object.values(pekerjaanCount),
+                        backgroundColor: '#2A4B9B'
+                    }]
+                },
+                options: { responsive: true, maintainAspectRatio: false }
+            });
+        }
+
+        // PAPAR JADUAL DATA
+        function paparJadual(data) {
+            const tbody = document.getElementById('jadualBody');
+            tbody.innerHTML = "";
+
+            data.forEach((row, idx) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50";
+
+                let badgeColor = "bg-sky-100 text-sky-800";
+                if(row.keputusanAkhir.includes('RUJUKAN')) badgeColor = "bg-emerald-100 text-emerald-800";
+                if(row.keputusanAkhir.includes('NASIHAT')) badgeColor = "bg-amber-100 text-amber-800";
+
+                tr.innerHTML = `
+                    <td class="p-3">
+                        <span class="font-bold block text-slate-900">${row.noIC || '-'}</span>
+                        <span class="text-[10px] text-slate-400">${row.timestamp}</span>
+                    </td>
+                    <td class="p-3 font-bold text-slate-800">${row.nama}</td>
+                    <td class="p-3">${row.pekerjaan}</td>
+                    <td class="p-3">${row.tempatSaringan}</td>
+                    <td class="p-3 text-center font-black text-ncd-blue">${row.jumlahRisiko}</td>
+                    <td class="p-3"><span class="${badgeColor} px-2.5 py-1 rounded-full text-[10px] font-black">${row.keputusanAkhir}</span></td>
+                    <td class="p-3 text-center">
+                        <button onclick="padamRekod(${idx})" class="text-rose-600 font-bold hover:underline">Padam</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        // TAPIS DATA
+        function tapisData() {
+            const carian = document.getElementById('carianInput').value.toLowerCase();
+            const pekerjaan = document.getElementById('filterPekerjaan').value;
+            const status = document.getElementById('filterStatus').value;
+            const jenis = document.getElementById('filterJenis').value;
+
+            const filtered = globalData.filter(d => {
+                const matchCarian = d.nama.toLowerCase().includes(carian) || d.noIC.includes(carian);
+                const matchPekerjaan = pekerjaan === 'SEMUA' || d.pekerjaan === pekerjaan;
+                const matchStatus = status === 'SEMUA' || d.keputusanAkhir.includes(status);
+                const matchJenis = jenis === 'SEMUA' || d.jenisSaringan === jenis;
+
+                return matchCarian && matchPekerjaan && matchStatus && matchJenis;
+            });
+
+            paparJadual(filtered);
+        }
+
+        // EKSPORT CSV
+        function eksportCSV() {
+            let csvContent = "data:text/csv;charset=utf-8,Nama,No_IC,No_Tel,Pekerjaan,Keputusan\n";
+            globalData.forEach(d => {
+                csvContent += `"${d.nama}","${d.noIC}","${d.noTel}","${d.pekerjaan}","${d.keputusanAkhir}"\n`;
+            });
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "Laporan_Superadmin_LHI.csv");
+            document.body.appendChild(link);
+            link.click();
+        }
+
+        function bukaModalTambah() { document.getElementById('modalTambah').classList.remove('hidden'); }
+        function tutupModalTambah() { document.getElementById('modalTambah').classList.add('hidden'); }
+
+        // MUAT DATA KALI PERTAMA BILA HALAMAN DIBUKA
+        window.onload = muatDataLive;
+    </script>
+</body>
+</html>
