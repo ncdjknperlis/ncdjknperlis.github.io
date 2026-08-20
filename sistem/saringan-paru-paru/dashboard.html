@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Papan Pemuka Analitik Interaktif LHI | JKN Perlis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { ncd: { blue: '#2A4B9B', blueDark: '#1d3570', green: '#38B44A', greenDark: '#298c38' } }
+                }
+            }
+        }
+    </script>
+    <style> 
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #F8FAFC; } 
+        canvas { cursor: pointer; }
+    </style>
+</head>
+<body class="text-slate-800 min-h-screen">
+
+    <div id="sidebar-container"></div>
+
+    <div class="pl-64 min-h-screen flex flex-col justify-between">
+        <div>
+            <div id="navbar-container"></div>
+
+            <main class="p-6 sm:p-8 space-y-6">
+                <!-- CROSS-FILTER BAR -->
+                <div id="activeFilterCard" class="hidden p-4 bg-gradient-to-r from-ncd-blue to-ncd-blueDark text-white rounded-2xl shadow-md flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <span class="p-2 bg-white/20 rounded-xl text-lg">🔍</span>
+                        <div>
+                            <span class="text-[10px] font-extrabold uppercase text-ncd-green bg-emerald-950 px-2.5 py-0.5 rounded border border-emerald-500/30">Cross-Filtering Aktif</span>
+                            <p class="text-xs font-bold mt-0.5">Menapis Data Mengikut: <span id="activeFilterText" class="text-amber-300 font-black underline">--</span></p>
+                        </div>
+                    </div>
+                    <div class="flex items-center gap-2">
+                        <button onclick="bukaDataTerpenapis()" class="py-1.5 px-3 bg-ncd-green hover:bg-ncd-greenDark text-white font-extrabold text-xs rounded-xl">📋 Lihat Senarai Pesakit →</button>
+                        <button onclick="resetPenapisInteraktif()" class="py-1.5 px-3 bg-white/20 hover:bg-white/30 text-white font-bold text-xs rounded-xl">✕ Reset Penapis</button>
+                    </div>
+                </div>
+
+                <!-- KPI METRICS -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <div class="bg-white p-5 rounded-2xl border border-l-4 border-l-ncd-blue shadow-xs">
+                        <span class="text-[11px] font-bold text-slate-500 uppercase">Indikator 6.2.1: Headcount Disaring</span>
+                        <h2 class="text-3xl font-black text-slate-900" id="kpiTotal">0</h2>
+                        <span class="text-[10px] text-ncd-blue font-bold">Jumlah Individu Unik</span>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl border border-l-4 border-l-amber-500 shadow-xs">
+                        <span class="text-[11px] font-bold text-slate-500 uppercase">Headcount Berisiko (≥1 Risiko)</span>
+                        <h2 class="text-3xl font-black text-amber-600" id="kpiBerisiko">0</h2>
+                        <span class="text-[10px] text-amber-700 font-bold" id="kpiPeratusBerisiko">0% Daripada Headcount</span>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl border border-l-4 border-l-ncd-green shadow-xs">
+                        <span class="text-[11px] font-bold text-slate-500 uppercase">Indikator 6.2.4: Setuju Rujukan KK</span>
+                        <h2 class="text-3xl font-black text-ncd-green" id="kpiRujukan">0</h2>
+                        <span class="text-[10px] text-ncd-greenDark font-bold" id="kpiKadarSetuju">0% Conversion Rate</span>
+                    </div>
+                    <div class="bg-white p-5 rounded-2xl border border-l-4 border-l-rose-500 shadow-xs">
+                        <span class="text-[11px] font-bold text-slate-500 uppercase">Indikator 6.2.3: Headcount Perokok</span>
+                        <h2 class="text-3xl font-black text-rose-600" id="kpiPerokok">0</h2>
+                        <span class="text-[10px] text-rose-700 font-bold" id="kpiPeratusPerokok">0% Prevalens Perokok</span>
+                    </div>
+                </div>
+
+                <!-- CARTA PREVALENS DIPERBESARKAN -->
+                <div class="bg-white p-6 rounded-3xl border shadow-xs space-y-3">
+                    <div class="flex items-center justify-between border-b pb-2">
+                        <div>
+                            <h3 class="text-sm font-extrabold uppercase text-ncd-blue">Analisis Kadar Prevalens 13 Faktor Risiko Part A (%)</h3>
+                            <p class="text-xs text-slate-500">💡 Klik pada mana-mana bar untuk menapis headcount mengikut faktor risiko spesifik.</p>
+                        </div>
+                        <span class="text-xs bg-blue-100 text-ncd-blue px-3 py-1 rounded-full font-extrabold">Interactive Chart</span>
+                    </div>
+                    <div class="h-[480px]"><canvas id="chartPrevalens"></canvas></div>
+                </div>
+
+                <!-- CARTA BARIS 2 -->
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div class="bg-white p-6 rounded-3xl border shadow-xs space-y-2">
+                        <h3 class="text-xs font-extrabold uppercase text-slate-700 border-b pb-2">Taburan Beban Risiko Pesakit (Headcount)</h3>
+                        <div class="h-64"><canvas id="chartBebanRisiko"></canvas></div>
+                    </div>
+                    <div class="bg-white p-6 rounded-3xl border shadow-xs space-y-2">
+                        <h3 class="text-xs font-extrabold uppercase text-slate-700 border-b pb-2">Indikator 6.2.2: Setting Saringan</h3>
+                        <div class="h-64"><canvas id="chartSetting"></canvas></div>
+                    </div>
+                </div>
+
+                <!-- CARTA BARIS 3 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white p-5 rounded-3xl border space-y-2">
+                        <h3 class="text-xs font-extrabold uppercase border-b pb-2">Sektor Pekerjaan</h3>
+                        <div class="h-56"><canvas id="chartPekerjaan"></canvas></div>
+                    </div>
+                    <div class="bg-white p-5 rounded-3xl border space-y-2">
+                        <h3 class="text-xs font-extrabold uppercase border-b pb-2">Status Persetujuan Rujukan KK</h3>
+                        <div class="h-56"><canvas id="chartPersetujuan"></canvas></div>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <div id="footer-container"></div>
+    </div>
+
+    <script>
+        // 🔗 APPS SCRIPT URL TERBAHARU & TOKEN KESELAMATAN
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwO1DxGPpatB-UCdQnhdDPOE-4kvBH2W1PXmfhHZzwnTAD1w527g78KnE4qQGjd63hW/exec";
+        const SECRET_TOKEN = "JKN_PERLIS_LHI_SECRET_2026";
+
+        let rawData = [], filteredData = [], activeFilter = null;
+        let chartBebanObj, chartPrevalensObj, chartSettingObj, chartPekerjaanObj, chartPersetujuanObj;
+
+        async function loadComponents() {
+            try {
+                const [navRes, sideRes, footRes] = await Promise.all([
+                    fetch('navbar.html'), fetch('sidebar.html'), fetch('footer.html')
+                ]);
+                document.getElementById('navbar-container').innerHTML = await navRes.text();
+                document.getElementById('sidebar-container').innerHTML = await sideRes.text();
+                document.getElementById('footer-container').innerHTML = await footRes.text();
+
+                const activeNav = document.getElementById('nav-dashboard');
+                if(activeNav) activeNav.className = "flex items-center gap-3 px-3 py-2.5 rounded-xl bg-ncd-blue text-white font-bold shadow-md";
+
+                muatDataLive();
+            } catch(e) { console.error("Ralat muat komponen:", e); }
+        }
+
+        function muatDataLive() {
+            fetch(`${GOOGLE_SCRIPT_URL}?token=${SECRET_TOKEN}`)
+                .then(res => res.json())
+                .then(response => {
+                    if(response.result === "success") {
+                        prosesJSONData(response.data);
+                    } else {
+                        alert("Ralat Keselamatan: Akses Ditolak.");
+                    }
+                })
+                .catch(err => console.error("Ralat muat data API:", err));
+        }
+
+        function prosesJSONData(rows) {
+            rawData = [];
+            for(let i = 1; i < rows.length; i++) {
+                const cols = rows[i];
+                if(!cols[0]) continue;
+
+                rawData.push({
+                    nama: String(cols[1] || ''),
+                    noIC: String(cols[2] || '').replace(/'/g, ''),
+                    pekerjaan: String(cols[4] || 'Lain-lain'),
+                    bangsa: String(cols[5] || 'Lain-lain'),
+                    jenisSaringan: String(cols[6] || 'Outreach'),
+                    jumlahRisiko: parseInt(cols[8]) || 0,
+                    keputusanAkhir: String(cols[12] || 'KLIEN SIHAT'),
+                    isPerokok: String(cols[20] || '').includes('YA'),
+                    items: cols.slice(13, 26).map(c => String(c || 'TIDAK'))
+                });
+            }
+
+            filteredData = [...rawData];
+            kemaskiniDashboard();
+        }
+
+        function kemaskiniDashboard() {
+            const total = filteredData.length;
+            const berisiko = filteredData.filter(d => d.jumlahRisiko >= 1).length;
+            const rujukan = filteredData.filter(d => d.keputusanAkhir.includes('RUJUKAN')).length;
+            const perokok = filteredData.filter(d => d.isPerokok).length;
+
+            document.getElementById('kpiTotal').innerText = total;
+            document.getElementById('kpiBerisiko').innerText = berisiko;
+            document.getElementById('kpiRujukan').innerText = rujukan;
+            document.getElementById('kpiPerokok').innerText = perokok;
+
+            document.getElementById('kpiPeratusBerisiko').innerText = total > 0 ? ((berisiko/total)*100).toFixed(1) + "% Daripada Headcount" : "0%";
+            document.getElementById('kpiKadarSetuju').innerText = berisiko > 0 ? ((rujukan/berisiko)*100).toFixed(1) + "% Conversion Rate" : "0%";
+            document.getElementById('kpiPeratusPerokok').innerText = total > 0 ? ((perokok/total)*100).toFixed(1) + "% Prevalens Perokok" : "0%";
+
+            renderChartPrevalens(total);
+            renderChartBebanRisiko();
+            renderChartSetting();
+            renderChartPekerjaan();
+            renderChartPersetujuan(total, berisiko, rujukan);
+        }
+
+        function renderChartPrevalens(totalHeadcount) {
+            const riskLabels = ["1. Kontak TB", "2. HIV", "3. Hazad Pekerjaan", "4. Pusat Tahanan", "5. Penghuni Institusi", "6. Komorbid Obesiti/DM/ESRD", "7. Imunosupresan/Steroid", "8. Perokok/Bekas/Pasif", "9. Metadon/Substans", "10. Kumpulan Rentan", "11. Sejarah Keluarga Paru-Paru", "12. Pencemaran/Jerebu", "13. Sejarah Kanser"];
+            const riskPrevalence = new Array(13).fill(0);
+            filteredData.forEach(d => { d.items.forEach((val, idx) => { if(val === 'YA') riskPrevalence[idx]++; }); });
+            const riskPercentage = riskPrevalence.map(count => totalHeadcount > 0 ? parseFloat(((count / totalHeadcount) * 100).toFixed(1)) : 0);
+
+            if(chartPrevalensObj) chartPrevalensObj.destroy();
+            chartPrevalensObj = new Chart(document.getElementById('chartPrevalens'), {
+                type: 'bar',
+                data: { labels: riskLabels, datasets: [{ label: 'Kadar Prevalens (%)', data: riskPercentage, backgroundColor: '#2A4B9B', borderRadius: 6 }] },
+                options: {
+                    indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: { x: { ticks: { callback: v => v + "%" } } },
+                    onClick: (e, activeEls) => {
+                        if (activeEls.length > 0) {
+                            const index = activeEls[0].index;
+                            tapisDataInteraktif('RISK_ITEM', index, riskLabels[index]);
+                        }
+                    }
+                }
+            });
+        }
+
+        function renderChartBebanRisiko() {
+            let count0 = 0, count1 = 0, count2to3 = 0, count4plus = 0;
+            filteredData.forEach(d => {
+                if(d.jumlahRisiko === 0) count0++;
+                else if(d.jumlahRisiko === 1) count1++;
+                else if(d.jumlahRisiko >= 2 && d.jumlahRisiko <= 3) count2to3++;
+                else if(d.jumlahRisiko >= 4) count4plus++;
+            });
+
+            if(chartBebanObj) chartBebanObj.destroy();
+            chartBebanObj = new Chart(document.getElementById('chartBebanRisiko'), {
+                type: 'bar',
+                data: { labels: ['0 Risiko (Sihat)', '1 Risiko (Tunggal)', '2-3 Risiko (Sederhana)', '≥4 Risiko (Tinggi)'], datasets: [{ label: 'Bilangan Pesakit', data: [count0, count1, count2to3, count4plus], backgroundColor: ['#0284c7', '#38B44A', '#f59e0b', '#e11d48'] }] },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    onClick: (e, activeEls) => {
+                        if (activeEls.length > 0) {
+                            const index = activeEls[0].index;
+                            const catMap = ['0', '1', '2-3', '4+'];
+                            const labelMap = ['0 Risiko (Sihat)', '1 Risiko (Tunggal)', '2-3 Risiko (Sederhana)', '≥4 Risiko (Tinggi)'];
+                            tapisDataInteraktif('RISK_BURDEN', catMap[index], labelMap[index]);
+                        }
+                    }
+                }
+            });
+        }
+
+        function renderChartSetting() {
+            const settingCount = {};
+            filteredData.forEach(d => { settingCount[d.jenisSaringan] = (settingCount[d.jenisSaringan] || 0) + 1; });
+            const labels = Object.keys(settingCount);
+
+            if(chartSettingObj) chartSettingObj.destroy();
+            chartSettingObj = new Chart(document.getElementById('chartSetting'), {
+                type: 'bar',
+                data: { labels: labels, datasets: [{ label: 'Headcount', data: Object.values(settingCount), backgroundColor: '#38B44A' }] },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    onClick: (e, activeEls) => {
+                        if (activeEls.length > 0) {
+                            const index = activeEls[0].index;
+                            tapisDataInteraktif('SETTING', labels[index], "Setting: " + labels[index]);
+                        }
+                    }
+                }
+            });
+        }
+
+        function renderChartPekerjaan() {
+            const pekCount = {};
+            filteredData.forEach(d => { pekCount[d.pekerjaan] = (pekCount[d.pekerjaan] || 0) + 1; });
+            const labels = Object.keys(pekCount);
+
+            if(chartPekerjaanObj) chartPekerjaanObj.destroy();
+            chartPekerjaanObj = new Chart(document.getElementById('chartPekerjaan'), {
+                type: 'doughnut',
+                data: { labels: labels, datasets: [{ data: Object.values(pekCount), backgroundColor: ['#2A4B9B', '#38B44A', '#f59e0b', '#8b5cf6', '#0284c7'] }] },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    onClick: (e, activeEls) => {
+                        if (activeEls.length > 0) {
+                            const index = activeEls[0].index;
+                            tapisDataInteraktif('PEKERJAAN', labels[index], "Sektor: " + labels[index]);
+                        }
+                    }
+                }
+            });
+        }
+
+        function renderChartPersetujuan(total, berisiko, rujukan) {
+            const menolak = berisiko - rujukan;
+            const sihat = total - berisiko;
+
+            if(chartPersetujuanObj) chartPersetujuanObj.destroy();
+            chartPersetujuanObj = new Chart(document.getElementById('chartPersetujuan'), {
+                type: 'doughnut',
+                data: { labels: ['Setuju KK', 'Menolak (Nasihat)', 'Sihat'], datasets: [{ data: [rujukan, menolak, sihat], backgroundColor: ['#38B44A', '#e11d48', '#0284c7'] }] },
+                options: {
+                    responsive: true, maintainAspectRatio: false,
+                    onClick: (e, activeEls) => {
+                        if (activeEls.length > 0) {
+                            const index = activeEls[0].index;
+                            const statusMap = ['RUJUKAN KE KK', 'NASIHAT', 'KLIEN SIHAT'];
+                            const labelMap = ['Status: Setuju KK', 'Status: Menolak (Nasihat)', 'Status: Klien Sihat'];
+                            tapisDataInteraktif('STATUS', statusMap[index], labelMap[index]);
+                        }
+                    }
+                }
+            });
+        }
+
+        function tapisDataInteraktif(type, val, labelNama) {
+            activeFilter = { type, val, labelNama };
+
+            if (type === 'RISK_ITEM') filteredData = rawData.filter(d => d.items[val] === 'YA');
+            else if (type === 'RISK_BURDEN') {
+                if (val === '0') filteredData = rawData.filter(d => d.jumlahRisiko === 0);
+                else if (val === '1') filteredData = rawData.filter(d => d.jumlahRisiko === 1);
+                else if (val === '2-3') filteredData = rawData.filter(d => d.jumlahRisiko >= 2 && d.jumlahRisiko <= 3);
+                else if (val === '4+') filteredData = rawData.filter(d => d.jumlahRisiko >= 4);
+            } else if (type === 'SETTING') filteredData = rawData.filter(d => d.jenisSaringan === val);
+            else if (type === 'PEKERJAAN') filteredData = rawData.filter(d => d.pekerjaan === val);
+            else if (type === 'STATUS') filteredData = rawData.filter(d => d.keputusanAkhir.includes(val));
+
+            document.getElementById('activeFilterCard').classList.remove('hidden');
+            document.getElementById('activeFilterText').innerText = labelNama;
+
+            kemaskiniDashboard();
+        }
+
+        function resetPenapisInteraktif() {
+            activeFilter = null;
+            filteredData = [...rawData];
+            document.getElementById('activeFilterCard').classList.add('hidden');
+            kemaskiniDashboard();
+        }
+
+        function bukaDataTerpenapis() {
+            if(activeFilter) {
+                sessionStorage.setItem('lhi_filter_type', activeFilter.type);
+                sessionStorage.setItem('lhi_filter_val', activeFilter.val);
+            }
+            window.location.href = "pengurusan-data.html";
+        }
+
+        window.onload = loadComponents;
+    </script>
+</body>
+</html>

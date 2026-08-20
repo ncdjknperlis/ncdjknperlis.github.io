@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengurusan Pengguna LHI | JKN Perlis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = { theme: { extend: { colors: { ncd: { blue: '#2A4B9B', green: '#38B44A' } } } } }
+    </script>
+    <style> body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #F8FAFC; } </style>
+</head>
+<body class="text-slate-800 min-h-screen">
+
+    <!-- FIXED SIDEBAR -->
+    <div id="sidebar-container"></div>
+
+    <!-- KAWASAN KANAN (PL-64) -->
+    <div class="pl-64 min-h-screen flex flex-col justify-between">
+        <div>
+            <!-- NAVBAR -->
+            <div id="navbar-container"></div>
+
+            <main class="p-6 sm:p-8 space-y-4">
+                <div class="bg-white p-6 rounded-3xl border shadow-xs space-y-4">
+                    <div class="flex items-center justify-between border-b pb-3">
+                        <div>
+                            <h3 class="text-xs font-black uppercase text-ncd-blue">Pengurusan Akaun & Peranan Pengguna</h3>
+                            <p class="text-[11px] text-slate-500">Kawal selia senarai petugas saringan dan pentadbir sistem JKN Perlis.</p>
+                        </div>
+                        <button onclick="bukaModalUser()" class="py-2 px-3.5 bg-ncd-blue hover:bg-ncd-blueDark text-white text-xs font-bold rounded-xl shadow-xs">
+                            ➕ Tambah Pengguna Baharu
+                        </button>
+                    </div>
+
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs border-collapse">
+                            <thead class="bg-slate-100 text-slate-700 uppercase font-extrabold border-b">
+                                <tr>
+                                    <th class="p-3">ID / Nama</th>
+                                    <th class="p-3">E-mel Rasmi</th>
+                                    <th class="p-3">Peranan (Role)</th>
+                                    <th class="p-3">Lokasi / Fasiliti</th>
+                                    <th class="p-3 text-center">Status</th>
+                                    <th class="p-3 text-center">Tindakan</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y font-medium text-slate-700">
+                                <tr>
+                                    <td class="p-3 font-bold">USR-001 · Dr. Azman (NCD)</td>
+                                    <td class="p-3">azman@moh.gov.my</td>
+                                    <td class="p-3"><span class="bg-purple-100 text-purple-800 px-2 py-0.5 rounded text-[10px] font-bold">SUPERADMIN</span></td>
+                                    <td class="p-3">JKN Perlis (Pusat)</td>
+                                    <td class="p-3 text-center"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-[10px] font-bold">AKTIF</span></td>
+                                    <td class="p-3 text-center"><button class="text-blue-600 font-bold hover:underline">Edit</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold">USR-002 · Nurse Salmah</td>
+                                    <td class="p-3">salmah@moh.gov.my</td>
+                                    <td class="p-3"><span class="bg-blue-100 text-blue-800 px-2 py-0.5 rounded text-[10px] font-bold">ADMIN KK</span></td>
+                                    <td class="p-3">Klinik Kesihatan Kangar</td>
+                                    <td class="p-3 text-center"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-[10px] font-bold">AKTIF</span></td>
+                                    <td class="p-3 text-center"><button class="text-blue-600 font-bold hover:underline">Edit</button></td>
+                                </tr>
+                                <tr>
+                                    <td class="p-3 font-bold">USR-003 · En. Razak (Outreach)</td>
+                                    <td class="p-3">razak@moh.gov.my</td>
+                                    <td class="p-3"><span class="bg-amber-100 text-amber-800 px-2 py-0.5 rounded text-[10px] font-bold">PETUGAS OUTREACH</span></td>
+                                    <td class="p-3">Komuniti / Tempat Kerja</td>
+                                    <td class="p-3 text-center"><span class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded text-[10px] font-bold">AKTIF</span></td>
+                                    <td class="p-3 text-center"><button class="text-blue-600 font-bold hover:underline">Edit</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </main>
+        </div>
+
+        <div id="footer-container"></div>
+    </div>
+
+    <script>
+        async function loadComponents() {
+            try {
+                const [navRes, sideRes, footRes] = await Promise.all([
+                    fetch('navbar.html'), fetch('sidebar.html'), fetch('footer.html')
+                ]);
+                document.getElementById('navbar-container').innerHTML = await navRes.text();
+                document.getElementById('sidebar-container').innerHTML = await sideRes.text();
+                document.getElementById('footer-container').innerHTML = await footRes.text();
+
+                const activeNav = document.getElementById('nav-user');
+                if(activeNav) activeNav.className = "flex items-center gap-3 px-3 py-2.5 rounded-xl bg-ncd-blue text-white font-bold shadow-md";
+            } catch(e) { console.error("Ralat muat komponen:", e); }
+        }
+
+        function bukaModalUser() {
+            alert("Dialog borang penambahan pengguna sistem saringan LHI.");
+        }
+
+        window.onload = loadComponents;
+    </script>
+</body>
+</html>

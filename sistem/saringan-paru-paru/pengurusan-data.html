@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengurusan Data LHI | JKN Perlis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght=400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: { extend: { colors: { ncd: { blue: '#2A4B9B', green: '#38B44A', greenDark: '#298c38' } } } }
+        }
+    </script>
+    <style> body { font-family: 'Plus Jakarta Sans', sans-serif; background-color: #F8FAFC; } </style>
+</head>
+<body class="text-slate-800 min-h-screen">
+
+    <!-- FIXED SIDEBAR -->
+    <div id="sidebar-container"></div>
+
+    <!-- KAWASAN KANAN (PL-64) -->
+    <div class="pl-64 min-h-screen flex flex-col justify-between">
+        <div>
+            <!-- NAVBAR -->
+            <div id="navbar-container"></div>
+
+            <main class="p-6 sm:p-8 space-y-4">
+                
+                <!-- INDIKATOR PENAPIS DARI DASHBOARD (IF APPLICABLE) -->
+                <div id="dashboardFilterBadge" class="hidden p-3.5 bg-amber-50 border border-amber-200 rounded-2xl flex items-center justify-between text-xs">
+                    <span class="font-bold text-amber-900">📌 Penapis Aktif dari Papan Analitik: <strong id="filterBadgeText" class="underline">--</strong></span>
+                    <button onclick="resetDashboardFilter()" class="py-1 px-2.5 bg-amber-200 text-amber-900 font-extrabold rounded-lg hover:bg-amber-300">Set Semula Penapis</button>
+                </div>
+
+                <!-- FILTER PANEL -->
+                <div class="bg-white p-5 rounded-2xl border shadow-xs space-y-3">
+                    <div class="flex justify-between border-b pb-3 items-center">
+                        <h3 class="text-xs font-extrabold uppercase text-ncd-blue">Penapis Data Saringan Terperinci</h3>
+                        <div class="flex gap-2">
+                            <button onclick="eksportCSV()" class="py-2 px-3.5 bg-ncd-green hover:bg-ncd-greenDark text-white text-xs font-bold rounded-xl shadow-xs">📥 Eksport CSV</button>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                        <div>
+                            <label class="font-bold block mb-1">Carian Pantas (IC / Nama / Tel)</label>
+                            <input type="text" id="carianInput" onkeyup="tapisData()" placeholder="Taip nama atau IC..." class="w-full p-2.5 rounded-xl border focus:ring-2 focus:ring-ncd-blue/20 outline-none">
+                        </div>
+                        <div>
+                            <label class="font-bold block mb-1">Status Keputusan</label>
+                            <select id="filterStatus" onchange="tapisData()" class="w-full p-2.5 rounded-xl border bg-white focus:ring-2 focus:ring-ncd-blue/20 outline-none">
+                                <option value="SEMUA">-- Semua Status --</option>
+                                <option value="RUJUKAN KE KK">RUJUKAN KE KK</option>
+                                <option value="KLIEN SIHAT">KLIEN SIHAT</option>
+                                <option value="NASIHAT">NASIHAT (MENOLAK)</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="font-bold block mb-1">Setting Saringan</label>
+                            <select id="filterJenis" onchange="tapisData()" class="w-full p-2.5 rounded-xl border bg-white focus:ring-2 focus:ring-ncd-blue/20 outline-none">
+                                <option value="SEMUA">-- Semua Setting --</option>
+                                <option value="Tempat Kerja">Tempat Kerja</option>
+                                <option value="Outreach">Outreach</option>
+                                <option value="Fasiliti Kesihatan">Fasiliti Kesihatan</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JADUAL DATA -->
+                <div class="bg-white rounded-2xl border overflow-hidden shadow-xs">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left text-xs border-collapse">
+                            <thead class="bg-slate-100 text-slate-700 uppercase font-extrabold border-b">
+                                <tr>
+                                    <th class="p-3">Tarikh / IC</th>
+                                    <th class="p-3">Nama Penuh</th>
+                                    <th class="p-3">Sektor Pekerjaan</th>
+                                    <th class="p-3">Lokasi Saringan</th>
+                                    <th class="p-3 text-center">Jml Risiko</th>
+                                    <th class="p-3">Status Keputusan</th>
+                                    <th class="p-3 text-center">Tindakan</th>
+                                </tr>
+                            </thead>
+                            <tbody id="jadualBody" class="divide-y font-medium text-slate-700">
+                                <!-- Injected via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+            </main>
+        </div>
+
+        <div id="footer-container"></div>
+    </div>
+
+    <!-- ⚙️ JAVASCRIPT ENGINE -->
+    <script>
+        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwO1DxGPpatB-UCdQnhdDPOE-4kvBH2W1PXmfhHZzwnTAD1w527g78KnE4qQGjd63hW/exec";
+        const SECRET_TOKEN = "JKN_PERLIS_LHI_SECRET_2026";
+        let globalData = [];
+
+        async function loadComponents() {
+            try {
+                const [navRes, sideRes, footRes] = await Promise.all([
+                    fetch('navbar.html'), fetch('sidebar.html'), fetch('footer.html')
+                ]);
+                document.getElementById('navbar-container').innerHTML = await navRes.text();
+                document.getElementById('sidebar-container').innerHTML = await sideRes.text();
+                document.getElementById('footer-container').innerHTML = await footRes.text();
+
+                const activeNav = document.getElementById('nav-data');
+                if(activeNav) activeNav.className = "flex items-center gap-3 px-3 py-2.5 rounded-xl bg-ncd-blue text-white font-bold shadow-md";
+
+                muatDataLive();
+            } catch(e) { console.error("Ralat muat komponen:", e); }
+        }
+
+        function muatDataLive() {
+            fetch(`${GOOGLE_SCRIPT_URL}?token=${SECRET_TOKEN}`)
+                .then(res => res.json())
+                .then(response => {
+                    if(response.result === "success") {
+                        prosesJSONData(response.data);
+                    } else {
+                        alert("Ralat Keselamatan: Akses Ditolak.");
+                    }
+                })
+                .catch(err => console.error("Ralat muat API:", err));
+        }
+
+        function prosesJSONData(rows) {
+            globalData = [];
+            for(let i = 1; i < rows.length; i++) {
+                const cols = rows[i];
+                if(!cols[0]) continue;
+
+                globalData.push({
+                    timestamp: String(cols[0]),
+                    nama: String(cols[1] || 'Tiada Nama'),
+                    noIC: String(cols[2] || '').replace(/'/g, ''),
+                    noTel: String(cols[3] || '').replace(/'/g, ''),
+                    pekerjaan: String(cols[4] || 'Lain-lain'),
+                    jenisSaringan: String(cols[6] || ''),
+                    tempatSaringan: String(cols[7] || ''),
+                    jumlahRisiko: parseInt(cols[8]) || 0,
+                    keputusanAkhir: String(cols[12] || 'KLIEN SIHAT'),
+                    items: cols.slice(13, 26).map(c => String(c || 'TIDAK'))
+                });
+            }
+
+            semakSessionFilter();
+        }
+
+        function semakSessionFilter() {
+            const filterType = sessionStorage.getItem('lhi_filter_type');
+            const filterVal = sessionStorage.getItem('lhi_filter_val');
+
+            if (filterType && filterVal) {
+                document.getElementById('dashboardFilterBadge').classList.remove('hidden');
+                document.getElementById('filterBadgeText').innerText = `${filterType} = ${filterVal}`;
+
+                let filtered = [];
+                if (filterType === 'RISK_ITEM') filtered = globalData.filter(d => d.items[filterVal] === 'YA');
+                else if (filterType === 'SETTING') filtered = globalData.filter(d => d.jenisSaringan === filterVal);
+                else if (filterType === 'PEKERJAAN') filtered = globalData.filter(d => d.pekerjaan === filterVal);
+                else if (filterType === 'STATUS') filtered = globalData.filter(d => d.keputusanAkhir.includes(filterVal));
+                else filtered = [...globalData];
+
+                paparJadual(filtered);
+            } else {
+                paparJadual(globalData);
+            }
+        }
+
+        function resetDashboardFilter() {
+            sessionStorage.removeItem('lhi_filter_type');
+            sessionStorage.removeItem('lhi_filter_val');
+            document.getElementById('dashboardFilterBadge').classList.add('hidden');
+            paparJadual(globalData);
+        }
+
+        function paparJadual(data) {
+            const tbody = document.getElementById('jadualBody');
+            tbody.innerHTML = "";
+            data.forEach((row) => {
+                const tr = document.createElement('tr');
+                tr.className = "hover:bg-slate-50";
+                let badgeColor = row.keputusanAkhir.includes('RUJUKAN') ? "bg-emerald-100 text-emerald-800" : "bg-sky-100 text-sky-800";
+
+                tr.innerHTML = `
+                    <td class="p-3">
+                        <span class="font-bold block text-slate-900">${row.noIC || '-'}</span>
+                        <span class="text-[10px] text-slate-400">${row.timestamp}</span>
+                    </td>
+                    <td class="p-3 font-bold text-slate-800">${row.nama}</td>
+                    <td class="p-3">${row.pekerjaan}</td>
+                    <td class="p-3">${row.tempatSaringan}</td>
+                    <td class="p-3 text-center font-black text-ncd-blue">${row.jumlahRisiko}</td>
+                    <td class="p-3"><span class="${badgeColor} px-2.5 py-1 rounded-full text-[10px] font-black">${row.keputusanAkhir}</span></td>
+                    <td class="p-3 text-center">
+                        <button onclick="alert('Kemaskini Rekod: ${row.nama}')" class="text-blue-600 font-bold hover:underline">Edit</button>
+                    </td>
+                `;
+                tbody.appendChild(tr);
+            });
+        }
+
+        function tapisData() {
+            const carian = document.getElementById('carianInput').value.toLowerCase();
+            const status = document.getElementById('filterStatus').value;
+            const jenis = document.getElementById('filterJenis').value;
+
+            const filtered = globalData.filter(d => {
+                const matchCarian = d.nama.toLowerCase().includes(carian) || d.noIC.includes(carian);
+                const matchStatus = status === 'SEMUA' || d.keputusanAkhir.includes(status);
+                const matchJenis = jenis === 'SEMUA' || d.jenisSaringan === jenis;
+                return matchCarian && matchStatus && matchJenis;
+            });
+
+            paparJadual(filtered);
+        }
+
+        function eksportCSV() {
+            let csvContent = "data:text/csv;charset=utf-8,Nama,No_IC,No_Tel,Pekerjaan,Keputusan\n";
+            globalData.forEach(d => { csvContent += `"${d.nama}","${d.noIC}","${d.noTel}","${d.pekerjaan}","${d.keputusanAkhir}"\n`; });
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement("a");
+            link.setAttribute("href", encodedUri);
+            link.setAttribute("download", "Laporan_LHI_Data.csv");
+            document.body.appendChild(link);
+            link.click();
+        }
+
+        window.onload = loadComponents;
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!-- SIDEBAR COMPONENT (FIXED LEFT PANEL) -->
+<aside class="w-64 bg-slate-900 text-white h-screen fixed top-0 left-0 flex flex-col justify-between p-4 z-50 overflow-y-auto">
+    <div class="space-y-6">
+        <!-- LOGO & HEADING -->
+        <div class="flex items-center gap-3 px-2 pt-2 border-b border-slate-800 pb-4">
+            <div>
+                <h1 class="text-xs font-black uppercase text-white tracking-wider">Superadmin LHI</h1>
+                <span class="text-[10px] text-slate-400 font-bold block">JKN Perlis © 2026</span>
+            </div>
+        </div>
+
+        <!-- MENU UTAMA -->
+        <nav class="space-y-1 text-xs font-bold">
+            <span class="text-[10px] uppercase tracking-widest text-slate-500 font-black px-3 block mb-2">Menu Utama</span>
+            
+            <a href="dashboard.html" id="nav-dashboard" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-300 hover:text-white transition-all">
+                <span>📊</span> <span>Papan Analitik</span>
+            </a>
+
+            <a href="pengurusan-data.html" id="nav-data" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-300 hover:text-white transition-all">
+                <span>📁</span> <span>Pengurusan Data (CRUD)</span>
+            </a>
+
+            <a href="pengurusan-user.html" id="nav-user" class="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-slate-800 text-slate-300 hover:text-white transition-all">
+                <span>👥</span> <span>Pengurusan Pengguna</span>
+            </a>
+        </nav>
+
+        <!-- MENU RANGKAIAN PANTAK & PANDUAN -->
+        <div class="space-y-1 text-xs font-bold pt-4 border-t border-slate-800">
+            <span class="text-[10px] uppercase tracking-widest text-slate-500 font-black px-3 block mb-2">Pautan Pantas</span>
+            
+            <a href="https://docs.google.com/spreadsheets/d/e/2PACX-1vTbD9fYiY4LCaJJ1FCK0PG2IAjEBeNaZ-qvQTx3DpjuEkJrZOufMpcw-2ncsaFmen9oghuYcuA29cjk/pub?output=csv" target="_blank" class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all">
+                <span>📗</span> <span>Google Sheet CSV</span>
+            </a>
+
+            <a href="saringan-lhi.html" target="_blank" class="flex items-center gap-3 px-3 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-all">
+                <span>📝</span> <span>Borang Saringan Awam</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- WIDGET TALIAN KECEMASAN & PROFIL -->
+    <div class="space-y-3 pt-4 border-t border-slate-800">
+        <div class="p-3 bg-slate-800/80 rounded-2xl border border-slate-700/60 text-[11px] space-y-1">
+            <span class="text-[9px] font-black uppercase text-emerald-400 bg-emerald-950 px-2 py-0.5 rounded border border-emerald-500/30">Talian Bantuan</span>
+            <p class="font-black text-white">Talian HEAL 15555</p>
+            <p class="text-[10px] text-slate-400 leading-tight">Sokongan Kesihatan Mental & Krisis KKM</p>
+        </div>
+
+        <div class="flex items-center justify-between p-2 bg-slate-950 rounded-2xl border border-slate-800">
+            <div class="flex items-center gap-2 overflow-hidden">
+                <div class="w-8 h-8 rounded-full bg-ncd-blue flex items-center justify-center font-black text-xs text-white flex-shrink-0">
+                    SA
+                </div>
+                <div class="truncate text-[11px]">
+                    <p class="font-extrabold text-white truncate">Superadmin NCD</p>
+                    <p class="text-[9px] text-slate-400 truncate">azman@moh.gov.my</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</aside>

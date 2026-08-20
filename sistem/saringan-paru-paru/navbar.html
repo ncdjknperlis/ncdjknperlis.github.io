@@ -1,0 +1,21 @@
+<!-- NAVBAR COMPONENT -->
+<header class="bg-white border-b border-slate-200 h-16 sm:h-20 px-6 flex items-center justify-between sticky top-0 z-30 shadow-2xs">
+    <div class="flex items-center gap-3">
+        <img src="images/logo.png" alt="KKM" class="h-9 w-auto" onerror="this.onerror=null; this.src='https://placehold.co/80x80/2A4B9B/ffffff?text=KKM';">
+        <img src="images/logo-ncd/logo-ncd-default.png" alt="NCD" class="h-9 w-auto" onerror="this.onerror=null; this.src='https://placehold.co/80x80/2A4B9B/ffffff?text=KKM';">
+        <div class="h-6 w-[1px] bg-slate-300"></div>
+        <div>
+            <h1 class="text-xs font-black text-slate-900 uppercase tracking-tight">Sistem Pengurusan LHI Kebangsaan</h1>
+            <span class="text-[10px] text-slate-500 font-bold block">Jabatan Kesihatan Negeri Perlis</span>
+        </div>
+    </div>
+
+    <div class="flex items-center gap-3">
+        <span class="text-xs font-extrabold bg-ncd-blue/10 text-ncd-blue px-3 py-1 rounded-full border border-ncd-blue/20 hidden sm:inline-block">
+            🌐 Live Server Connected
+        </span>
+        <button onclick="muatDataLive()" class="bg-slate-100 hover:bg-slate-200 p-2 rounded-xl text-xs font-bold text-slate-700 flex items-center gap-1 border border-slate-200 active:scale-95 transition-all">
+            🔄 Refresh Data
+        </button>
+    </div>
+</header>
