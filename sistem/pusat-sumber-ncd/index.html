@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pusat Sumber Multimedia NCD | JKN Perlis</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght=300;400;600;700;800&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="images/logo.png">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        ::-webkit-scrollbar { display: none; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; display: block; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.1); border-radius: 10px; }
+
+        :root {
+            --bg-utama: #FBFBFB; --bg-kad: #FFFFFF; --border-warna: #F3F4F6;
+            --teks-tajuk: #101e33; --teks-biasa: #1A1A1A; --teks-sub: #9CA3AF;
+        }
+        [data-theme="dark"] {
+            --bg-utama: #0B132B; --bg-kad: #1C2541; --border-warna: #3A506B;
+            --teks-tajuk: #FFFFFF; --teks-biasa: #E2E8F0; --teks-sub: #94A3B8;
+        }
+
+        .dinamik-bg-utama { background-color: var(--bg-utama) !important; }
+        .dinamik-bg-kad { background-color: var(--bg-kad) !important; }
+        .dinamik-border { border-color: var(--border-warna) !important; }
+        .dinamik-teks-tajuk { color: var(--teks-tajuk) !important; }
+        .dinamik-teks-biasa { color: var(--teks-biasa) !important; }
+        .dinamik-teks-sub { color: var(--teks-sub) !important; }
+    </style>
+</head>
+<body class="h-screen w-screen overflow-x-hidden md:overflow-hidden flex flex-col dinamik-bg-utama dinamik-teks-biasa antialiased">
+
+    <!-- 🔗 GOOGLE APPS SCRIPT URL RASMI MOH.GOV.MY -->
+    <script>
+        const NCD_API_URL = "https://script.google.com/macros/s/AKfycbyAxpk5_eGDzGD7s6TSWqKqA9motzNtMNMNS9IZkwaOWwUcvea_QJzJUFuexuk1tA8diA/exec";
+    </script>
+
+    <!-- HEADER PORTAL -->
+    <header class="w-full py-2 md:py-3 px-4 md:px-6 bg-white border-b flex flex-row items-center justify-between z-30 sticky top-0 dinamik-bg-kad dinamik-border shadow-xs">
+        <div class="flex items-center space-x-2 md:space-x-3">
+            <button onclick="toggleSidebar()" class="p-2 rounded-xl bg-slate-100 text-slate-700 font-bold text-base hover:bg-slate-200 transition-all">☰</button>
+            <img src="images/logo.png" class="w-7 md:w-10 h-auto object-contain">
+            <img src="images/logo-ncd/logo-ncd-default.png" class="w-20 md:w-32 h-auto object-contain">
+            <div class="w-[1px] h-6 bg-gray-200"></div>
+            <h2 class="text-[9px] md:text-[11px] font-bold uppercase text-[#101e33] leading-tight dinamik-teks-tajuk">
+                Kawalan Penyakit Tidak Berjangkit (NCD)<br>
+                <span class="text-gray-400 font-medium text-[8px] dinamik-teks-sub">Jabatan Kesihatan Negeri Perlis</span>
+            </h2>
+        </div>
+        <div class="flex items-center space-x-3">
+            <a href="index.html" class="px-3 py-1.5 rounded-xl bg-[#101e33] hover:bg-[#1d3557] text-white text-xs font-bold transition-all shadow-sm">← Hub Utama</a>
+        </div>
+    </header>
+
+    <div class="flex-1 w-full flex relative overflow-hidden">
+        
+        <!-- SIDEBAR PENAPIS -->
+        <aside id="sidebarFilter" class="w-72 md:w-80 bg-white border-r p-5 flex flex-col justify-between flex-shrink-0 z-20 absolute lg:relative inset-y-0 left-0 -translate-x-full lg:translate-x-0 shadow-xl lg:shadow-none h-[calc(100vh-57px)] overflow-y-auto dinamik-bg-kad dinamik-border transition-transform">
+            <div class="space-y-4">
+                <div class="flex items-center justify-between border-b pb-3 dinamik-border">
+                    <h3 class="text-xs font-black uppercase tracking-wider dinamik-teks-tajuk">🔍 Penapis Bahan Digital</h3>
+                </div>
+                <div class="bg-slate-50 p-3 rounded-xl border text-center space-y-0.5 dinamik-bg-utama dinamik-border">
+                    <span class="text-[10px] font-bold text-gray-400 uppercase">Status carian</span>
+                    <span id="materialCount" class="text-xs font-extrabold dinamik-teks-tajuk block">Menampilkan: 0 bahan</span>
+                </div>
+                <div class="space-y-3 text-xs">
+                    <div>
+                        <label class="font-bold text-gray-500 uppercase text-[10px] block mb-1">Carian Kata Kunci</label>
+                        <input type="text" id="searchInput" onkeyup="prosesCarianDanTapisan()" placeholder="Cari tajuk..." class="w-full p-2.5 border rounded-xl font-medium focus:outline-none dinamik-bg-kad dinamik-border dinamik-teks-biasa">
+                    </div>
+                    <div>
+                        <label class="font-bold text-gray-500 uppercase text-[10px] block mb-1">Kategori Bahan</label>
+                        <select id="categorySelect" onchange="prosesCarianDanTapisan()" class="w-full p-2.5 border rounded-xl font-bold cursor-pointer dinamik-bg-kad dinamik-border dinamik-teks-biasa">
+                            <option value="all">📁 Semua Kategori</option>
+                            <option value="infografik">🎨 Imej / Infografik</option>
+                            <option value="video">🎬 Video Promosi</option>
+                            <option value="cpg">📄 Dokumen / CPG / Risalah</option>
+                            <option value="latihan">📚 Modul Latihan</option>
+                            <option value="flipbook">📖 E-Flipbook Interaktif</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="font-bold text-gray-500 uppercase text-[10px] block mb-1">Program / Portfolio</label>
+                        <select id="programSelect" onchange="prosesCarianDanTapisan()" class="w-full p-2.5 border rounded-xl font-bold cursor-pointer dinamik-bg-kad dinamik-border dinamik-teks-biasa">
+                            <option value="all">📁 Semua Program</option>
+                            <option value="umum">📁 Umum</option>
+                            <option value="mental">🧠 Kesihatan Mental</option>
+                            <option value="diabetes">🍬 Diabetes</option>
+                            <option value="hpt">🩸 Hipertensi</option>
+                            <option value="hpl">🍗 Hyperlipidemia</option>
+                            <option value="kanser">🎗️ Kanser</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-4 border-t flex-shrink-0 dinamik-border">
+                <button onclick="resetPenapis()" class="w-full py-2 bg-rose-50 text-rose-600 font-bold text-xs rounded-xl border border-rose-200 hover:bg-rose-100 transition-all">Reset Penapis</button>
+            </div>
+        </aside>
+
+        <!-- KANDUNGAN UTAMA -->
+        <div class="flex-1 w-full overflow-y-auto custom-scrollbar flex flex-col h-[calc(100vh-57px)]">
+            <section class="w-full bg-[#101e33] py-6 px-6 relative overflow-hidden flex-shrink-0 shadow-md">
+                <div class="relative z-10 space-y-1">
+                    <span class="text-[10px] font-extrabold tracking-widest text-emerald-400 uppercase bg-emerald-500/10 px-2.5 py-0.5 rounded-full">Hub Sumber Digital Live</span>
+                    <h1 class="text-xl md:text-2xl font-extrabold text-white">Bahan Pendidikan Kesihatan NCD</h1>
+                    <p class="text-xs text-gray-300 font-light opacity-90">Senarai bahan multimedia yang dipanggil secara langsung daripada pangkalan data Google Sheet NCD JKN Perlis.</p>
+                </div>
+            </section>
+
+            <!-- GRID PAPARAN BAHAN (SAIZ KAD LEBIH BESAR & SESELESA FULL PAGE) -->
+            <main class="w-full px-4 md:px-8 py-6 flex-1 flex flex-col justify-between">
+                <div>
+                    <div id="loadingState" class="text-center py-16 space-y-2">
+                        <span class="text-3xl inline-block animate-spin">⏳</span>
+                        <p class="text-xs font-bold text-gray-500">Memanggil data bahan daripada Google Sheet...</p>
+                    </div>
+                    
+                    <!-- GRID 5 COLUMNS DENGAN KAD SAIS 64 (h-64) -->
+                    <div id="resourceGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-5 hidden"></div>
+                </div>
+
+                <!-- KAWALAN PAGINATION (PAGE CONTROL) -->
+                <div id="paginationContainer" class="flex items-center justify-center space-x-2 mt-8 mb-4 py-4 w-full border-t border-gray-100 dinamik-border"></div>
+            </main>
+
+            <footer class="w-full bg-white py-3 text-center border-t text-[10px] text-gray-400 font-semibold uppercase dinamik-bg-kad dinamik-border flex-shrink-0">
+                Hak Cipta © 2026 Unit Kawalan Penyakit Tidak Berjangkit (NCD), JKN Perlis
+            </footer>
+        </div>
+
+    </div>
+
+    <!-- ENGINE JAVASCRIPT FETCH, ROUTING & PAGINATION -->
+    <script>
+        let rawMasterData = [];
+        let filteredData = [];
+        
+        // TETAPAN PAGINATION (15 BAHAN PER MUKA SURAT)
+        let currentPage = 1;
+        const itemsPerPage = 15; 
+
+        // 1. MEMANGGIL DATA DARIPADA GOOGLE APPS SCRIPT API
+        async function muatDataGoogleSheet() {
+            try {
+                const response = await fetch(NCD_API_URL);
+                const result = await response.json();
+                
+                if (result.status === "SUCCESS") {
+                    rawMasterData = result.data;
+                    filteredData = [...rawMasterData];
+                    
+                    document.getElementById('loadingState').classList.add('hidden');
+                    document.getElementById('resourceGrid').classList.remove('hidden');
+                    
+                    prosesCarianDanTapisan();
+                } else {
+                    document.getElementById('loadingState').innerHTML = `<p class="text-xs font-bold text-rose-600">❌ Gagal memuatkan data: ${result.message}</p>`;
+                }
+            } catch (err) {
+                console.error("Ralat panggil API:", err);
+                document.getElementById('loadingState').innerHTML = `<p class="text-xs font-bold text-rose-600">❌ Ralat Rangkaian / Akses Web App URL belum dibuka kepada umum.</p>`;
+            }
+        }
+
+        // 2. ENJIN TAPISAN DAN CARIAN
+        function prosesCarianDanTapisan() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const cat = document.getElementById('categorySelect').value;
+            const prog = document.getElementById('programSelect').value;
+
+            filteredData = rawMasterData.filter(item => {
+                const matchCat = (cat === 'all' || item.category === cat);
+                const matchProg = (prog === 'all' || item.program === prog);
+                const matchQuery = (item.title || '').toLowerCase().includes(query) || (item.desc || '').toLowerCase().includes(query);
+                return matchCat && matchProg && matchQuery;
+            });
+
+            document.getElementById('materialCount').innerText = `Menampilkan: ${filteredData.length} bahan`;
+            
+            currentPage = 1; // Reset ke muka surat 1 setiap kali buat carian
+            paparkanGridBahan();
+            renderPaginationControls();
+        }
+
+        // 3. ENJIN PAPARAN GRID (BESAR & KEMAS)
+        function paparkanGridBahan() {
+            const grid = document.getElementById('resourceGrid');
+            grid.innerHTML = "";
+
+            if (filteredData.length === 0) {
+                grid.innerHTML = `
+                    <div class="col-span-full text-center py-12 bg-white border rounded-2xl p-6 shadow-xs">
+                        <span class="text-2xl block mb-1">📂</span>
+                        <p class="text-xs font-bold text-gray-700">Tiada bahan ditemui.</p>
+                    </div>`;
+                return;
+            }
+
+            // Dapatkan item untuk muka surat semasa sahaja
+            const startIndex = (currentPage - 1) * itemsPerPage;
+            const endIndex = startIndex + itemsPerPage;
+            const itemsToRender = filteredData.slice(startIndex, endIndex);
+
+            itemsToRender.forEach(item => {
+                let targetPage = "view-document.html";
+                const itemCat = (item.category || '').toLowerCase();
+
+                if (itemCat === "infografik" || itemCat === "logo") {
+                    targetPage = "play-image.html";
+                } else if (itemCat === "video") {
+                    targetPage = "play-video.html";
+                } else if (itemCat === "flipbook") {
+                    targetPage = "view-flipbook.html";
+                } else if (itemCat === "package" || itemCat === "pakej") {
+                    targetPage = "play-package.html";
+                }
+
+                const pageUrl = `${targetPage}?id=${encodeURIComponent(item.id)}&url=${encodeURIComponent(item.url || '')}&title=${encodeURIComponent(item.title || '')}&desc=${encodeURIComponent(item.desc || '')}&program=${encodeURIComponent(item.program || 'umum')}&badge=${encodeURIComponent(item.badgeText || '')}`;
+
+                // KAD LEBIH BESAR (h-64) & PEMUTIHAN TEKS TERANGA
+                const cardHtml = `
+                    <div class="group bg-white border border-gray-100 rounded-2xl shadow-xs hover:shadow-md hover:scale-[1.02] transition-all duration-200 overflow-hidden flex flex-col justify-between h-64 relative dinamik-bg-kad dinamik-border">
+                        <a href="${pageUrl}" class="absolute inset-0 z-20 cursor-pointer select-none"></a>
+                        
+                        <div class="w-full h-32 overflow-hidden bg-gray-50 relative flex items-center justify-center flex-shrink-0">
+                            <img src="${item.imageUrl || 'images/logo.png'}" alt="${item.title}" loading="lazy" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='images/logo.png'; this.className+=' object-contain p-4';">
+                            <span class="absolute top-2 left-2 text-[9px] font-extrabold uppercase px-2.5 py-0.5 rounded-md bg-white/90 backdrop-blur-xs text-sky-700 shadow-xs z-10">${item.badgeText || item.category}</span>
+                        </div>
+                        
+                        <div class="p-3 flex-1 flex flex-col justify-between min-w-0 z-10 pointer-events-none">
+                            <div class="space-y-1">
+                                <h3 class="text-xs font-extrabold text-[#101e33] leading-tight line-clamp-2 group-hover:text-sky-600 transition-colors dinamik-teks-tajuk" title="${item.title}">${item.title}</h3>
+                                <p class="text-[11px] text-gray-400 font-light line-clamp-2 leading-relaxed dinamik-teks-sub">${item.desc || ''}</p>
+                            </div>
+                            <div class="pt-2 border-t border-gray-100 flex justify-between items-center flex-shrink-0 mt-2">
+                                <span class="text-[9px] text-gray-400 font-bold uppercase tracking-wider">${item.program}</span>
+                                <span class="text-[10px] font-extrabold text-[#101e33] group-hover:text-sky-600 transition-colors">Akses ↗</span>
+                            </div>
+                        </div>
+                    </div>`;
+
+                grid.innerHTML += cardHtml;
+            });
+        }
+
+        // 4. ENJIN BUTANG PAGINATION
+        function renderPaginationControls() {
+            const container = document.getElementById("paginationContainer");
+            if (!container) return;
+
+            container.innerHTML = "";
+            const totalPages = Math.ceil(filteredData.length / itemsPerPage);
+
+            if (totalPages <= 1) {
+                container.classList.add("hidden");
+                return;
+            } else {
+                container.classList.remove("hidden");
+            }
+
+            // Butang Previous
+            const prevBtn = document.createElement("button");
+            prevBtn.innerHTML = "← Prev";
+            prevBtn.className = `px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-all ${currentPage === 1 ? 'bg-gray-50 text-gray-300 border-gray-100 cursor-not-allowed' : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50 active:scale-95 shadow-xs'}`;
+            prevBtn.disabled = currentPage === 1;
+            prevBtn.onclick = () => {
+                if (currentPage > 1) {
+                    currentPage--;
+                    paparkanGridBahan();
+                    renderPaginationControls();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            };
+            container.appendChild(prevBtn);
+
+            // Nombor Halaman
+            for (let i = 1; i <= totalPages; i++) {
+                const pageBtn = document.createElement("button");
+                pageBtn.innerText = i;
+                pageBtn.className = `w-8 h-8 rounded-xl text-xs font-bold border transition-all flex items-center justify-center ${currentPage === i ? 'bg-[#101e33] text-white border-[#101e33] shadow-xs' : 'bg-white text-gray-600 border-gray-200 hover:bg-gray-50 active:scale-95 shadow-xs'}`;
+                pageBtn.onclick = () => {
+                    currentPage = i;
+                    paparkanGridBahan();
+                    renderPaginationControls();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                };
+                container.appendChild(pageBtn);
+            }
+
+            // Butang Next
+            const nextBtn = document.createElement("button");
+            nextBtn.innerHTML = "Next →";
+            nextBtn.className = `px-3.5 py-1.5 rounded-xl text-xs font-bold border transition-all ${currentPage === totalPages ? 'bg-gray-50 text-gray-300 border-gray-100 cursor-not-allowed' : 'bg-white text-gray-700 border-gray-200 hover:bg-gray-50 active:scale-95 shadow-xs'}`;
+            nextBtn.disabled = currentPage === totalPages;
+            nextBtn.onclick = () => {
+                if (currentPage < totalPages) {
+                    currentPage++;
+                    paparkanGridBahan();
+                    renderPaginationControls();
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                }
+            };
+            container.appendChild(nextBtn);
+        }
+
+        function resetPenapis() {
+            if (document.getElementById('searchInput')) document.getElementById('searchInput').value = "";
+            if (document.getElementById('categorySelect')) document.getElementById('categorySelect').value = "all";
+            if (document.getElementById('programSelect')) document.getElementById('programSelect').value = "all";
+            prosesCarianDanTapisan();
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebarFilter');
+            if (sidebar) sidebar.classList.toggle('-translate-x-full');
+        }
+
+        window.addEventListener('DOMContentLoaded', muatDataGoogleSheet);
+    </script>
+</body>
+</html>
