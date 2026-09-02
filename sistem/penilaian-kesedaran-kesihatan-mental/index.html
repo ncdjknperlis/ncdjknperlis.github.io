@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <base target="_top">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:wght@600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    body { background-color: #f1f5f9; font-family: 'Inter', sans-serif; color: #334155; padding-top: 40px; padding-bottom: 40px; }
+    .main-container { max-width: 850px; background: #ffffff; padding: 50px; border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.06); margin: auto; }
+    .header-box { border-bottom: 2px solid #e2e8f0; padding-bottom: 25px; margin-bottom: 40px; text-align: center; }
+    .header-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.5rem; color: #0f172a; margin-bottom: 10px; line-height: 1.3;}
+    .sub-header { color: #64748b; font-weight: 500; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;}
+    
+    .step-container { display: none; animation: fadeIn 0.4s ease-out; }
+    .step-container.active { display: block; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+    
+    .question-title { font-family: 'Poppins', sans-serif; font-weight: 600; color: #1e293b; margin-bottom: 25px; font-size: 1.25rem; line-height: 1.6; }
+    
+    .statement-list { list-style: none; padding-left: 0; margin-bottom: 25px; }
+    .statement-list li { display: flex; align-items: center; background: #f8fafc; margin-bottom: 10px; padding: 12px 18px; border-radius: 10px; border: 1px solid #e2e8f0; color: #334155; font-size: 1.05rem;}
+    .statement-list .roman { font-family: 'Poppins', sans-serif; font-weight: 700; color: #2563eb; background: #eff6ff; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center; border-radius: 50%; margin-right: 15px; flex-shrink: 0; font-size: 0.95rem; }
+    
+    .option-box { display: block; padding: 16px 20px; margin-bottom: 14px; border: 2px solid #e2e8f0; border-radius: 10px; background: #ffffff; transition: all 0.2s ease-in-out; cursor: pointer; }
+    .option-box:hover { background: #f8fafc; border-color: #cbd5e1; }
+    .option-box.selected { border-color: #3b82f6; background: #eff6ff; }
+    .option-box .form-check { margin-bottom: 0; padding-left: 1.8em; }
+    .form-check-label { cursor: pointer; width: 100%; display: block; color: #475569; font-size: 1.05rem; }
+    .form-check-input { cursor: pointer; transform: scale(1.2); margin-top: 0.35rem; }
+    
+    .btn-primary { background-color: #2563eb; border: none; padding: 14px 30px; font-weight: 600; border-radius: 8px; font-size: 1.1rem; transition: background-color 0.2s;}
+    .btn-primary:hover { background-color: #1d4ed8; }
+    .btn-success { background-color: #059669; border: none; padding: 14px 30px; font-weight: 600; border-radius: 8px; font-size: 1.1rem;}
+    .btn-success:hover { background-color: #047857; }
+    
+    .feedback-box { display: none; margin-top: 25px; padding: 20px; border-radius: 10px; font-size: 1.05rem; font-weight: 500; }
+    .feedback-wrong { background-color: #fef2f2; border-left: 6px solid #ef4444; color: #b91c1c; }
+    .feedback-right { background-color: #f0fdf4; border-left: 6px solid #10b981; color: #047857; }
+    
+    .progress { height: 10px; border-radius: 5px; background-color: #e2e8f0; }
+    .progress-bar { background-color: #3b82f6; transition: width 0.4s ease; }
+    
+    footer { text-align: center; margin-top: 50px; color: #94a3b8; font-size: 0.9em; font-weight: 500; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="main-container">
+    <div class="header-box">
+      <img src="https://lh3.googleusercontent.com/d/1lIkdT2BsA51EX-CoF_lpWluaAGDraz_y" alt="Logo Organisasi" class="img-fluid mx-auto d-block mb-4" style="max-height: 120px; object-fit: contain;">
+      
+      <div class="header-title">UJIAN PENILAIAN BAGI PROGRAM KESEDARAN DAN ADVOKASI KESIHATAN MENTAL</div>
+      <div class="sub-header">Pusat Kecemerlangan Kesihatan Mental Kebangsaan</div>
+    </div>
+
+    <div class="progress mb-5" id="progressWrapper">
+      <div id="progressBar" class="progress-bar" role="progressbar" style="width: 0%;"></div>
+    </div>
+
+    <div id="step-0" class="step-container active">
+      <div class="mb-4">
+        <label for="codeNumber" class="form-label fw-bold text-dark fs-5">Sila Masukkan No. Kod Unik Anda:</label>
+        <input type="text" class="form-control form-control-lg p-3" id="codeNumber" placeholder="Cth: ID-001">
+        <div class="form-text mt-2 text-muted">Sila gunakan kod yang sama untuk Ujian Pra dan Ujian Pos.</div>
+      </div>
+      
+      <div class="mb-4">
+        <label for="testType" class="form-label fw-bold text-dark fs-5">Jenis Ujian:</label>
+        <select class="form-select form-select-lg p-3" id="testType">
+          <option value="">-- Sila Pilih --</option>
+          <option value="Pre Test">Ujian Pra (Pre Test)</option>
+          <option value="Post Test">Ujian Pos (Post Test)</option>
+        </select>
+      </div>
+
+      <div class="form-check mb-5 mt-4">
+        <input class="form-check-input" type="checkbox" id="consentCheck" style="transform: scale(1.5); margin-right: 10px;">
+        <label class="form-check-label fw-bold text-dark fs-6" for="consentCheck" style="padding-top: 3px;">
+          Saya faham dan bersetuju untuk menjawab borang penilaian saringan ini.
+        </label>
+      </div>
+      <button class="btn btn-primary w-100 py-3 fs-5" onclick="startQuiz()">Mula Menjawab</button>
+    </div>
+
+    <div id="step-1" class="step-container">
+      <div class="question-title">Soalan 1: Kesihatan Mental adalah keadaan di mana.........</div>
+      <label class="option-box" onclick="selectOption(this, 1)"><div class="form-check"><input class="form-check-input" type="radio" name="q1" value="A"><span class="form-check-label">A. Seseorang yang tidak dapat berfungsi secara optima dan tidak mampu menyumbang kepada masyarakat.</span></div></label>
+      <label class="option-box" onclick="selectOption(this, 1)"><div class="form-check"><input class="form-check-input" type="radio" name="q1" value="B"><span class="form-check-label">B. Seseorang yang mengalami gangguan pada fungsi otak dan menyebabkan gangguan ketara.</span></div></label>
+      <label class="option-box" onclick="selectOption(this, 1)"><div class="form-check"><input class="form-check-input" type="radio" name="q1" value="C"><span class="form-check-label">C. Satu keadaan kesejahteraan yang membolehkan seseorang dapat mengatasi tekanan kehidupan, menyedari potensi diri, dapat belajar dan bekerja dengan baik.</span></div></label>
+      <label class="option-box" onclick="selectOption(this, 1)"><div class="form-check"><input class="form-check-input" type="radio" name="q1" value="D"><span class="form-check-label">D. Individu yang mengalami gangguan emosi atau perasaan yang boleh menyebabkan fungsi kehidupan seharian tidak mencapai tahap optima.</span></div></label>
+      <div id="feedback-1" class="feedback-box"></div>
+      <div class="mt-4 text-end"><button class="btn btn-primary" id="btn-1" onclick="handleStep(1)">Semak Jawapan</button></div>
+    </div>
+
+    <div id="step-2" class="step-container">
+      <div class="question-title">Soalan 2: Berikut adalah tanda-tanda awal seseorang yang mempunyai masalah kesihatan mental kecuali...</div>
+      <label class="option-box" onclick="selectOption(this, 2)"><div class="form-check"><input class="form-check-input" type="radio" name="q2" value="A"><span class="form-check-label">A. Hilang selera makan atau berlebihan</span></div></label>
+      <label class="option-box" onclick="selectOption(this, 2)"><div class="form-check"><input class="form-check-input" type="radio" name="q2" value="B"><span class="form-check-label">B. Masalah atau gangguan untuk tidur</span></div></label>
+      <label class="option-box" onclick="selectOption(this, 2)"><div class="form-check"><input class="form-check-input" type="radio" name="q2" value="C"><span class="form-check-label">C. Suka menyendiri</span></div></label>
+      <label class="option-box" onclick="selectOption(this, 2)"><div class="form-check"><input class="form-check-input" type="radio" name="q2" value="D"><span class="form-check-label">D. Produktiviti kerja meningkat</span></div></label>
+      <div id="feedback-2" class="feedback-box"></div>
+      <div class="mt-4 text-end"><button class="btn btn-primary" id="btn-2" onclick="handleStep(2)">Semak Jawapan</button></div>
+    </div>
+
+    <div id="step-3" class="step-container">
+      <div class="question-title">Soalan 3: Ciri-ciri seseorang memiliki kesihatan mental yang baik adalah seperti berikut kecuali...</div>
+      <label class="option-box" onclick="selectOption(this, 3)"><div class="form-check"><input class="form-check-input" type="radio" name="q3" value="A"><span class="form-check-label">A. Tidak beremosi secara keterlaluan.</span></div></label>
+      <label class="option-box" onclick="selectOption(this, 3)"><div class="form-check"><input class="form-check-input" type="radio" name="q3" value="B"><span class="form-check-label">B. Berupaya untuk mengekalkan hubungan dengan orang lain dalam pelbagai situasi.</span></div></label>
+      <label class="option-box" onclick="selectOption(this, 3)"><div class="form-check"><input class="form-check-input" type="radio" name="q3" value="C"><span class="form-check-label">C. Merasai diri lebih baik dari orang lain.</span></div></label>
+      <label class="option-box" onclick="selectOption(this, 3)"><div class="form-check"><input class="form-check-input" type="radio" name="q3" value="D"><span class="form-check-label">D. Boleh membuat keputusan dalam kehidupan seharian.</span></div></label>
+      <div id="feedback-3" class="feedback-box"></div>
+      <div class="mt-4 text-end"><button class="btn btn-primary" id="btn-3" onclick="handleStep(3)">Semak Jawapan</button></div>
+    </div>
+
+    <div id="step-4" class="step-container">
+      <div class="question-title">Soalan 4: Pesakit mental tidak boleh bekerja.</div>
+      <label class="option-box" onclick="selectOption(this, 4)"><div class="form-check"><input class="form-check-input" type="radio" name="q4" value="Ya"><span class="form-check-label">Ya</span></div></label>
+      <label class="option-box" onclick="selectOption(this, 4)"><div class="form-check"><input class="form-check-input" type="radio" name="q4" value="Tidak"><span class="form-check-label">Tidak</span></div></label>
+      <div id="feedback-4" class="feedback-box"></div>
+      <div class="mt-4 text-end"><button class="btn btn-primary" id="btn-4" onclick="handleStep(4)">Semak Jawapan</button></div>
+    </div>
+
+    <div id="step-5" class="step-container">
+      <div class="question-title">Soalan 5: Pesakit mental selalu mengganas dan perlu diasingkan.</div>
+      <label class="option-box" onclick="selectOption(this, 5)"><div class="form-check"><input class="form-check-input" type="radio" name="q5" value="Ya"><span class="form-check-label">Ya</span></div></label>
+      <label class="option-box" onclick="selectOption(this, 5)"><div class="form-check"><input class="form-check-input" type="radio" name="q5" value="Tidak"><span class="form-check-label">Tidak</span></div></label>
+      <div id="feedback-5" class="feedback-box"></div>
+      <div class="mt-4 text-end"><button class="btn btn-primary" id="btn-5" onclick="handleStep(5)">Semak Jawapan</button></div>
+    </div>
+
+    <div id="step-6" class="step-container">
+      <div class="question-title">Soalan 6: Semua penyakit mental disebabkan faktor genetik atau keturunan.</div>
+      <label class="option-box" onclick="selectOption(this, 6)"><div class="form-check"><input class="form-check-input" type="radio" name="q6" value="Ya"><span class="form-check-label">Ya</span></div></label>
+      <label class="option-box" onclick="selectOption(this, 6)"><div class="form-check"><input class="form-check-input" type="radio" name="q6" value="Tidak"><span class="form-check-label">Tidak</span></div></label>
+      <div id="feedback-6" class="feedback-box"></div>
+      <div class="mt-4 text-end"><button class="btn btn-primary" id="btn-6" onclick="handleStep(6)">Semak Jawapan</button></div>
+    </div>
+
+    <div id="step-7" class="step-container">
+      <div class="question-title">Soalan 7: Apakah kesan stigma dan diskriminasi terhadap individu dengan masalah kesihatan mental?</div>
+      <ul class="statement-list">
+        <li><span class="roman">i</span> Berasa malu dilabelkan “tidak siuman”</li>
+        <li><span class="roman">ii</span> Mengelakkan diri daripada mendapatkan bantuan</li>
+        <li><span class="roman">iii</span> Berasa mempunyai harapan dan terus berjuang</li>
+        <li><span class="roman">iv</span> Menjauhkan diri daripada masyarakat</li>
+      </ul>
+      <label class="option-box" onclick="selectOption(this, 7)"><div class="form-check"><input class="form-check-input" type="radio" name="q7" value="A"><span class="form-check-label">A. ii & iii</span></div></label>
+      <label class="option-box" onclick="selectOption(this, 7)"><div class="form-check"><input class="form-check-input" type="radio" name="q7" value="B"><span class="form-check-label">B. ii, iii & iv</span></div></label>
+      <label class="option-box" onclick="selectOption(this, 7)"><div class="form-check"><input class="form-check-input" type="radio" name="q7" value="C"><span class="form-check-label">C. i, ii & iv</span></div></label>
+      <label class="option-box" onclick="selectOption(this, 7)"><div class="form-check"><input class="form-check-input" type="radio" name="q7" value="D"><span class="form-check-label">D. i, ii, iii, & iv</span></div></label>
+      <div id="feedback-7" class="feedback-box"></div>
+      <div class="mt-4 text-end"><button class="btn btn-primary" id="btn-7" onclick="handleStep(7)">Semak Jawapan</button></div>
+    </div>
+
+    <div id="step-8" class="step-container">
+      <div class="question-title">Soalan 8: Berikut adalah amalan dalam penjagaan kesihatan mental kendiri yang baik iaitu:</div>
+      <ul class="statement-list">
+        <li><span class="roman">i</span> Senaman</li>
+        <li><span class="roman">ii</span> Merokok</li>
+        <li><span class="roman">iii</span> Minum alkohol</li>
+        <li><span class="roman">iv</span> Menulis Diari</li>
+      </ul>
+      <label class="option-box" onclick="selectOption(this, 8)"><div class="form-check"><input class="form-check-input" type="radio" name="q8" value="A"><span class="form-check-label">A. ii & iii</span></div></label>
+      <label class="option-box" onclick="selectOption(this, 8)"><div class="form-check"><input class="form-check-input" type="radio" name="q8" value="B"><span class="form-check-label">B. i & iv</span></div></label>
+      <label class="option-box" onclick="selectOption(this, 8)"><div class="form-check"><input class="form-check-input" type="radio" name="q8" value="C"><span class="form-check-label">C. i & iii</span></div></label>
+      <label class="option-box" onclick="selectOption(this, 8)"><div class="form-check"><input class="form-check-input" type="radio" name="q8" value="D"><span class="form-check-label">D. ii & iv</span></div></label>
+      <div id="feedback-8" class="feedback-box"></div>
+      <div class="mt-4 text-end"><button class="btn btn-primary" id="btn-8" onclick="handleStep(8)">Semak Jawapan</button></div>
+    </div>
+
+    <div id="step-9" class="step-container">
+      <div class="question-title">Soalan 9: Peranan sokongan sosial sangat penting untuk menjaga kesihatan mental yang baik.</div>
+      <label class="option-box" onclick="selectOption(this, 9)"><div class="form-check"><input class="form-check-input" type="radio" name="q9" value="Betul"><span class="form-check-label">Betul</span></div></label>
+      <label class="option-box" onclick="selectOption(this, 9)"><div class="form-check"><input class="form-check-input" type="radio" name="q9" value="Salah"><span class="form-check-label">Salah</span></div></label>
+      <div id="feedback-9" class="feedback-box"></div>
+      <div class="mt-4 text-end"><button class="btn btn-primary" id="btn-9" onclick="handleStep(9)">Semak Jawapan</button></div>
+    </div>
+
+    <div id="step-10" class="step-container">
+      <div class="question-title">Soalan 10: “Terima Kasih” adalah salah satu contoh komunikasi lisan.</div>
+      <label class="option-box" onclick="selectOption(this, 10)"><div class="form-check"><input class="form-check-input" type="radio" name="q10" value="Betul"><span class="form-check-label">Betul</span></div></label>
+      <label class="option-box" onclick="selectOption(this, 10)"><div class="form-check"><input class="form-check-input" type="radio" name="q10" value="Salah"><span class="form-check-label">Salah</span></div></label>
+      <div id="feedback-10" class="feedback-box"></div>
+      <div class="mt-4 text-end"><button class="btn btn-primary" id="btn-10" onclick="handleStep(10)">Semak & Hantar Rekod</button></div>
+    </div>
+
+    <div id="resultArea" class="step-container text-center py-5">
+      <h2 style="color: #059669; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 2.5rem;">Selesai!</h2>
+      <p class="mt-3 text-secondary fs-5 mb-5">Keputusan <span id="displayTestType" class="fw-bold text-dark"></span> anda telah berjaya direkodkan.</p>
+      
+      <div id="scoreDisplayArea"></div>
+      
+    </div>
+
+  </div>
+
+  <footer>
+    Hak Cipta Terpelihara JKN Perlis (2026)
+  </footer>
+</div>
+
+<script>
+  let userData = {};
+  let stepState = {}; 
+  
+  const answersDB = {
+    1: { ans: "C", text: "C. Satu keadaan kesejahteraan yang membolehkan seseorang dapat mengatasi tekanan kehidupan..." },
+    2: { ans: "D", text: "D. Produktiviti kerja meningkat" },
+    3: { ans: "C", text: "C. Merasai diri lebih baik dari orang lain." },
+    4: { ans: "Tidak", text: "Tidak" },
+    5: { ans: "Tidak", text: "Tidak" },
+    6: { ans: "Tidak", text: "Tidak" },
+    7: { ans: "C", text: "C. i, ii & iv" },
+    8: { ans: "B", text: "B. i & iv" },
+    9: { ans: "Betul", text: "Betul" },
+    10: { ans: "Betul", text: "Betul" }
+  };
+
+  function selectOption(element, qNum) {
+    if(stepState[qNum]) return; 
+    
+    const boxes = document.querySelectorAll(`#step-${qNum} .option-box`);
+    boxes.forEach(box => box.classList.remove('selected'));
+    
+    element.classList.add('selected');
+    const radio = element.querySelector('input[type="radio"]');
+    radio.checked = true;
+  }
+
+  function startQuiz() {
+    const code = document.getElementById('codeNumber').value.trim();
+    const testType = document.getElementById('testType').value;
+    const checked = document.getElementById('consentCheck').checked;
+    
+    if(!code) { alert("Sila masukkan No. Kod Unik anda."); return; }
+    if(!testType) { alert("Sila pilih Jenis Ujian (Pre Test / Post Test)."); return; }
+    if(!checked) { alert("Sila tandakan kotak persetujuan untuk meneruskan."); return; }
+    
+    userData.codeNumber = code;
+    userData.testType = testType;
+    
+    showStep(1);
+    updateProgress(1);
+  }
+
+  function handleStep(qNum) {
+    const btn = document.getElementById(`btn-${qNum}`);
+    const selected = document.querySelector(`input[name="q${qNum}"]:checked`);
+    const feedbackBox = document.getElementById(`feedback-${qNum}`);
+
+    if (!stepState[qNum]) {
+      if (!selected) { alert("Sila pilih satu jawapan."); return; }
+      
+      userData[`q${qNum}`] = selected.value;
+      const isCorrect = (selected.value === answersDB[qNum].ans);
+      
+      document.querySelectorAll(`#step-${qNum} .option-box`).forEach(box => {
+        box.style.pointerEvents = 'none';
+        if(box.querySelector('input').value !== answersDB[qNum].ans && box.classList.contains('selected')){
+            box.style.borderColor = '#ef4444'; 
+        }
+      });
+      
+      feedbackBox.style.display = "block";
+      if(isCorrect) {
+        feedbackBox.className = "feedback-box feedback-right";
+        feedbackBox.innerHTML = "✅ Jawapan anda tepat!";
+      } else {
+        feedbackBox.className = "feedback-box feedback-wrong";
+        feedbackBox.innerHTML = `❌ Jawapan anda kurang tepat.<br><div class="mt-2 text-dark">Jawapan sebenar: <strong>${answersDB[qNum].text}</strong></div>`;
+      }
+
+      stepState[qNum] = "checked";
+      btn.innerText = (qNum === 10) ? "Hantar Rekod Saringan" : "Soalan Seterusnya ➔";
+      btn.classList.replace("btn-primary", "btn-success");
+
+    } else {
+      if (qNum < 10) {
+        showStep(qNum + 1);
+        updateProgress(qNum + 1);
+      } else {
+        submitFinalData();
+      }
+    }
+  }
+
+  function showStep(stepNum) {
+    document.querySelectorAll('.step-container').forEach(el => el.classList.remove('active'));
+    document.getElementById(`step-${stepNum}`).classList.add('active');
+  }
+
+  function updateProgress(stepNum) {
+    const percentage = ((stepNum - 1) / 10) * 100;
+    document.getElementById('progressBar').style.width = percentage + "%";
+  }
+
+  function submitFinalData() {
+    const btn = document.getElementById('btn-10');
+    btn.disabled = true;
+    btn.innerText = "Menyimpan ke Pangkalan Data...";
+
+    google.script.run
+      .withSuccessHandler(res => {
+        if(res.status === "success") {
+          document.getElementById('step-10').classList.remove('active');
+          document.getElementById('resultArea').classList.add('active');
+          document.getElementById('progressWrapper').style.display = "none";
+          document.getElementById('displayTestType').innerText = res.testType;
+          
+          let scoreHtml = '';
+          
+          if(res.testType === "Post Test") {
+            scoreHtml = `
+              <div style="display: flex; gap: 20px; justify-content: center; flex-wrap: wrap; margin-top: 30px;">
+                <div style="flex: 1; min-width: 250px; background-color: #f8fafc; border: 2px dashed #94a3b8; border-radius: 12px; padding: 30px; text-align: center;">
+                  <div style="font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 600; color: #64748b; margin-bottom: 15px;">Markah Ujian Pra</div>
+                  <div style="font-size: 3rem; font-weight: 700; color: #64748b;">${res.preTestScore}</div>
+                </div>
+                <div style="flex: 1; min-width: 250px; background-color: #ecfdf5; border: 2px solid #10b981; border-radius: 12px; padding: 30px; text-align: center; transform: scale(1.05); box-shadow: 0 10px 25px rgba(16,185,129,0.15);">
+                  <div style="font-family: 'Poppins', sans-serif; font-size: 1.1rem; font-weight: 600; color: #059669; margin-bottom: 15px;">Markah Ujian Pos</div>
+                  <div style="font-size: 3rem; font-weight: 700; color: #059669;">${res.score} / ${res.total}</div>
+                </div>
+              </div>
+            `;
+          } else {
+            scoreHtml = `
+              <div style="background-color: #eff6ff; border: 2px solid #3b82f6; border-radius: 12px; padding: 40px; max-width: 400px; margin: 30px auto; text-align: center; box-shadow: 0 5px 15px rgba(59,130,246,0.1);">
+                <div style="font-family: 'Poppins', sans-serif; font-size: 1.2rem; font-weight: 600; color: #1d4ed8; margin-bottom: 15px;">Markah Ujian Pra Anda</div>
+                <div style="font-size: 4rem; font-weight: 700; color: #2563eb;">${res.score}<span style="font-size: 1.5rem; color: #94a3b8;"> / ${res.total}</span></div>
+              </div>
+            `;
+          }
+          
+          document.getElementById('scoreDisplayArea').innerHTML = scoreHtml;
+          
+        } else {
+          alert("Ralat Penyerahan:\n" + res.message);
+          btn.disabled = false;
+          btn.innerText = "Cuba Hantar Semula";
+        }
+      })
+      .withFailureHandler(err => {
+        alert("Ralat Rangkaian:\n" + err);
+        btn.disabled = false;
+        btn.innerText = "Hantar Rekod Saringan";
+      })
+      .processForm(userData);
+  }
+</script>
+
+</body>
+</html>

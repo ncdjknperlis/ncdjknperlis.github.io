@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pusat Akses Digital NCD | Aero Glass Edition</title>
+    <link rel="icon" type="image/png" href="favicon/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 40%, #0284c7 100%);
+            background-attachment: fixed;
+            color: #FFFFFF;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* 💎 WINDOWS AERO GLASS BASE PANEL */
+        .aero-glass {
+            background: rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(24px) saturate(190%);
+            -webkit-backdrop-filter: blur(24px) saturate(190%);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+        }
+
+        .aero-header {
+            background: rgba(15, 23, 42, 0.65);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+        }
+
+        /* 🎴 AERO GLASS GRID CARD & HOVER GLOW EFFECT */
+        .aero-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(16px) saturate(160%);
+            -webkit-backdrop-filter: blur(16px) saturate(160%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            will-change: transform, box-shadow, border-color, background;
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                        box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                        border-color 0.35s ease,
+                        background 0.35s ease;
+        }
+
+        .aero-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            background: rgba(255, 255, 255, 0.18);
+            border-color: rgba(56, 189, 248, 0.8);
+            box-shadow: 
+                0 0 35px rgba(56, 189, 248, 0.4),
+                0 20px 40px rgba(0, 0, 0, 0.4),
+                inset 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        /* 🎴 3D DECK CAROUSEL STYLES */
+        .deck-container {
+            perspective: 1000px;
+            transform-style: preserve-3d;
+            touch-action: pan-y;
+        }
+
+        .deck-card {
+            position: absolute;
+            width: 320px;
+            height: 490px;
+            background: rgba(15, 23, 42, 0.82);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            border-radius: 24px;
+            will-change: transform, opacity, box-shadow;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1), 
+                        opacity 0.5s ease-out,
+                        box-shadow 0.5s ease-out;
+            transform-style: preserve-3d;
+            backface-visibility: hidden;
+            cursor: pointer;
+        }
+
+        @media (min-width: 768px) {
+            .deck-card {
+                width: 380px;
+                height: 520px;
+            }
+        }
+
+        .deck-card-active {
+            box-shadow: 
+                0 0 35px rgba(56, 189, 248, 0.5),
+                0 25px 50px -10px rgba(0, 0, 0, 0.5),
+                0 0 0 2px #38bdf8;
+        }
+        
+        .deck-card-inactive {
+            box-shadow: 0 8px 20px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        /* 🔷 AERO GLASS BUTTONS */
+        .aero-btn-glass {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.25s ease;
+        }
+        .aero-btn-glass:hover {
+            background: rgba(255, 255, 255, 0.3);
+            border-color: rgba(255, 255, 255, 0.6);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        .aero-btn-primary {
+            background: linear-gradient(135deg, #0284c7 0%, #0369a1 100%);
+            border: 1px solid rgba(186, 230, 253, 0.5);
+            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.4);
+            transition: all 0.25s ease;
+        }
+        .aero-btn-primary:hover {
+            background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+            box-shadow: 0 0 20px rgba(56, 189, 248, 0.6);
+            transform: translateY(-1px);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.5); }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.25); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(56, 189, 248, 0.8); }
+    </style>
+</head>
+<body class="min-h-screen w-screen flex flex-col justify-between select-none pb-12">
+
+    <!-- 🌐 HEADER AERO GLASS -->
+    <header class="w-full py-3.5 px-6 md:px-12 aero-header flex flex-row items-center justify-between z-40 sticky top-0 shadow-lg">
+        
+        <div class="flex items-center space-x-4">
+            <div class="flex items-center space-x-3">
+                <img src="images/logo.png" style="max-width: 30px;" class="w-full h-auto object-contain filter drop-shadow-md" alt="Logo KKM">
+                <img src="images/logo-ncd/logo-ncd-black.png" style="max-width: 105px;" class="w-full h-auto object-contain hidden sm:block filter drop-shadow-md" alt="Logo NCD">
+                <div class="w-px h-6 bg-white/20"></div>
+                <div>
+                    <h1 class="text-xs md:text-sm font-extrabold text-white tracking-wide uppercase drop-shadow-sm">
+                        Pusat Akses Digital NCD
+                    </h1>
+                    <p class="text-[9px] text-sky-300 font-semibold tracking-widest uppercase">Jabatan Kesihatan Negeri Perlis</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CONTROLS: SEARCH, FILTER & TOGGLE 3D DECK VIEW -->
+        <div class="flex items-center space-x-3">
+            <!-- 🔘 BUTTON TOGGLE 3D DECK INTERAKTIF -->
+            <button onclick="toggleViewMode()" id="viewToggleBtn" class="aero-btn-glass text-white text-xs font-bold py-1.5 px-3.5 rounded-xl flex items-center gap-2 active:scale-95 shadow-md">
+                <span id="viewToggleText">Mod Interaktif</span>
+            </button>
+
+            <!-- BAR CARIAN -->
+            <div id="searchContainer" class="relative hidden sm:block w-40 md:w-56">
+                <input type="text" id="searchInput" onkeyup="filterCards()" placeholder="🔍 Cari modul..." class="w-full bg-white/10 border border-white/20 text-white placeholder-slate-300 text-xs font-medium py-1.5 px-3 rounded-xl focus:outline-none focus:border-sky-400 backdrop-blur-md">
+            </div>
+
+            <!-- FILTER DROPDOWN -->
+            <select id="filterSelect" onchange="filterCards()" class="bg-slate-900/80 border border-white/20 text-white text-xs font-bold py-1.5 px-3 rounded-xl focus:outline-none focus:border-sky-400 cursor-pointer backdrop-blur-md shadow-inner">
+                <option value="all" class="bg-slate-900">📁 Semua Modul (16)</option>
+                <option value="sistem" class="bg-slate-900">⚙️ Sistem & Aplikasi</option>
+                <option value="pusat-sumber" class="bg-slate-900">🎨 Pusat Sumber & Media</option>
+                <option value="ujian" class="bg-slate-900">📝 Ujian Penilaian</option>
+            </select>
+        </div>
+    </header>
+
+    <!-- 🔲 MAIN CONTAINER (GRID / 3D DECK) -->
+    <main id="mainContainer" class="flex-1 w-full px-6 md:px-12 py-8 max-w-[1920px] mx-auto flex flex-col items-center justify-center relative">
+        <div id="gridWrapper" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6 w-full">
+            <!-- Cards dinamik daripada JavaScript -->
+        </div>
+    </main>
+
+    <!-- 💡 NOTA KECIL PANDUAN SKROL (FIXED TERAPUNG DI BAWAH KAD SEBELUM FOOTER) -->
+    <div id="deckGuideNote" class="hidden items-center justify-center space-x-2 py-1.5 px-4 bg-black/40 border border-white/20 rounded-full text-[10px] text-slate-200 font-medium backdrop-blur-md shadow-lg fixed bottom-16 left-1/2 -translate-x-1/2 z-30 animate-pulse pointer-events-none">
+        <span>🖱️ Skrol tetikus / Leret ke kiri & kanan untuk tukar kad</span>
+        <span class="text-slate-500">•</span>
+        <span class="text-sky-300 font-bold">Tekan Enter ↵ untuk buka</span>
+    </div>
+
+    <!-- 🎮 FOOTER & DECK CONTROLS -->
+    <footer class="w-full py-3.5 px-6 md:px-12 aero-header flex flex-col md:flex-row items-center justify-between gap-3 z-40 fixed bottom-0 left-0 right-0 text-xs shadow-lg">
+        <div class="flex items-center space-x-2.5 font-semibold text-sky-200">
+            <span class="w-2.5 h-2.5 rounded-full bg-sky-400 animate-ping"></span>
+            <span id="activeCounter" class="tracking-wide font-bold text-white">Paparan Grid Aktif</span>
+        </div>
+
+        <!-- CONTROLS UNTUK 3D DECK -->
+        <div id="deckControls" class="hidden items-center space-x-3">
+            <button onclick="navigateDeck(-1)" class="aero-btn-glass px-4 py-1.5 text-white rounded-xl text-xs font-semibold active:scale-95 flex items-center gap-1.5">
+                <span>←</span> Undur
+            </button>
+
+            <button onclick="launchCurrentSystem()" class="aero-btn-primary px-6 py-1.5 text-white rounded-xl text-xs font-bold tracking-wide shadow-md flex items-center gap-2">
+                <span>Akses Sistem</span> <span class="text-[10px] opacity-80">↵</span>
+            </button>
+
+            <button onclick="navigateDeck(1)" class="aero-btn-glass px-4 py-1.5 text-white rounded-xl text-xs font-semibold active:scale-95 flex items-center gap-1.5">
+                Maju <span>→</span>
+            </button>
+        </div>
+
+        <div class="text-[11px] text-slate-300 font-medium tracking-wider uppercase hidden lg:block">
+            Hak Cipta © 2026 Unit NCD, Jabatan Kesihatan Negeri Perlis
+        </div>
+    </footer>
+
+    <!-- 📜 DATA CARDS ENGINE & SCRIPT -->
+    <script>
+        const cardsData = [
+            {
+                id: "manual",
+                type: "pusat-sumber",
+                title: "Manual & Info Teknikal",
+                category: "DOKUMENTASI",
+                desc: "Akses 14 manual pengurusan, indikator KPI, struktur reten, dan takwim sambutan kesihatan NCD KKM.",
+                img: "images/card/card-00.png",
+                badge: "INFO",
+                badgeBg: "bg-purple-500/30 text-purple-200 border-purple-400/40",
+                url: "maklumat-teknikal.html"
+            },
+            {
+                id: "hub",
+                type: "pusat-sumber",
+                title: "Hub Sumber NCD",
+                category: "PUSAT SUMBER",
+                desc: "Akses terus garis panduan klinikal (CPG), infografik kesedaran, dan video promosi kesihatan Unit NCD Perlis.",
+                img: "images/card/card-00.png",
+                badge: "MEDIA HUB",
+                badgeBg: "bg-amber-500/30 text-amber-200 border-amber-400/40",
+                url: "info-ncd.html"
+            },
+            {
+                id: "diabetes",
+                type: "sistem",
+                title: "Sistem e-Diabetes",
+                category: "REGISTRY",
+                desc: "Pengurusan pesakit diabetes mellitus (DM) bagi negeri Perlis.",
+                img: "images/card/card-01.png",
+                badge: "SISTEM",
+                badgeBg: "bg-sky-500/30 text-sky-200 border-sky-400/40",
+                url: "https://script.google.com/a/macros/moh.gov.my/s/AKfycbxblW48lkpgP1kyZt3alMLoQLGO7Nzh6-IKArJcLxO09NvulJSsVeadWPyAprl0qihuyg/exec"
+            },
+            {
+                id: "nhr",
+                type: "sistem",
+                title: "Sistem NHR (Hipertensi)",
+                category: "REGISTRY",
+                desc: "Pengurusan pesakit hipertensi (darah tinggi) bagi negeri Perlis.",
+                img: "images/card/card-02.png",
+                badge: "SISTEM",
+                badgeBg: "bg-sky-500/30 text-sky-200 border-sky-400/40",
+                url: "https://sites.google.com/moh.gov.my/htn-registry-audit-2025/home"
+            },
+            {
+                id: "saringan",
+                type: "sistem",
+                title: "Sistem e-Saringan",
+                category: "KOMUNITI",
+                desc: "Pengurusan saringan faktor risiko komuniti dan lapangan (KOSPEN / Bukan KOSPEN).",
+                img: "images/card/card-03.png",
+                badge: "SISTEM",
+                badgeBg: "bg-emerald-500/30 text-emerald-200 border-emerald-400/40",
+                url: "https://script.google.com/macros/s/AKfycbzQfP_AZWFUK9t804pvV2XmFYHoNtyq6pGRxL4byzt57PXLtrhSzW-7z3-lTgLM-aUd/exec"
+            },
+            {
+                id: "kolon",
+                type: "sistem",
+                title: "Sistem e-Kolon",
+                category: "ONKOLOGI",
+                desc: "Pengurusan klien / pesakit yang menjalani saringan kanser kolorektal negeri Perlis.",
+                img: "images/card/card-04.png",
+                badge: "SISTEM",
+                badgeBg: "bg-sky-500/30 text-sky-200 border-sky-400/40",
+                url: "#"
+            },
+            {
+                id: "iquit",
+                type: "sistem",
+                title: "iQuit Perlis",
+                category: "INTERVENSI",
+                desc: "Sistem pendaftaran, pengurusan intervensi, pelaporan perkhidmatan berhenti merokok (KBM) Perlis.",
+                img: "images/card/card-05.png",
+                badge: "SISTEM",
+                badgeBg: "bg-sky-500/30 text-sky-200 border-sky-400/40",
+                url: "https://perlis.moh.gov.my/pubjknpls/iquit/eis/public_dashboard"
+            },
+            {
+                id: "fagerstrom",
+                type: "ujian",
+                title: "Ujian Fagerström Kebergantungan Nikotin",
+                category: "PENILAIAN",
+                desc: "Ujian bagi menilai tahap kebergantungan nikotin anda.",
+                img: "images/card/card-05.png",
+                badge: "UJIAN",
+                badgeBg: "bg-emerald-500/30 text-emerald-200 border-emerald-400/40",
+                url: "https://perlis.moh.gov.my/pubjknpls/iquit/"
+            },
+            {
+                id: "ekospen",
+                type: "sistem",
+                title: "e-KOSPEN",
+                category: "KOMUNITI",
+                desc: "Sistem pelaporan aktiviti dan intervensi program Komuniti Sihat Perkasa Negara (KOSPEN) negeri Perlis.",
+                img: "images/card/card-06.png",
+                badge: "SISTEM",
+                badgeBg: "bg-sky-500/30 text-sky-200 border-sky-400/40",
+                url: "https://script.google.com/a/macros/moh.gov.my/s/AKfycbx2ES0gysZ5p_o-x9Yhuppza7OzqCwzFP_Lhbis8ipiJtgGUWswiRiUGWbSKtf0Mcla/exec"
+            },
+            {
+                id: "eminda",
+                type: "sistem",
+                title: "e-Minda Perlis",
+                category: "MENTAL",
+                desc: "Sistem pengurusan saringan, intervensi, pelaporan program Kesihatan Mental / Psikososial negeri Perlis.",
+                img: "images/card/card-07.png",
+                badge: "SISTEM",
+                badgeBg: "bg-sky-500/30 text-sky-200 border-sky-400/40",
+                url: "#"
+            },
+            {
+                id: "nalury",
+                type: "sistem",
+                title: "National Lung Health Registry (NALURY)",
+                category: "RESPIRATORI",
+                desc: "Pemeriksaan kesihatan pernafasan dan penilaian risiko.",
+                img: "images/card/card-08.png",
+                badge: "SISTEM",
+                badgeBg: "bg-sky-500/30 text-sky-200 border-sky-400/40",
+                url: "https://nalury.mrichealthcare.com/"
+            },
+            {
+                id: "mycpd",
+                type: "sistem",
+                title: "Sistem MyCPD-NCD",
+                category: "LATIHAN",
+                desc: "Sistem pengurusan latihan, pendaftaran bengkel, permohonan mata CPD dalaman Unit NCD Perlis.",
+                img: "images/card/card-09.png",
+                badge: "SISTEM",
+                badgeBg: "bg-sky-500/30 text-sky-200 border-sky-400/40",
+                url: "#"
+            },
+            {
+                id: "eosca",
+                type: "sistem",
+                title: "Sistem e-OSCA",
+                category: "INTERVENSI",
+                desc: "Modul pendaftaran, penilaian, intervensi One Stop Centre for Addiction (OSCA) Klinik Kesihatan Kuala Perlis.",
+                img: "images/card/card-10.png",
+                badge: "SISTEM",
+                badgeBg: "bg-sky-500/30 text-sky-200 border-sky-400/40",
+                url: "#"
+            },
+            {
+                id: "akta852",
+                type: "sistem",
+                title: "Sistem Akta 852",
+                category: "PERUNDANGAN",
+                desc: "Sistem pelaporan advokasi, penguatkuasaan, pemantauan Akta Kawalan Produk Merokok Demi Kesihatan Awam 2024.",
+                img: "images/card/card-11.png",
+                badge: "SISTEM",
+                badgeBg: "bg-sky-500/30 text-sky-200 border-sky-400/40",
+                url: "#"
+            },
+            {
+                id: "mimo",
+                type: "sistem",
+                title: "Sistem Reten MIMO",
+                category: "OBESITI",
+                desc: "Pusat pengumpulan data reten bulanan program Multidisciplinary Integrated Management of Obesity (MIMO) Perlis.",
+                img: "images/card/card-12.png",
+                badge: "SISTEM",
+                badgeBg: "bg-sky-500/30 text-sky-200 border-sky-400/40",
+                url: "https://sites.google.com/moh.gov.my/sistem/reten-mimo"
+            },
+            {
+                id: "dass",
+                type: "ujian",
+                title: "Program Kesedaran & Advokasi Kesihatan Mental",
+                category: "PENILAIAN",
+                desc: "Ujian penilaian tahap kefahaman dan kesedaran komuniti mengenai Kesihatan Mental.",
+                img: "images/card/card-07.png",
+                badge: "UJIAN",
+                badgeBg: "bg-emerald-500/30 text-emerald-200 border-emerald-400/40",
+                url: "https://script.google.com/a/macros/moh.gov.my/s/AKfycbxTUKXhYxbs3UKA_NB6F_DZn4yi3YuZEvpehGgf0c3MS5sYGX0583M_13Ghw8m1MYQ1/exec"
+            },
+            {
+                id: "stig9",
+                type: "sistem",
+                title: "STIG-9 Mental Health",
+                category: "PSIKOSOSIAL",
+                desc: "Borang saringan awam dan dashboard pelaporan bagi soal selidik stigma Kesihatan Mental dalam komuniti.",
+                img: "images/card/card-13.png",
+                badge: "NEW",
+                badgeBg: "bg-rose-500/30 text-rose-200 border-rose-400/40",
+                btn1Text: "Borang Umum",
+                btn1Url: "https://awam-ncdperlis.github.io/sistem/stig-9/",
+                btn2Text: "Dashboard Laporan",
+                btn2Url: "sistem/stig-9/laporan.html",
+                url: "https://awam-ncdperlis.github.io/sistem/stig-9/"
+            },
+            {
+                id: "lhi",
+                type: "sistem",
+                title: "Saringan Paru-Paru (LHI)",
+                category: "RESPIRATORI",
+                desc: "Borang saringan awam dan dashboard pelaporan penilaian risiko paru-paru.",
+                img: "images/card/card-14.png",
+                badge: "NEW",
+                badgeBg: "bg-rose-500/30 text-rose-200 border-rose-400/40",
+                btn1Text: "Borang Saringan",
+                btn1Url: "https://awam-ncdperlis.github.io/sistem/saringan-paru-paru/",
+                btn2Text: "Dashboard Laporan",
+                btn2Url: "sistem/saringan-paru-paru/dashboard.html",
+                url: "https://awam-ncdperlis.github.io/sistem/saringan-paru-paru/"
+            },
+            {
+                id: "flipbook",
+                type: "sistem",
+                title: "Flipbook NCD",
+                category: "FLIPBOOK",
+                desc: "Memaparkan koleksi manual rujukan dan e-flipbook interaktif NCD Perlis.",
+                img: "images/card/card-15.png",
+                badge: "NEW",
+                badgeBg: "bg-rose-500/30 text-rose-200 border-rose-400/40",
+                url: "https://awam-ncdperlis.github.io/sistem/flipbook/"
+            }
+        ];
+
+        let activeIndex = 0;
+        let visibleCards = [...cardsData];
+        let is3DDeckView = false;
+        let isScrollingLocked = false;
+
+        function toggleViewMode() {
+            is3DDeckView = !is3DDeckView;
+            
+            const btnText = document.getElementById("viewToggleText");
+            const mainContainer = document.getElementById("mainContainer");
+            const deckControls = document.getElementById("deckControls");
+            const deckGuideNote = document.getElementById("deckGuideNote");
+            const searchContainer = document.getElementById("searchContainer");
+
+            if (is3DDeckView) {
+                btnText.innerText = "Paparan Grid";
+                deckControls.classList.remove("hidden");
+                deckControls.classList.add("flex");
+                if (deckGuideNote) {
+                    deckGuideNote.classList.remove("hidden");
+                    deckGuideNote.classList.add("flex");
+                }
+                if (searchContainer) searchContainer.classList.add("hidden");
+                
+                mainContainer.className = "flex-1 w-full flex flex-col items-center justify-center relative my-auto deck-container min-h-[560px]";
+                renderDeckView();
+            } else {
+                btnText.innerText = "Mod Interaktif";
+                deckControls.classList.add("hidden");
+                deckControls.classList.remove("flex");
+                if (deckGuideNote) {
+                    deckGuideNote.classList.add("hidden");
+                    deckGuideNote.classList.remove("flex");
+                }
+                if (searchContainer) searchContainer.classList.remove("hidden");
+                
+                mainContainer.className = "flex-1 w-full px-6 md:px-12 py-8 max-w-[1920px] mx-auto flex flex-col items-center justify-center relative";
+                renderGridView();
+            }
+        }
+
+        // 🔲 MOD 1: AERO GLASS GRID VIEW
+        function renderGridView() {
+            const wrapper = document.getElementById("gridWrapper");
+            wrapper.className = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6 w-full";
+            wrapper.innerHTML = "";
+
+            if (visibleCards.length === 0) {
+                wrapper.innerHTML = `
+                    <div class="col-span-full text-center text-slate-200 font-semibold text-sm py-16 aero-glass rounded-3xl">
+                        🔍 Tiada modul sistem ditemui mengikut kriteria carian anda.
+                    </div>`;
+                return;
+            }
+
+            visibleCards.forEach((card) => {
+                const cardEl = document.createElement("div");
+                cardEl.className = "aero-card p-5 flex flex-col justify-between h-[430px] cursor-pointer group";
+
+                let buttonHTML = '';
+                if (card.btn1Text && card.btn2Text) {
+                    buttonHTML = `
+                        <div class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-white/10">
+                            <a href="${card.btn1Url}" target="_blank" onclick="event.stopPropagation()" class="aero-btn-glass py-2 text-white font-bold rounded-xl text-[11px] text-center shadow-xs">
+                                📝 ${card.btn1Text}
+                            </a>
+                            <a href="${card.btn2Url}" target="_blank" onclick="event.stopPropagation()" class="aero-btn-primary py-2 text-white font-bold rounded-xl text-[11px] text-center shadow-xs">
+                                📊 ${card.btn2Text}
+                            </a>
+                        </div>`;
+                } else {
+                    buttonHTML = `
+                        <div class="mt-3 pt-3 border-t border-white/10 flex justify-between items-center">
+                            <span class="text-[10px] text-slate-300 font-semibold uppercase tracking-wider">Akses Langsung</span>
+                            <span class="text-xs font-bold text-sky-300 group-hover:text-white transition-colors flex items-center gap-0.5">Buka Sistem <span>↗</span></span>
+                        </div>`;
+                }
+
+                cardEl.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="px-2.5 py-0.5 border text-[9px] font-extrabold rounded-md uppercase tracking-wider ${card.badgeBg}">
+                                ${card.badge}
+                            </span>
+                            <span class="text-[10px] font-bold text-sky-200/80 uppercase tracking-wider">${card.category}</span>
+                        </div>
+
+                        <div class="w-full h-36 rounded-2xl overflow-hidden my-3 border border-white/10 bg-black/20 relative flex-shrink-0">
+                            <img src="${card.img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='images/logo.png'; this.className+=' object-contain p-6';">
+                        </div>
+
+                        <div>
+                            <h2 class="text-base font-bold text-white leading-tight tracking-tight group-hover:text-sky-300 transition-colors">${card.title}</h2>
+                            <p class="text-xs text-slate-200/90 font-normal mt-1.5 line-clamp-3 leading-relaxed">${card.desc}</p>
+                        </div>
+                    </div>
+
+                    ${buttonHTML}
+                `;
+
+                cardEl.onclick = () => {
+                    if (card.url && card.url !== "#") {
+                        window.open(card.url, "_blank");
+                    }
+                };
+
+                wrapper.appendChild(cardEl);
+            });
+
+            document.getElementById("activeCounter").innerText = `Menampilkan ${visibleCards.length} Daripada ${cardsData.length} Modul`;
+        }
+
+        // 🎴 MOD 2: 3D DECK CAROUSEL VIEW
+        function renderDeckView() {
+            const wrapper = document.getElementById("gridWrapper");
+            wrapper.className = "relative w-full h-full flex items-center justify-center";
+            wrapper.innerHTML = "";
+
+            if (visibleCards.length === 0) {
+                wrapper.innerHTML = `<div class="text-slate-200 font-semibold text-sm">Tiada modul sistem ditemui.</div>`;
+                return;
+            }
+
+            visibleCards.forEach((card, index) => {
+                const offset = index - activeIndex;
+                const absOffset = Math.abs(offset);
+                
+                const translateX = offset * 280; 
+                const translateZ = -absOffset * 180; 
+                const rotateY = offset * -18; 
+                const scale = 1 - absOffset * 0.08; 
+                const opacity = absOffset > 3 ? 0 : 1 - absOffset * 0.22;
+                const zIndex = 100 - absOffset;
+
+                const cardEl = document.createElement("div");
+                const isActive = index === activeIndex;
+
+                cardEl.className = `deck-card flex flex-col justify-between p-6 overflow-hidden ${isActive ? 'deck-card-active' : 'deck-card-inactive'}`;
+                
+                cardEl.style.transform = `translate3d(${translateX}px, 0px, ${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
+                cardEl.style.zIndex = zIndex;
+                cardEl.style.opacity = opacity;
+
+                let buttonHTML = '';
+                if (card.btn1Text && card.btn2Text) {
+                    buttonHTML = `
+                        <div class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-white/10">
+                            <a href="${card.btn1Url}" target="_blank" onclick="event.stopPropagation()" class="aero-btn-glass py-2 text-white font-bold rounded-xl text-[11px] text-center shadow-xs">
+                                📝 ${card.btn1Text}
+                            </a>
+                            <a href="${card.btn2Url}" target="_blank" onclick="event.stopPropagation()" class="aero-btn-primary py-2 text-white font-bold rounded-xl text-[11px] text-center shadow-xs">
+                                📊 ${card.btn2Text}
+                            </a>
+                        </div>`;
+                } else {
+                    buttonHTML = `
+                        <div class="mt-3 pt-3 border-t border-white/10 flex justify-between items-center">
+                            <span class="text-[10px] text-slate-300 font-semibold uppercase tracking-wider">Akses Langsung</span>
+                            <span class="text-xs font-bold text-sky-300 flex items-center gap-0.5">Buka Sistem <span>↗</span></span>
+                        </div>`;
+                }
+
+                cardEl.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="px-2.5 py-0.5 border text-[9px] font-extrabold rounded-md uppercase tracking-wider ${card.badgeBg}">
+                                ${card.badge}
+                            </span>
+                            <span class="text-[10px] font-bold text-sky-200/80 uppercase tracking-wider">${card.category}</span>
+                        </div>
+
+                        <div class="w-full h-36 md:h-44 rounded-2xl overflow-hidden my-3 border border-white/10 bg-black/20 relative flex-shrink-0">
+                            <img src="${card.img}" class="w-full h-full object-cover" onerror="this.src='images/logo.png'; this.className+=' object-contain p-6';">
+                        </div>
+
+                        <div>
+                            <h2 class="text-base md:text-lg font-bold text-white leading-tight tracking-tight">${card.title}</h2>
+                            <p class="text-xs text-slate-200/90 font-normal mt-1.5 line-clamp-3 leading-relaxed">${card.desc}</p>
+                        </div>
+                    </div>
+
+                    ${buttonHTML}
+                `;
+
+                cardEl.onclick = () => {
+                    if (index === activeIndex) {
+                        launchCurrentSystem();
+                    } else {
+                        activeIndex = index;
+                        renderDeckView();
+                    }
+                };
+
+                wrapper.appendChild(cardEl);
+            });
+
+            document.getElementById("activeCounter").innerText = `Modul Terpilih: ${activeIndex + 1} / ${visibleCards.length}`;
+        }
+
+        function navigateDeck(direction) {
+            if (visibleCards.length === 0 || !is3DDeckView) return;
+            activeIndex = (activeIndex + direction + visibleCards.length) % visibleCards.length;
+            renderDeckView();
+        }
+
+        function launchCurrentSystem() {
+            if (visibleCards.length === 0 || !is3DDeckView) return;
+            const currentCard = visibleCards[activeIndex];
+            if (currentCard.url && currentCard.url !== "#") {
+                window.open(currentCard.url, "_blank");
+            }
+        }
+
+        function filterCards() {
+            const filterType = document.getElementById("filterSelect").value;
+            const searchVal = document.getElementById("searchInput").value.toLowerCase().trim();
+
+            visibleCards = cardsData.filter(card => {
+                const matchType = (filterType === "all" || card.type === filterType);
+                const matchSearch = (searchVal === "" || card.title.toLowerCase().includes(searchVal) || card.desc.toLowerCase().includes(searchVal));
+                return matchType && matchSearch;
+            });
+
+            activeIndex = 0;
+            if (is3DDeckView) {
+                renderDeckView();
+            } else {
+                renderGridView();
+            }
+        }
+
+        // 🖱️ SKROL TETIKUS / TRACKPAD
+        window.addEventListener("wheel", (e) => {
+            if (!is3DDeckView || isScrollingLocked) return;
+
+            if (Math.abs(e.deltaY) > 20 || Math.abs(e.deltaX) > 20) {
+                isScrollingLocked = true;
+                if (e.deltaY > 0 || e.deltaX > 0) {
+                    navigateDeck(1);
+                } else {
+                    navigateDeck(-1);
+                }
+                
+                setTimeout(() => {
+                    isScrollingLocked = false;
+                }, 250);
+            }
+        }, { passive: true });
+
+        // 📱 LERETAN SENTUH (TOUCH SWIPE)
+        let touchStartX = 0;
+        window.addEventListener("touchstart", (e) => {
+            if (!is3DDeckView) return;
+            touchStartX = e.touches[0].clientX;
+        }, { passive: true });
+
+        window.addEventListener("touchend", (e) => {
+            if (!is3DDeckView) return;
+            let touchEndX = e.changedTouches[0].clientX;
+            let diffX = touchStartX - touchEndX;
+
+            if (Math.abs(diffX) > 40) {
+                if (diffX > 0) {
+                    navigateDeck(1);
+                } else {
+                    navigateDeck(-1);
+                }
+            }
+        }, { passive: true });
+
+        // EVENT LISTENER PAPAN KEKUNCI
+        window.addEventListener("keydown", (e) => {
+            if (!is3DDeckView) return;
+            if (e.key === "ArrowRight" || e.key === "ArrowDown") {
+                navigateDeck(1);
+            } else if (e.key === "ArrowLeft" || e.key === "ArrowUp") {
+                navigateDeck(-1);
+            } else if (e.key === "Enter") {
+                launchCurrentSystem();
+            }
+        });
+
+        window.onload = () => {
+            renderGridView();
+        };
+    </script>
+</body>
+</html>
