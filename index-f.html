@@ -17,6 +17,48 @@
             overflow-x: hidden;
         }
 
+        /* 🌐 DIGITAL LOADING SCREEN STYLES */
+        #loaderScreen {
+            background: linear-gradient(135deg, #090d16 0%, #0f172a 50%, #0284c7 100%);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.8s;
+        }
+
+        .loader-glass-box {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(24px) saturate(180%);
+            -webkit-backdrop-filter: blur(24px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(56, 189, 248, 0.2);
+        }
+
+        .loader-ring {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-top-color: #38bdf8;
+            border-right-color: rgba(56, 189, 248, 0.3);
+            animation: spin 1s cubic-bezier(0.55, 0.15, 0.45, 0.85) infinite;
+        }
+
+        .loader-core {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: radial-gradient(circle, #38bdf8 0%, rgba(2, 132, 199, 0.4) 70%, transparent 100%);
+            animation: pulse-glow 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse-glow {
+            0% { transform: scale(0.8); opacity: 0.6; box-shadow: 0 0 10px #38bdf8; }
+            100% { transform: scale(1.15); opacity: 1; box-shadow: 0 0 25px #38bdf8, 0 0 40px #0284c7; }
+        }
+
         /* 💎 WINDOWS AERO GLASS BASE PANEL */
         .aero-glass {
             background: rgba(255, 255, 255, 0.12);
@@ -33,7 +75,7 @@
             border-bottom: 1px solid rgba(255, 255, 255, 0.18);
         }
 
-        /* 🎴 AERO GLASS GRID CARD & HOVER GLOW EFFECT */
+        /* 🎴 AERO GLASS GRID CARD */
         .aero-card {
             background: rgba(255, 255, 255, 0.08);
             backdrop-filter: blur(16px) saturate(160%);
@@ -58,7 +100,7 @@
                 inset 0 0 15px rgba(255, 255, 255, 0.3);
         }
 
-        /* 🎴 3D DECK CAROUSEL STYLES (MOBILE RESPONSIVE) */
+        /* 🎴 3D DECK CAROUSEL STYLES */
         .deck-container {
             perspective: 1000px;
             transform-style: preserve-3d;
@@ -136,7 +178,41 @@
 </head>
 <body class="min-h-screen w-screen flex flex-col justify-between select-none pb-16 md:pb-12">
 
-    <!-- 🌐 HEADER AERO GLASS (MOBILE RESPONSIVE) -->
+    <!-- 🌐 DIGITAL LOADING SCREEN (AERO DIGITAL OVERLAY) -->
+    <div id="loaderScreen" class="fixed inset-0 z-50 flex flex-col items-center justify-center p-4">
+        <div class="loader-glass-box rounded-3xl p-8 md:p-12 flex flex-col items-center max-w-sm w-full text-center space-y-6">
+            
+            <!-- ANIMATED DIGITAL ORB -->
+            <div class="relative flex items-center justify-center my-2">
+                <div class="loader-ring"></div>
+                <div class="loader-core absolute"></div>
+            </div>
+
+            <!-- TEKS PEMUATAN DIGITAL -->
+            <div class="space-y-2">
+                <h2 class="text-sm md:text-base font-extrabold text-white uppercase tracking-wider">
+                    PUSAT AKSES DIGITAL NCD
+                </h2>
+                <p class="text-[10px] md:text-[11px] text-sky-300 font-semibold tracking-widest uppercase">
+                    Jabatan Kesihatan Negeri Perlis
+                </p>
+            </div>
+
+            <!-- BAR KEMAJUAN DIGITAL -->
+            <div class="w-full space-y-2">
+                <div class="w-full h-1.5 bg-black/40 rounded-full overflow-hidden border border-white/10">
+                    <div id="loaderBar" class="h-full bg-gradient-to-r from-sky-400 to-sky-200 w-0 transition-all duration-300 ease-out shadow-sm"></div>
+                </div>
+                <div class="flex justify-between items-center text-[9px] font-mono text-slate-300 tracking-wider">
+                    <span id="loaderStatus">MEMUATKAN MODUL...</span>
+                    <span id="loaderPercentage">0%</span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 🌐 HEADER AERO GLASS -->
     <header class="w-full py-2.5 px-4 md:px-12 aero-header flex flex-col sm:flex-row items-center justify-between gap-2.5 z-40 sticky top-0 shadow-lg">
         
         <div class="flex items-center justify-between w-full sm:w-auto">
@@ -155,17 +231,14 @@
 
         <!-- CONTROLS: SEARCH, FILTER & TOGGLE 3D DECK VIEW -->
         <div class="flex items-center justify-between w-full sm:w-auto space-x-2">
-            <!-- 🔘 BUTTON TOGGLE 3D DECK INTERAKTIF -->
             <button onclick="toggleViewMode()" id="viewToggleBtn" class="aero-btn-glass text-white text-[11px] md:text-xs font-bold py-1 px-3 rounded-xl flex items-center gap-1.5 active:scale-95 shadow-md flex-1 sm:flex-none justify-center">
                 <span id="viewToggleText">Mod Interaktif</span>
             </button>
 
-            <!-- BAR CARIAN (MOBILE HIDDEN TO SAVE SPACE) -->
             <div id="searchContainer" class="relative hidden md:block w-40 md:w-56">
                 <input type="text" id="searchInput" onkeyup="filterCards()" placeholder="🔍 Cari modul..." class="w-full bg-white/10 border border-white/20 text-white placeholder-slate-300 text-xs font-medium py-1 px-3 rounded-xl focus:outline-none focus:border-sky-400 backdrop-blur-md">
             </div>
 
-            <!-- FILTER DROPDOWN -->
             <select id="filterSelect" onchange="filterCards()" class="bg-slate-900/90 border border-white/20 text-white text-[11px] md:text-xs font-bold py-1 px-2.5 rounded-xl focus:outline-none focus:border-sky-400 cursor-pointer backdrop-blur-md shadow-inner">
                 <option value="all" class="bg-slate-900">📁 Semua Modul (16)</option>
                 <option value="sistem" class="bg-slate-900">⚙️ Sistem & Aplikasi</option>
@@ -176,14 +249,14 @@
     </header>
 
     <!-- 🔲 MAIN CONTAINER (GRID / 3D DECK) -->
-    <main id="mainContainer" class="flex-1 w-full px-4 md:px-12 py-6 max-w-[1920px] mx-auto flex flex-col items-center justify-center relative">
+    <main id="mainContainer" class="flex-1 w-full px-4 md:px-12 py-6 md:py-8 max-w-[1920px] mx-auto flex flex-col items-center justify-center relative">
         <div id="gridWrapper" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 md:gap-6 w-full">
             <!-- Cards dinamik daripada JavaScript -->
         </div>
     </main>
 
     <!-- 💡 NOTA KECIL PANDUAN SKROL -->
-    <div id="deckGuideNote" class="hidden items-center justify-center space-x-2 py-1 px-3.5 bg-black/50 border border-white/20 rounded-full text-[9px] md:text-[10px] text-slate-200 font-medium backdrop-blur-md shadow-lg fixed bottom-14 left-1/2 -translate-x-1/2 z-30 animate-pulse pointer-events-none w-[90vw] max-w-max text-center">
+    <div id="deckGuideNote" class="hidden items-center justify-center space-x-2 py-1.5 px-4 bg-black/50 border border-white/20 rounded-full text-[10px] text-slate-200 font-medium backdrop-blur-md shadow-lg fixed bottom-16 left-1/2 -translate-x-1/2 z-30 animate-pulse pointer-events-none w-[90vw] max-w-max text-center">
         <span>🖱️ Skrol / Leret kiri & kanan untuk tukar kad</span>
         <span class="text-slate-500">•</span>
         <span class="text-sky-300 font-bold">Tekan Enter ↵ untuk buka</span>
@@ -196,7 +269,6 @@
             <span id="activeCounter" class="tracking-wide font-bold text-white text-[10px] md:text-xs">Paparan Grid Aktif</span>
         </div>
 
-        <!-- CONTROLS UNTUK 3D DECK -->
         <div id="deckControls" class="hidden items-center space-x-2">
             <button onclick="navigateDeck(-1)" class="aero-btn-glass px-3 py-1 text-white rounded-xl text-[11px] font-semibold active:scale-95 flex items-center gap-1">
                 <span>←</span>
@@ -495,7 +567,7 @@
 
             visibleCards.forEach((card) => {
                 const cardEl = document.createElement("div");
-                cardEl.className = "aero-card p-4 md:p-5 flex flex-col justify-between h-[410px] md:h-[430px] cursor-pointer group";
+                cardEl.className = "aero-card flex flex-col justify-between h-[410px] md:h-[430px] cursor-pointer group overflow-hidden p-0";
 
                 let buttonHTML = '';
                 if (card.btn1Text && card.btn2Text) {
@@ -517,25 +589,25 @@
                 }
 
                 cardEl.innerHTML = `
-                    <div>
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="px-2 py-0.5 border text-[8px] md:text-[9px] font-extrabold rounded-md uppercase tracking-wider ${card.badgeBg}">
-                                ${card.badge}
-                            </span>
-                            <span class="text-[9px] md:text-[10px] font-bold text-sky-200/80 uppercase tracking-wider">${card.category}</span>
-                        </div>
+                    <div class="w-full h-36 md:h-40 overflow-hidden relative flex-shrink-0">
+                        <img src="${card.img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='images/logo.png'; this.className+=' object-contain p-6';">
+                        <span class="absolute top-3 left-3 px-2 py-0.5 border text-[8px] md:text-[9px] font-extrabold rounded-md uppercase tracking-wider backdrop-blur-md ${card.badgeBg}">
+                            ${card.badge}
+                        </span>
+                    </div>
 
-                        <div class="w-full h-32 md:h-36 rounded-xl md:rounded-2xl overflow-hidden my-2.5 md:my-3 border border-white/10 bg-black/20 relative flex-shrink-0">
-                            <img src="${card.img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='images/logo.png'; this.className+=' object-contain p-6';">
-                        </div>
-
+                    <div class="p-4 md:p-5 flex-1 flex flex-col justify-between">
                         <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-[9px] md:text-[10px] font-bold text-sky-300 uppercase tracking-wider">${card.category}</span>
+                            </div>
+
                             <h2 class="text-sm md:text-base font-bold text-white leading-tight tracking-tight group-hover:text-sky-300 transition-colors">${card.title}</h2>
                             <p class="text-[11px] md:text-xs text-slate-200/90 font-normal mt-1 md:mt-1.5 line-clamp-3 leading-relaxed">${card.desc}</p>
                         </div>
-                    </div>
 
-                    ${buttonHTML}
+                        ${buttonHTML}
+                    </div>
                 `;
 
                 cardEl.onclick = () => {
@@ -561,7 +633,6 @@
                 return;
             }
 
-            // Laraskan offset jarak kad mengikut saiz skrin
             const isMobile = window.innerWidth < 768;
             const offsetSpacing = isMobile ? 180 : 280;
 
@@ -579,7 +650,7 @@
                 const cardEl = document.createElement("div");
                 const isActive = index === activeIndex;
 
-                cardEl.className = `deck-card flex flex-col justify-between p-5 md:p-6 overflow-hidden ${isActive ? 'deck-card-active' : 'deck-card-inactive'}`;
+                cardEl.className = `deck-card flex flex-col justify-between overflow-hidden p-0 ${isActive ? 'deck-card-active' : 'deck-card-inactive'}`;
                 
                 cardEl.style.transform = `translate3d(${translateX}px, 0px, ${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
                 cardEl.style.zIndex = zIndex;
@@ -605,25 +676,25 @@
                 }
 
                 cardEl.innerHTML = `
-                    <div>
-                        <div class="flex justify-between items-center mb-2">
-                            <span class="px-2 py-0.5 border text-[8px] md:text-[9px] font-extrabold rounded-md uppercase tracking-wider ${card.badgeBg}">
-                                ${card.badge}
-                            </span>
-                            <span class="text-[9px] md:text-[10px] font-bold text-sky-200/80 uppercase tracking-wider">${card.category}</span>
-                        </div>
+                    <div class="w-full h-36 md:h-44 overflow-hidden relative flex-shrink-0">
+                        <img src="${card.img}" class="w-full h-full object-cover" onerror="this.src='images/logo.png'; this.className+=' object-contain p-6';">
+                        <span class="absolute top-3 left-3 px-2 py-0.5 border text-[8px] md:text-[9px] font-extrabold rounded-md uppercase tracking-wider backdrop-blur-md ${card.badgeBg}">
+                            ${card.badge}
+                        </span>
+                    </div>
 
-                        <div class="w-full h-32 md:h-44 rounded-xl md:rounded-2xl overflow-hidden my-2.5 md:my-3 border border-white/10 bg-black/20 relative flex-shrink-0">
-                            <img src="${card.img}" class="w-full h-full object-cover" onerror="this.src='images/logo.png'; this.className+=' object-contain p-6';">
-                        </div>
-
+                    <div class="p-5 md:p-6 flex-1 flex flex-col justify-between">
                         <div>
+                            <div class="flex justify-between items-center mb-1">
+                                <span class="text-[9px] md:text-[10px] font-bold text-sky-300 uppercase tracking-wider">${card.category}</span>
+                            </div>
+
                             <h2 class="text-sm md:text-lg font-bold text-white leading-tight tracking-tight">${card.title}</h2>
                             <p class="text-[11px] md:text-xs text-slate-200/90 font-normal mt-1 md:mt-1.5 line-clamp-3 leading-relaxed">${card.desc}</p>
                         </div>
-                    </div>
 
-                    ${buttonHTML}
+                        ${buttonHTML}
+                    </div>
                 `;
 
                 cardEl.onclick = () => {
@@ -724,8 +795,41 @@
             }
         });
 
+        // 🌐 LOGIK ENJIN DIGITAL LOADING SCREEN
+        function simulateLoading() {
+            const loaderScreen = document.getElementById("loaderScreen");
+            const loaderBar = document.getElementById("loaderBar");
+            const loaderPercentage = document.getElementById("loaderPercentage");
+            const loaderStatus = document.getElementById("loaderStatus");
+
+            let progress = 0;
+            const interval = setInterval(() => {
+                progress += Math.floor(Math.random() * 15) + 10;
+                
+                if (progress >= 100) {
+                    progress = 100;
+                    clearInterval(interval);
+                    
+                    if (loaderBar) loaderBar.style.width = "100%";
+                    if (loaderPercentage) loaderPercentage.innerText = "100%";
+                    if (loaderStatus) loaderStatus.innerText = "SISTEM SIAP!";
+
+                    setTimeout(() => {
+                        if (loaderScreen) {
+                            loaderScreen.style.opacity = "0";
+                            loaderScreen.style.visibility = "hidden";
+                        }
+                    }, 500);
+                } else {
+                    if (loaderBar) loaderBar.style.width = `${progress}%`;
+                    if (loaderPercentage) loaderPercentage.innerText = `${progress}%`;
+                }
+            }, 120);
+        }
+
         window.onload = () => {
             renderGridView();
+            simulateLoading();
         };
 
         window.onresize = () => {
