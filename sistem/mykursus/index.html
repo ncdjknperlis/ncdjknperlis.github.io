@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <base target="_top">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Unit NCD - MYKURSUS</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Fail CSS Luaran -->
+    <link rel="stylesheet" href="styles.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  </head>
+  <body>
+
+    <nav class="navbar-custom d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center">
+        <div class="logo-icon"><i class="fas fa-notes-medical fs-5 text-white"></i></div>
+        <span class="navbar-brand-text">Unit NCD - MYKURSUS</span>
+      </div>
+      <div>
+        <span class="me-3" style="cursor:pointer;" onclick="openAnnouncement()" title="Pengumuman"><i class="fas fa-info-circle fs-5"></i></span>
+        <span id="authBtn" style="cursor:pointer; font-weight: 600; font-size: 0.85rem;" onclick="toggleAuth()">
+          <i class="fas fa-lock me-1" id="authIcon"></i> <span id="authText" class="d-none d-sm-inline">LOGIN</span>
+        </span>
+      </div>
+    </nav>
+
+    <div class="container-fluid mt-3 px-3 pb-4 flex-grow-1">
+      <div class="row g-2 mb-3">
+        <div class="col-4 col-md-3" onclick="showView('Katalog')">
+           <div class="metric-card bg-katalog"><div class="icon-wrapper d-none d-sm-flex"><i class="fas fa-list-ul"></i></div><div><p class="metric-title">Katalog Kursus</p></div></div>
+        </div>
+        <div class="col-4 col-md-3" onclick="showView('Status')">
+           <div class="metric-card bg-status"><div class="icon-wrapper d-none d-sm-flex"><i class="fas fa-search"></i></div><div><p class="metric-title">Status Pemohon</p></div></div>
+        </div>
+        <div class="col-4 col-md-3" onclick="showView('Kalendar')">
+           <div class="metric-card bg-kalendar"><div class="icon-wrapper d-none d-sm-flex"><i class="fas fa-calendar-alt"></i></div><div><p class="metric-title">Kalendar Kursus</p></div></div>
+        </div>
+        <div class="col-12 col-md-3" id="cardMesyuarat" onclick="showView('Mesyuarat')" style="display: none;">
+           <div class="metric-card bg-mesyuarat"><div class="icon-wrapper d-none d-sm-flex"><i class="fas fa-users-cog"></i></div><div><p class="metric-title">Mesyuarat</p></div></div>
+        </div>
+      </div>
+
+      <div class="main-container">
+        <!-- KATALOG VIEW -->
+        <div id="viewKatalog">
+            <div class="d-flex justify-content-between align-items-start mb-2 pb-2">
+               <div>
+                 <h5 class="m-0 text-dark fw-bold">KATALOG KURSUS</h5>
+                 <p class="text-muted small m-0 mt-1">Sistem Pengurusan Rekod Kursus NCD.</p>
+               </div>
+               
+               <div class="d-flex gap-2 mt-1 align-items-center">
+                 <button id="downloadExcelBtn" class="btn btn-light border shadow-sm px-2 py-1" onclick="openDownloadModal()" style="display: none; color: #16a34a;" title="Muat Turun Excel">
+                   <i class="fas fa-file-excel fs-5"></i>
+                 </button>
+                 <button id="addCourseBtn" class="btn btn-primary btn-sm rounded px-3 shadow-sm" onclick="openAddModal()" style="display: none;">
+                   <i class="fas fa-plus me-1"></i> Tambah Rekod
+                 </button>
+               </div>
+            </div>
+
+            <div class="row mb-3 gx-3 align-items-end filter-bar bg-light p-2 rounded mx-0 shadow-sm border mt-3">
+              <div class="col-md-4 filter-col">
+                 <label class="small text-muted fw-bold mb-1"><i class="fas fa-search me-1"></i> Carian Bebas</label>
+                 <input type="text" id="customSearch" class="form-control form-control-sm input-line" placeholder="Cari tajuk, tempat...">
+              </div>
+              <div class="col-md-4 filter-col">
+                 <label class="small text-muted fw-bold mb-1"><i class="fas fa-calendar-alt me-1"></i> Saringan Tahun</label>
+                 <select id="filterTahun" class="form-select form-select-sm input-line text-muted"><option value="">Semua Tahun</option></select>
+              </div>
+              <div class="col-md-4 filter-col">
+                 <label class="small text-muted fw-bold mb-1"><i class="fas fa-clock me-1"></i> Saringan Bulan</label>
+                 <select id="filterBulan" class="form-select form-select-sm input-line text-muted"><option value="">Semua Bulan</option></select>
+              </div>
+            </div>
+
+            <div class="table-responsive mt-3">
+              <table id="courseTable" class="table table-hover align-middle w-100">
+                <thead class="table-light text-secondary border-bottom">
+                  <tr>
+                    <th>Tajuk Kursus</th><th>Penganjur</th><th>Bidang</th><th>Kumpulan Sasaran</th><th>Tarikh Mula</th><th>Tarikh Tamat</th><th>Status</th><th class="text-center">Tindakan</th><th style="display:none;">Tahun</th><th style="display:none;">Bulan</th>
+                  </tr>
+                </thead>
+              </table>
+            </div>
+        </div>
+
+        <!-- STATUS VIEW -->
+        <div id="viewStatus" style="display: none;">
+            <div class="mb-4">
+               <h5 class="m-0 text-dark fw-bold">STATUS PERMOHONAN</h5>
+               <p class="text-muted small m-0 mt-1">Sila masukkan nombor kad pengenalan tanpa "-".</p>
+            </div>
+
+            <div class="row mb-4 align-items-end">
+              <div class="col-md-4 col-8">
+                 <input type="text" id="checkIcInput" class="form-control input-line" placeholder="No Kad Pengenalan">
+              </div>
+              <div class="col-md-2 col-4">
+                 <button class="btn btn-primary w-100 shadow-sm" onclick="semakStatusPermohonan()"><i class="fas fa-search me-1"></i> Semak</button>
+              </div>
+            </div>
+
+            <div id="statusResultContainer" style="display: none;">
+                <div class="bg-light p-3 rounded border mb-4">
+                    <div class="row lh-lg">
+                       <div class="col-md-3 col-sm-4 fw-bold small text-dark">No Kad Pengenalan:</div><div class="col-md-9 col-sm-8 small fw-bold text-primary" id="resIc"></div>
+                       <div class="col-md-3 col-sm-4 fw-bold small text-dark">Nama Pemohon:</div><div class="col-md-9 col-sm-8 small text-secondary" id="resNama"></div>
+                       <div class="col-md-3 col-sm-4 fw-bold small text-dark">Tempat Bekerja:</div><div class="col-md-9 col-sm-8 small text-secondary" id="resTempat"></div>
+                    </div>
+                </div>
+
+                <h6 class="fw-bold text-dark mb-3">Senarai Permohonan</h6>
+                <div class="table-responsive">
+                   <table class="table table-borderless table-hover border-top">
+                      <thead class="border-bottom text-dark small fw-bold bg-light">
+                         <tr><th>#</th><th>Nama Kursus</th><th>Mula Kursus</th><th>Tamat Kursus</th><th>Status Kelulusan</th><th class="text-center">Borang Pegawai (Sijil)</th></tr>
+                      </thead>
+                      <tbody id="resTableBody" class="small text-secondary"></tbody>
+                   </table>
+                </div>
+            </div>
+            
+            <div id="statusEmptyContainer" class="text-center py-5" style="display: none;">
+                <i class="fas fa-search fa-3x text-muted mb-3 opacity-25"></i>
+                <p class="text-muted small">Tiada rekod permohonan dijumpai dlm sistem.</p>
+            </div>
+        </div>
+
+        <!-- KALENDAR VIEW -->
+        <div id="viewKalendar" style="display: none;">
+            <div class="mb-4 d-flex flex-column flex-md-row justify-content-between align-items-md-center">
+               <div class="mb-2 mb-md-0">
+                 <h5 class="m-0 text-dark fw-bold">KALENDAR KURSUS</h5>
+                 <p class="text-muted small m-0 mt-1">Jadual rasmi program dan kursus NCD.</p>
+               </div>
+               <span id="calAdminNotice" class="badge bg-warning text-dark" style="display:none;">
+                 <i class="fas fa-exclamation-circle me-1"></i> Mode Kalendar (Read-Only)
+               </span>
+            </div>
+            <div class="border rounded shadow-sm overflow-hidden" style="height: 600px; background: #f8f9fa; display:flex; justify-content:center; align-items:center;" id="calLoadingContainer">
+               <div class="spinner-border text-primary"></div>
+            </div>
+            <iframe id="calendarIframe" style="width: 100%; height: 600px; border: 0; display:none;" scrolling="no"></iframe>
+        </div>
+
+        <!-- MESYUARAT VIEW -->
+        <div id="viewMesyuarat" style="display: none;">
+            <div class="d-flex justify-content-between align-items-start mb-2 pb-2">
+               <div>
+                 <h5 class="m-0 text-dark fw-bold">MESYUARAT</h5>
+                 <p class="text-muted small m-0 mt-1">Sistem Pengurusan Rekod Mesyuarat NCD.</p>
+               </div>
+               <button class="btn btn-primary btn-sm rounded px-3 shadow-sm mt-1" onclick="openAddMesyuaratModal()">
+                 <i class="fas fa-plus me-1"></i> Tambah Mesyuarat
+               </button>
+            </div>
+
+            <div class="row mb-3 gx-3 align-items-end filter-bar bg-light p-2 rounded mx-0 shadow-sm border mt-3">
+              <div class="col-md-4 filter-col">
+                 <label class="small text-muted fw-bold mb-1"><i class="fas fa-search me-1"></i> Carian Bebas</label>
+                 <input type="text" id="mesyuaratSearch" class="form-control form-control-sm input-line" placeholder="Cari tajuk mesyuarat...">
+              </div>
+              <div class="col-md-4 filter-col">
+                 <label class="small text-muted fw-bold mb-1"><i class="fas fa-calendar-alt me-1"></i> Saringan Tahun</label>
+                 <select id="filterMesyuaratTahun" class="form-select form-select-sm input-line text-muted"><option value="">Semua Tahun</option></select>
+              </div>
+              <div class="col-md-4 filter-col">
+                 <label class="small text-muted fw-bold mb-1"><i class="fas fa-clock me-1"></i> Saringan Bulan</label>
+                 <select id="filterMesyuaratBulan" class="form-select form-select-sm input-line text-muted"><option value="">Semua Bulan</option></select>
+              </div>
+            </div>
+
+            <div class="table-responsive mt-3">
+              <table id="mesyuaratTable" class="table table-hover align-middle w-100">
+                <thead class="table-light text-secondary border-bottom">
+                  <tr><th>Tajuk Mesyuarat</th><th>Masa Mula</th><th>Masa Tamat</th><th class="text-center">Minit Mesyuarat</th><th class="text-center">Tindakan</th><th style="display:none;">Tahun</th><th style="display:none;">Bulan</th></tr>
+                </thead>
+              </table>
+            </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- NOTIFIKASI TEREAPUNG -->
+    <div class="floating-notification minimized" id="floatingNotif">
+        <div class="fn-header" id="floatingNotifHeader">
+            <span><i class="fas fa-bell me-2"></i> Notifikasi Semasa</span>
+            <i class="fas fa-chevron-up" id="notifToggleIcon" style="cursor: pointer; font-style: normal;" onclick="toggleNotif(event)"></i>
+        </div>
+        <div class="fn-body">
+            <marquee direction="up" scrollamount="2" scrolldelay="60" style="height: 100%;" onmouseover="this.stop();" onmouseout="this.start();" id="notifMarquee">
+                <div class="text-center text-muted mt-3" style="font-style: italic;"><i class="fas fa-spinner fa-spin"></i> Memuatkan notifikasi...</div>
+            </marquee>
+        </div>
+    </div>
+
+    <footer class="custom-footer text-center text-muted small">
+      <p class="mb-1 fw-bold" style="color: var(--primary-dark);">Hak Cipta Terpelihara Unit NCD JKN Perlis (2026)</p>
+      <p class="mb-0">System powered by Dr Mior Mohd Khairil & Mohd Aliff Faiz</p>
+    </footer>
+
+    <!-- MODAL LOG IN -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-sm">
+        <div class="modal-content border-0 shadow-lg" style="border-radius: 6px;">
+          <form id="loginForm">
+            <div class="modal-header bg-gradient-premium border-bottom-0">
+              <h6 class="fw-bold m-0"><i class="fas fa-shield-alt me-2"></i>Admin Access</h6>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body px-4 pt-4">
+              <div class="form-floating mb-3">
+                <input type="password" name="password" class="form-control rounded-3" id="adminPwd" placeholder="Password" required>
+                <label for="adminPwd">Password</label>
+              </div>
+            </div>
+            <div class="modal-footer border-top-0 pb-4 px-4 pt-0">
+              <button type="submit" class="btn btn-primary w-100 rounded-0 shadow-sm">Log Masuk</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- PERMOHONAN MODAL -->
+    <div class="modal fade" id="applyModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content shadow-lg border-0" style="border-radius: 6px;">
+          <form id="applyForm">
+            <div class="modal-header bg-gradient-premium border-bottom-0">
+              <h6 class="fw-bold m-0"><i class="fas fa-user-edit me-2"></i>Permohonan Kursus</h6>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+            </div>
+            <div class="modal-body p-4 bg-light">
+              <input type="hidden" id="tahunMohonInput" name="tahunMohon">
+              <div class="row align-items-end mb-3">
+                <div class="col-md-7 mb-3 mb-md-0">
+                  <label class="form-label text-muted small fw-bold mb-1">Tajuk Kursus</label>
+                  <input type="text" name="tajukMohon" class="form-control bg-white fw-bold text-primary border-0 shadow-sm" id="tajukMohonInput" readonly>
+                </div>
+                <div class="col-md-5 text-md-end">
+                  <div class="btn-group btn-group-sm shadow-sm w-100 w-md-auto" role="group">
+                    <input type="radio" class="btn-check" name="kategori" id="katStaf" value="Staf Kesihatan" onchange="toggleKategori()" checked>
+                    <label class="btn btn-outline-primary fw-bold" for="katStaf">Staf Kesihatan</label>
+                    <input type="radio" class="btn-check" name="kategori" id="katAwam" value="Orang Awam" onchange="toggleKategori()">
+                    <label class="btn btn-outline-primary fw-bold" for="katAwam">Orang Awam</label>
+                  </div>
+                </div>
+              </div>
+              <hr class="mb-4">
+              <div class="form-floating mb-3"><input type="text" name="nama" class="form-control text-uppercase-input shadow-sm border-0" id="namaInput" placeholder="Nama Penuh" required><label>Nama Penuh</label></div>
+              <div class="form-floating mb-3"><input type="text" name="ic" class="form-control shadow-sm border-0" id="icPemohonInput" placeholder="No Kad Pengenalan" required><label>No Kad Pengenalan (Contoh: 880102095012)</label></div>
+              <div id="stafFieldsContainer">
+                <div class="row g-2">
+                  <div class="col-md-6 form-floating mb-3"><input type="text" name="jawatan" class="form-control text-uppercase-input shadow-sm border-0" id="jawatanInput" placeholder="Jawatan" required><label class="ms-2">Jawatan</label></div>
+                  <div class="col-md-6 form-floating mb-3"><input type="text" name="gred" class="form-control text-uppercase-input shadow-sm border-0" id="gredInput" placeholder="Gred" required><label class="ms-2">Gred (Contoh: U41)</label></div>
+                </div>
+                <div class="form-floating mb-2"><input type="text" name="tempatKerja" class="form-control text-uppercase-input shadow-sm border-0" id="tempatKerjaInput" placeholder="Tempat Bekerja" required><label>Tempat Bekerja / Unit</label></div>
+              </div>
+            </div>
+            <div class="modal-footer border-top-0 pb-4 px-4 bg-light">
+              <button type="button" class="btn btn-secondary rounded-0 px-4" data-bs-dismiss="modal">Batal</button>
+              <button type="submit" class="btn btn-success rounded-0 px-4 shadow-sm" id="submitApplyBtn"><i class="fas fa-paper-plane me-1"></i> Hantar Permohonan</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAKLUMAT KURSUS MODAL -->
+    <div class="modal fade" id="detailsModal" tabindex="-1">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content shadow-lg border-0" style="border-radius: 6px;">
+          <div class="modal-header bg-gradient-premium border-bottom-0">
+            <h6 class="fw-bold m-0">Maklumat Kursus</h6>
+            <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body p-4">
+            <div class="table-responsive border mb-4 rounded">
+              <table class="table table-bordered m-0 details-table">
+                <tbody>
+                  <tr><th>Tajuk Kursus:</th><td id="dtl-tajuk" class="fw-bold text-primary text-uppercase"></td></tr>
+                  <tr><th>Tarikh:</th><td id="dtl-tarikh"></td></tr>
+                  <tr><th>Tempat:</th><td id="dtl-tempat"></td></tr>
+                  <tr><th>Kumpulan Sasaran:</th><td id="dtl-sasaran"></td></tr>
+                  <tr><th>Pengajar/Penceramah:</th><td id="dtl-pengajar"></td></tr>
+                  <tr><th>Penerangan:</th><td id="dtl-penerangan" style="white-space: pre-wrap;"></td></tr>
+                  <tr><th>Status:</th><td><span class="badge" id="dtl-status">Buka</span></td></tr>
+                  <tr><th>Pegawai untuk Dihubungi :</th><td id="dtl-pegawai"></td></tr>
+                  <tr><th>E-mel Dihubungi :</th><td id="dtl-emel"></td></tr>
+                  <tr><th><span class="bg-primary text-white px-2 py-1 rounded">Telefon Dihubungi</span></th><td id="dtl-telefon"></td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="text-center mt-3" id="mohonContainer">
+              <p class="text-danger small mb-3 fw-bold" id="labelTutup" style="display: none;">Maaf, penyertaan untuk kursus ini telah ditutup.</p>
+              <button class="btn btn-primary px-4 me-2 shadow-sm rounded-0" id="btnMohon" onclick="openApplyModal()"><i class="fas fa-check me-1"></i> Mohon Kursus</button>
+              <button class="btn btn-secondary px-4 shadow-sm rounded-0" data-bs-dismiss="modal">Tutup</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SKRIP UTAMA JS -->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- Fail JS Luaran yang Dibahagikan -->
+    <script src="api.js"></script>
+    <script src="modules.js"></script>
+  </body>
+</html>

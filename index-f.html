@@ -27,7 +27,7 @@
         }
 
         .aero-header {
-            background: rgba(15, 23, 42, 0.65);
+            background: rgba(15, 23, 42, 0.75);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
             border-bottom: 1px solid rgba(255, 255, 255, 0.18);
@@ -39,7 +39,7 @@
             backdrop-filter: blur(16px) saturate(160%);
             -webkit-backdrop-filter: blur(16px) saturate(160%);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 24px;
+            border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             will-change: transform, box-shadow, border-color, background;
             transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
@@ -49,7 +49,7 @@
         }
 
         .aero-card:hover {
-            transform: translateY(-8px) scale(1.02);
+            transform: translateY(-6px) scale(1.015);
             background: rgba(255, 255, 255, 0.18);
             border-color: rgba(56, 189, 248, 0.8);
             box-shadow: 
@@ -58,7 +58,7 @@
                 inset 0 0 15px rgba(255, 255, 255, 0.3);
         }
 
-        /* 🎴 3D DECK CAROUSEL STYLES */
+        /* 🎴 3D DECK CAROUSEL STYLES (MOBILE RESPONSIVE) */
         .deck-container {
             perspective: 1000px;
             transform-style: preserve-3d;
@@ -67,9 +67,10 @@
 
         .deck-card {
             position: absolute;
-            width: 320px;
-            height: 490px;
-            background: rgba(15, 23, 42, 0.82);
+            width: calc(100vw - 48px);
+            max-width: 320px;
+            height: 460px;
+            background: rgba(15, 23, 42, 0.88);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
             border: 1px solid rgba(255, 255, 255, 0.25);
@@ -86,6 +87,7 @@
         @media (min-width: 768px) {
             .deck-card {
                 width: 380px;
+                max-width: 380px;
                 height: 520px;
             }
         }
@@ -126,45 +128,45 @@
             transform: translateY(-1px);
         }
 
-        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.5); }
         ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.25); border-radius: 4px; }
         ::-webkit-scrollbar-thumb:hover { background: rgba(56, 189, 248, 0.8); }
     </style>
 </head>
-<body class="min-h-screen w-screen flex flex-col justify-between select-none pb-12">
+<body class="min-h-screen w-screen flex flex-col justify-between select-none pb-16 md:pb-12">
 
-    <!-- 🌐 HEADER AERO GLASS -->
-    <header class="w-full py-3.5 px-6 md:px-12 aero-header flex flex-row items-center justify-between z-40 sticky top-0 shadow-lg">
+    <!-- 🌐 HEADER AERO GLASS (MOBILE RESPONSIVE) -->
+    <header class="w-full py-2.5 px-4 md:px-12 aero-header flex flex-col sm:flex-row items-center justify-between gap-2.5 z-40 sticky top-0 shadow-lg">
         
-        <div class="flex items-center space-x-4">
-            <div class="flex items-center space-x-3">
-                <img src="images/logo.png" style="max-width: 30px;" class="w-full h-auto object-contain filter drop-shadow-md" alt="Logo KKM">
-                <img src="images/logo-ncd/logo-ncd-black.png" style="max-width: 105px;" class="w-full h-auto object-contain hidden sm:block filter drop-shadow-md" alt="Logo NCD">
-                <div class="w-px h-6 bg-white/20"></div>
+        <div class="flex items-center justify-between w-full sm:w-auto">
+            <div class="flex items-center space-x-2.5">
+                <img src="images/logo.png" style="max-width: 26px;" class="w-full h-auto object-contain filter drop-shadow-md" alt="Logo KKM">
+                <img src="images/logo-ncd/logo-ncd-black.png" style="max-width: 90px;" class="w-full h-auto object-contain filter drop-shadow-md" alt="Logo NCD">
+                <div class="w-px h-5 bg-white/20"></div>
                 <div>
-                    <h1 class="text-xs md:text-sm font-extrabold text-white tracking-wide uppercase drop-shadow-sm">
+                    <h1 class="text-[11px] md:text-sm font-extrabold text-white tracking-wide uppercase leading-tight drop-shadow-sm">
                         Pusat Akses Digital NCD
                     </h1>
-                    <p class="text-[9px] text-sky-300 font-semibold tracking-widest uppercase">Jabatan Kesihatan Negeri Perlis</p>
+                    <p class="text-[8px] md:text-[9px] text-sky-300 font-semibold tracking-widest uppercase">JKN Perlis</p>
                 </div>
             </div>
         </div>
 
         <!-- CONTROLS: SEARCH, FILTER & TOGGLE 3D DECK VIEW -->
-        <div class="flex items-center space-x-3">
+        <div class="flex items-center justify-between w-full sm:w-auto space-x-2">
             <!-- 🔘 BUTTON TOGGLE 3D DECK INTERAKTIF -->
-            <button onclick="toggleViewMode()" id="viewToggleBtn" class="aero-btn-glass text-white text-xs font-bold py-1.5 px-3.5 rounded-xl flex items-center gap-2 active:scale-95 shadow-md">
+            <button onclick="toggleViewMode()" id="viewToggleBtn" class="aero-btn-glass text-white text-[11px] md:text-xs font-bold py-1 px-3 rounded-xl flex items-center gap-1.5 active:scale-95 shadow-md flex-1 sm:flex-none justify-center">
                 <span id="viewToggleText">Mod Interaktif</span>
             </button>
 
-            <!-- BAR CARIAN -->
-            <div id="searchContainer" class="relative hidden sm:block w-40 md:w-56">
-                <input type="text" id="searchInput" onkeyup="filterCards()" placeholder="🔍 Cari modul..." class="w-full bg-white/10 border border-white/20 text-white placeholder-slate-300 text-xs font-medium py-1.5 px-3 rounded-xl focus:outline-none focus:border-sky-400 backdrop-blur-md">
+            <!-- BAR CARIAN (MOBILE HIDDEN TO SAVE SPACE) -->
+            <div id="searchContainer" class="relative hidden md:block w-40 md:w-56">
+                <input type="text" id="searchInput" onkeyup="filterCards()" placeholder="🔍 Cari modul..." class="w-full bg-white/10 border border-white/20 text-white placeholder-slate-300 text-xs font-medium py-1 px-3 rounded-xl focus:outline-none focus:border-sky-400 backdrop-blur-md">
             </div>
 
             <!-- FILTER DROPDOWN -->
-            <select id="filterSelect" onchange="filterCards()" class="bg-slate-900/80 border border-white/20 text-white text-xs font-bold py-1.5 px-3 rounded-xl focus:outline-none focus:border-sky-400 cursor-pointer backdrop-blur-md shadow-inner">
+            <select id="filterSelect" onchange="filterCards()" class="bg-slate-900/90 border border-white/20 text-white text-[11px] md:text-xs font-bold py-1 px-2.5 rounded-xl focus:outline-none focus:border-sky-400 cursor-pointer backdrop-blur-md shadow-inner">
                 <option value="all" class="bg-slate-900">📁 Semua Modul (16)</option>
                 <option value="sistem" class="bg-slate-900">⚙️ Sistem & Aplikasi</option>
                 <option value="pusat-sumber" class="bg-slate-900">🎨 Pusat Sumber & Media</option>
@@ -174,42 +176,42 @@
     </header>
 
     <!-- 🔲 MAIN CONTAINER (GRID / 3D DECK) -->
-    <main id="mainContainer" class="flex-1 w-full px-6 md:px-12 py-8 max-w-[1920px] mx-auto flex flex-col items-center justify-center relative">
-        <div id="gridWrapper" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6 w-full">
+    <main id="mainContainer" class="flex-1 w-full px-4 md:px-12 py-6 max-w-[1920px] mx-auto flex flex-col items-center justify-center relative">
+        <div id="gridWrapper" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 md:gap-6 w-full">
             <!-- Cards dinamik daripada JavaScript -->
         </div>
     </main>
 
-    <!-- 💡 NOTA KECIL PANDUAN SKROL (FIXED TERAPUNG DI BAWAH KAD SEBELUM FOOTER) -->
-    <div id="deckGuideNote" class="hidden items-center justify-center space-x-2 py-1.5 px-4 bg-black/40 border border-white/20 rounded-full text-[10px] text-slate-200 font-medium backdrop-blur-md shadow-lg fixed bottom-16 left-1/2 -translate-x-1/2 z-30 animate-pulse pointer-events-none">
-        <span>🖱️ Skrol tetikus / Leret ke kiri & kanan untuk tukar kad</span>
+    <!-- 💡 NOTA KECIL PANDUAN SKROL -->
+    <div id="deckGuideNote" class="hidden items-center justify-center space-x-2 py-1 px-3.5 bg-black/50 border border-white/20 rounded-full text-[9px] md:text-[10px] text-slate-200 font-medium backdrop-blur-md shadow-lg fixed bottom-14 left-1/2 -translate-x-1/2 z-30 animate-pulse pointer-events-none w-[90vw] max-w-max text-center">
+        <span>🖱️ Skrol / Leret kiri & kanan untuk tukar kad</span>
         <span class="text-slate-500">•</span>
         <span class="text-sky-300 font-bold">Tekan Enter ↵ untuk buka</span>
     </div>
 
     <!-- 🎮 FOOTER & DECK CONTROLS -->
-    <footer class="w-full py-3.5 px-6 md:px-12 aero-header flex flex-col md:flex-row items-center justify-between gap-3 z-40 fixed bottom-0 left-0 right-0 text-xs shadow-lg">
-        <div class="flex items-center space-x-2.5 font-semibold text-sky-200">
-            <span class="w-2.5 h-2.5 rounded-full bg-sky-400 animate-ping"></span>
-            <span id="activeCounter" class="tracking-wide font-bold text-white">Paparan Grid Aktif</span>
+    <footer class="w-full py-2.5 px-4 md:px-12 aero-header flex flex-row items-center justify-between gap-2 z-40 fixed bottom-0 left-0 right-0 text-xs shadow-lg">
+        <div class="flex items-center space-x-2 font-semibold text-sky-200">
+            <span class="w-2 h-2 rounded-full bg-sky-400 animate-ping"></span>
+            <span id="activeCounter" class="tracking-wide font-bold text-white text-[10px] md:text-xs">Paparan Grid Aktif</span>
         </div>
 
         <!-- CONTROLS UNTUK 3D DECK -->
-        <div id="deckControls" class="hidden items-center space-x-3">
-            <button onclick="navigateDeck(-1)" class="aero-btn-glass px-4 py-1.5 text-white rounded-xl text-xs font-semibold active:scale-95 flex items-center gap-1.5">
-                <span>←</span> Undur
+        <div id="deckControls" class="hidden items-center space-x-2">
+            <button onclick="navigateDeck(-1)" class="aero-btn-glass px-3 py-1 text-white rounded-xl text-[11px] font-semibold active:scale-95 flex items-center gap-1">
+                <span>←</span>
             </button>
 
-            <button onclick="launchCurrentSystem()" class="aero-btn-primary px-6 py-1.5 text-white rounded-xl text-xs font-bold tracking-wide shadow-md flex items-center gap-2">
-                <span>Akses Sistem</span> <span class="text-[10px] opacity-80">↵</span>
+            <button onclick="launchCurrentSystem()" class="aero-btn-primary px-4 py-1 text-white rounded-xl text-[11px] font-bold tracking-wide shadow-md flex items-center gap-1">
+                <span>Akses</span> <span class="text-[9px] opacity-80">↵</span>
             </button>
 
-            <button onclick="navigateDeck(1)" class="aero-btn-glass px-4 py-1.5 text-white rounded-xl text-xs font-semibold active:scale-95 flex items-center gap-1.5">
-                Maju <span>→</span>
+            <button onclick="navigateDeck(1)" class="aero-btn-glass px-3 py-1 text-white rounded-xl text-[11px] font-semibold active:scale-95 flex items-center gap-1">
+                <span>→</span>
             </button>
         </div>
 
-        <div class="text-[11px] text-slate-300 font-medium tracking-wider uppercase hidden lg:block">
+        <div class="text-[10px] text-slate-300 font-medium tracking-wider uppercase hidden lg:block">
             Hak Cipta © 2026 Unit NCD, Jabatan Kesihatan Negeri Perlis
         </div>
     </footer>
@@ -460,7 +462,7 @@
                 }
                 if (searchContainer) searchContainer.classList.add("hidden");
                 
-                mainContainer.className = "flex-1 w-full flex flex-col items-center justify-center relative my-auto deck-container min-h-[560px]";
+                mainContainer.className = "flex-1 w-full flex flex-col items-center justify-center relative my-auto deck-container min-h-[500px] md:min-h-[560px]";
                 renderDeckView();
             } else {
                 btnText.innerText = "Mod Interaktif";
@@ -472,7 +474,7 @@
                 }
                 if (searchContainer) searchContainer.classList.remove("hidden");
                 
-                mainContainer.className = "flex-1 w-full px-6 md:px-12 py-8 max-w-[1920px] mx-auto flex flex-col items-center justify-center relative";
+                mainContainer.className = "flex-1 w-full px-4 md:px-12 py-6 md:py-8 max-w-[1920px] mx-auto flex flex-col items-center justify-center relative";
                 renderGridView();
             }
         }
@@ -480,12 +482,12 @@
         // 🔲 MOD 1: AERO GLASS GRID VIEW
         function renderGridView() {
             const wrapper = document.getElementById("gridWrapper");
-            wrapper.className = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-6 w-full";
+            wrapper.className = "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-4 md:gap-6 w-full";
             wrapper.innerHTML = "";
 
             if (visibleCards.length === 0) {
                 wrapper.innerHTML = `
-                    <div class="col-span-full text-center text-slate-200 font-semibold text-sm py-16 aero-glass rounded-3xl">
+                    <div class="col-span-full text-center text-slate-200 font-semibold text-xs md:text-sm py-12 md:py-16 aero-glass rounded-2xl md:rounded-3xl">
                         🔍 Tiada modul sistem ditemui mengikut kriteria carian anda.
                     </div>`;
                 return;
@@ -493,23 +495,23 @@
 
             visibleCards.forEach((card) => {
                 const cardEl = document.createElement("div");
-                cardEl.className = "aero-card p-5 flex flex-col justify-between h-[430px] cursor-pointer group";
+                cardEl.className = "aero-card p-4 md:p-5 flex flex-col justify-between h-[410px] md:h-[430px] cursor-pointer group";
 
                 let buttonHTML = '';
                 if (card.btn1Text && card.btn2Text) {
                     buttonHTML = `
                         <div class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-white/10">
-                            <a href="${card.btn1Url}" target="_blank" onclick="event.stopPropagation()" class="aero-btn-glass py-2 text-white font-bold rounded-xl text-[11px] text-center shadow-xs">
+                            <a href="${card.btn1Url}" target="_blank" onclick="event.stopPropagation()" class="aero-btn-glass py-1.5 md:py-2 text-white font-bold rounded-xl text-[10px] md:text-[11px] text-center shadow-xs">
                                 📝 ${card.btn1Text}
                             </a>
-                            <a href="${card.btn2Url}" target="_blank" onclick="event.stopPropagation()" class="aero-btn-primary py-2 text-white font-bold rounded-xl text-[11px] text-center shadow-xs">
+                            <a href="${card.btn2Url}" target="_blank" onclick="event.stopPropagation()" class="aero-btn-primary py-1.5 md:py-2 text-white font-bold rounded-xl text-[10px] md:text-[11px] text-center shadow-xs">
                                 📊 ${card.btn2Text}
                             </a>
                         </div>`;
                 } else {
                     buttonHTML = `
                         <div class="mt-3 pt-3 border-t border-white/10 flex justify-between items-center">
-                            <span class="text-[10px] text-slate-300 font-semibold uppercase tracking-wider">Akses Langsung</span>
+                            <span class="text-[9px] md:text-[10px] text-slate-300 font-semibold uppercase tracking-wider">Akses Langsung</span>
                             <span class="text-xs font-bold text-sky-300 group-hover:text-white transition-colors flex items-center gap-0.5">Buka Sistem <span>↗</span></span>
                         </div>`;
                 }
@@ -517,19 +519,19 @@
                 cardEl.innerHTML = `
                     <div>
                         <div class="flex justify-between items-center mb-2">
-                            <span class="px-2.5 py-0.5 border text-[9px] font-extrabold rounded-md uppercase tracking-wider ${card.badgeBg}">
+                            <span class="px-2 py-0.5 border text-[8px] md:text-[9px] font-extrabold rounded-md uppercase tracking-wider ${card.badgeBg}">
                                 ${card.badge}
                             </span>
-                            <span class="text-[10px] font-bold text-sky-200/80 uppercase tracking-wider">${card.category}</span>
+                            <span class="text-[9px] md:text-[10px] font-bold text-sky-200/80 uppercase tracking-wider">${card.category}</span>
                         </div>
 
-                        <div class="w-full h-36 rounded-2xl overflow-hidden my-3 border border-white/10 bg-black/20 relative flex-shrink-0">
+                        <div class="w-full h-32 md:h-36 rounded-xl md:rounded-2xl overflow-hidden my-2.5 md:my-3 border border-white/10 bg-black/20 relative flex-shrink-0">
                             <img src="${card.img}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" onerror="this.src='images/logo.png'; this.className+=' object-contain p-6';">
                         </div>
 
                         <div>
-                            <h2 class="text-base font-bold text-white leading-tight tracking-tight group-hover:text-sky-300 transition-colors">${card.title}</h2>
-                            <p class="text-xs text-slate-200/90 font-normal mt-1.5 line-clamp-3 leading-relaxed">${card.desc}</p>
+                            <h2 class="text-sm md:text-base font-bold text-white leading-tight tracking-tight group-hover:text-sky-300 transition-colors">${card.title}</h2>
+                            <p class="text-[11px] md:text-xs text-slate-200/90 font-normal mt-1 md:mt-1.5 line-clamp-3 leading-relaxed">${card.desc}</p>
                         </div>
                     </div>
 
@@ -559,21 +561,25 @@
                 return;
             }
 
+            // Laraskan offset jarak kad mengikut saiz skrin
+            const isMobile = window.innerWidth < 768;
+            const offsetSpacing = isMobile ? 180 : 280;
+
             visibleCards.forEach((card, index) => {
                 const offset = index - activeIndex;
                 const absOffset = Math.abs(offset);
                 
-                const translateX = offset * 280; 
+                const translateX = offset * offsetSpacing; 
                 const translateZ = -absOffset * 180; 
                 const rotateY = offset * -18; 
                 const scale = 1 - absOffset * 0.08; 
-                const opacity = absOffset > 3 ? 0 : 1 - absOffset * 0.22;
+                const opacity = absOffset > (isMobile ? 1 : 3) ? 0 : 1 - absOffset * 0.25;
                 const zIndex = 100 - absOffset;
 
                 const cardEl = document.createElement("div");
                 const isActive = index === activeIndex;
 
-                cardEl.className = `deck-card flex flex-col justify-between p-6 overflow-hidden ${isActive ? 'deck-card-active' : 'deck-card-inactive'}`;
+                cardEl.className = `deck-card flex flex-col justify-between p-5 md:p-6 overflow-hidden ${isActive ? 'deck-card-active' : 'deck-card-inactive'}`;
                 
                 cardEl.style.transform = `translate3d(${translateX}px, 0px, ${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`;
                 cardEl.style.zIndex = zIndex;
@@ -583,17 +589,17 @@
                 if (card.btn1Text && card.btn2Text) {
                     buttonHTML = `
                         <div class="grid grid-cols-2 gap-2 mt-3 pt-3 border-t border-white/10">
-                            <a href="${card.btn1Url}" target="_blank" onclick="event.stopPropagation()" class="aero-btn-glass py-2 text-white font-bold rounded-xl text-[11px] text-center shadow-xs">
+                            <a href="${card.btn1Url}" target="_blank" onclick="event.stopPropagation()" class="aero-btn-glass py-2 text-white font-bold rounded-xl text-[10px] md:text-[11px] text-center shadow-xs">
                                 📝 ${card.btn1Text}
                             </a>
-                            <a href="${card.btn2Url}" target="_blank" onclick="event.stopPropagation()" class="aero-btn-primary py-2 text-white font-bold rounded-xl text-[11px] text-center shadow-xs">
+                            <a href="${card.btn2Url}" target="_blank" onclick="event.stopPropagation()" class="aero-btn-primary py-2 text-white font-bold rounded-xl text-[10px] md:text-[11px] text-center shadow-xs">
                                 📊 ${card.btn2Text}
                             </a>
                         </div>`;
                 } else {
                     buttonHTML = `
                         <div class="mt-3 pt-3 border-t border-white/10 flex justify-between items-center">
-                            <span class="text-[10px] text-slate-300 font-semibold uppercase tracking-wider">Akses Langsung</span>
+                            <span class="text-[9px] md:text-[10px] text-slate-300 font-semibold uppercase tracking-wider">Akses Langsung</span>
                             <span class="text-xs font-bold text-sky-300 flex items-center gap-0.5">Buka Sistem <span>↗</span></span>
                         </div>`;
                 }
@@ -601,19 +607,19 @@
                 cardEl.innerHTML = `
                     <div>
                         <div class="flex justify-between items-center mb-2">
-                            <span class="px-2.5 py-0.5 border text-[9px] font-extrabold rounded-md uppercase tracking-wider ${card.badgeBg}">
+                            <span class="px-2 py-0.5 border text-[8px] md:text-[9px] font-extrabold rounded-md uppercase tracking-wider ${card.badgeBg}">
                                 ${card.badge}
                             </span>
-                            <span class="text-[10px] font-bold text-sky-200/80 uppercase tracking-wider">${card.category}</span>
+                            <span class="text-[9px] md:text-[10px] font-bold text-sky-200/80 uppercase tracking-wider">${card.category}</span>
                         </div>
 
-                        <div class="w-full h-36 md:h-44 rounded-2xl overflow-hidden my-3 border border-white/10 bg-black/20 relative flex-shrink-0">
+                        <div class="w-full h-32 md:h-44 rounded-xl md:rounded-2xl overflow-hidden my-2.5 md:my-3 border border-white/10 bg-black/20 relative flex-shrink-0">
                             <img src="${card.img}" class="w-full h-full object-cover" onerror="this.src='images/logo.png'; this.className+=' object-contain p-6';">
                         </div>
 
                         <div>
-                            <h2 class="text-base md:text-lg font-bold text-white leading-tight tracking-tight">${card.title}</h2>
-                            <p class="text-xs text-slate-200/90 font-normal mt-1.5 line-clamp-3 leading-relaxed">${card.desc}</p>
+                            <h2 class="text-sm md:text-lg font-bold text-white leading-tight tracking-tight">${card.title}</h2>
+                            <p class="text-[11px] md:text-xs text-slate-200/90 font-normal mt-1 md:mt-1.5 line-clamp-3 leading-relaxed">${card.desc}</p>
                         </div>
                     </div>
 
@@ -720,6 +726,10 @@
 
         window.onload = () => {
             renderGridView();
+        };
+
+        window.onresize = () => {
+            if (is3DDeckView) renderDeckView();
         };
     </script>
 </body>

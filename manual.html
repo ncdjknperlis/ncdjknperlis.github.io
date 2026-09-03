@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Penggunaan | Pusat Akses Digital NCD</title>
+    <link rel="icon" type="image/png" href="favicon/favicon.ico">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e1b4b 40%, #0284c7 100%);
+            background-attachment: fixed;
+            color: #FFFFFF;
+            min-height: 100vh;
+        }
+
+        .aero-glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.25);
+        }
+
+        .aero-header {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        .aero-btn-glass {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.25s ease;
+        }
+        .aero-btn-glass:hover {
+            background: rgba(255, 255, 255, 0.3);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: rgba(15, 23, 42, 0.5); }
+        ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.25); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: rgba(56, 189, 248, 0.8); }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between antialiased selection:bg-sky-500 selection:text-white">
+
+    <!-- 🌐 HEADER -->
+    <header class="w-full py-4 px-6 md:px-12 aero-header flex flex-row items-center justify-between sticky top-0 z-50">
+        <div class="flex items-center space-x-3">
+            <img src="images/logo.png" style="max-width: 30px;" class="w-full h-auto object-contain" alt="Logo KKM">
+            <div class="w-px h-6 bg-white/20"></div>
+            <div>
+                <h1 class="text-xs md:text-sm font-extrabold text-white tracking-wide uppercase">
+                    Pusat Akses Digital NCD
+                </h1>
+                <p class="text-[9px] text-sky-300 font-semibold tracking-widest uppercase">Jabatan Kesihatan Negeri Perlis</p>
+            </div>
+        </div>
+
+        <a href="index.html" class="aero-btn-glass px-4 py-1.5 text-xs font-bold text-white rounded-xl flex items-center gap-2">
+            <span>←</span> Kembali ke Portal
+        </a>
+    </header>
+
+    <!-- 📖 KANDUNGAN UTAMA MANUAL -->
+    <main class="flex-1 w-full max-w-5xl mx-auto px-6 py-10 space-y-8">
+        
+        <!-- TAJUK UTAMA -->
+        <div class="text-center space-y-2">
+            <span class="px-3 py-1 bg-sky-500/20 border border-sky-400/30 text-sky-300 rounded-full text-xs font-bold uppercase tracking-wider">
+                Panduan Pengguna
+            </span>
+            <h1 class="text-2xl md:text-4xl font-extrabold text-white tracking-tight">
+                Manual Penggunaan Portal Digital NCD
+            </h1>
+            <p class="text-xs md:text-sm text-slate-300 font-normal max-w-2xl mx-auto leading-relaxed">
+                Panduan ringkas ini menjelaskan cara navigasi, carian modul, serta penggunaan Mod Interaktif 3D Deck di dalam portal.
+            </p>
+        </div>
+
+        <!-- SEKSYEN 1: MOD PAPARAN -->
+        <section class="aero-glass p-6 md:p-8 rounded-3xl space-y-4">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl">🖥️</span>
+                <h2 class="text-lg md:text-xl font-bold text-white">1. Mod Paparan Utama</h2>
+            </div>
+            <p class="text-xs md:text-sm text-slate-200 leading-relaxed">
+                Portal ini menyediakan dua jenis paparan berbeza yang boleh ditukar mengikut keselesaan anda menerusi butang di bahagian *header*:
+            </p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                <div class="p-4 bg-white/5 border border-white/10 rounded-2xl space-y-2">
+                    <h3 class="text-sm font-bold text-sky-300 flex items-center gap-2">
+                        <span>📱</span> Paparan Grid (Lalai)
+                    </h3>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Memaparkan kesemua 16 modul sistem secara serentak dalam bentuk susunan kad grid (*full-width*). Mod ini memudahkan carian pantas serta capaian terus ke aplikasi.
+                    </p>
+                </div>
+
+                <div class="p-4 bg-white/5 border border-white/10 rounded-2xl space-y-2">
+                    <h3 class="text-sm font-bold text-sky-300 flex items-center gap-2">
+                        <span>🎴</span> Mod Interaktif (3D Deck)
+                    </h3>
+                    <p class="text-xs text-slate-300 leading-relaxed">
+                        Memaparkan modul satu demi satu di tengah skrin dalam susunan tetingkap 3D yang elegan. Sangat sesuai untuk persembahan atau navigasi santai.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEKSYEN 2: KAWALAN MOD 3D DECK -->
+        <section class="aero-glass p-6 md:p-8 rounded-3xl space-y-4">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl">🖱️</span>
+                <h2 class="text-lg md:text-xl font-bold text-white">2. Navigasi Mod Interaktif (3D Deck)</h2>
+            </div>
+            <p class="text-xs md:text-sm text-slate-200 leading-relaxed">
+                Apabila anda berada di dalam **Mod Interaktif (3D Deck)**, terdapat 4 cara mudah untuk menukar kad modul:
+            </p>
+
+            <ul class="space-y-3 text-xs md:text-sm text-slate-300">
+                <li class="flex items-start gap-3 p-3 bg-white/5 border border-white/10 rounded-xl">
+                    <span class="text-sky-400 font-bold">1. Skrol Tetikus / Trackpad:</span>
+                    <span>Skrol ke atas/bawah atau kiri/kanan pada tetikus/trackpad untuk meluncur kad secara lancar.</span>
+                </li>
+                <li class="flex items-start gap-3 p-3 bg-white/5 border border-white/10 rounded-xl">
+                    <span class="text-sky-400 font-bold">2. Leretan Sentuh (Touch Swipe):</span>
+                    <span>Pada peranti skrin sentuh (telefon/tablet), leret skrin ke kiri atau kanan untuk menukar kad.</span>
+                </li>
+                <li class="flex items-start gap-3 p-3 bg-white/5 border border-white/10 rounded-xl">
+                    <span class="text-sky-400 font-bold">3. Papan Kekunci:</span>
+                    <span>Gunakan anak panah <code class="px-1.5 py-0.5 bg-white/20 rounded text-[11px] font-mono text-white">←</code> <code class="px-1.5 py-0.5 bg-white/20 rounded text-[11px] font-mono text-white">→</code> untuk menukar kad, dan tekan <code class="px-1.5 py-0.5 bg-sky-500 rounded text-[11px] font-mono text-white">Enter ↵</code> untuk membuka sistem modul terpilih.</span>
+                </li>
+                <li class="flex items-start gap-3 p-3 bg-white/5 border border-white/10 rounded-xl">
+                    <span class="text-sky-400 font-bold">4. Butang Kawalan Footer:</span>
+                    <span>Tekan butang <b>Undur</b> / <b>Maju</b> serta <b>Akses Sistem</b> yang terletak pada bahagian *footer* bawah.</span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- SEKSYEN 3: CARIAN & TAPISAN -->
+        <section class="aero-glass p-6 md:p-8 rounded-3xl space-y-4">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl">🔍</span>
+                <h2 class="text-lg md:text-xl font-bold text-white">3. Carian & Tapisan Modul</h2>
+            </div>
+            <div class="space-y-3 text-xs md:text-sm text-slate-300">
+                <p class="leading-relaxed">
+                    Untuk memudahkan capaian ke 16 buah modul sistem, anda boleh menggunakan fungsi penapis di bahagian *header*:
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="p-3.5 bg-white/5 border border-white/10 rounded-xl">
+                        <strong class="text-white block mb-1">🔍 Kotak Carian Teks:</strong>
+                        Menaip nama modul atau kata kunci berkaitan untuk tapis secara *real-time*.
+                    </div>
+                    <div class="p-3.5 bg-white/5 border border-white/10 rounded-xl">
+                        <strong class="text-white block mb-1">📁 Tapis Kategori:</strong>
+                        Memilih kategori khas seperti *⚙️ Sistem & Aplikasi*, *🎨 Pusat Sumber & Media*, atau *📝 Ujian Penilaian*.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEKSYEN 4: AKSES DUA BUTANG -->
+        <section class="aero-glass p-6 md:p-8 rounded-3xl space-y-4">
+            <div class="flex items-center space-x-3">
+                <span class="text-2xl">🔗</span>
+                <h2 class="text-lg md:text-xl font-bold text-white">4. Kad Dua Akses (Contoh: STIG-9 & Saringan Paru-Paru)</h2>
+            </div>
+            <p class="text-xs md:text-sm text-slate-300 leading-relaxed">
+                Sesetengah kad modul khas dilengkapi **dua butang asing** di bahagian bawah kad:
+            </p>
+            <div class="flex flex-col sm:flex-row gap-3 pt-1">
+                <span class="py-2 px-4 bg-white/15 border border-white/20 rounded-xl text-xs font-bold text-white flex items-center justify-center gap-1.5">
+                    📝 Borang Umum / Saringan
+                </span>
+                <span class="py-2 px-4 bg-sky-600 rounded-xl text-xs font-bold text-white flex items-center justify-center gap-1.5 shadow-md">
+                    📊 Dashboard Laporan
+                </span>
+            </div>
+            <p class="text-xs text-slate-400">
+                Akses ini membolehkan kakitangan atau orang awam memilih terus sama ada ingin mengisi borang atau melihat paparan *dashboard* pelaporan.
+            </p>
+        </section>
+
+    </main>
+
+    <!-- 🎮 FOOTER -->
+    <footer class="w-full py-4 px-6 text-center aero-header text-xs text-slate-300">
+        Hak Cipta © 2026 Unit Kawalan Penyakit Tidak Berjangkit (NCD), Jabatan Kesihatan Negeri Perlis
+    </footer>
+
+</body>
+</html>
