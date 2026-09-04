@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Portal Pentadbir - Ujian Kesihatan Mental</title>
+  
+  <!-- CSS Bootstrap & Google Fonts -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  
+  <style>
+    :root {
+      --bg-light: #f8fafc;
+      --card-bg: #ffffff;
+      --border-color: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #64748b;
+      --primary-blue: #2563eb;
+    }
+
+    body {
+      background-color: var(--bg-light);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text-main);
+      padding-bottom: 60px;
+    }
+
+    /* SKRIN LOG IN */
+    .login-wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .login-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 40px;
+      width: 100%;
+      max-width: 420px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.05);
+    }
+
+    .form-control-custom {
+      background: #f1f5f9;
+      border: 1px solid #cbd5e1;
+      color: var(--text-main);
+      border-radius: 12px;
+      padding: 12px 16px;
+    }
+
+    .form-control-custom:focus {
+      background: #ffffff;
+      border-color: var(--primary-blue);
+      box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.1);
+    }
+
+    .btn-primary-custom {
+      background: var(--primary-blue);
+      color: white;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      padding: 14px;
+      transition: all 0.2s ease;
+      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+    }
+
+    .btn-primary-custom:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+    }
+
+    /* NAVIGATION HEADER */
+    .navbar-custom {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-color);
+      padding: 16px 0;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+      margin-bottom: 35px;
+    }
+
+    /* KAD REPORTING KPI */
+    .kpi-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 20px;
+      padding: 24px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.02);
+      transition: transform 0.2s ease;
+    }
+
+    .kpi-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .kpi-icon-wrapper {
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+    }
+
+    /* DATA TABLE */
+    .panel-card {
+      background: #ffffff;
+      border: 1px solid var(--border-color);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03);
+    }
+
+    .table-light-custom {
+      color: var(--text-main);
+      font-size: 0.9rem;
+    }
+
+    .table-light-custom th {
+      background: #f8fafc;
+      color: var(--text-muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.5px;
+      padding: 16px;
+      border-bottom: 2px solid var(--border-color);
+    }
+
+    .table-light-custom td {
+      padding: 16px;
+      border-bottom: 1px solid #f1f5f9;
+      vertical-align: middle;
+    }
+
+    /* BADGES STATUS */
+    .status-badge {
+      padding: 6px 14px;
+      border-radius: 50px;
+      font-weight: 700;
+      font-size: 0.75rem;
+    }
+
+    .status-badge.done {
+      background: #dcfce7;
+      color: #15803d;
+    }
+
+    .status-badge.pending {
+      background: #fef3c7;
+      color: #b45309;
+    }
+  </style>
+</head>
+<body>
+
+<!-- 1. SKRIN LOG IN (LIGHT THEME WITH LOGO) -->
+<div id="loginView" class="login-wrapper">
+  <div class="login-card text-center">
+    
+    <!-- LOGO ORGANISASI -->
+    <img src="https://lh3.googleusercontent.com/d/1lIkdT2BsA51EX-CoF_lpWluaAGDraz_y" alt="Logo Organisasi" class="img-fluid mb-3" style="max-height: 85px; object-fit: contain;">
+    
+    <div class="mb-4">
+      <h4 class="fw-bold text-dark">Portal Pentadbir</h4>
+      <p class="text-muted fs-6">Sistem Saringan Kesihatan Mental</p>
+    </div>
+
+    <div class="text-start mb-3">
+      <label class="form-label fw-semibold text-dark fs-6">Username</label>
+      <input type="text" class="form-control form-control-custom" id="adminUser" placeholder="Masukkan username">
+    </div>
+
+    <div class="text-start mb-4">
+      <label class="form-label fw-semibold text-dark fs-6">Kata Laluan</label>
+      <input type="password" class="form-control form-control-custom" id="adminPass" placeholder="Masukkan kata laluan">
+    </div>
+
+    <div id="loginAlert" class="alert alert-danger py-2 mb-3" style="display:none; font-size:0.85rem;"></div>
+
+    <button class="btn btn-primary-custom w-100" id="btnLogin" onclick="submitAdminLogin()">Log Masuk Admin ➔</button>
+  </div>
+</div>
+
+<!-- 2. DASHBOARD UTAMA (LIGHT & BRIGHT DASHBOARD) -->
+<div id="dashboardView" style="display: none;">
+  
+  <!-- NAVBAR HEADER -->
+  <nav class="navbar-custom">
+    <div class="container d-flex justify-content-between align-items-center">
+      <div class="d-flex align-items-center gap-3">
+        <img src="https://lh3.googleusercontent.com/d/1lIkdT2BsA51EX-CoF_lpWluaAGDraz_y" alt="Logo" style="max-height: 50px;">
+        <div>
+          <h5 class="fw-bold mb-0 text-dark">Dashboard Pentadbir</h5>
+          <small class="text-muted fw-semibold">Pusat Kecemerlangan Kesihatan Mental Kebangsaan</small>
+        </div>
+      </div>
+      <button class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-bold" onclick="logout()"><i class="bi bi-box-arrow-right me-1"></i> Log Keluar</button>
+    </div>
+  </nav>
+
+  <div class="container">
+    
+    <!-- CARDS PELAPORAN / KPI ANALYSIS -->
+    <div class="row g-4 mb-4">
+      <div class="col-md-4">
+        <div class="kpi-card">
+          <div class="kpi-icon-wrapper bg-primary bg-opacity-10 text-primary">
+            <i class="bi bi-people-fill"></i>
+          </div>
+          <div class="text-muted fw-bold fs-6">Jumlah Peserta Berdaftar</div>
+          <div class="display-6 fw-extrabold text-dark mt-1" id="statTotal">0</div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="kpi-card">
+          <div class="kpi-icon-wrapper bg-success bg-opacity-10 text-success">
+            <i class="bi bi-check-circle-fill"></i>
+          </div>
+          <div class="text-muted fw-bold fs-6">Selesai (Pre & Post Test)</div>
+          <div class="display-6 fw-extrabold text-success mt-1" id="statCompleted">0</div>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="kpi-card">
+          <div class="kpi-icon-wrapper bg-warning bg-opacity-10 text-warning">
+            <i class="bi bi-hourglass-split"></i>
+          </div>
+          <div class="text-muted fw-bold fs-6">Belum Ujian Pos</div>
+          <div class="display-6 fw-extrabold text-warning mt-1" id="statPending">0</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- JADUAL CRUD & CARIAN -->
+    <div class="panel-card">
+      <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+        <div>
+          <h5 class="fw-bold mb-1 text-dark"><i class="bi bi-folder-symlink me-2 text-primary"></i>Pengurusan Rekod Peserta</h5>
+          <small class="text-muted">Kemaskini dan pengurusan data keputusan ujian</small>
+        </div>
+        <div style="max-width: 320px; width: 100%;">
+          <div class="input-group">
+            <span class="input-group-text bg-light border-end-0"><i class="bi bi-search text-muted"></i></span>
+            <input type="text" id="searchInput" class="form-control bg-light border-start-0" placeholder="Cari No. Kad Pengenalan" onkeyup="filterTable()">
+          </div>
+        </div>
+      </div>
+
+      <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
+        <table class="table table-light-custom align-middle mb-0" id="mainTable">
+          <thead>
+            <tr>
+              <th>No. Kad Pengenalan</th>
+              <th>Markah Pre Test</th>
+              <th>Markah Post Test</th>
+              <th>Tarikh Kemaskini</th>
+              <th>Status Penilaian</th>
+              <th class="text-end">Tindakan (CRUD)</th>
+            </tr>
+          </thead>
+          <tbody id="tableBody"></tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- MODAL POPUP EDIT (UPDATE CRUD) -->
+<div class="modal fade" id="editModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg rounded-4">
+      <div class="modal-header bg-primary text-white rounded-top-4">
+        <h5 class="modal-title fw-bold"><i class="bi bi-pencil-square me-2"></i>Kemaskini Rekod Peserta</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <input type="hidden" id="editRowId">
+        <div class="mb-3">
+          <label class="form-label fw-bold text-dark">No. Kad Pengenalan</label>
+          <input type="text" class="form-control form-control-custom bg-light" id="editCode" disabled>
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-bold text-dark">Markah Pre Test</label>
+          <input type="text" class="form-control form-control-custom" id="editPre">
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-bold text-dark">Markah Post Test</label>
+          <input type="text" class="form-control form-control-custom" id="editPost">
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-bold text-dark">Status Penilaian</label>
+          <select class="form-select form-control-custom" id="editStatus">
+            <option value="Selesai (Pre & Post)">Selesai (Pre & Post)</option>
+            <option value="Belum Ujian Pos">Belum Ujian Pos</option>
+            <option value="Belum Ujian Pra">Belum Ujian Pra</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer border-0 p-4 pt-0">
+        <button type="button" class="btn btn-light rounded-3 fw-bold" data-bs-dismiss="modal">Batal</button>
+        <button type="button" class="btn btn-primary rounded-3 fw-bold px-4" onclick="saveEdit()">Simpan Perubahan</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const API_URL = "https://script.google.com/macros/s/AKfycbwkLkwga-kdvyP8kSzmm7gnf_f0w3R7Jx5ex0YLoxy4PnsgH6PSYeWQ3Oz_7Rsg27Pr/exec";
+
+  let creds = {};
+  let currentRowsData = [];
+  let editModalObj;
+
+  // AUTO-LOGIN SEBAIK SAHAJA PAGE DI-REFRESH
+  document.addEventListener("DOMContentLoaded", function() {
+    editModalObj = new bootstrap.Modal(document.getElementById('editModal'));
+    
+    // Semak jika terdapat sesi tersimpan di dalam LocalStorage
+    const savedCreds = localStorage.getItem("admin_session");
+    if (savedCreds) {
+      try {
+        creds = JSON.parse(savedCreds);
+        // Terus sahkan dan muatkan data tanpa minta user isi form semula
+        fetchDashboardData(true);
+      } catch (e) {
+        localStorage.removeItem("admin_session");
+      }
+    }
+  });
+
+  function submitAdminLogin() {
+    const u = document.getElementById('adminUser').value.trim();
+    const p = document.getElementById('adminPass').value.trim();
+    const alertBox = document.getElementById('loginAlert');
+
+    if(!u || !p) { alertBox.innerText = "Sila isi Username & Kata Laluan."; alertBox.style.display="block"; return; }
+
+    creds = { username: u, password: p };
+    fetchDashboardData(false);
+  }
+
+  function fetchDashboardData(isAutoLogin) {
+    const btn = document.getElementById('btnLogin');
+    const alertBox = document.getElementById('loginAlert');
+
+    if (!isAutoLogin) {
+      btn.disabled = true;
+      btn.innerText = "Mengesahkan Akaun...";
+    }
+
+    fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ action: "getDashboard", credentials: creds })
+    })
+    .then(r => r.json())
+    .then(res => {
+      if (!isAutoLogin) {
+        btn.disabled = false;
+        btn.innerText = "Log Masuk Admin ➔";
+      }
+
+      if(res.status === "success") {
+        // SIMPAN SESI KE DALAM LOCALSTORAGE
+        localStorage.setItem("admin_session", JSON.stringify(creds));
+
+        document.getElementById('loginView').style.display = "none";
+        document.getElementById('dashboardView').style.display = "block";
+        
+        document.getElementById('statTotal').innerText = res.stats.total;
+        document.getElementById('statCompleted').innerText = res.stats.completed;
+        document.getElementById('statPending').innerText = res.stats.pendingPost;
+
+        currentRowsData = res.rows;
+        renderTable(res.rows);
+      } else {
+        // Jika auto-login gagal (contohnya password dah ditukar), padap sesi lama
+        localStorage.removeItem("admin_session");
+        if (isAutoLogin) {
+          document.getElementById('loginView').style.display = "flex";
+        } else {
+          alertBox.innerText = res.message;
+          alertBox.style.display = "block";
+        }
+      }
+    })
+    .catch(err => {
+      if (!isAutoLogin) {
+        btn.disabled = false;
+        btn.innerText = "Log Masuk Admin ➔";
+        alertBox.innerText = "Ralat Rangkaian API";
+        alertBox.style.display = "block";
+      }
+    });
+  }
+
+  function renderTable(rows) {
+    let bodyHtml = "";
+    if(rows.length === 0) {
+      bodyHtml = `<tr><td colspan="6" class="text-center text-muted py-4">Tiada rekod data dijumpai.</td></tr>`;
+    } else {
+      rows.forEach((r, idx) => {
+        let isDone = r[25] && r[25].includes("Selesai");
+        let badgeHtml = isDone ? `<span class="status-badge done"><i class="bi bi-check-circle-fill me-1"></i>Selesai</span>` : `<span class="status-badge pending"><i class="bi bi-clock-history me-1"></i>${r[25] || 'Proses'}</span>`;
+
+        bodyHtml += `
+          <tr>
+            <td class="fw-bold text-dark">${r[0]}</td>
+            <td class="fw-semibold">${r[1] || '-'}</td>
+            <td class="fw-semibold text-primary">${r[2] || '-'}</td>
+            <td class="text-muted">${r[27] || r[3] || '-'}</td>
+            <td>${badgeHtml}</td>
+            <td class="text-end">
+              <button class="btn btn-light btn-sm text-primary border me-1 rounded-3 fw-bold" onclick="openEditModal(${idx})"><i class="bi bi-pencil-fill me-1"></i>Sunting</button>
+              <button class="btn btn-light btn-sm text-danger border rounded-3 fw-bold" onclick="deleteRow(${idx})"><i class="bi bi-trash-fill me-1"></i>Padam</button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+    document.getElementById('tableBody').innerHTML = bodyHtml;
+  }
+
+  function openEditModal(idx) {
+    const data = currentRowsData[idx];
+    document.getElementById('editRowId').value = idx;
+    document.getElementById('editCode').value = data[0];
+    document.getElementById('editPre').value = data[1];
+    document.getElementById('editPost').value = data[2];
+    document.getElementById('editStatus').value = data[25] || "Belum Ujian Pos";
+    editModalObj.show();
+  }
+
+  function saveEdit() {
+    const idx = document.getElementById('editRowId').value;
+    const updateData = {
+      preScore: document.getElementById('editPre').value,
+      postScore: document.getElementById('editPost').value,
+      status: document.getElementById('editStatus').value
+    };
+
+    fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ action: "updateRecord", credentials: creds, rowId: idx, data: updateData })
+    })
+    .then(r => r.json())
+    .then(res => {
+      if(res.status === "success") {
+        editModalObj.hide();
+        fetchDashboardData(true); 
+      } else {
+        alert("Gagal mengemaskini: " + res.message);
+      }
+    });
+  }
+
+  function deleteRow(idx) {
+    if(confirm("Adakah anda pasti mahu memadam rekod peserta ini?")) {
+      fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({ action: "deleteRecord", credentials: creds, rowId: idx })
+      })
+      .then(r => r.json())
+      .then(res => {
+        if(res.status === "success") {
+          fetchDashboardData(true); 
+        } else {
+          alert("Gagal memadam: " + res.message);
+        }
+      });
+    }
+  }
+
+  function filterTable() {
+    const filter = document.getElementById("searchInput").value.toUpperCase();
+    const filteredRows = currentRowsData.filter(r => r[0].toUpperCase().includes(filter));
+    renderTable(filteredRows);
+  }
+
+  function logout() {
+    // PADAM SESI LOG IN DAN RELOAD
+    localStorage.removeItem("admin_session");
+    location.reload();
+  }
+</script>
+
+</body>
+</html>
