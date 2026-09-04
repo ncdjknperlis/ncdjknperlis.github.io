@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dashboard Pelaporan Pentadbir</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  
+  <style>
+    body { background-color: #f8fafc; font-family: 'Plus Jakarta Sans', sans-serif; color: #0f172a; padding-bottom: 60px; }
+    .navbar-custom { background: #ffffff; border-bottom: 1px solid #e2e8f0; padding: 16px 0; margin-bottom: 35px; }
+    .kpi-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 20px; padding: 22px; box-shadow: 0 10px 25px rgba(0,0,0,0.02); }
+    .kpi-icon { width: 48px; height: 48px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; margin-bottom: 12px; }
+    .panel-card { background: #ffffff; border: 1px solid #e2e8f0; border-radius: 24px; padding: 28px; }
+    .status-badge { padding: 6px 14px; border-radius: 50px; font-weight: 700; font-size: 0.75rem; }
+    .status-badge.done { background: #dcfce7; color: #15803d; }
+    .status-badge.pending { background: #fef3c7; color: #b45309; }
+  </style>
+</head>
+<body>
+
+<nav class="navbar-custom">
+  <div class="container d-flex justify-content-between align-items-center">
+    <div class="d-flex align-items-center gap-3">
+      <img src="https://lh3.googleusercontent.com/d/1lIkdT2BsA51EX-CoF_lpWluaAGDraz_y" alt="Logo" style="max-height: 48px;">
+      <div>
+        <h5 class="fw-bold mb-0">Dashboard Pelaporan Admin</h5>
+        <small class="text-muted fw-semibold">Pusat Kecemerlangan Kesihatan Mental Kebangsaan</small>
+      </div>
+    </div>
+    <button class="btn btn-outline-danger btn-sm rounded-pill px-3 fw-bold" onclick="logout()"><i class="bi bi-box-arrow-right me-1"></i> Log Keluar</button>
+  </div>
+</nav>
+
+<div class="container">
+  
+  <!-- BARIS KPI REPORTING KETIGA (TERMASUK KPI 80%) -->
+  <div class="row g-3 mb-4">
+    <div class="col-md-3">
+      <div class="kpi-card">
+        <div class="kpi-icon bg-primary bg-opacity-10 text-primary"><i class="bi bi-people-fill"></i></div>
+        <div class="text-muted fw-bold fs-6">Jumlah Peserta</div>
+        <div class="fs-2 fw-extrabold text-dark" id="statTotal">0</div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="kpi-card">
+        <div class="kpi-icon bg-success bg-opacity-10 text-success"><i class="bi bi-check-circle-fill"></i></div>
+        <div class="text-muted fw-bold fs-6">Selesai (Pre & Post)</div>
+        <div class="fs-2 fw-extrabold text-success" id="statCompleted">0</div>
+      </div>
+    </div>
+
+    <div class="col-md-3">
+      <div class="kpi-card">
+        <div class="kpi-icon bg-info bg-opacity-10 text-info"><i class="bi bi-graph-up-arrow"></i></div>
+        <div class="text-muted fw-bold fs-6">Purata Peningkatan</div>
+        <div class="fs-2 fw-extrabold text-info" id="statAvgDiff">+0.0</div>
+      </div>
+    </div>
+
+    <!-- CARDS PENCAPAIAN KPI 80% -->
+    <div class="col-md-3">
+      <div class="kpi-card" id="kpiCardBox">
+        <div class="kpi-icon bg-purple bg-opacity-10 text-indigo" id="kpiIconBox"><i class="bi bi-trophy-fill"></i></div>
+        <div class="text-muted fw-bold fs-6">KPI Peningkatan (Target 80%)</div>
+        <div class="fs-2 fw-extrabold" id="statKpi">0%</div>
+        <small class="fw-bold" id="kpiStatusText"></small>
+      </div>
+    </div>
+  </div>
+
+  <!-- JADUAL DATA CRUD -->
+  <div class="panel-card">
+    <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-3">
+      <div>
+        <h5 class="fw-bold mb-1 text-dark"><i class="bi bi-folder-symlink me-2 text-primary"></i>Pengurusan Rekod Peserta</h5>
+        <small class="text-muted">Senarai penuh rekod penilaian saringan</small>
+      </div>
+      <div style="max-width: 320px; width: 100%;">
+        <input type="text" id="searchInput" class="form-control bg-light" placeholder="🔍 Cari No. Kad Pengenalan..." onkeyup="filterTable()">
+      </div>
+    </div>
+
+    <div class="table-responsive" style="max-height: 500px; overflow-y: auto;">
+      <table class="table table-hover align-middle mb-0" style="font-size: 0.88rem;">
+        <thead class="table-light">
+          <tr>
+            <th>No. Kad Pengenalan (MyKad)</th>
+            <th>Markah Pre</th>
+            <th>Markah Post</th>
+            <th>Peningkatan</th>
+            <th>Status</th>
+            <th class="text-end">Tindakan</th>
+          </tr>
+        </thead>
+        <tbody id="tableBody"></tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<!-- MODAL EDIT -->
+<div class="modal fade" id="editModal" tabindex="-1">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content border-0 shadow-lg rounded-4">
+      <div class="modal-header bg-primary text-white rounded-top-4">
+        <h5 class="modal-title fw-bold">Kemaskini Rekod Peserta</h5>
+        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body p-4">
+        <input type="hidden" id="editRowId">
+        <div class="mb-3">
+          <label class="form-label fw-bold">No. Kad Pengenalan</label>
+          <input type="text" class="form-control bg-light" id="editCode" disabled>
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-bold">Markah Pre Test</label>
+          <input type="text" class="form-control" id="editPre">
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-bold">Markah Post Test</label>
+          <input type="text" class="form-control" id="editPost">
+        </div>
+        <div class="mb-3">
+          <label class="form-label fw-bold">Status Penilaian</label>
+          <select class="form-select" id="editStatus">
+            <option value="Selesai (Pre & Post)">Selesai (Pre & Post)</option>
+            <option value="Belum Ujian Pos">Belum Ujian Pos</option>
+            <option value="Belum Ujian Pra">Belum Ujian Pra</option>
+          </select>
+        </div>
+      </div>
+      <div class="modal-footer border-0 p-4 pt-0">
+        <button type="button" class="btn btn-light rounded-3 fw-bold" data-bs-dismiss="modal">Batal</button>
+        <button type="button" class="btn btn-primary rounded-3 fw-bold px-4" onclick="saveEdit()">Simpan Perubahan</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const API_URL = "https://script.google.com/macros/s/AKfycbwkLkwga-kdvyP8kSzmm7gnf_f0w3R7Jx5ex0YLoxy4PnsgH6PSYeWQ3Oz_7Rsg27Pr/exec";
+
+  let creds = {};
+  let currentRowsData = [];
+  let editModalObj;
+
+  document.addEventListener("DOMContentLoaded", function() {
+    editModalObj = new bootstrap.Modal(document.getElementById('editModal'));
+    
+    const saved = localStorage.getItem("admin_session");
+    if(!saved) {
+      window.location.href = "index.html";
+    } else {
+      creds = JSON.parse(saved);
+      loadDashboard();
+    }
+  });
+
+  function loadDashboard() {
+    fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ action: "getDashboard", credentials: creds })
+    })
+    .then(r => r.json())
+    .then(res => {
+      if(res.status === "success") {
+        document.getElementById('statTotal').innerText = res.stats.total;
+        document.getElementById('statCompleted').innerText = res.stats.completed;
+        document.getElementById('statAvgDiff').innerText = `+${res.stats.avgDiff}`;
+        
+        // Tetapan KPI 80%
+        let kpiVal = parseFloat(res.stats.kpiPercentage);
+        document.getElementById('statKpi').innerText = `${kpiVal}%`;
+        
+        let kpiText = document.getElementById('kpiStatusText');
+        if (kpiVal >= 80) {
+          kpiText.innerHTML = `<span class="text-success"><i class="bi bi-check-circle me-1"></i>KPI Mencapai Sasaran (≥80%)</span>`;
+        } else {
+          kpiText.innerHTML = `<span class="text-danger"><i class="bi bi-exclamation-triangle me-1"></i>Belum Capai Sasaran (<80%)</span>`;
+        }
+
+        currentRowsData = res.rows;
+        renderTable(res.rows);
+      } else {
+        localStorage.removeItem("admin_session");
+        window.location.href = "index.html";
+      }
+    })
+    .catch(err => { alert("Ralat Rangkaian API"); });
+  }
+
+  function renderTable(rows) {
+    let bodyHtml = "";
+    if(rows.length === 0) {
+      bodyHtml = `<tr><td colspan="6" class="text-center text-muted py-4">Tiada rekod data dijumpai.</td></tr>`;
+    } else {
+      rows.forEach((r, idx) => {
+        let isDone = r[25] && r[25].includes("Selesai");
+        let badgeHtml = isDone ? `<span class="status-badge done">Selesai</span>` : `<span class="status-badge pending">${r[25] || 'Proses'}</span>`;
+
+        let preVal = parseInt(r[1]) || 0;
+        let postVal = parseInt(r[2]) || 0;
+        let diffText = isDone ? (postVal - preVal >= 0 ? `+${postVal - preVal}` : `${postVal - preVal}`) : '-';
+
+        bodyHtml += `
+          <tr>
+            <td class="fw-bold text-dark">${r[0]}</td>
+            <td class="fw-semibold">${r[1] || '-'}</td>
+            <td class="fw-semibold text-primary">${r[2] || '-'}</td>
+            <td class="fw-bold ${parseInt(diffText) > 0 ? 'text-success':''}">${diffText}</td>
+            <td>${badgeHtml}</td>
+            <td class="text-end">
+              <button class="btn btn-light btn-sm text-primary border me-1 fw-bold" onclick="openEditModal(${idx})"><i class="bi bi-pencil-fill me-1"></i>Sunting</button>
+              <button class="btn btn-light btn-sm text-danger border fw-bold" onclick="deleteRow(${idx})"><i class="bi bi-trash-fill me-1"></i>Padam</button>
+            </td>
+          </tr>
+        `;
+      });
+    }
+    document.getElementById('tableBody').innerHTML = bodyHtml;
+  }
+
+  function openEditModal(idx) {
+    const data = currentRowsData[idx];
+    document.getElementById('editRowId').value = idx;
+    document.getElementById('editCode').value = data[0];
+    document.getElementById('editPre').value = data[1];
+    document.getElementById('editPost').value = data[2];
+    document.getElementById('editStatus').value = data[25] || "Belum Ujian Pos";
+    editModalObj.show();
+  }
+
+  function saveEdit() {
+    const idx = document.getElementById('editRowId').value;
+    const updateData = {
+      preScore: document.getElementById('editPre').value,
+      postScore: document.getElementById('editPost').value,
+      status: document.getElementById('editStatus').value
+    };
+
+    fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "text/plain;charset=utf-8" },
+      body: JSON.stringify({ action: "updateRecord", credentials: creds, rowId: idx, data: updateData })
+    })
+    .then(r => r.json())
+    .then(res => {
+      if(res.status === "success") {
+        editModalObj.hide();
+        loadDashboard(); 
+      } else {
+        alert("Gagal mengemaskini: " + res.message);
+      }
+    });
+  }
+
+  function deleteRow(idx) {
+    if(confirm("Adakah anda pasti mahu memadam rekod ini?")) {
+      fetch(API_URL, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain;charset=utf-8" },
+        body: JSON.stringify({ action: "deleteRecord", credentials: creds, rowId: idx })
+      })
+      .then(r => r.json())
+      .then(res => {
+        if(res.status === "success") {
+          loadDashboard(); 
+        } else {
+          alert("Gagal memadam: " + res.message);
+        }
+      });
+    }
+  }
+
+  function filterTable() {
+    const filter = document.getElementById("searchInput").value.toUpperCase();
+    const filteredRows = currentRowsData.filter(r => r[0].toUpperCase().includes(filter));
+    renderTable(filteredRows);
+  }
+
+  function logout() {
+    localStorage.removeItem("admin_session");
+    window.location.href = "index.html";
+  }
+</script>
+
+</body>
+</html>
